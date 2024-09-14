@@ -6,7 +6,7 @@
 #    By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/14 08:32:12 by passunca          #+#    #+#              #
-#    Updated: 2024/09/14 08:43:18 by passunca         ###   ########.fr        #
+#    Updated: 2024/09/14 14:49:54 by passunca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ TESTER			= CPP00_00_tester
 ### Message Vars
 _SUCCESS 		= [$(GRN)SUCCESS$(D)]
 _INFO 			= [$(BLU)INFO$(D)]
-_SEP 			= =====================
+_SEP 			= =====================================================
 
 #==============================================================================#
 #                                    PATHS                                     #
@@ -117,17 +117,19 @@ check_ext_func: all $(TEMP_PATH)		## Check for external functions
 ##@ Test Rules 🧪
 
 test: all			## Run tests
-	@echo "[$(YEL)Running $(NAME) tests$(D)]"
+	@echo "[$(YEL)Running $(GRN)$(NAME)$(YEL) tests$(D)]"
 	@echo "$(YEL)$(_SEP)$(D)"
 	@echo "$(CYA)$(NAME)$(D): $(MAG)with no arguments$(D)"
-	@./$(NAME)
+	./$(NAME)
 	@echo "$(YEL)$(_SEP)$(D)"
 	@echo "$(CYA)$(NAME)$(D): $(MAG)with 1 argument$(D)"
-	@./$(NAME) "shhhhh... I think the students are asleep..."
+	./$(NAME) "shhhhh... I think the students are asleep..."
+	@echo "$(YEL)$(_SEP)$(D)"
 	@echo "$(CYA)$(NAME)$(D): $(MAG)with several argument$(D)"
-	@./$(NAME) Damnit " ! " "Sorry students, I thought this thing was off."
-	@echo "$(CYA)$(NAME)$(D): $(MAG)with lots of whitespace$(D)"
-	@./$(NAME) Dude "    !    " "    I am loud and I shall be loud till the end of timez   !!!    "
+	./$(NAME) Damnit " ! " "Sorry students, I thought this thing was off."
+	@echo "$(YEL)$(_SEP)$(D)"
+	@echo "$(CYA)$(NAME)$(D): $(MAG)with lots of whitespace$(D) $(RED)(Extra)$(D)"
+	./$(NAME) Dude "    !    " "    I am loud and I shall be loud till the end of timez   !!!    "
 
 ##@ Debug Rules 
 
