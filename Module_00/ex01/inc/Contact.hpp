@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 16:00:46 by passunca          #+#    #+#             */
-/*   Updated: 2024/09/14 18:37:56 by passunca         ###   ########.fr       */
+/*   Updated: 2024/09/14 19:13:13 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ class Contact
 			std::string nickName, std::string phoneNumber,
 			std::string darkestSecret);
 		
-		std::string get_firstName(void) const;
-		std::string get_lastName(void) const;
-		std::string get_nickName(void) const;
+		std::string getFirstName(void);
+		std::string getLastName(void);
+		std::string getNickName(void);
 
 	private:
 		std::string	_firstName;

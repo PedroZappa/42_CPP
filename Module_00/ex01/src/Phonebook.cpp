@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 16:13:52 by passunca          #+#    #+#             */
-/*   Updated: 2024/09/14 18:42:52 by passunca         ###   ########.fr       */
+/*   Updated: 2024/09/14 19:14:07 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ void PhoneBook::search(void)
 {
 	int	idx, max;
 
+	(void)idx;
+	(void)max;
 	// Get largest supported index
 	max = (this->_n > (MAX_CONTACTS - 1)) ? (MAX_CONTACTS - 1) : --this->_n;
 	this->_printPhoneBook();
@@ -80,11 +82,11 @@ void PhoneBook::_printPhoneBook(void)
 	for (int i = 0; i <= (MAX_CONTACTS - 1); i++)
 	{
 		std::cout << "|" << std::setw(10) << i << "|";
-		field = this->_contacts[i].get_firstName();
+		field = this->_contacts[i].getFirstName();
 		std::cout << std::setw(10) << PhoneBook::formatString(field) << "|";
-		field = this->_contacts[i].get_lastName();
+		field = this->_contacts[i].getLastName();
 		std::cout << std::setw(10) << PhoneBook::formatString(field) << "|";
-		field = this->_contacts[i].get_nickName();
+		field = this->_contacts[i].getNickName();
 		std::cout << std::setw(10) << PhoneBook::formatString(field) << "|" << std::endl;
 	}
 }
@@ -120,4 +122,5 @@ std::string PhoneBook::formatString(std::string str)
 		std::cout << std::setw(9) << std::right << str.substr(0, 9) << ".";
 	else
 		std::cout << std::setw(10) << std::right << str;
+	return (str);
 }
