@@ -38,7 +38,7 @@ end
 ### 000_main.c
 ## main()
 break main
-run Damnit " ! " "Sorry students, I thought this thing was off."
+run Dude"    !    " "    I am loud and I shall be loud till the end of timez   !!!    "
 main
 fs cmd
 rfr

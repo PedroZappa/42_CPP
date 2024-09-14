@@ -1,3 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/14 13:48:49 by passunca          #+#    #+#             */
+/*   Updated: 2024/09/14 13:50:03 by passunca         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/**
+* @defgroup CPP_MODULE_00_EX00 megaphone
+* @{
+*
+* @brief		Exercise 00 - megaphone 
+* @version		1.0
+***/
+
 #include <iostream>	// std::cout, std::endl
 
 std::string ft_capitalize(const std::string &str);
@@ -38,6 +58,12 @@ std::string ft_capitalize(const std::string &str)
     return ret;
 }
 
+/**
+* @brief Trim a string
+* @param str string to be trimmed
+* @param c character to trim
+* @return trimmed string
+**/
 std::string ft_trim(const std::string &str, char c)
 {
 	size_t str_start = str.find_first_not_of(c);
@@ -49,3 +75,5 @@ std::string ft_trim(const std::string &str, char c)
 
 	return str.substr(str_start, (str_end - str_start + 1));
 }
+
+/** @} */

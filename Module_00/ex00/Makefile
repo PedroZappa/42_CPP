@@ -128,7 +128,6 @@ test: all			## Run tests
 	@./$(NAME) Damnit " ! " "Sorry students, I thought this thing was off."
 	@echo "$(CYA)$(NAME)$(D): $(MAG)with lots of whitespace$(D)"
 	@./$(NAME) Dude "    !    " "    I am loud and I shall be loud till the end of timez   !!!    "
-	@./$(NAME) Dude"    !    " "    I am loud and I shall be loud till the end of timez   !!!    "
 
 ##@ Debug Rules 
 
