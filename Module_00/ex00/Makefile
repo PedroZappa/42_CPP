@@ -25,29 +25,24 @@ ARG			=
 #                                     NAMES                                    #
 #==============================================================================#
 
-NAME 			= CPP01_00
-TESTER			= minishell_tester
+NAME 			= megaphone
+TESTER			= CPP00_00_tester
 
 ### Message Vars
 _SUCCESS 		= [$(GRN)SUCCESS$(D)]
 _INFO 			= [$(BLU)INFO$(D)]
-_NORM 			= [$(MAG)Norminette$(D)]
-_NORM_SUCCESS 	= $(GRN)=== OK:$(D)
-_NORM_INFO 		= $(BLU)File no:$(D)
-_NORM_ERR 		= $(RED)=== KO:$(D)
 _SEP 			= =====================
 
 #==============================================================================#
 #                                    PATHS                                     #
 #==============================================================================#
 
-SRC_PATH		= src
+SRC_PATH		= .
 INC_PATH		= inc
-LIBS_PATH		= lib
 BUILD_PATH		= .build
 TEMP_PATH		= .temp
 
-FILES			= 000_main.c
+FILES			= megaphone.cpp
 
 SRC		= $(addprefix $(SRC_PATH)/, $(FILES))
 OBJS	= $(SRC:$(SRC_PATH)/%.c=$(BUILD_PATH)/%.o)
@@ -56,15 +51,15 @@ OBJS	= $(SRC:$(SRC_PATH)/%.c=$(BUILD_PATH)/%.o)
 #                              COMPILER & FLAGS                                #
 #==============================================================================#
 
-CC			= c++
+CXX			= c++
 BUILD 		?= all
 INC			= -I $(INC_PATH)
 
-CFLAGS		= -Wall -Wextra -Werror
-CFLAGS		+= -std=c98
+CXXFLAGS	= -Wall -Wextra -Werror
+CXXFLAGS	+= -std=c++98
 
-ASAN_FLAGS	= -fsanitize=address
 DEBUG_FLAGS	= -g
+ASAN_FLAGS	= -fsanitize=address
 
 #==============================================================================#
 #                                COMMANDS                                      #
@@ -84,24 +79,23 @@ VGDB_ARGS	= --vgdb-error=0 $(VAL_LEAK) $(VAL_ARGS)
 #                                  RULES                                       #
 #==============================================================================#
 
-##@ CPP01_00 Compilation Rules 🏗
+##@ CPP00_00 Compilation Rules 🏗
 
 all: $(BUILD_PATH) $(NAME)	## Compile
 
 $(NAME): $(BUILD_PATH) $(OBJS)			## Compile
 	@echo "$(YEL)Compiling $(MAG)$(NAME)$(YEL) mandatory version$(D)"
-	$(CC) $(CFLAGS) $(DFLAGS) $(OBJS) $(INC) $(LIBFT_ARC) $(RFLAGS) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJS) $(INC) -o $(NAME)
 	@echo "[$(_SUCCESS) compiling $(MAG)$(NAME)$(D) $(YEL)🖔$(D)]"
-	make norm
 
-debug: CFLAGS += $(DEBUG_FLAGS)
+debug: CXXFLAGS += $(DEBUG_FLAGS)
 debug: all $(NAME) $(TEMP_PATH)			## Compile w/ debug symbols
 
 -include $(BUILD_PATH)/%.d
 
 $(BUILD_PATH)/%.o: $(SRC_PATH)/%.c
 	@echo -n "$(MAG)█$(D)"
-	$(CC) $(CFLAGS) $(DFLAGS) -MMD -MP -c $< -o $@
+	$(CXX) $(CXXFLAGS) -MMD -MP -c $< -o $@
 
 $(BUILD_PATH):
 	$(MKDIR_P) $(BUILD_PATH)
@@ -121,6 +115,18 @@ check_ext_func: all $(TEMP_PATH)		## Check for external functions
 	@echo "$(YEL)$(_SEP)$(D)"
 
 ##@ Test Rules 🧪
+
+test: all			## Run tests
+	@echo "[$(YEL)Running $(NAME) tests$(D)]"
+	@echo "$(YEL)$(_SEP)$(D)"
+	@echo "$(CYA)$(NAME)$(D): $(MAG)with no arguments$(D)"
+	@./$(NAME)
+	@echo "$(YEL)$(_SEP)$(D)"
+	@echo "$(CYA)$(NAME)$(D): $(MAG)with 1 argument$(D)"
+	@./$(NAME) "shhhhh... I think the students are asleep..."
+	@echo "$(CYA)$(NAME)$(D): $(MAG)with several argument$(D)"
+	@./$(NAME) Damnit " ! " "Sorry students, I thought this thing was off."
+
 
 ##@ Debug Rules 
 
@@ -188,7 +194,6 @@ fclean: clean			## Remove executable and .gdbinit
 	@if [ -f "$(NAME)" ]; then \
 		if [ -f "$(NAME)" ]; then \
 			$(RM) $(NAME); \
-			$(RM) compile_commands.json; \
 			echo "* $(YEL)Removing $(CYA)$(NAME)$(D) file: $(_SUCCESS)"; \
 		fi; \
 	else \
