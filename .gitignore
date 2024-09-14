@@ -31,3 +31,6 @@
 *.out
 *.app
 megaphone
+
+#Debug/Test
+**/gdb.txt
