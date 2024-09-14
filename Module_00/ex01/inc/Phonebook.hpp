@@ -27,17 +27,19 @@ class PhoneBook
 		PhoneBook(void);
 		~PhoneBook(void);
 
-		void	add(void);
-		void	search(void);
+		void		add(void);
+		void		search(void);
 
-		static void	printHeader(void);
+		static void	printMenu(void);
 		static void	printErr(std::string msg);
 
 	private:
-		Contact	_contacts[MAX_CONTACTS];
-		int		_nContacts;
+		Contact		_contacts[MAX_CONTACTS];
+		int			_nContacts;
 
-		void	_display(void);
+		void		_display(void);
+		void		_prompt(std::string prompt);
+		bool		_isPrintable(std::string str);
 };
 
 #endif
