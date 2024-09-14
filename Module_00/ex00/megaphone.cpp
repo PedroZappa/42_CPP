@@ -1,6 +1,7 @@
 #include <iostream>	// std::cout, std::endl
 
 std::string ft_capitalize(const std::string &str);
+std::string ft_trim(const std::string &str, char c);
 
 /**
 * @brief Broadcast the message in all CAPS
@@ -29,14 +30,35 @@ int main(int argc, char **argv)
 std::string ft_capitalize(const std::string &str)
 {
 	std::string ret;
+	std::string trim = ft_trim(str, ' ');
+	bool capitalizeNext = true;
 
-	for (unsigned int i = 0; i < str.length(); i++)
+	for (unsigned int i = 0; i < trim.length(); i++)
 	{
-		while ((str[i] == ' ') && (i < str.length()) && (i > 0)
-			&& (str[i] == ' ') && ((str[i + 1] == '\0') || (str[i + 1] == ' ')))
-			++i;
-		ret += (char)std::toupper(str[i]);
+		if(std::isspace(trim[i]))
+		{
+			capitalizeNext = true;
+			ret += trim[i];
+		}
+		else if (capitalizeNext)
+		{
+			ret += (char)std::toupper(trim[i]); // convert to uppercase
+			capitalizeNext = false;
+		}
+		else
+			ret += trim[i];
 	}
-
 	return (ret);
+}
+
+std::string ft_trim(const std::string &str, char c)
+{
+	size_t str_start = str.find_first_not_of(c);
+	size_t str_end = str.find_last_not_of(c);
+
+	// if the string is all spaces, return an empty string
+	if (str_start == std::string::npos || str_end == std::string::npos)
+		return "";
+
+	return str.substr(str_start, (str_end - str_start + 1));
 }
