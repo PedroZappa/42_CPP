@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 16:13:52 by passunca          #+#    #+#             */
-/*   Updated: 2024/09/14 18:41:43 by passunca         ###   ########.fr       */
+/*   Updated: 2024/09/14 18:42:52 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,12 @@ void PhoneBook::printErr(std::string msg)
 	std::cout << BRED << "Error: " << BYEL << msg << NC << std::endl;
 }
 
+/// @brief Get Prompt
+void PhoneBook::prompt(std::string prompt)
+{
+	std::cout << ARROW << prompt;
+};
+
 /// @brief Format String
 std::string PhoneBook::formatString(std::string str)
 {
@@ -115,10 +121,3 @@ std::string PhoneBook::formatString(std::string str)
 	else
 		std::cout << std::setw(10) << std::right << str;
 }
-
-/// @brief Get Prompt
-void PhoneBook::prompt(std::string prompt)
-{
-	std::cout << ARROW << prompt;
-};
-
