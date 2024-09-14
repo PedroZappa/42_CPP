@@ -1,5 +1,10 @@
 # C++ - Module 00
 
+> Strings
+
+- [Strings - cppreferece.com](https://en.cppreference.com/w/cpp/string)
+- [Null-terminted byte strings - cppreferece.com](https://en.cppreference.com/w/cpp/string/byte)
+
 > Namespaces
 
 > Classes

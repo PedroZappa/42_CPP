@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 13:48:49 by passunca          #+#    #+#             */
-/*   Updated: 2024/09/14 13:51:01 by passunca         ###   ########.fr       */
+/*   Updated: 2024/09/14 14:42:42 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,14 @@
 * @version		1.0
 ***/
 
-#include <iostream>	// std::cout, std::endl
+#include <iostream>
 
 std::string ft_capitalize(const std::string &str);
 std::string ft_trim(const std::string &str, char c);
 
-/**
-* @brief Broadcast the message in all CAPS
-* @param str string to be converted to uppercase
-* @return SUCCESS(0)
-**/
+/// @brief Broadcast the message in all CAPS
+/// @param str string to be converted to uppercase
+/// @return SUCCESS(0)
 int main(int argc, char **argv)
 {
 	std::string out;
@@ -35,18 +33,16 @@ int main(int argc, char **argv)
 	if (argc == 1)
 		out += "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
 	else
-		for (int word_i = 1; (word_i < argc); word_i++)
-			out.append(ft_capitalize(argv[word_i])).append(" ");
+		for (int arg = 1; (arg < argc); arg++)
+			out.append(ft_capitalize(argv[arg])).append(" ");
 
 	std::cout << out << std::endl;
 	return (0);
 }
 
-/**
-* @brief Capitalize a string
-* @param str string to be converted to uppercase
-* @return uppercase string
-**/
+/// @brief Capitalize a string
+/// @param str string to be converted to uppercase
+/// @return uppercase string
 std::string ft_capitalize(const std::string &str)
 {
     std::string ret;
@@ -58,12 +54,10 @@ std::string ft_capitalize(const std::string &str)
     return (ret);
 }
 
-/**
-* @brief Trim a string
-* @param str string to be trimmed
-* @param c character to trim
-* @return trimmed string
-**/
+/// @brief Trim leading and trailing 'c' characters from a string
+/// @param str string to be trimmed
+/// @param c character to trim
+/// @return trimmed string
 std::string ft_trim(const std::string &str, char c)
 {
 	size_t str_start = str.find_first_not_of(c);
@@ -71,7 +65,7 @@ std::string ft_trim(const std::string &str, char c)
 
 	// if the string is all spaces, return an empty string
 	if (str_start == std::string::npos || str_end == std::string::npos)
-		return "";
+		return ("");
 
 	return (str.substr(str_start, (str_end - str_start + 1)));
 }
