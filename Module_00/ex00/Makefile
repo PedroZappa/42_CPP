@@ -6,7 +6,7 @@
 #    By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/14 08:32:12 by passunca          #+#    #+#              #
-#    Updated: 2024/09/14 14:49:54 by passunca         ###   ########.fr        #
+#    Updated: 2024/09/14 15:11:44 by passunca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,6 @@ _SEP 			= =====================================================
 #==============================================================================#
 
 SRC_PATH		= .
-INC_PATH		= inc
 BUILD_PATH		= .build
 TEMP_PATH		= .temp
 
@@ -52,14 +51,9 @@ OBJS	= $(SRC:$(SRC_PATH)/%.c=$(BUILD_PATH)/%.o)
 #==============================================================================#
 
 CXX			= c++
-BUILD 		?= all
-INC			= -I $(INC_PATH)
-
 CXXFLAGS	= -Wall -Wextra -Werror
 CXXFLAGS	+= -std=c++98
-
 DEBUG_FLAGS	= -g
-ASAN_FLAGS	= -fsanitize=address
 
 #==============================================================================#
 #                                COMMANDS                                      #
@@ -69,11 +63,6 @@ ASAN_FLAGS	= -fsanitize=address
 RM		= rm -rf
 AR		= ar rcs
 MKDIR_P	= mkdir -p
-
-### Valgrind
-VAL_ARGS 	= --suppressions=readline.supp
-VAL_LEAK	= --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --trace-children=yes
-VGDB_ARGS	= --vgdb-error=0 $(VAL_LEAK) $(VAL_ARGS)
 
 #==============================================================================#
 #                                  RULES                                       #
@@ -89,7 +78,7 @@ $(NAME): $(BUILD_PATH) $(OBJS)			## Compile
 	@echo "[$(_SUCCESS) compiling $(MAG)$(NAME)$(D) $(YEL)🖔$(D)]"
 
 debug: CXXFLAGS += $(DEBUG_FLAGS)
-debug: all $(NAME) $(TEMP_PATH)			## Compile w/ debug symbols
+debug: fclean $(NAME) $(TEMP_PATH)			## Compile w/ debug symbols
 
 -include $(BUILD_PATH)/%.d
 
@@ -104,15 +93,6 @@ $(BUILD_PATH):
 $(TEMP_PATH):
 	$(MKDIR_P) $(TEMP_PATH)
 	@echo "* $(YEL)Creating $(CYA)$(TEMP_PATH)$(YEL) folder:$(D) $(_SUCCESS)"
-
-##@ Norm Rules
-
-check_ext_func: all $(TEMP_PATH)		## Check for external functions
-	@echo "[$(YEL)Checking for external functions$(D)]"
-	@echo "$(YEL)$(_SEP)$(D)"
-	@echo "$(CYA)Reading binary$(D): $(MAG)$(NAME)$(D)"
-	nm ./$(NAME) | grep "U" | grep -v "__" | tee $(TEMP_PATH)/ext_func.txt
-	@echo "$(YEL)$(_SEP)$(D)"
 
 ##@ Test Rules 🧪
 
