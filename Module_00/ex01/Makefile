@@ -6,7 +6,7 @@
 #    By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/14 14:51:25 by passunca          #+#    #+#              #
-#    Updated: 2024/09/14 15:37:08 by passunca         ###   ########.fr        #
+#    Updated: 2024/09/14 15:40:59 by passunca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,8 +87,7 @@ debug: fclean $(NAME) $(TEMP_PATH)			## Compile w/ debug symbols
 
 $(BUILD_PATH)/%.o: $(SRC_PATH)/%.c
 	@echo -n "$(MAG)█$(D)"
-	$(CXX) $(CXXFLAGS) -I $(INC_PATH) -MMD -MP -c $< -o $@
-	@echo "[$(GRN)compiling$(D)]: $<"
+	$(CXX) $(CXXFLAGS) -MMD -MP -c $< -o $@
 
 $(BUILD_PATH):
 	$(MKDIR_P) $(BUILD_PATH)
@@ -107,13 +106,13 @@ test: all			## Run tests
 	./$(NAME)
 	@echo "$(YEL)$(_SEP)$(D)"
 	@echo "$(CYA)$(NAME)$(D): $(MAG)with 1 argument$(D)"
-	./$(NAME) "shhhhh... I think the students are asleep..."
+	./$(NAME) 
 	@echo "$(YEL)$(_SEP)$(D)"
 	@echo "$(CYA)$(NAME)$(D): $(MAG)with several argument$(D)"
-	./$(NAME) Damnit " ! " "Sorry students, I thought this thing was off."
+	./$(NAME) 
 	@echo "$(YEL)$(_SEP)$(D)"
 	@echo "$(CYA)$(NAME)$(D): $(MAG)with lots of whitespace$(D) $(RED)(Extra)$(D)"
-	./$(NAME) Dude "    !    " "    I am loud and I shall be loud till the end of timez   !!!    "
+	./$(NAME) 
 
 ##@ Debug Rules 
 
