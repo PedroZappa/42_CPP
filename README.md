@@ -1,9 +1,20 @@
 # C++ - Module 00
 
-> Memory Allocation
-> Pointers to members
-> References
-> Switch Statement
+> Namespaces
+
+> Classes
+
+> Member Functions
+
+> stdio streams
+
+> Initialization Lists
+
+> Static
+
+> Const
+
+> & Other Basic Stuff
 
 ## What Is the Orthodox Canonical Form? (OCF)
 
@@ -108,4 +119,6 @@ RAII is also known as SBRM : **Scope-Bound Resource Management**, after the basi
 
 ___
 
-## ex00/
+## Exercise 00: BraiiiiiiinnnzzzZ
+
+
