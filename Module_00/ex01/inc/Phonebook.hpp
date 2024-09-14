@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 16:00:43 by passunca          #+#    #+#             */
-/*   Updated: 2024/09/14 16:24:13 by passunca         ###   ########.fr       */
+/*   Updated: 2024/09/14 18:09:20 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 
 # define MAX_CONTACTS 8
 
-# define HEADER "\t==>\tWelcome to My Awesome Phonebook!\t<==\n"
-# define ARROW	"==>"
+# define HEADER "==>\tWelcome to My Awesome Phonebook!\t<==\n"
+# define ARROW	"==> "
 
 class PhoneBook
 {
@@ -32,13 +32,14 @@ class PhoneBook
 
 		static void	printMenu(void);
 		static void	printErr(std::string msg);
+		static void	prompt(std::string prompt);
+		static void formatString(std::string str);
 
 	private:
 		Contact		_contacts[MAX_CONTACTS];
 		int			_n;
 
 		void		_display(void);
-		void		_prompt(std::string prompt);
 		bool		_isPrintable(std::string str);
 };
 

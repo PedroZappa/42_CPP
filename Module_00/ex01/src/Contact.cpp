@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 17:30:52 by passunca          #+#    #+#             */
-/*   Updated: 2024/09/14 17:43:36 by passunca         ###   ########.fr       */
+/*   Updated: 2024/09/14 17:59:23 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ Contact::Contact(void) {}
 /// @brief Destructor
 Contact::~Contact(void) {}
 
-/// @brief Copy Constructor
-Contact::Contact(std::string& fN, std::string& lN,
-	std::string& nN, std::string& pN, std::string& dS)
+/// @brief Contact initializer
+Contact::Contact(std::string fN, std::string lN,
+	std::string nN, std::string pN, std::string dS)
 {
 	this->_firstName = fN;
 	this->_lastName = lN;
@@ -28,3 +28,4 @@ Contact::Contact(std::string& fN, std::string& lN,
 	this->_phoneNumber = pN;
 	this->_darkestSecret = dS;
 }
+

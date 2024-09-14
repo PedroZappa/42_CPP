@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 16:13:52 by passunca          #+#    #+#             */
-/*   Updated: 2024/09/14 16:31:40 by passunca         ###   ########.fr       */
+/*   Updated: 2024/09/14 18:10:14 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void PhoneBook::add(void)
 {
 	std::string firstName, lastName, nickName, phoneNumber, darkestSecret;
 	
+	// Get user input
 	std::cout << "First Name\t: ";
 	std::getline(std::cin, firstName, '\n');
 	std::cout << "Last Name\t: ";
@@ -34,6 +35,7 @@ void PhoneBook::add(void)
 	std::cout << "Darkest Secret\t: ";
 	std::getline(std::cin, darkestSecret, '\n');
 
+	// Validate user input
 	if (firstName.empty() || lastName.empty() || nickName.empty()
 		|| phoneNumber.empty() || darkestSecret.empty())
 	{
@@ -48,6 +50,7 @@ void PhoneBook::add(void)
 		return ;
 	}
 
+	// Add Contact
 	this->_contacts[this->_n++ % MAX_CONTACTS] = Contact(firstName, lastName, nickName, phoneNumber, darkestSecret);
 	std::cout << std::endl << BGRN << "\tContact added successfully" << NC << std::endl;
 }
@@ -69,11 +72,12 @@ void PhoneBook::search(void)
 void PhoneBook::printMenu(void)
 {
 	std::cout << BGRN << HEADER << NC << std::endl;
-	std::cout << "Available Actions yo:";
-	std::cout << HYEL"\t" << ARROW << "ADD" << std::endl;
-	std::cout << HYEL"\t" << ARROW << "SEARCH" << std::endl;
-	std::cout << HYEL"\t" << ARROW << "ESCAPE!!" << std::endl;
+	std::cout << "Available Actions yo:" << std::endl;
+	std::cout << HYEL << ARROW << "ADD to me..." << std::endl;
+	std::cout << HYEL << ARROW << "SEARCH me..." << std::endl;
+	std::cout << HYEL << ARROW << "ESCAPE ME!!" << std::endl;
 	std::cout << NC << std::endl;
+	prompt("Enter a command : ");
 }
 
 /// @brief Print Error
@@ -82,9 +86,18 @@ void PhoneBook::printErr(std::string msg)
 	std::cout << BRED << "Error: " << BYEL << msg << NC << std::endl;
 }
 
-/// @brief Get Prompt
-void PhoneBook::_prompt(std::string prompt)
+/// @brief Format String
+void PhoneBook::formatString(std::string str)
 {
-	std::cout << ARROW << prompt << std::endl;
+	if (str.length() > 10)
+		std::cout << std::setw(9) << std::right << str.substr(0, 9) << ".";
+	else
+		std::cout << std::setw(10) << std::right << str;
+}
+
+/// @brief Get Prompt
+void PhoneBook::prompt(std::string prompt)
+{
+	std::cout << ARROW << prompt;
 };
 
