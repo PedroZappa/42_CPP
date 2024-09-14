@@ -13,26 +13,26 @@
 #include "../inc/Phonebook.hpp"
 
 /// @brief Constructor
-PhoneBook::PhoneBook(void) { this->_nContacts = -1; }
+PhoneBook::PhoneBook(void) { this->_n= -1; }
 
 /// @brief Destructor
 PhoneBook::~PhoneBook(void) {}
 
 /// @brief Add a Contact to the PhoneBook
-void add(void)
+void PhoneBook::add(void)
 {
 	std::string firstName, lastName, nickName, phoneNumber, darkestSecret;
 	
-	std::cout << "First Name\t\t: ";
-	std::getline(std::cin, firstName);
-	std::cout << "Last Name\t\t: ";
-	std::getline(std::cin, lastName);
-	std::cout << "Nickname\t\t: ";
-	std::getline(std::cin, nickName);
-	std::cout << "Phone Number\t\t: ";
-	std::getline(std::cin, phoneNumber);
-	std::cout << "Darkest Secret\t\t: ";
-	std::getline(std::cin, darkestSecret);
+	std::cout << "First Name\t: ";
+	std::getline(std::cin, firstName, '\n');
+	std::cout << "Last Name\t: ";
+	std::getline(std::cin, lastName, '\n');
+	std::cout << "Nickname\t: ";
+	std::getline(std::cin, nickName, '\n');
+	std::cout << "Phone Number\t: ";
+	std::getline(std::cin, phoneNumber, '\n');
+	std::cout << "Darkest Secret\t: ";
+	std::getline(std::cin, darkestSecret, '\n');
 
 	if (firstName.empty() || lastName.empty() || nickName.empty()
 		|| phoneNumber.empty() || darkestSecret.empty())
@@ -40,14 +40,16 @@ void add(void)
 		std::cout << BRED << "A Contact cannot have empty fields" << NC << std::endl;
 		return ;
 	}
+	if (!_isPrintable(firstName) || !_isPrintable(lastName)
+		|| !_isPrintable(nickName) || !_isPrintable(phoneNumber)
+		|| !_isPrintable(darkestSecret))
+	{
+		std::cout << BRED << "Gotcha!! A Contact cannot contain non printable characters" << NC << std::endl;
+		return ;
+	}
 
-		if (!_isPrintable(firstName) || !_isPrintable(lastName)
-			|| !_isPrintable(nickName) || !_isPrintable(phoneNumber)
-			|| !_isPrintable(darkestSecret))
-		{
-			std::cout << BRED << "Gotcha!! A Contact cannot contain non printable characters" << NC << std::endl;
-			return ;
-		}
+	this->_contacts[this->_n++ % MAX_CONTACTS] = Contact(firstName, lastName, nickName, phoneNumber, darkestSecret);
+	std::cout << std::endl << BGRN << "\tContact added successfully" << NC << std::endl;
 }
 
 bool PhoneBook::_isPrintable(std::string str)
@@ -58,7 +60,7 @@ bool PhoneBook::_isPrintable(std::string str)
 	return (true);
 }
 
-void search(void)
+void PhoneBook::search(void)
 {
 	return;
 }

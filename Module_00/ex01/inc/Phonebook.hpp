@@ -13,7 +13,7 @@
 #ifndef PHONEBOOK_HPP
 # define PHONEBOOK_HPP
 
-# include "ansi.h"
+# include "Ansi.h"
 # include "Contact.hpp"
 
 # define MAX_CONTACTS 8
@@ -35,7 +35,7 @@ class PhoneBook
 
 	private:
 		Contact		_contacts[MAX_CONTACTS];
-		int			_nContacts;
+		int			_n;
 
 		void		_display(void);
 		void		_prompt(std::string prompt);
