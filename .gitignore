@@ -34,3 +34,5 @@ megaphone
 
 #Debug/Test
 **/gdb.txt
+**/.temp
+**/.build
