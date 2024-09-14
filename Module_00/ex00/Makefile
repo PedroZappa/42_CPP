@@ -125,9 +125,10 @@ test: all			## Run tests
 	@echo "$(CYA)$(NAME)$(D): $(MAG)with 1 argument$(D)"
 	@./$(NAME) "shhhhh... I think the students are asleep..."
 	@echo "$(CYA)$(NAME)$(D): $(MAG)with several argument$(D)"
-	@./$(NAME) Damnit" ! " "Sorry students, I thought this thing was off."
+	@./$(NAME) Damnit " ! " "Sorry students, I thought this thing was off."
 	@echo "$(CYA)$(NAME)$(D): $(MAG)with lots of whitespace$(D)"
-	@./$(NAME) Dude "    !    " "I am loud and I shall be loud till the end of timez!"
+	@./$(NAME) Dude "    !    " "    I am loud and I shall be loud till the end of timez   !!!    "
+	@./$(NAME) Dude"    !    " "    I am loud and I shall be loud till the end of timez   !!!    "
 
 ##@ Debug Rules 
 

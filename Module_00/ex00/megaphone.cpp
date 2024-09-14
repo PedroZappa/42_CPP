@@ -29,28 +29,27 @@ int main(int argc, char **argv)
 **/
 std::string ft_capitalize(const std::string &str)
 {
-	std::string ret;
-	std::string trim = ft_trim(str, ' ');
-	bool capitalizeNext = true;
+    std::string ret;
+    std::string trim = ft_trim(str, ' ');
 
-	for (unsigned int i = 0; i < trim.length(); i++)
-	{
-		if(std::isspace(trim[i]))
-		{
-			capitalizeNext = true;
-			ret += trim[i];
-		}
-		else if (capitalizeNext)
-		{
-			ret += (char)std::toupper(trim[i]); // convert to uppercase
-			capitalizeNext = false;
-		}
-		else
-			ret += trim[i];
-	}
-	return (ret);
+    for (unsigned int i = 0; i < trim.length(); i++)
+    {
+        // Capitalize the first character or any character that follows a space
+        if (i == 0 || std::isspace(trim[i - 1]))
+            ret += (char)std::toupper(trim[i]);
+        else
+            ret += trim[i];
+    }
+
+    return ret;
 }
 
+/**
+* @brief Trim a string
+* @param str string to be trimmed
+* @param c character to trim
+* @return trimmed string
+**/
 std::string ft_trim(const std::string &str, char c)
 {
 	size_t str_start = str.find_first_not_of(c);
