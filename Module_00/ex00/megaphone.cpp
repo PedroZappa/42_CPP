@@ -16,7 +16,7 @@ int main(int argc, char **argv)
 		out += "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
 	else
 		for (int word_i = 1; (word_i < argc); word_i++)
-			out.append(ft_capitalize(argv[word_i]).append(" "));
+			out.append(ft_capitalize(argv[word_i])).append(" ");
 
 	std::cout << out << std::endl;
 	return (0);
@@ -33,23 +33,11 @@ std::string ft_capitalize(const std::string &str)
     std::string trim = ft_trim(str, ' ');
 
     for (unsigned int i = 0; i < trim.length(); i++)
-    {
-        // Capitalize the first character or any character that follows a space
-        if (i == 0 || std::isspace(trim[i - 1]))
-            ret += (char)std::toupper(trim[i]);
-        else
-            ret += trim[i];
-    }
+		ret += std::toupper(trim[i]);
 
     return ret;
 }
 
-/**
-* @brief Trim a string
-* @param str string to be trimmed
-* @param c character to trim
-* @return trimmed string
-**/
 std::string ft_trim(const std::string &str, char c)
 {
 	size_t str_start = str.find_first_not_of(c);
