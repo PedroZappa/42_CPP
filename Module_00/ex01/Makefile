@@ -6,7 +6,7 @@
 #    By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/14 14:51:25 by passunca          #+#    #+#              #
-#    Updated: 2024/09/14 15:35:42 by passunca         ###   ########.fr        #
+#    Updated: 2024/09/14 15:37:08 by passunca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,7 +88,7 @@ debug: fclean $(NAME) $(TEMP_PATH)			## Compile w/ debug symbols
 $(BUILD_PATH)/%.o: $(SRC_PATH)/%.c
 	@echo -n "$(MAG)█$(D)"
 	$(CXX) $(CXXFLAGS) -I $(INC_PATH) -MMD -MP -c $< -o $@
-	@echo "[$(GREEN)compiling$(RESET)]: $<"
+	@echo "[$(GRN)compiling$(D)]: $<"
 
 $(BUILD_PATH):
 	$(MKDIR_P) $(BUILD_PATH)
