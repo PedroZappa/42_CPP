@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 16:00:43 by passunca          #+#    #+#             */
-/*   Updated: 2024/09/14 18:09:20 by passunca         ###   ########.fr       */
+/*   Updated: 2024/09/14 18:40:40 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ class PhoneBook
 		static void	printMenu(void);
 		static void	printErr(std::string msg);
 		static void	prompt(std::string prompt);
-		static void formatString(std::string str);
+		static std::string formatString(std::string str);
 
 	private:
 		Contact		_contacts[MAX_CONTACTS];
@@ -41,6 +41,7 @@ class PhoneBook
 
 		void		_display(void);
 		bool		_isPrintable(std::string str);
+		void		_printPhoneBook(void);
 };
 
 #endif
