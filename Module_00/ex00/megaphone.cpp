@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 13:48:49 by passunca          #+#    #+#             */
-/*   Updated: 2024/09/14 13:50:03 by passunca         ###   ########.fr       */
+/*   Updated: 2024/09/14 13:51:01 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ std::string ft_trim(const std::string &str, char c);
 **/
 int main(int argc, char **argv)
 {
-	std::string out = "";
+	std::string out;
 
 	if (argc == 1)
 		out += "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
@@ -55,7 +55,7 @@ std::string ft_capitalize(const std::string &str)
     for (unsigned int i = 0; i < trim.length(); i++)
 		ret += std::toupper(trim[i]);
 
-    return ret;
+    return (ret);
 }
 
 /**
@@ -73,7 +73,7 @@ std::string ft_trim(const std::string &str, char c)
 	if (str_start == std::string::npos || str_end == std::string::npos)
 		return "";
 
-	return str.substr(str_start, (str_end - str_start + 1));
+	return (str.substr(str_start, (str_end - str_start + 1)));
 }
 
 /** @} */
