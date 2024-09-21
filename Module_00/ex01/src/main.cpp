@@ -14,32 +14,31 @@
 
 std::string toLower(std::string str);
 
-int main()
+int main(void)
 {
-	std::string	input;
-	PhoneBook	phonebook = PhoneBook();
+	PhoneBook		phonebook = PhoneBook();
+	std::string		cmd;
 
 	while (true)
 	{
 		phonebook.printMenu();
-		std::getline(std::cin, input, '\n');
-		input = toLower(input);
-		if (input == "add")
+		std::getline(std::cin, cmd);
+		cmd = toLower(cmd);
+		if (cmd == "add")
 			phonebook.add();
-		else if (input == "search")
+		else if (cmd == "search")
 			phonebook.search();
-		else if (input == "exit")
+		else if (cmd == "exit")
 			break ;
 		else if (std::cin.eof())
 			break ;
 		else
-			std::cout << BRED << "Invalid command" << NC << std::endl;
+			std::cout << BRED << "\tInvalid command" << NC << std::endl;
 	}
-
 	return (0);
 }
 
-// Turn input into lkowercase
+// Turn cmd into lkowercase
 std::string toLower(std::string str)
 {
 	for (size_t i = 0; i < str.length(); i++)

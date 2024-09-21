@@ -13,6 +13,10 @@
 #ifndef PHONEBOOK_HPP
 # define PHONEBOOK_HPP
 
+#include <iostream>
+#include <fstream>
+#include <string>
+
 # include "Ansi.h"
 # include "Contact.hpp"
 

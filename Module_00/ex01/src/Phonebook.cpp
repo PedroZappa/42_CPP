@@ -22,7 +22,7 @@ PhoneBook::~PhoneBook(void) {}
 void PhoneBook::add(void)
 {
 	std::string firstName, lastName, nickName, phoneNumber, darkestSecret;
-	
+
 	// Get user input
 	std::cout << "First Name\t: ";
 	std::getline(std::cin, firstName, '\n');
@@ -45,7 +45,7 @@ void PhoneBook::add(void)
 	if (!_isPrintable(firstName) || !_isPrintable(lastName)
 		|| !_isPrintable(nickName) || !_isPrintable(phoneNumber)
 		|| !_isPrintable(darkestSecret))
-	{
+		{
 		std::cout << BRED << "\tGotcha!! A Contact cannot contain non printable characters" << NC << std::endl;
 		return ;
 	}
@@ -74,15 +74,14 @@ void PhoneBook::search(void)
 	std::cin >> id;
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	// Check for invalid input (anythibng other than numbers)
-	if (std::cin.fail())
+	if (std::cin.fail())	
 	{
 		std::cout << "\n\tInvalid Input!" << std::endl;
 		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	}
-	else if (id < 0 || id > max) {
-		std::cout << "\n" << id << " : Is not a valid ID!" << std::endl;
-	}
+	else if ((id < 0) || (id > max))
+		std::cout << "\n" << BRED << id << " : Is not a valid ID!" << NC << std::endl;
 	else
 		this->_contacts[id].printContact();
 }
@@ -133,6 +132,6 @@ void PhoneBook::prompt(std::string prompt)
 std::string PhoneBook::formatString(std::string str)
 {
 	if (str.length() > 10)
-		return (str.substr(0, 8) + ".");
+		return (str.substr(0, 9) + ".");
 	return (str);
 }
