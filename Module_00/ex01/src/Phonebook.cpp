@@ -39,14 +39,14 @@ void PhoneBook::add(void)
 	if (firstName.size() < 1 || lastName.size() < 1 || nickName.size() < 1
 		|| phoneNumber.size() < 1 || darkestSecret.size() < 1)
 	{
-		std::cout << BRED << "A Contact cannot have empty fields" << NC << std::endl;
+		std::cout << BRED << "\tA Contact cannot have empty fields" << NC << std::endl;
 		return ;
 	}
 	if (!_isPrintable(firstName) || !_isPrintable(lastName)
 		|| !_isPrintable(nickName) || !_isPrintable(phoneNumber)
 		|| !_isPrintable(darkestSecret))
 	{
-		std::cout << BRED << "Gotcha!! A Contact cannot contain non printable characters" << NC << std::endl;
+		std::cout << BRED << "\tGotcha!! A Contact cannot contain non printable characters" << NC << std::endl;
 		return ;
 	}
 
