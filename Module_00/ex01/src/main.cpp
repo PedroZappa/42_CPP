@@ -12,6 +12,8 @@
 
 #include "../inc/Phonebook.hpp"
 
+std::string toLower(std::string str);
+
 int main()
 {
 	std::string	input;
@@ -21,11 +23,12 @@ int main()
 	{
 		phonebook.printMenu();
 		std::getline(std::cin, input, '\n');
-		if (input == "ADD")
+		input = toLower(input);
+		if (input == "add")
 			phonebook.add();
-		else if (input == "SEARCH")
+		else if (input == "search")
 			phonebook.search();
-		else if (input == "EXIT")
+		else if (input == "exit")
 			break ;
 		else if (std::cin.eof())
 			break ;
@@ -34,4 +37,12 @@ int main()
 	}
 
 	return (0);
+}
+
+// Turn input into lkowercase
+std::string toLower(std::string str)
+{
+	for (size_t i = 0; i < str.length(); i++)
+		str[i] = std::tolower(str[i]);
+	return (str);
 }

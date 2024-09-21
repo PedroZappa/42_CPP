@@ -108,11 +108,11 @@ void PhoneBook::_printPhoneBook(void)
 /// @brief Print Menu
 void PhoneBook::printMenu(void)
 {
-	std::cout << BGRN << HEADER << NC << std::endl;
+	std::cout << HEADER << BGRN << NC << std::endl;
 	std::cout << "Available Actions yo:" << std::endl;
-	std::cout << HYEL << ARROW << "ADD to me..." << std::endl;
-	std::cout << HYEL << ARROW << "SEARCH me..." << std::endl;
-	std::cout << HYEL << ARROW << "ESCAPE ME!!" << std::endl;
+	std::cout << ARROW << HYEL << "Add" << NC << " to me..." << std::endl;
+	std::cout << ARROW << HYEL << "Search" << NC << " me..." << std::endl;
+	std::cout << ARROW << HYEL << "Exit" << NC << " me!!" << std::endl;
 	std::cout << NC << std::endl;
 	prompt("Enter a command : ");
 }
