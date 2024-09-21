@@ -13,7 +13,7 @@
 #include "../inc/Phonebook.hpp"
 
 /// @brief Constructor
-PhoneBook::PhoneBook(void) { this->_n= -1; }
+PhoneBook::PhoneBook(void) { this->_n= 0; }
 
 /// @brief Destructor
 PhoneBook::~PhoneBook(void) {}
@@ -36,8 +36,8 @@ void PhoneBook::add(void)
 	std::getline(std::cin, darkestSecret, '\n');
 
 	// Validate user input
-	if (firstName.empty() || lastName.empty() || nickName.empty()
-		|| phoneNumber.empty() || darkestSecret.empty())
+	if (firstName.size() < 1 || lastName.size() < 1 || nickName.size() < 1
+		|| phoneNumber.size() < 1 || darkestSecret.size() < 1)
 	{
 		std::cout << BRED << "A Contact cannot have empty fields" << NC << std::endl;
 		return ;
@@ -65,20 +65,34 @@ bool PhoneBook::_isPrintable(std::string str)
 
 void PhoneBook::search(void)
 {
-	int	idx, max;
+	int	id, max;
 
-	(void)idx;
-	(void)max;
 	// Get largest supported index
 	max = (this->_n > (MAX_CONTACTS - 1)) ? (MAX_CONTACTS - 1) : --this->_n;
 	this->_printPhoneBook();
+	std::cout << "SELECT ID : ";
+	std::cin >> id;
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	// Check for invalid input (anythibng other than numbers)
+	if (std::cin.fail())
+	{
+		std::cout << "\n\tInvalid Input!" << std::endl;
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	}
+	else if (id < 0 || id > max) {
+		std::cout << "\n" << id << " : Is not a valid ID!" << std::endl;
+	}
+	else
+		this->_contacts[id].printContact();
 }
 
 void PhoneBook::_printPhoneBook(void)
 {
 	std::string field;
 
-	std::cout << "|\tIndex|\tFirst Name|\tLast Name|\tNickname|" << std::endl;
+	std::cout << std::endl;
+	std::cout << "|     Index|First Name| Last Name|  Nickname|" << std::endl;
 	for (int i = 0; i <= (MAX_CONTACTS - 1); i++)
 	{
 		std::cout << "|" << std::setw(10) << i << "|";
@@ -119,8 +133,6 @@ void PhoneBook::prompt(std::string prompt)
 std::string PhoneBook::formatString(std::string str)
 {
 	if (str.length() > 10)
-		std::cout << std::setw(9) << std::right << str.substr(0, 9) << ".";
-	else
-		std::cout << std::setw(10) << std::right << str;
+		return (str.substr(0, 8) + ".");
 	return (str);
 }
