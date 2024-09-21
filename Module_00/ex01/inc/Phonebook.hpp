@@ -22,7 +22,7 @@
 
 # define MAX_CONTACTS 8
 
-# define HEADER "==>\tWelcome to My Awesome Phonebook!\t<==\n"
+# define HEADER "==>\tWelcome to Zee Awesome Phonebook!\t<==\n"
 # define ARROW	"==> "
 
 class PhoneBook

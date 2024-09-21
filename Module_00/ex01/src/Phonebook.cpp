@@ -73,7 +73,6 @@ void PhoneBook::search(void)
 	std::cout << "SELECT ID : ";
 	std::cin >> id;
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-	// Check for invalid input (anythibng other than numbers)
 	if (std::cin.fail())	
 	{
 		std::cout << "\n\tInvalid Input!" << std::endl;
