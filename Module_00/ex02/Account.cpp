@@ -67,6 +67,23 @@ void Account::displayAccountsInfos(void)
 	std::cout << "withdrawals:" << Account::_totalNbWithdrawals << std::endl;
 }
 
+/**
+ * @brief Make a Deposit
+ */
+void Account::makeDeposit(int deposit)
+{
+	this->_amount += deposit;         // Update account balance
+	this->_nbDeposits++;              // Increment number of deposits
+	Account::_totalNbDeposits++;      // Increment global number of deposits
+	Account::_totalAmount += deposit; // Update total amount across all accounts
+
+	Account::_displayTimestamp();
+	std::cout << "index:" << this->_accountIndex << ";";
+	std::cout << "p_amount:" << (this->_amount - deposit) << ";";
+	std::cout << "deposit:" << deposit << ";";
+	std::cout << "amount:" << this->_amount << ";";
+	std::cout << "nb_deposits:" << this->_nbDeposits << std::endl;
+}
 
 /* Account Class Private Methods */
 
@@ -75,7 +92,7 @@ void Account::displayAccountsInfos(void)
  */
 static void _displayTimestamp(void)
 {
-	std::time_t	rawtime;
+	std::time_t rawtime;
 	std::tm *timestamp;
 
 	rawtime = std::time(0);
@@ -88,4 +105,3 @@ static void _displayTimestamp(void)
 	std::cout << std::setfill('0') << std::setw(2) << timestamp->tm_min;
 	std::cout << std::setfill('0') << std::setw(2) << timestamp->tm_sec << "] ";
 }
-
