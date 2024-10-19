@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 11:45:13 by passunca          #+#    #+#             */
-/*   Updated: 2024/10/19 20:34:11 by passunca         ###   ########.fr       */
+/*   Updated: 2024/10/19 21:16:32 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ class Zombie
 	std::string _name;
 };
 
+Zombie	*zombieHorde(int N, std::string name);
 
 #endif

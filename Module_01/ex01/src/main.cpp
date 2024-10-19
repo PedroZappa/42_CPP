@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 11:43:28 by passunca          #+#    #+#             */
-/*   Updated: 2024/10/19 20:43:20 by passunca         ###   ########.fr       */
+/*   Updated: 2024/10/19 21:17:19 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,34 @@
 
 static void	headerPrinter(void);
 static void	sepPrinter(void);
+static void	exitErr(std::string msg);
+static void usage(void);
 
 /**
  * @brief Zombie and Chump creation test
 */
 int main(int argc, char **argv) {
-	(void)argc;
 	(void)argv;
+	int	size;
 
 	headerPrinter();
-
+	if (argc > 3)
+		exitErr("Too many arguments");
+	else if (argc <= 2)
+		exitErr("Too few arguments");
+	try
+	{
+		size = std::atoi(argv[1]);
+	}
+	catch (std::out_of_range &e)
+	{
+		exitErr("N value is  out of range");
+	}
+	
+	Zombie *horde = zombieHorde(size, argv[2]);
 	sepPrinter();
+
+	delete [] horde;
 
 	return (EXIT_SUCCESS);
 }
@@ -46,3 +63,14 @@ static void	sepPrinter(void) {
 	std::cout << NC;
 }
 
+static void	exitErr(std::string msg) {
+	std::cout << RED;
+	std::cout << "Error: "<< msg << std::endl;
+	usage();
+	exit(EXIT_FAILURE);
+}
+
+static void usage(void) {
+	std::cout << BYEL << "Usage: ";
+	std::cout << BWHT << "./moarBrainz.out <N> <name>" << NC << std::endl;
+}
