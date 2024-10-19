@@ -15,9 +15,7 @@
 #include <iomanip>  // std::setfill std::setw
 #include <iostream> // std::cout std::endl
 
-/**
- *	Initializes Account's class static private members
- */
+/*	Initializes Account's class static private members */
 int Account::_nbAccounts = 0;
 int Account::_totalAmount = 0;
 int Account::_totalNbDeposits = 0;
@@ -56,19 +54,49 @@ Account::~Account(void)
 /* Account Class Public Methods */
 
 /**
+ * @brief Get _nbAccounts
+ */
+int Account::getNbAccounts()
+{
+	return (Account::_nbAccounts);
+}
+/**
+ * @brief Get _totalAmount
+ */
+int Account::getTotalAmount()
+{
+	return (Account::_totalAmount);
+}
+/**
+ * @brief Get _totalNbDeposits
+ */
+int Account::getNbDeposits()
+{
+	return (Account::_totalNbDeposits);
+}
+/**
+ * @brief Get _totalNbWithdrawals
+ */
+int Account::getNbWithdrawals()
+{
+	return (Account::_totalNbWithdrawals);
+}
+
+/**
  * @brief Get Accounts Information
  */
 void Account::displayAccountsInfos(void)
 {
 	Account::_displayTimestamp();
-	std::cout << "accounts:" << Account::_nbAccounts << ";";
-	std::cout << "total:" << Account::_totalAmount << ";";
-	std::cout << "deposits:" << Account::_totalNbDeposits << ";";
-	std::cout << "withdrawals:" << Account::_totalNbWithdrawals << std::endl;
+	std::cout << "accounts:" << Account::getNbAccounts() << ";";
+	std::cout << "total:" << Account::getTotalAmount() << ";";
+	std::cout << "deposits:" << Account::getNbDeposits() << ";";
+	std::cout << "withdrawals:" << Account::getNbWithdrawals() << std::endl;
 }
 
 /**
  * @brief Make a Deposit
+ * @param deposit
  */
 void Account::makeDeposit(int deposit)
 {
