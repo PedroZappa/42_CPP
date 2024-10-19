@@ -32,6 +32,7 @@
 *.app
 megaphone
 phonebook
+bankAccount
 
 #Debug/Test
 **/gdb.txt
