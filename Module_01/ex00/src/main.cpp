@@ -17,6 +17,7 @@
 **       on the stack or on the heap?
 ** WARN: Zombies must be destroyed when not needed anymore
 */
+
 void	headerPrinter(void);
 void	sepPrinter(void);
 
