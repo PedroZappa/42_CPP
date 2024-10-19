@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 11:43:28 by passunca          #+#    #+#             */
-/*   Updated: 2024/10/19 21:17:19 by passunca         ###   ########.fr       */
+/*   Updated: 2024/10/19 21:46:37 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,11 @@ int main(int argc, char **argv) {
 	}
 	
 	Zombie *horde = zombieHorde(size, argv[2]);
+	for (int i = 0; i < size; i++)
+		horde[i].announce();
 	sepPrinter();
 
 	delete [] horde;
-
 	return (EXIT_SUCCESS);
 }
 

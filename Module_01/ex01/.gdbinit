@@ -19,10 +19,11 @@ set print array-indexes on
 
 ### main.cpp
 define main
+  display argc
+  display argv@argc
 	display zombieName
-	display chumpName
-	display zombie
-	display *zombie
+	display size
+	display *horde
 end
 
 ### Go GDB Go! I Choose YOU! 
