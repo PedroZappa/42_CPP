@@ -55,6 +55,7 @@ Account::~Account(void)
 
 /**
  * @brief Get _nbAccounts
+ * @return _nbAccounts
  */
 int Account::getNbAccounts()
 {
@@ -62,6 +63,7 @@ int Account::getNbAccounts()
 }
 /**
  * @brief Get _totalAmount
+ * @return _totalAmount
  */
 int Account::getTotalAmount()
 {
@@ -69,6 +71,7 @@ int Account::getTotalAmount()
 }
 /**
  * @brief Get _totalNbDeposits
+ * @return _totalNbDeposits
  */
 int Account::getNbDeposits()
 {
@@ -76,6 +79,7 @@ int Account::getNbDeposits()
 }
 /**
  * @brief Get _totalNbWithdrawals
+ * @return _totalNbWithdrawals
  */
 int Account::getNbWithdrawals()
 {
@@ -117,6 +121,8 @@ void Account::makeDeposit(int deposit)
 /**
  * @brief Make a Withdrawal
  * @param withdrawal
+ * @return SUCCESS(true)
+ * @return FAILURE(false)
  */
 bool Account::makeWithdrawal(int withdrawal)
 {
@@ -144,6 +150,28 @@ bool Account::makeWithdrawal(int withdrawal)
 	std::cout << "amount:" << this->_amount << ";";
 	std::cout << "nb_withdrawals:" << this->_nbWithdrawals << std::endl;
 	return (true);
+}
+
+/**
+ * @brief Get Account's Amount
+ * @return Account's Amount
+ * @note 'const' guarantees no modifications to object's state
+ */
+int Account::checkAmount(void) const
+{
+	return (this->_amount);
+}
+
+/**
+ * @brief Get Account's Status
+ */
+void Account::displayStatus(void) const
+{
+	Account::_displayTimestamp();
+	std::cout << "index:" << this->_accountIndex << ";";
+	std::cout << "amount:" << this->_amount << ";";
+	std::cout << "deposits:" << this->_nbDeposits << ";";
+	std::cout << "withdrawals:" << this->_nbWithdrawals << std::endl;
 }
 
 /* Account Class Private Methods */
