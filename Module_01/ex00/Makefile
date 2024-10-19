@@ -70,6 +70,12 @@ RM			= rm -rf
 AR			= ar rcs
 MKDIR_P	= mkdir -p
 
+### Valgrind
+# VAL_SUP 	= --suppressions=
+VAL_LEAK	= --leak-check=full --show-leak-kinds=all --trace-children=yes
+VAL_FD		= --track-fds=yes --track-origins=yes
+VGDB_ARGS	= --vgdb-error=0 $(VAL_LEAK) $(VAL_SUP) $(VAL_FD)
+
 #==============================================================================#
 #                                  RULES                                       #
 #==============================================================================#

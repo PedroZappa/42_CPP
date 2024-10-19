@@ -22,8 +22,8 @@ define main
 	display zombieName
 	display chumpName
 	display zombie
+	display *zombie
 end
-
 
 ### Go GDB Go! I Choose YOU! 
 
