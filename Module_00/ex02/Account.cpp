@@ -24,7 +24,8 @@ int Account::_totalNbDeposits = 0;
 int Account::_totalNbWithdrawals = 0;
 
 /**
- *	Account class Constructor
+ * @brief Account class Constructor
+ * @param initial_deposit
  */
 Account::Account(int initial_deposit)
 {
@@ -41,7 +42,7 @@ Account::Account(int initial_deposit)
 }
 
 /**
- *	Account class Destructor
+ *	@brief Account class Destructor
  */
 Account::~Account(void)
 {
@@ -52,8 +53,25 @@ Account::~Account(void)
 	std::cout << "closed" << std::endl;
 }
 
+/* Account Class Public Methods */
+
 /**
- * Account clkass Helper Methods
+ * @brief Get Accounts Information
+ */
+void Account::displayAccountsInfos(void)
+{
+	Account::_displayTimestamp();
+	std::cout << "accounts:" << Account::_nbAccounts << ";";
+	std::cout << "total:" << Account::_totalAmount << ";";
+	std::cout << "deposits:" << Account::_totalNbDeposits << ";";
+	std::cout << "withdrawals:" << Account::_totalNbWithdrawals << std::endl;
+}
+
+
+/* Account Class Private Methods */
+
+/**
+ * @brief Print Timestamps
  */
 static void _displayTimestamp(void)
 {
@@ -70,3 +88,4 @@ static void _displayTimestamp(void)
 	std::cout << std::setfill('0') << std::setw(2) << timestamp->tm_min;
 	std::cout << std::setfill('0') << std::setw(2) << timestamp->tm_sec << "] ";
 }
+
