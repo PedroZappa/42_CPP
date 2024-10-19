@@ -26,7 +26,7 @@ int main(int argc, char **argv)
 {
 	int size;
 	(void)argc;
-	
+
 	headerPrinter();
 	if (argc > 3)
 		exitErr("Too many arguments");
