@@ -25,7 +25,7 @@ Zombie::Zombie(void)
  * @note Member Initializer List:
  - (https://en.cppreference.com/w/cpp/language/constructor)
  * - more efficient than assignment;
- * - Mandatory for const or reference inits
+ * - Mandatory for const or reference initializations
  */
 Zombie::Zombie(std::string name) : _name(name)
 {
@@ -36,7 +36,8 @@ Zombie::Zombie(std::string name) : _name(name)
  */
 Zombie::~Zombie(void)
 {
-	std::cout << "Zombie " << _name << " destroyed ☠" << std::endl;
+	std::cout << RED << "Zombie " << BWHT << _name;
+	std::cout << RED << " destroyed ☠☠☠" << NC << std::endl;
 }
 
 /* Zombie's Public Methods */
@@ -46,5 +47,5 @@ Zombie::~Zombie(void)
  */
 void Zombie::announce(void)
 {
-	std::cout << _name << ": BraiiiiiiinnnzzzZ..." << std::endl;
+	std::cout << _name << ": " << BMAG "BraiiiiiiinnnzzzZ..." << NC << std::endl;
 }

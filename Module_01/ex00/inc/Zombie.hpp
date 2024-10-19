@@ -15,6 +15,9 @@
 
 #include <string>	// std::string
 #include <iostream>	// std::cout std::endl
+#include <cstdlib>	// EXIT_SUCCESS
+
+# include "Ansi.h"
 
 class Zombie
 {

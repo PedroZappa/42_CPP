@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../inc/Zombie.hpp"
-#include <cstdlib>
 
 static void	headerPrinter(void);
 static void	sepPrinter(void);
@@ -25,28 +24,34 @@ int main(void) {
 	Zombie *zombie;
 
 	headerPrinter();
-	std::cout << "Name a new Zombie: ";
+	std::cout << YEL << "Name a new Zombie: " << NC;
 	std::getline(std::cin, zombieName);
-	std::cout << "Name a new Chump: ";
+	std::cout << YEL << "Name a new Chump: " << NC;
 	std::getline(std::cin, chumpName);
 	
 	sepPrinter();
 	zombie = newZombie(zombieName);
 	zombie->announce();
-
 	randomChump(chumpName);
 
+	sepPrinter();
 	delete zombie;
 	return (EXIT_SUCCESS);
 }
 
 static void	headerPrinter(void) {
+	std::cout << GRN;
 	std::cout << "=========================" << std::endl;
+	std::cout << BWHT;
 	std::cout << "     Zedro's Zombies     " << std::endl;
+	std::cout << GRN;
 	std::cout << "=========================" << std::endl;
+	std::cout << NC;
 }
 
 static void	sepPrinter(void) {
+	std::cout << GRN;
 	std::cout << "=========================" << std::endl;
 	std::cout << "=========================" << std::endl;
+	std::cout << NC;
 }
