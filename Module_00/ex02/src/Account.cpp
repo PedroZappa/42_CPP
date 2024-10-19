@@ -45,7 +45,7 @@ Account::Account(int initial_deposit)
 Account::~Account(void)
 {
 	// Write Account's destruction log to std::cout
-	Account::_displayTimestamp();
+	_displayTimestamp();
 	std::cout << "index:" << this->_accountIndex << ";";
 	std::cout << "amount:" << this->_amount << ";";
 	std::cout << "closed" << std::endl;
@@ -59,7 +59,7 @@ Account::~Account(void)
  */
 int Account::getNbAccounts()
 {
-	return (t::_nbAccounts);
+	return (_nbAccounts);
 }
 /**
  * @brief Get _totalAmount
@@ -67,7 +67,7 @@ int Account::getNbAccounts()
  */
 int Account::getTotalAmount()
 {
-	return (t::_totalAmount);
+	return (_totalAmount);
 }
 /**
  * @brief Get _totalNbDeposits
@@ -75,7 +75,7 @@ int Account::getTotalAmount()
  */
 int Account::getNbDeposits()
 {
-	return (t::_totalNbDeposits);
+	return (_totalNbDeposits);
 }
 /**
  * @brief Get _totalNbWithdrawals
@@ -83,7 +83,7 @@ int Account::getNbDeposits()
  */
 int Account::getNbWithdrawals()
 {
-	return (t::_totalNbWithdrawals);
+	return (_totalNbWithdrawals);
 }
 
 /**
@@ -137,7 +137,7 @@ bool Account::makeWithdrawal(int withdrawal)
 		success = true;
 	}
 	// Write Withdrawal log to std::cout
-	t::_displayTimestamp();
+	_displayTimestamp();
 	std::cout << "index:" << this->_accountIndex << ";";
 	if (!success)
 	{
@@ -168,7 +168,7 @@ int Account::checkAmount(void) const
  */
 void Account::displayStatus(void) const
 {
-	t::_displayTimestamp();
+	_displayTimestamp();
 	std::cout << "index:" << this->_accountIndex << ";";
 	std::cout << "amount:" << this->_amount << ";";
 	std::cout << "deposits:" << this->_nbDeposits << ";";
@@ -180,7 +180,7 @@ void Account::displayStatus(void) const
 /**
  * @brief Print Timestamps
  */
-static void _displayTimestamp(void)
+void Account::_displayTimestamp(void)
 {
 	std::time_t rawtime;
 	std::tm *timestamp;
