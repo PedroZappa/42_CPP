@@ -21,7 +21,6 @@ set print array-indexes on
 define main
   display argc
   display argv@argc
-	display zombieName
 	display size
 	display *horde
 end
@@ -30,7 +29,7 @@ end
 
 # main
 break main
-run 
+run 2 Z Z
 fs cmd
 rfr
 

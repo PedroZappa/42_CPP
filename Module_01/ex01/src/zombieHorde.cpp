@@ -30,7 +30,7 @@ Zombie *zombieHorde(int N, std::string name)
 	Zombie *horde = new Zombie[N];
 	std::string suffixes[] = {
 		"al", "el", "il", "ol", "ul", "az", "ez", "iz", "oz", "uz", "ah", "eh", "ih", "ih", "oh", "uh"};
-	int suffixN = sizeof(suffixes) / sizeof(suffixes[0]);
+	int suffixN = (sizeof(suffixes) / sizeof(suffixes[0]));
 
 	for (int i = 0; i < N; i++)
 	{
