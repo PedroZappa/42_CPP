@@ -61,26 +61,24 @@ int main(int argc, char **argv)
 static void headerPrinter(void)
 {
 	std::cout << GRN;
-	std::cout << "=========================" << std::endl;
+	std::cout << "=========================" << "\n";
 	std::cout << BWHT;
-	std::cout << " Zedro's Horde o'Zombies " << std::endl;
+	std::cout << " Zedro's Horde o'Zombies " << "\n";
 	std::cout << GRN;
-	std::cout << "=========================" << std::endl;
-	std::cout << NC;
+	std::cout << "=========================" << NC << "\n";
 }
 
 static void sepPrinter(void)
 {
 	std::cout << GRN;
-	std::cout << "=========================" << std::endl;
-	std::cout << "=========================" << std::endl;
-	std::cout << NC;
+	std::cout << "=========================" << "\n";
+	std::cout << "=========================" << NC << "\n";
 }
 
 static void exitErr(const std::string &msg)
 {
 	std::cout << RED;
-	std::cout << "Error: " << msg << std::endl;
+	std::cout << "Error: " << msg << "\n";
 	usage();
 	msg.~basic_string();
 	exit(EXIT_SUCCESS);
@@ -89,5 +87,5 @@ static void exitErr(const std::string &msg)
 static void usage(void)
 {
 	std::cout << BYEL << "Usage: ";
-	std::cout << BWHT << "./moarBrainz.out <N> <name>" << NC << std::endl;
+	std::cout << BWHT << "./moarBrainz.out <N> <name>" << NC << "\n";
 }
