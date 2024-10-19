@@ -19,13 +19,13 @@ SHELL	:= bash --rcfile ~/.bashrc
 
 # Default test values
 IN_PATH		?= $(SRC_PATH)
-ARG			=
+ARG				=
 
 #==============================================================================#
 #                                     NAMES                                    #
 #==============================================================================#
 
-NAME 			= phonebook
+NAME 			 	= bankAccount
 TESTER			= CPP00_00_tester
 
 ### Message Vars
@@ -40,31 +40,32 @@ _SEP 			= =====================================================
 SRC_PATH		= src
 BUILD_PATH	= .build
 TEMP_PATH		= .temp
-INC_PATH		= inc/
+INC_PATH		= inc
 
-FILES			= main.cpp
-FILES			+= Phonebook.cpp
-FILES			+= Contact.cpp
+FILES				= tests.cpp
+FILES				+= Account.cpp
 
-SRC		= $(addprefix $(SRC_PATH)/, $(FILES))
-OBJS	= $(SRC:$(SRC_PATH)/%.c=$(BUILD_PATH)/%.o)
+SRC					= $(addprefix $(SRC_PATH)/, $(FILES))
+OBJS				= $(SRC:$(SRC_PATH)/%.cpp=$(BUILD_PATH)/%.o)
 
 #==============================================================================#
 #                              COMPILER & FLAGS                                #
 #==============================================================================#
 
-CXX			= c++
-CXXFLAGS	= -Wall -Wextra -Werror
-CXXFLAGS	+= -std=c++98
+CXX					= c++
+CXXFLAGS		= -Wall -Wextra -Werror
+CXXFLAGS		+= -std=c++98
 DEBUG_FLAGS	= -g
+INC					= -I $(INC_PATH)
+
 
 #==============================================================================#
 #                                COMMANDS                                      #
 #==============================================================================#
 
 ### Core Utils
-RM		= rm -rf
-AR		= ar rcs
+RM			= rm -rf
+AR			= ar rcs
 MKDIR_P	= mkdir -p
 
 #==============================================================================#
@@ -73,7 +74,7 @@ MKDIR_P	= mkdir -p
 
 ##@ CPP00_00 Compilation Rules 🏗
 
-all: $(BUILD_PATH) $(NAME)	## Compile
+all: $(NAME)	## Compile
 
 $(NAME): $(BUILD_PATH) $(OBJS)			## Compile
 	@echo "$(YEL)Compiling $(MAG)$(NAME)$(YEL) mandatory version$(D)"
@@ -85,9 +86,9 @@ debug: fclean $(NAME) $(TEMP_PATH)			## Compile w/ debug symbols
 
 -include $(BUILD_PATH)/%.d
 
-$(BUILD_PATH)/%.o: $(SRC_PATH)/%.c
+$(BUILD_PATH)/%.o: $(SRC_PATH)/%.cpp
 	@echo -n "$(MAG)█$(D)"
-	$(CXX) $(CXXFLAGS) -I $(INC_PATH) -MMD -MP -c $< -o $@
+	$(CXX) $(CXXFLAGS) -MMD -MP -c $< -o $@
 
 $(BUILD_PATH):
 	$(MKDIR_P) $(BUILD_PATH)
@@ -231,4 +232,5 @@ BWHI	= $(shell tput setaf 15)
 D 		= $(shell tput sgr0)
 BEL 	= $(shell tput bel)
 CLR 	= $(shell tput el 1)
+
 

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Account.hpp"
+#include "../inc/Account.hpp"
 #include <ctime>    // std::time
 #include <iomanip>  // std::setfill std::setw
 #include <iostream> // std::cout std::endl
@@ -91,7 +91,7 @@ int Account::getNbWithdrawals()
  */
 void Account::displayAccountsInfos(void)
 {
-	Account::_displayTimestamp();
+	_displayTimestamp();
 	std::cout << "accounts:" << t::getNbAccounts() << ";";
 	std::cout << "total:" << t::getTotalAmount() << ";";
 	std::cout << "deposits:" << t::getNbDeposits() << ";";
@@ -110,7 +110,7 @@ void Account::makeDeposit(int deposit)
 	Account::_totalAmount += deposit; // Update total amount across all accounts
 
 	// Write Deposit log to std::cout
-	Account::_displayTimestamp();
+	_displayTimestamp();
 	std::cout << "index:" << this->_accountIndex << ";";
 	std::cout << "p_amount:" << (this->_amount - deposit) << ";";
 	std::cout << "deposit:" << deposit << ";";
@@ -164,10 +164,11 @@ int Account::checkAmount(void) const
 
 /**
  * @brief Get Account's Status
+ * @note 'const' guarantees no modifications to object's state
  */
 void Account::displayStatus(void) const
 {
-	Account::_displayTimestamp();
+	t::_displayTimestamp();
 	std::cout << "index:" << this->_accountIndex << ";";
 	std::cout << "amount:" << this->_amount << ";";
 	std::cout << "deposits:" << this->_nbDeposits << ";";
