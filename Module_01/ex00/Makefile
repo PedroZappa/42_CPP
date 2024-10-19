@@ -115,13 +115,13 @@ test: all $(TEMP_PATH)			## Run tests
 
 ##@ Debug Rules 
 
-gdb: all $(NAME) $(TEMP_PATH)			## Debug w/ gdb
+gdb: debug $(NAME) $(TEMP_PATH)			## Debug w/ gdb
 	tmux split-window -h "gdb --tui --args ./$(NAME)"
 	tmux resize-pane -L 5
 	# tmux split-window -v "btop"
 	make get_log
 
-vgdb: all $(NAME) $(TEMP_PATH)			## Debug w/ valgrind (memcheck) & gdb
+vgdb: debug $(NAME) $(TEMP_PATH)			## Debug w/ valgrind (memcheck) & gdb
 	tmux split-window -h "valgrind $(VGDB_ARGS) --log-file=gdb.txt ./$(NAME) $(ARG)"
 	make vgdb_cmd
 	tmux split-window -v "gdb --tui -x $(TEMP_PATH)/gdb_commands.txt $(NAME)"

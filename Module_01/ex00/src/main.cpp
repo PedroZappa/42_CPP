@@ -11,16 +11,14 @@
 /* ************************************************************************** */
 
 #include "../inc/Zombie.hpp"
+#include <cstdlib>
 
-/* 
-** NOTE: In which case is it better to allocate the Zombie    
-**       on the stack or on the heap?
-** WARN: Zombies must be destroyed when not needed anymore
+static void	headerPrinter(void);
+static void	sepPrinter(void);
+
+/**
+ * @brief Zombie and Chump creation test
 */
-
-void	headerPrinter(void);
-void	sepPrinter(void);
-
 int main(void) {
 	std::string zombieName;
 	std::string chumpName;
@@ -39,16 +37,16 @@ int main(void) {
 	randomChump(chumpName);
 
 	delete zombie;
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
-void	headerPrinter(void) {
+static void	headerPrinter(void) {
 	std::cout << "=========================" << std::endl;
 	std::cout << "     Zedro's Zombies     " << std::endl;
 	std::cout << "=========================" << std::endl;
 }
 
-void	sepPrinter(void) {
+static void	sepPrinter(void) {
 	std::cout << "=========================" << std::endl;
 	std::cout << "=========================" << std::endl;
 }
