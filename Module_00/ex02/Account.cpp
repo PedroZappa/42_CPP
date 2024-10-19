@@ -58,28 +58,28 @@ Account::~Account(void)
  */
 int Account::getNbAccounts()
 {
-	return (Account::_nbAccounts);
+	return (t::_nbAccounts);
 }
 /**
  * @brief Get _totalAmount
  */
 int Account::getTotalAmount()
 {
-	return (Account::_totalAmount);
+	return (t::_totalAmount);
 }
 /**
  * @brief Get _totalNbDeposits
  */
 int Account::getNbDeposits()
 {
-	return (Account::_totalNbDeposits);
+	return (t::_totalNbDeposits);
 }
 /**
  * @brief Get _totalNbWithdrawals
  */
 int Account::getNbWithdrawals()
 {
-	return (Account::_totalNbWithdrawals);
+	return (t::_totalNbWithdrawals);
 }
 
 /**
@@ -88,10 +88,10 @@ int Account::getNbWithdrawals()
 void Account::displayAccountsInfos(void)
 {
 	Account::_displayTimestamp();
-	std::cout << "accounts:" << Account::getNbAccounts() << ";";
-	std::cout << "total:" << Account::getTotalAmount() << ";";
-	std::cout << "deposits:" << Account::getNbDeposits() << ";";
-	std::cout << "withdrawals:" << Account::getNbWithdrawals() << std::endl;
+	std::cout << "accounts:" << t::getNbAccounts() << ";";
+	std::cout << "total:" << t::getTotalAmount() << ";";
+	std::cout << "deposits:" << t::getNbDeposits() << ";";
+	std::cout << "withdrawals:" << t::getNbWithdrawals() << std::endl;
 }
 
 /**
