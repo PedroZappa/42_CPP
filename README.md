@@ -92,7 +92,7 @@ ___
 In C++ every object/reference has a **lifetime**, the length of time between its creation and its destruction.
 The **lifetime of an object** starts when:
 
-- Properly aligned memory is **allocated*;
+- Properly aligned memory is **allocated**;
 - And its **initialization** is successfully completed;
 
 The **lifetime of an object** ends when:
@@ -123,6 +123,9 @@ RAII uses the resource via an instance of a RAII-class that either:
 RAII is also known as SBRM : **Scope-Bound Resource Management**, after the basic use case where the lifetime of an RAII object end due to scope exit.
 
 ___
+
+# Module_01
+- Memory allocation, pointers to members, references, switch statement
 
 ## Exercise 00: BraiiiiiiinnnzzzZ
 
