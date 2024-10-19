@@ -25,8 +25,7 @@ Zombie::Zombie(void)
  * @note Member Initializer List:
  - (https://en.cppreference.com/w/cpp/language/constructor)
  * - more efficient than assignment;
- * - If '_name' were a const or reference member list initialization
- *   would be mandatory;
+ * - Mandatory for const or reference inits
  */
 Zombie::Zombie(std::string name) : _name(name)
 {
