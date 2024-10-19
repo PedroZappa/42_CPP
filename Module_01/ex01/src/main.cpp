@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 11:43:28 by passunca          #+#    #+#             */
-/*   Updated: 2024/10/19 20:35:44 by passunca         ###   ########.fr       */
+/*   Updated: 2024/10/19 20:43:20 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ static void	sepPrinter(void);
 /**
  * @brief Zombie and Chump creation test
 */
-int main(void) {
+int main(int argc, char **argv) {
+	(void)argc;
+	(void)argv;
 
 	headerPrinter();
 

@@ -6,7 +6,7 @@
 #    By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/14 14:51:25 by passunca          #+#    #+#              #
-#    Updated: 2024/10/19 20:36:08 by passunca         ###   ########.fr        #
+#    Updated: 2024/10/19 20:42:46 by passunca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ INC_PATH		= inc
 
 FILES				= main.cpp
 FILES				+= Zombie.cpp
+FILES				+= newZombie.cpp
 FILES				+= zombieHorde.cpp
 
 SRC					= $(addprefix $(SRC_PATH)/, $(FILES))
