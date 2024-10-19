@@ -37,7 +37,7 @@ Zombie::Zombie(std::string name) : _name(name)
 Zombie::~Zombie(void)
 {
 	std::cout << RED << "Zombie " << BWHT << _name;
-	std::cout << RED << " destroyed ☠☠☠" << NC << std::endl;
+	std::cout << RED << " destroyed ☠☠☠" << NC << "\n";
 }
 
 /* Zombie's Public Methods */
@@ -47,7 +47,7 @@ Zombie::~Zombie(void)
  */
 void Zombie::announce(void)
 {
-	std::cout << _name << ": " << BMAG "BraiiiiiiinnnzzzZ..." << NC << std::endl;
+	std::cout << _name << ": " << BMAG "BraiiiiiiinnnzzzZ..." << NC << "\n";
 }
 
 /**
