@@ -100,7 +100,7 @@ void Account::displayAccountsInfos(void)
 
 /**
  * @brief Make a Deposit
- * @param deposit
+ * @param deposit amount to be deposited
  */
 void Account::makeDeposit(int deposit)
 {
@@ -120,7 +120,7 @@ void Account::makeDeposit(int deposit)
 
 /**
  * @brief Make a Withdrawal
- * @param withdrawal
+ * @param withdrawal amount to be withdrawn
  * @return SUCCESS(true)
  * @return FAILURE(false)
  */

@@ -100,20 +100,16 @@ $(TEMP_PATH):
 
 ##@ Test Rules 🧪
 
-test: all			## Run tests
+test: all $(TEMP_PATH)			## Run tests
 	@echo "[$(YEL)Running $(GRN)$(NAME)$(YEL) tests$(D)]"
 	@echo "$(YEL)$(_SEP)$(D)"
-	@echo "$(CYA)$(NAME)$(D): $(MAG)with no arguments$(D)"
-	./$(NAME)
+	@echo "$(CYA)$(NAME)$(D): $(MAG)Get Output$(D)"
+	./$(NAME) > $(TEMP_PATH)/test_out.txt
+	@echo "$(CYA)$(NAME)$(D): $(MAG)Get Diff$(D)"
+	sed 's/\[[^]]*\] //' ./19920104_091532.log > $(TEMP_PATH)/reflog.txt
+	sed 's/\[[^]]*\] //' $(TEMP_PATH)/test_out.txt > $(TEMP_PATH)/trim.txt
+	diff $(TEMP_PATH)/trim.txt $(TEMP_PATH)/reflog.txt
 	@echo "$(YEL)$(_SEP)$(D)"
-	@echo "$(CYA)$(NAME)$(D): $(MAG)with 1 argument$(D)"
-	./$(NAME) 
-	@echo "$(YEL)$(_SEP)$(D)"
-	@echo "$(CYA)$(NAME)$(D): $(MAG)with several argument$(D)"
-	./$(NAME) 
-	@echo "$(YEL)$(_SEP)$(D)"
-	@echo "$(CYA)$(NAME)$(D): $(MAG)with lots of whitespace$(D) $(RED)(Extra)$(D)"
-	./$(NAME) 
 
 ##@ Debug Rules 
 
