@@ -6,15 +6,17 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 18:20:01 by passunca          #+#    #+#             */
-/*   Updated: 2024/10/20 18:26:13 by passunca         ###   ########.fr       */
+/*   Updated: 2024/10/20 19:35:54 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef REPLACE_HPP
 #define REPLACE_HPP
 
-#include "../inc/Ansi.h"
-#include <exception>
-#include <iostream>
+#include "../inc/Ansi.h" // Ansi colors baby!
+#include <exception> // std::exception
+#include <iostream> // std::cout, std::cerr
+#include <stdexcept> // std::invalid_argument
+#include <fstream> // std::ifstream, std::ofstream
 
 #endif
