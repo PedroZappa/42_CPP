@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 18:14:46 by passunca          #+#    #+#             */
-/*   Updated: 2024/10/20 20:08:12 by passunca         ###   ########.fr       */
+/*   Updated: 2024/10/20 20:24:09 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,15 @@ int main(int argc, char **argv)
 		checkArgs(argc, argv);
 		std::string toReplace = argv[2];
 		std::string replaceWith = argv[3];
+
+		std::cout << "Reading " BWHT << argv[1] << NC " file...\n";
 		std::string in = readFile(argv[1]);
-		if (in.empty())
-			throw std::runtime_error("Failed to read file");
+
+		std::cout << "Replacing '" YEL << toReplace << NC "' with '" GRN
+				  << replaceWith << NC "' in " BWHT << argv[1] << NC " file...\n";
 		std::string out = replace(in, toReplace, replaceWith);
+		
+		std::cout << "Writing to '" BWHT << argv[1] << ".replace'" NC " file...\n";
 		writeToFile(argv[1], out);
 	}
 	catch (const std::exception &e)
@@ -77,7 +82,7 @@ static void usage(void)
  */
 static std::string readFile(const std::string &filename)
 {
-	std::ifstream file(filename);
+	std::ifstream file;
 	std::string content;
 	std::string buffer;
 
@@ -121,7 +126,7 @@ static std::string replace(const std::string &in,
 
 /**
  * @brief Write content to filename
- * @param filename 
+ * @param filename
  * @param content
  */
 static void writeToFile(const std::string filename, const std::string &content)
