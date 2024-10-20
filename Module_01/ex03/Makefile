@@ -6,7 +6,7 @@
 #    By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/14 14:51:25 by passunca          #+#    #+#              #
-#    Updated: 2024/10/20 11:39:40 by passunca         ###   ########.fr        #
+#    Updated: 2024/10/20 17:49:25 by passunca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,9 +42,9 @@ TEMP_PATH		= .temp
 INC_PATH		= inc
 
 FILES				= main.cpp
-# FILES				+= HumanA.cpp
-# FILES				+= HumanB.cpp
-# FILES				+= Weapon.cpp
+FILES				+= HumanA.cpp
+FILES				+= HumanB.cpp
+FILES				+= Weapon.cpp
 
 SRC					= $(addprefix $(SRC_PATH)/, $(FILES))
 OBJS				= $(SRC:$(SRC_PATH)/%.cpp=$(BUILD_PATH)/%.o)

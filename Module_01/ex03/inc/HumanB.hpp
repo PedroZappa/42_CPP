@@ -6,26 +6,28 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 12:27:39 by passunca          #+#    #+#             */
-/*   Updated: 2024/10/20 12:29:02 by passunca         ###   ########.fr       */
+/*   Updated: 2024/10/20 17:31:23 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HUMANB_HPP
-# define HUMANB_HPP
+#define HUMANB_HPP
 
-# include "Weapon.hpp"
+#include "Ansi.h"
+#include "Weapon.hpp"
 
 class HumanB
 {
-	private:
-		std::string _name;
-		Weapon *_weapon;
-	public:
-		HumanB(std::string name, Weapon &weapon);
-		~HumanB();
+  private:
+	std::string _name;
+	Weapon *_weapon; // May be NULL
 
-		void attack(void) const;
-		void setWeapon(Weapon &weapon);
+  public:
+	HumanB(std::string name);
+	~HumanB();
+
+	void attack(void) const;
+	void setWeapon(Weapon &weapon);
 };
 
 #endif
