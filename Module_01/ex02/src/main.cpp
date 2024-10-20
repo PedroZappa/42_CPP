@@ -37,24 +37,19 @@ int main(void)
 	std::string const &stringREF = string; 
 
 	headerPrinter("Zedro's Memory Inspector", WIDTH);
-	std::cout << " Address of " << BLU << "string:\t" \
-	<< YEL << &string << NC << "\n" \
-	<< " Address of " << BLU << "stringPTR:\t" \
-	<< YEL << stringPTR << NC << "\n" \
-	<< " Address of " << BLU << "stringREF:\t" \
-	<< YEL << &stringREF << NC << "\n";
+	std::cout << " Address of " BLU "string:\t" YEL \
+	<< &string << NC "\n Address of " MAG "stringPTR:\t" YEL \
+	<< stringPTR << NC "\n Address of " CYN "stringREF:\t" YEL \
+	<< &stringREF << NC "\n";
 
 	sepPrinter(WIDTH);
-	std::cout << " Value of " << BLU << "string:\t" \
-	<< YEL << string << NC << "\n" \
-	<< "Value of " << BLU << "stringPTR\t" \
-	<< YEL << stringPTR << NC << "\n" \
-	<< "Value of " << BLU << "stringREF\t" \
-	<< YEL << stringREF << NC << "\n";
+	std::cout << " Value of " BLU "string:\t" YEL << string << NC \
+	"\n Value of " MAG "stringPTR\t" YEL << *stringPTR << NC  \
+	"\n Value of " CYN "stringREF\t" YEL << stringREF << NC "\n";
 
 	sepPrinter(WIDTH);
-	std::cout << BLU << "string" << NC << ", " << BLU "stringPTR " << NC \
-	<< "and " << BLU << "stringREF\n" << NC << "all point to the same address\n"; 
+	std::cout << BLU " string" NC ", " MAG "stringPTR " NC \
+	<< "and " CYN "stringREF\n" NC " ALL POINT TO THE " RED "SAME ADDRESS\n" NC; 
 	sepPrinter(WIDTH);
 
 	return (EXIT_SUCCESS);
