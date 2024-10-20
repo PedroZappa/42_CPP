@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 12:30:27 by passunca          #+#    #+#             */
-/*   Updated: 2024/10/20 12:35:50 by passunca         ###   ########.fr       */
+/*   Updated: 2024/10/20 16:40:13 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,5 @@ void Weapon::setType(std::string newType)
  * */
 const std::string &Weapon::getType(void) const
 {
-	return (static_cast<const std::string &>(_type));
+	return (_type);
 }

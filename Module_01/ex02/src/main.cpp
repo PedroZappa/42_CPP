@@ -37,10 +37,9 @@ int main(void)
 	std::string const &stringREF = string; 
 
 	headerPrinter("Zedro's Memory Inspector", WIDTH);
-	std::cout << " Address of " BLU "string:\t" YEL \
-	<< &string << NC "\n Address of " MAG "stringPTR:\t" YEL \
-	<< stringPTR << NC "\n Address of " CYN "stringREF:\t" YEL \
-	<< &stringREF << NC "\n";
+	std::cout << " Address of " BLU "string:\t" YEL << &string << NC \
+	"\n Address of " MAG "stringPTR:\t" YEL << stringPTR << NC \
+	"\n Address of " CYN "stringREF:\t" YEL << &stringREF << NC "\n";
 
 	sepPrinter(WIDTH);
 	std::cout << " Value of " BLU "string:\t" YEL << string << NC \
