@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 18:14:46 by passunca          #+#    #+#             */
-/*   Updated: 2024/10/20 20:24:09 by passunca         ###   ########.fr       */
+/*   Updated: 2024/10/20 20:56:57 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,31 @@ static void writeToFile(const std::string filename, const std::string &content);
 
 int main(int argc, char **argv)
 {
+	headerPrinter("Sed is for loosers", WIDTH, '*', BGRN);
 	try
 	{
+		std::cout << "Checking input arguments...\n";
 		checkArgs(argc, argv);
 		std::string toReplace = argv[2];
 		std::string replaceWith = argv[3];
-
+		sepPrinter(WIDTH, '-', YEL, 1);
 		std::cout << "Reading " BWHT << argv[1] << NC " file...\n";
 		std::string in = readFile(argv[1]);
-
+	
+		sepPrinter(WIDTH, '-', YEL, 1);
 		std::cout << "Replacing '" YEL << toReplace << NC "' with '" GRN
 				  << replaceWith << NC "' in " BWHT << argv[1] << NC " file...\n";
 		std::string out = replace(in, toReplace, replaceWith);
 		
+		sepPrinter(WIDTH, '-', YEL, 1);
 		std::cout << "Writing to '" BWHT << argv[1] << ".replace'" NC " file...\n";
 		writeToFile(argv[1], out);
+		headerPrinter("Exiting now...", WIDTH, '*', HMAG);
 	}
 	catch (const std::exception &e)
 	{
 		std::cerr << RED "Error: " << e.what() << "\n" NC;
+		sepPrinter(WIDTH, '.', BRED, 1);
 		usage();
 		return (EXIT_FAILURE);
 	}

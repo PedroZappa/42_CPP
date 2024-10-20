@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 18:20:01 by passunca          #+#    #+#             */
-/*   Updated: 2024/10/20 20:13:29 by passunca         ###   ########.fr       */
+/*   Updated: 2024/10/20 20:53:18 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,18 @@
 #define REPLACE_HPP
 
 #include "../inc/Ansi.h" // Ansi colors baby!
-#include <exception> // std::exception
-#include <iostream> // std::cout, std::cerr
-#include <stdexcept> // std::invalid_argument
-#include <fstream> // std::ifstream, std::ofstream
-#include <cstdlib> // EXIT_FAILURE 
+#include <cstdlib>       // EXIT_FAILURE
+#include <exception>     // std::exception
+#include <fstream>       // std::ifstream, std::ofstream
+#include <iostream>      // std::cout, std::cerr
+#include <stdexcept>     // std::invalid_argument
+
+#define WIDTH 42
+
+void headerPrinter(const std::string &headerText,
+				   int inWidth,
+				   char sepColor,
+				   const char *color);
+void sepPrinter(int inWidth, char sepChar, const char* color, int nLines);
 
 #endif
