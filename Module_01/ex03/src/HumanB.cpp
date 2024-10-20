@@ -18,7 +18,7 @@
  * */
 HumanB::HumanB(std::string name) : _name(name)
 {
-	std::cout << YEL "HumanB " GRN << _name << BWHT " with "
+	std::cout << GRN "HumanB " YEL << _name << " with "
 			  << _weapon->getType() << GRN " created \n" NC;
 }
 
@@ -27,7 +27,7 @@ HumanB::HumanB(std::string name) : _name(name)
  * */
 HumanB::~HumanB(void)
 {
-	std::cout << RED "HumanB " BWHT << _name << " with" << _weapon->getType()
+	std::cout << RED "HumanB " BWHT << _name << " with " << _weapon->getType()
 			  << RED " destroyed ☠☠☠\n" NC;
 }
 
@@ -39,7 +39,7 @@ void HumanB::attack(void) const
 	if (_weapon == NULL)
 		std::cout << BWHT << _name << " is unarmed." NC "\n";
 	else
-		std::cout << GRN << _name << BWHT " attacks with their " YEL
+		std::cout << YEL << _name << BWHT " attacks with their " YEL
 				  << _weapon->getType() << NC "\n";
 }
 

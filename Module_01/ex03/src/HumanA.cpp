@@ -19,7 +19,7 @@
  * */
 HumanA::HumanA(std::string name, Weapon &weapon) : _name(name), _weapon(weapon)
 {
-	std::cout << YEL "HumanA " GRN << _name << BWHT " with " << _weapon.getType()
+	std::cout << GRN "HumanA " YEL << _name << " with " << _weapon.getType()
 			  << GRN " created \n" NC;
 }
 
@@ -37,6 +37,6 @@ HumanA::~HumanA(void)
  * */
 void HumanA::attack(void) const
 {
-	std::cout << GRN << _name << BWHT " attacks with their " YEL
+	std::cout << YEL << _name << BWHT " attacks with their " YEL
 			  << _weapon.getType() << "\n" NC;
 }
