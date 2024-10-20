@@ -38,3 +38,4 @@ bankAccount
 **/gdb.txt
 **/.temp
 **/.build
+*.replace
