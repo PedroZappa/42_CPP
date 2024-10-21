@@ -18,15 +18,14 @@ MAKE	= make -C
 SHELL	:= bash --rcfile ~/.bashrc
 
 # Default test values
-IN_PATH		?= $(SRC_PATH)
+IN_PATH			?= $(SRC_PATH)
 ARG				=
 
 #==============================================================================#
 #                                     NAMES                                    #
 #==============================================================================#
 
-NAME 			 	= bankAccount
-TESTER			= CPP00_00_tester
+NAME 			= bankAccount
 
 ### Message Vars
 _SUCCESS 		= [$(GRN)SUCCESS$(D)]
@@ -38,25 +37,25 @@ _SEP 			= =====================================================
 #==============================================================================#
 
 SRC_PATH		= src
-BUILD_PATH	= .build
+BUILD_PATH		= .build
 TEMP_PATH		= .temp
 INC_PATH		= inc
 
-FILES				= tests.cpp
-FILES				+= Account.cpp
+FILES			= tests.cpp
+FILES			+= Account.cpp
 
-SRC					= $(addprefix $(SRC_PATH)/, $(FILES))
-OBJS				= $(SRC:$(SRC_PATH)/%.cpp=$(BUILD_PATH)/%.o)
+SRC				= $(addprefix $(SRC_PATH)/, $(FILES))
+OBJS			= $(SRC:$(SRC_PATH)/%.cpp=$(BUILD_PATH)/%.o)
 
 #==============================================================================#
 #                              COMPILER & FLAGS                                #
 #==============================================================================#
 
-CXX					= c++
+CXX				= c++
 CXXFLAGS		= -Wall -Wextra -Werror
 CXXFLAGS		+= -std=c++98
-DEBUG_FLAGS	= -g
-INC					= -I $(INC_PATH)
+DEBUG_FLAGS		= -g
+INC				= -I $(INC_PATH)
 
 
 #==============================================================================#
@@ -75,6 +74,10 @@ MKDIR_P	= mkdir -p
 ##@ CPP00_00 Compilation Rules 🏗
 
 all: $(NAME)	## Compile
+
+exec: $(NAME) $(TEMP_PATH)			## Run
+	@echo "$(YEL)Running $(MAG)$(NAME)$(YEL)$(D)"
+	./$(NAME) $(ARG)
 
 $(NAME): $(BUILD_PATH) $(OBJS)			## Compile
 	@echo "$(YEL)Compiling $(MAG)$(NAME)$(YEL) mandatory version$(D)"

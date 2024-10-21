@@ -26,7 +26,6 @@ ARG			=
 #==============================================================================#
 
 NAME 			= megaphone
-TESTER			= CPP00_00_tester
 
 ### Message Vars
 _SUCCESS 		= [$(GRN)SUCCESS$(D)]
@@ -71,6 +70,10 @@ MKDIR_P	= mkdir -p
 ##@ CPP00_00 Compilation Rules 🏗
 
 all: $(BUILD_PATH) $(NAME)	## Compile
+
+exec: $(NAME) $(TEMP_PATH)			## Run
+	@echo "$(YEL)Running $(MAG)$(NAME)$(YEL)$(D)"
+	./$(NAME) $(ARG)
 
 $(NAME): $(BUILD_PATH) $(OBJS)			## Compile
 	@echo "$(YEL)Compiling $(MAG)$(NAME)$(YEL) mandatory version$(D)"

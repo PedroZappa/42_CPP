@@ -28,7 +28,7 @@ void headerPrinter(const std::string &headerText,
 	// Manually calculate the maximum of inWidth and minWidth
 	int width = (inWidth > minWidth) ? inWidth : minWidth;
 	// Calculate the padding for centering
-	int totalPad = (width - textLen - 2); // account for text and 2 spaces
+	int totalPad = (width - textLen); // account for text
 	int leftPad = (totalPad / 2);
 	int rightPad = (totalPad - leftPad);
 
@@ -36,7 +36,7 @@ void headerPrinter(const std::string &headerText,
 	std::cout << sepColor;
 	std::cout << std::string(width, sep) << "\n";
 	std::cout << BWHT;
-	std::cout << std::string(leftPad, ' ') << " " << headerText << " "
+	std::cout << std::string(leftPad, ' ') << headerText
 			  << std::string(rightPad, ' ') << "\n";
 	std::cout << sepColor;
 	std::cout << std::string(width, sep) << "\n" NC;
