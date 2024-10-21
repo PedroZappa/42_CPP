@@ -102,20 +102,20 @@ $(TEMP_PATH):
 
 ##@ Test Rules 🧪
 
+test_all: all			## Run all tests
+	make test
+	make test_valgrind
+
 test: all			## Run tests
 	@echo "[$(YEL)Running $(GRN)$(NAME)$(YEL) tests$(D)]"
 	@echo "$(YEL)$(_SEP)$(D)"
-	@echo "$(CYA)$(NAME)$(D): $(MAG)with no arguments$(D)"
-	./$(NAME)
+	@echo "$(CYA)$(NAME)$(D): $(MAG)with contacts.txt$(D)"
+	./$(NAME) < tests/contacts.txt
+
+test_valgrind: all
 	@echo "$(YEL)$(_SEP)$(D)"
-	@echo "$(CYA)$(NAME)$(D): $(MAG)with 1 argument$(D)"
-	./$(NAME) 
-	@echo "$(YEL)$(_SEP)$(D)"
-	@echo "$(CYA)$(NAME)$(D): $(MAG)with several argument$(D)"
-	./$(NAME) 
-	@echo "$(YEL)$(_SEP)$(D)"
-	@echo "$(CYA)$(NAME)$(D): $(MAG)with lots of whitespace$(D) $(RED)(Extra)$(D)"
-	./$(NAME) 
+	@echo "$(CYA)$(NAME)$(D): $(MAG)with contacts.txt$(D)"
+	valgrind ./$(NAME) < tests/contacts.txt
 
 ##@ Debug Rules 
 

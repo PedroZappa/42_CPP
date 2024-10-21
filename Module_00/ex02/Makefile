@@ -79,6 +79,10 @@ exec: $(NAME) $(TEMP_PATH)			## Run
 	@echo "$(YEL)Running $(MAG)$(NAME)$(YEL)$(D)"
 	./$(NAME) $(ARG)
 
+exec: $(NAME) $(TEMP_PATH)			## Run
+	@echo "$(YEL)Running $(MAG)$(NAME)$(YEL)$(D)"
+	./$(NAME) $(ARG)
+
 $(NAME): $(BUILD_PATH) $(OBJS)			## Compile
 	@echo "$(YEL)Compiling $(MAG)$(NAME)$(YEL) mandatory version$(D)"
 	$(CXX) $(CXXFLAGS) -I $(INC_PATH) $(OBJS) -o $(NAME)
