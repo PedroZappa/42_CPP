@@ -86,6 +86,6 @@ static void exitErr(const std::string &msg)
 
 static void usage(void)
 {
-	std::cout << BYEL << "Usage: ";
-	std::cout << BWHT << "./moarBrainz.out <N> <name>" << NC << "\n";
+	std::cout << BYEL "Usage: ";
+	std::cout << BWHT "./moarBrainz.out <N> <name>\n" NC;
 }
