@@ -14,10 +14,14 @@
 
 int main(int argc, char **argv) {
   Harl harl;
+
+  headerPrinter("HarlFilter", WIDTH, '-', RED);
   if (argc != 2) {
-    std::cout << "Error: " BWHT "Usage: ./HarlFilter <level>\n";
-    return 1;
+    std::cout << RED "Error: " BWHT "Usage: " YEL "./HarlFilter <level>\n" NC;
+    sepPrinter(WIDTH, '-', YEL, 1);
+    return (1);
   }
   harl.complain(argv[1]);
-  return 0;
+  sepPrinter(WIDTH, '-', YEL, 1);
+  return (0);
 }

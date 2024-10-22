@@ -25,7 +25,7 @@ ARG				=
 #                                     NAMES                                    #
 #==============================================================================#
 
-NAME 			 	= harl2.out
+NAME 			 	= hardFilter
 
 ### Message Vars
 _SUCCESS 		= [$(GRN)SUCCESS$(D)]
@@ -43,6 +43,7 @@ INC_PATH		= inc
 
 FILES				= main.cpp
 FILES				+= Harl.cpp
+FILES				+= printer.cpp
 
 SRC					= $(addprefix $(SRC_PATH)/, $(FILES))
 OBJS				= $(SRC:$(SRC_PATH)/%.cpp=$(BUILD_PATH)/%.o)

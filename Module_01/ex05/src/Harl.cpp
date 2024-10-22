@@ -15,13 +15,13 @@
 /** @brief Construct a new Harl:: Harl object */
 Harl::Harl() {
   std::cout << BWHT << "Harl 2.0 ";
-  std::cout << GRN << " created ✅✅✅" << NC << std::endl;
+  std::cout << GRN << "created ✅✅✅" << NC << std::endl;
 }
 
 /** @brief Destroy the Harl:: Harl object */
 Harl::~Harl() {
   std::cout << BWHT << "Harl 2.0 ";
-  std::cout << RED << " destroyed ☠☠☠" << NC << std::endl;
+  std::cout << RED << "destroyed ☠☠☠" << NC << std::endl;
 }
 
 /** @brief Complain about DEBUG level */
@@ -53,6 +53,10 @@ void Harl::error() {
   std::cout << "This is unacceptable! I want to speak to the manager now.\n" NC;
 }
 
+/**
+ * @brief Make Harl 2.0 complain
+ * @param level The level to complain about
+ */
 void Harl::complain(std::string level) {
   void (Harl::*f[4])(void) = {&Harl::debug, &Harl::info, &Harl::warning,
                               &Harl::error};

@@ -18,6 +18,8 @@
 #include <iostream> // std::cout
 #include <string>   // std::string
 
+#define WIDTH 42
+
 class Harl {
 private:
   void debug(void);
@@ -32,4 +34,8 @@ public:
   void complain(std::string level);
 };
 
+// UI Printer
+void headerPrinter(const std::string &headerText, int inWidth, char sep,
+                   const char *sepColor);
+void sepPrinter(int inWidth, char sepChar, const char *color, int nLines);
 #endif
