@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 11:03:13 by passunca          #+#    #+#             */
-/*   Updated: 2024/10/22 14:15:39 by passunca         ###   ########.fr       */
+/*   Updated: 2024/10/22 14:41:10 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,8 @@ public:
   void complain(std::string level);
 };
 
+// UI Printer
+void headerPrinter(const std::string &headerText, int inWidth, char sep,
+                   const char *sepColor);
+void sepPrinter(int inWidth, char sepChar, const char *color, int nLines);
 #endif
-

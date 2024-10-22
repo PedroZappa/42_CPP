@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 14:12:59 by passunca          #+#    #+#             */
-/*   Updated: 2024/10/22 14:17:02 by passunca         ###   ########.fr       */
+/*   Updated: 2024/10/22 14:38:18 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 int main(void)
 {
+	headerPrinter("Harl 2.0 Filter", 50, '-', BRED);
 	return (0);
 }
