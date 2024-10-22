@@ -16,6 +16,7 @@
 #include "../inc/Ansi.h"
 #include <iostream> // std::cout
 #include <string>   // std::string
+#include <cstdlib>  // EXIT_SUCCESS, EXIT_FAILURE
 
 enum err_code
 {
@@ -23,6 +24,12 @@ enum err_code
 	INFO,
 	WARNING,
 	ERROR
+};
+
+enum e_exit
+{
+	FAILURE = 1,
+	SUCCESS = 0
 };
 
 #define WIDTH 42

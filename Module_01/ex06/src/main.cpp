@@ -13,7 +13,7 @@
 #include "../inc/Harl.hpp"
 #include <cstdlib>
 
-void errExit(const std::string &msg);
+static int checkArg(int argc, char **argv);
 
 int main(int argc, char **argv)
 {
@@ -21,20 +21,36 @@ int main(int argc, char **argv)
 	std::string level;
 	std::string levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 
-	if (argc != 2)
-		errExit("Wrong number of arguments");
-
 	headerPrinter("Harl 2.0 Filter", 50, '-', BRED);
+
+	if (checkArg(argc, argv) == EXIT_FAILURE)
+		return(EXIT_FAILURE);
 
 	return (0);
 }
 
 /**
- * @brief Print error message and exit
- * @param msg Error message
-*/
-void errExit(const std::string &msg)
+*	@brief Checks if arg is a valid identifier
+*	@param argc Number of arguments
+*	@param argv Array of arguments
+*	@return EXIT_SUCCESS if arg is valid, EXIT_FAILURE otherwise
+* */
+static int checkArg(int argc, char **argv)
 {
-	std::cerr << RED << msg << "\n" NC;
-	exit(EXIT_FAILURE);
+	if (argc != 2)
+	{
+		std::cout << RED "Error: " BWHT "Usage: " YEL "./HarlFilter "
+													  "<level>\n" NC;
+		sepPrinter(WIDTH, '-', RED, 2);
+		return (EXIT_FAILURE);
+	}
+	std::string arg = argv[1];
+	if (arg != "DEBUG" && arg != "INFO" && arg != "WARNING" && arg != "ERROR")
+	{
+		std::cout << RED "Filter Error: " BWHT "Invalid level. Use:\n" 
+					BYEL "DEBUG || INFO || WARNING || ERROR\n" NC;
+		sepPrinter(WIDTH, '-', RED, 2);
+		return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
 }

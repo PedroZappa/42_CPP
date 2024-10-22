@@ -30,18 +30,19 @@ Harl::~Harl()
 void Harl::debug()
 {
 	headerPrinter("[ DEBUG ]", WIDTH, ' ', BWHT);
-	std::cout << GRN "I love having extra bacon for my\n"
-					 "7XL-double-cheese-triple-pickle-special-ketchup burger.\n"
-					 "I really do!\n" NC;
+	std::cout << YEL "I love having extra bacon for my\n"
+					 "7XL-double-cheese-triple-pickle-special-ketchup\n"
+					 "burger. I really do!\n\n" NC;
 }
 
 /** @brief Complain level INFO */
 void Harl::info()
 {
 	headerPrinter("[ INFO ]", WIDTH, ' ', BWHT);
-	std::cout << CYN "I cannot believe adding extra bacon costs more money.\n"
-					 "You didn’t put enough bacon in my burger! If you did, I\n"
-					 "wouldn’t be asking for more!\n" NC;
+	std::cout << YEL "I cannot believe adding extra bacon costs\n"
+					 "more money.\nYou didn’t put enough bacon\n"
+					 "in my burger! If you did, I wouldn’t be\n"
+					 "asking for more!\n\n" NC;
 }
 
 /** @brief Complain level WARNING */
@@ -50,24 +51,16 @@ void Harl::warning()
 	headerPrinter("[ WARNING ]", WIDTH, ' ', BWHT);
 	std::cout << YEL "I think I deserve to have some extra\n"
 					 "bacon for free. I’ve been coming for years\n"
-					 "whereas you started working here since last month.\n" NC;
+					 "whereas you started working here since "
+					 "last\nmonth.\n\n" NC;
 }
 
 /** @brief Complain level ERROR */
 void Harl::error()
 {
 	headerPrinter("[ ERROR ]", WIDTH, ' ', BWHT);
-	std::cout << "This is unacceptable! I want to speak to the manager "
-				 "now.\n" NC;
-}
-
-/**
- * @brief Complain level ERROR
- */
-void Harl::error()
-{
-	std::cout << "[ ERROR ]\nThis is unacceptable! I want to speak to the manager "
-				 "now.\n" NC;
+	std::cout << YEL "This is unacceptable! I want to speak to\n"
+					 "the manager now.\n\n" NC;
 }
 
 /**
@@ -86,7 +79,7 @@ void Harl::complain(std::string level)
 			(this->*f[i])();
 
 	int lvl = DEBUG;
-	while ((lvl << ERROR) && (levels[lvl] != level))
+	while ((lvl < ERROR) && (levels[lvl] != level))
 		lvl++;
 	switch (lvl)
 	{
