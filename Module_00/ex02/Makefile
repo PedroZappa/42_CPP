@@ -79,10 +79,6 @@ exec: $(NAME) $(TEMP_PATH)			## Run
 	@echo "$(YEL)Running $(MAG)$(NAME)$(YEL)$(D)"
 	./$(NAME) $(ARG)
 
-exec: $(NAME) $(TEMP_PATH)			## Run
-	@echo "$(YEL)Running $(MAG)$(NAME)$(YEL)$(D)"
-	./$(NAME) $(ARG)
-
 $(NAME): $(BUILD_PATH) $(OBJS)			## Compile
 	@echo "$(YEL)Compiling $(MAG)$(NAME)$(YEL) mandatory version$(D)"
 	$(CXX) $(CXXFLAGS) -I $(INC_PATH) $(OBJS) -o $(NAME)
@@ -108,13 +104,16 @@ $(TEMP_PATH):
 ##@ Test Rules 🧪
 
 test: all $(TEMP_PATH)			## Run tests
+	tmux set-option remain-on-exit on
 	@echo "[$(YEL)Running $(GRN)$(NAME)$(YEL) tests$(D)]"
 	@echo "$(YEL)$(_SEP)$(D)"
 	@echo "$(CYA)$(NAME)$(D): $(MAG)Get Output$(D)"
 	./$(NAME) > $(TEMP_PATH)/test_out.txt
-	@echo "$(CYA)$(NAME)$(D): $(MAG)Get Diff$(D)"
 	sed 's/\[[^]]*\] //' ./19920104_091532.log > $(TEMP_PATH)/reflog.txt
 	sed 's/\[[^]]*\] //' $(TEMP_PATH)/test_out.txt > $(TEMP_PATH)/trim.txt
+	tmux split-window -h "cat ./19920104_091532.log"
+	tmux split-window -h "cat $(TEMP_PATH)/test_out.txt"
+	@echo "$(CYA)$(NAME)$(D): $(MAG)Get Diff$(D)"
 	diff $(TEMP_PATH)/trim.txt $(TEMP_PATH)/reflog.txt
 	@echo "$(YEL)$(_SEP)$(D)"
 
