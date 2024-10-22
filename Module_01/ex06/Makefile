@@ -25,7 +25,7 @@ ARG				=
 #                                     NAMES                                    #
 #==============================================================================#
 
-NAME 			 	= harl2filter.out
+NAME 			 	= harlFilter
 
 ### Message Vars
 _SUCCESS 		= [$(GRN)SUCCESS$(D)]
