@@ -30,7 +30,7 @@ NAME 			 	= harl2.out
 ### Message Vars
 _SUCCESS 		= [$(GRN)SUCCESS$(D)]
 _INFO 			= [$(BLU)INFO$(D)]
-_SEP	 			= =====================================================
+_SEP	 			= ==========================================
 
 #==============================================================================#
 #                                    PATHS                                     #
@@ -53,9 +53,9 @@ OBJS				= $(SRC:$(SRC_PATH)/%.cpp=$(BUILD_PATH)/%.o)
 #==============================================================================#
 
 CXX					= c++
-CXXFLAGS	  	 	= -Wall -Wextra -Werror
-CXXFLAGS	  	 	+= -std=c++98
-DEBUG_FLAGS	  	 	= -g3
+CXXFLAGS	 	= -Wall -Wextra -Werror
+CXXFLAGS		+= -std=c++98
+DEBUG_FLAGS	= -g3
 INC					= -I $(INC_PATH)
 
 
@@ -64,8 +64,8 @@ INC					= -I $(INC_PATH)
 #==============================================================================#
 
 ### Core Utils
-RM			= rm -rf
-AR			= ar rcs
+RM				= rm -rf
+AR				= ar rcs
 MKDIR_P		= mkdir -p
 
 ### Valgrind
@@ -111,6 +111,24 @@ $(TEMP_PATH):
 ##@ Test Rules 🧪
 
 test: all $(TEMP_PATH)			## Run tests
+	@echo "$(YEL)Running $(MAG)$(NAME)$(YEL)$(D)"
+	@echo "$(YEL)$(_SEP)$(D)"
+	@echo "$(YEL) Running $(BWHI)Debug $(YEL) filter...$(D)"
+	./$(NAME) "DEBUG"
+	@echo "$(YEL)$(_SEP)$(D)"
+	@echo "$(YEL) Running $(BWHI)Info $(YEL) filter...$(D)"
+	./$(NAME) "INFO"
+	@echo "$(YEL)$(_SEP)$(D)"
+	@echo "$(YEL) Running $(BWHI)Warning $(YEL) filter...$(D)"
+	./$(NAME) "WARNING"
+	@echo "$(YEL)$(_SEP)$(D)"
+	@echo "$(YEL) Running $(BWHI)Error $(YEL) filter...$(D)"
+	./$(NAME) "ERROR"
+	@echo "$(YEL)$(_SEP)$(D)"
+	@echo "$(YEL) Running $(BWHI)Invalid $(YEL) filter...$(D)"
+	-./$(NAME) "ZEDRO"
+	@echo "$(YEL)$(_SEP)$(D)"
+
 
 ##@ Debug Rules 
 
