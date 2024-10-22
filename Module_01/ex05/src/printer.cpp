@@ -46,12 +46,12 @@ void headerPrinter(const std::string &headerText,
  * @brief Prints a separator line
  * @param inWidth The width of the separator line
  */
-void sepPrinter(int inWidth, char sepChar, const char* color, int nLines)
+void sepPrinter(int inWidth, char sepChar, const char *color, int nLines)
 {
-    std::cout << color;
-    for (int i = 0; i < nLines; ++i) {
-        std::cout << std::string(inWidth, sepChar) << "\n";
-    }
-    std::cout << NC;  // Assuming NC is a macro or constant for resetting color
+	std::cout << color;
+	for (int i = 0; i < nLines; ++i)
+	{
+		std::cout << std::string(inWidth, sepChar) << "\n";
+	}
+	std::cout << NC; // Assuming NC is a macro or constant for resetting color
 }
-

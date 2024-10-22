@@ -13,55 +13,96 @@
 #include "../inc/Harl.hpp"
 
 /** @brief Construct a new Harl:: Harl object */
-Harl::Harl() {
-  std::cout << BWHT << "Harl 2.0 ";
-  std::cout << GRN << " created ✅✅✅" << NC << std::endl;
+Harl::Harl()
+{
+	std::cout << BWHT << "Harl 2.0 ";
+	std::cout << GRN << " created ✅✅✅" << NC << std::endl;
 }
 
 /** @brief Destroy the Harl:: Harl object */
-Harl::~Harl() {
-  std::cout << BWHT << "Harl 2.0 ";
-  std::cout << RED << " destroyed ☠☠☠" << NC << std::endl;
+Harl::~Harl()
+{
+	std::cout << BWHT << "Harl 2.0 ";
+	std::cout << RED << " destroyed ☠☠☠" << NC << std::endl;
 }
 
 /** @brief Complain about DEBUG level */
-void Harl::debug() {
-  std::cout << GRN "I love having extra bacon for my "
-                   "7XL-double-cheese-triple-pickle-special-ketchup burger. I "
-                   "really do!\n" NC;
+void Harl::debug()
+{
+	headerPrinter("[ DEBUG ]", WIDTH, ' ', BWHT);
+	std::cout << GRN "I love having extra bacon for my\n"
+					 "7XL-double-cheese-triple-pickle-special-ketchup burger.\n"
+					 "I really do!\n" NC;
 }
 
 /** @brief Complain level INFO */
-void Harl::info() {
-  std::cout << CYN "I cannot believe adding extra bacon costs more money."
-                   "You didn’t put enough bacon in my burger! If you did, I "
-                   "wouldn’t be asking for more!\n" NC;
+void Harl::info()
+{
+	headerPrinter("[ INFO ]", WIDTH, ' ', BWHT);
+	std::cout << CYN "I cannot believe adding extra bacon costs more money.\n"
+					 "You didn’t put enough bacon in my burger! If you did, I\n"
+					 "wouldn’t be asking for more!\n" NC;
 }
 
 /** @brief Complain level WARNING */
-void Harl::warning() {
-  std::cout << RED
-      "I think I deserve to have some extra bacon for free. I’ve been "
-      "coming for years whereas you started working here since last "
-      "month.\n" NC;
+void Harl::warning()
+{
+	headerPrinter("[ WARNING ]", WIDTH, ' ', BWHT);
+	std::cout << YEL "I think I deserve to have some extra\n"
+					 "bacon for free. I’ve been coming for years\n"
+					 "whereas you started working here since last month.\n" NC;
+}
+
+/** @brief Complain level ERROR */
+void Harl::error()
+{
+	headerPrinter("[ ERROR ]", WIDTH, ' ', BWHT);
+	std::cout << "This is unacceptable! I want to speak to the manager "
+				 "now.\n" NC;
 }
 
 /**
  * @brief Complain level ERROR
  */
-void Harl::error() {
-  std::cout << "This is unacceptable! I want to speak to the manager now.\n" NC;
+void Harl::error()
+{
+	std::cout << "[ ERROR ]\nThis is unacceptable! I want to speak to the manager "
+				 "now.\n" NC;
 }
 
-void Harl::complain(std::string level) {
-  void (Harl::*f[4])(void) = {&Harl::debug, &Harl::info, &Harl::warning,
-                              &Harl::error};
+/**
+ * @brief Harl 2.0 Complain
+ * @param level
+ */
+void Harl::complain(std::string level)
+{
+	void (Harl::*f[4])(void) = {
+		&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
 
-  std::string levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+	std::string levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 
-  for (int i = 0; i < 4; i++) {
-    if (level == levels[i])
-      (this->*f[i])();
-  }
+	for (int i = 0; i < 4; i++)
+		if (level == levels[i])
+			(this->*f[i])();
+
+	int lvl = DEBUG;
+	while ((lvl << ERROR) && (levels[lvl] != level))
+		lvl++;
+	switch (lvl)
+	{
+	case DEBUG:
+		Harl::debug();
+		break;
+	case INFO:
+		Harl::info();
+		break;
+	case WARNING:
+		Harl::warning();
+		break;
+	case ERROR:
+		Harl::error();
+		break;
+	default:
+		std::cout << BWHT "[ Who knows, probably complaining about stuff ]\n" NC;
+	}
 }
-

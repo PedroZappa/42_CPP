@@ -23,6 +23,7 @@ int main(int argc, char **argv)
 
 	if (argc != 2)
 		errExit("Wrong number of arguments");
+
 	headerPrinter("Harl 2.0 Filter", 50, '-', BRED);
 
 	return (0);

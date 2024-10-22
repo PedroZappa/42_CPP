@@ -14,26 +14,39 @@
 #define HARL_HPP
 
 #include "../inc/Ansi.h"
-
 #include <iostream> // std::cout
 #include <string>   // std::string
 
-class Harl {
-private:
-  void debug(void);
-  void info(void);
-  void warning(void);
-  void error(void);
+enum err_code
+{
+	DEBUG,
+	INFO,
+	WARNING,
+	ERROR
+};
 
-public:
-  Harl();
-  ~Harl();
+#define WIDTH 42
 
-  void complain(std::string level);
+class Harl
+{
+  public:
+	Harl();
+	~Harl();
+
+	void complain(std::string level);
+
+  private:
+	void debug(void);
+	void info(void);
+	void warning(void);
+	void error(void);
 };
 
 // UI Printer
-void headerPrinter(const std::string &headerText, int inWidth, char sep,
-                   const char *sepColor);
+void headerPrinter(const std::string &headerText,
+				   int inWidth,
+				   char sep,
+				   const char *sepColor);
 void sepPrinter(int inWidth, char sepChar, const char *color, int nLines);
+
 #endif

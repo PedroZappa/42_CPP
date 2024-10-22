@@ -12,16 +12,22 @@
 
 #include "../inc/Harl.hpp"
 
-int main(int argc, char **argv) {
-  Harl harl;
+int main(int argc, char **argv)
+{
+	Harl harl;
 
-  headerPrinter("HarlFilter", WIDTH, '-', RED);
-  if (argc != 2) {
-    std::cout << RED "Error: " BWHT "Usage: " YEL "./HarlFilter <level>\n" NC;
-    sepPrinter(WIDTH, '-', YEL, 1);
-    return (1);
-  }
-  harl.complain(argv[1]);
-  sepPrinter(WIDTH, '-', YEL, 1);
-  return (0);
+	headerPrinter("HarlFilter", WIDTH, '-', RED);
+
+	if (argc != 2)
+	{
+		std::cout << RED "Error: " BWHT "Usage: " YEL "./HarlFilter "
+													  "<level>\n" NC;
+		sepPrinter(WIDTH, '-', RED, 2);
+		return (1);
+	}
+
+	harl.complain(argv[1]);
+	sepPrinter(WIDTH, '-', GRN, 2);
+
+	return (0);
 }
