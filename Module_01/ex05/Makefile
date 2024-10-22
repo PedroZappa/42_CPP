@@ -25,7 +25,7 @@ ARG				=
 #                                     NAMES                                    #
 #==============================================================================#
 
-NAME 			 	= hardFilter
+NAME 			 	= harl2.out
 
 ### Message Vars
 _SUCCESS 		= [$(GRN)SUCCESS$(D)]
