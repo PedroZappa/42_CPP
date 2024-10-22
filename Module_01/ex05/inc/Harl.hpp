@@ -6,12 +6,14 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 11:03:13 by passunca          #+#    #+#             */
-/*   Updated: 2024/10/22 11:06:42 by passunca         ###   ########.fr       */
+/*   Updated: 2024/10/22 12:17:00 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HARL_HPP
 # define HARL_HPP
+
+#include "../inc/Ansi.h"
 
 #include <iostream> // std::cout
 #include <string>   // std::string
