@@ -5,99 +5,63 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/29 12:47:17 by passunca          #+#    #+#             */
-/*   Updated: 2024/10/22 14:14:41 by passunca         ###   ########.fr       */
+/*   Created: 2024/10/22 11:03:29 by passunca          #+#    #+#             */
+/*   Updated: 2024/10/22 14:17:52 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANSI_H
-# define ANSI_H
-/*
- * This is free and unencumbered software released into the public domain.
- *
- * For more information, please refer to <https://unlicense.org>
- *
- * Source: https://gist.github.com/RabaDabaDoba/145049536f815903c79944599c6f952a
+#include "../inc/Harl.hpp"
+
+/** @brief Construct a new Harl:: Harl object */
+Harl::Harl() {
+  std::cout << BWHT << "Harl 2.0 ";
+  std::cout << GRN << " created ✅✅✅" << NC << std::endl;
+}
+
+/** @brief Destroy the Harl:: Harl object */
+Harl::~Harl() {
+  std::cout << BWHT << "Harl 2.0 ";
+  std::cout << RED << " destroyed ☠☠☠" << NC << std::endl;
+}
+
+/** @brief Complain about DEBUG level */
+void Harl::debug() {
+  std::cout << GRN "I love having extra bacon for my "
+                   "7XL-double-cheese-triple-pickle-special-ketchup burger. I "
+                   "really do!\n" NC;
+}
+
+/** @brief Complain level INFO */
+void Harl::info() {
+  std::cout << CYN "I cannot believe adding extra bacon costs more money."
+                   "You didn’t put enough bacon in my burger! If you did, I "
+                   "wouldn’t be asking for more!\n" NC;
+}
+
+/** @brief Complain level WARNING */
+void Harl::warning() {
+  std::cout << RED
+      "I think I deserve to have some extra bacon for free. I’ve been "
+      "coming for years whereas you started working here since last "
+      "month.\n" NC;
+}
+
+/**
+ * @brief Complain level ERROR
  */
+void Harl::error() {
+  std::cout << "This is unacceptable! I want to speak to the manager now.\n" NC;
+}
 
-// ANSI Escape codes
-//Regular text
-# define BLK "\e[0;30m"	// RGB(0, 0, 0)
-# define RED "\e[0;31m"	// RGB(255, 0, 0)
-# define GRN "\e[0;32m"	// RGB(0, 255, 0)
-# define YEL "\e[0;33m"	// RGB(255, 255, 0)
-# define BLU "\e[0;34m"	// RGB(0, 0, 255)
-# define MAG "\e[0;35m"	// RGB(255, 0, 255)
-# define CYN "\e[0;36m"	// RGB(0, 255, 255)
-# define WHT "\e[0;37m"	// RGB(255, 255, 255)
+void Harl::complain(std::string level) {
+  void (Harl::*f[4])(void) = {&Harl::debug, &Harl::info, &Harl::warning,
+                              &Harl::error};
 
-//Regular bold text
-# define BBLK "\e[1;30m"	
-# define BRED "\e[1;31m"
-# define BGRN "\e[1;32m"
-# define BYEL "\e[1;33m"
-# define BBLU "\e[1;34m"
-# define BMAG "\e[1;35m"
-# define BCYN "\e[1;36m"
-# define BWHT "\e[1;37m"
+  std::string levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 
-//Regular underline text
-# define UBLK "\e[4;30m"
-# define URED "\e[4;31m"
-# define UGRN "\e[4;32m"
-# define UYEL "\e[4;33m"
-# define UBLU "\e[4;34m"
-# define UMAG "\e[4;35m"
-# define UCYN "\e[4;36m"
-# define UWHT "\e[4;37m"
-
-//Regular background
-# define BLKB "\e[40m"
-# define REDB "\e[41m"
-# define GRNB "\e[42m"
-# define YELB "\e[43m"
-# define BLUB "\e[44m"
-# define MAGB "\e[45m"
-# define CYNB "\e[46m"
-# define WHTB "\e[47m"
-
-//High intensty background 
-# define BLKHB "\e[0;100m"
-# define REDHB "\e[0;101m"
-# define GRNHB "\e[0;102m"
-# define YELHB "\e[0;103m"
-# define BLUHB "\e[0;104m"
-# define MAGHB "\e[0;105m"
-# define CYNHB "\e[0;106m"
-# define WHTHB "\e[0;107m"
-
-//High intensty text
-# define HBLK "\e[0;90m"
-# define HRED "\e[0;91m"
-# define HGRN "\e[0;92m"
-# define HYEL "\e[0;93m"
-# define HBLU "\e[0;94m"
-# define HMAG "\e[0;95m"
-# define HCYN "\e[0;96m"
-# define HWHT "\e[0;97m"
-
-//Bold high intensity text
-# define BHBLK "\e[1;90m"
-# define BHRED "\e[1;91m"
-# define BHGRN "\e[1;92m"
-# define BHYEL "\e[1;93m"
-# define BHBLU "\e[1;94m"
-# define BHMAG "\e[1;95m"
-# define BHCYN "\e[1;96m"
-# define BHWHT "\e[1;97m"
-
-//Reset
-# define RESET "\e[0m"
-# define CRESET "\e[0m"
-# define COLOR_RESET "\e[0m"
-# define NC "\e[0m"
-
-#endif
-
-
+  for (int i = 0; i < 4; i++) {
+    if (level == levels[i])
+      (this->*f[i])();
+  }
+}
 
