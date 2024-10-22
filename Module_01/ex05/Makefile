@@ -129,6 +129,28 @@ test: all $(TEMP_PATH)			## Run tests
 	-./$(NAME) "ZEDRO"
 	@echo "$(YEL)$(_SEP)$(D)"
 
+test_memcheck: all 		## Run memory checjs w/ valgrind
+	@echo "$(YEL)Running $(MAG)$(NAME)$(YEL)$(D)"
+	@echo "$(YEL)$(_SEP)$(D)"
+	@echo "$(YEL) Running $(BWHI)Debug $(YEL) filter...$(D)"
+	valgrind ./$(NAME) "DEBUG"
+	@echo "$(YEL)$(_SEP)$(D)"
+	@echo "$(YEL) Running $(BWHI)Info $(YEL) filter...$(D)"
+	@echo "$(YEL)$(_SEP)$(D)"
+	valgrind ./$(NAME) "INFO"
+	@echo "$(YEL)$(_SEP)$(D)"
+	@echo "$(YEL) Running $(BWHI)Warning $(YEL) filter...$(D)"
+	@echo "$(YEL)$(_SEP)$(D)"
+	valgrind ./$(NAME) "WARNING"
+	@echo "$(YEL)$(_SEP)$(D)"
+	@echo "$(YEL) Running $(BWHI)Error $(YEL) filter...$(D)"
+	@echo "$(YEL)$(_SEP)$(D)"
+	valgrind ./$(NAME) "ERROR"
+	@echo "$(YEL)$(_SEP)$(D)"
+	@echo "$(YEL) Running $(BWHI)Invalid $(YEL) filter...$(D)"
+	@echo "$(YEL)$(_SEP)$(D)"
+	valgrind ./$(NAME) "ZEDRO"
+	@echo "$(YEL)$(_SEP)$(D)"
 
 ##@ Debug Rules 
 
