@@ -24,6 +24,7 @@
 
 # define HEADER "==>\tWelcome to Zee Awesome Phonebook!\t<==\n"
 # define ARROW	"==> "
+# define WIDTH	42
 
 class PhoneBook
 {

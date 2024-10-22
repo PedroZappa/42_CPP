@@ -102,7 +102,7 @@ $(TEMP_PATH):
 
 ##@ Test Rules 🧪
 
-test_all: all			## Run all tests
+test_all: all		## Run all tests
 	make test
 	make test_valgrind
 
