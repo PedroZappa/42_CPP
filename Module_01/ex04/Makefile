@@ -36,10 +36,10 @@ _SEP	 			= =====================================================
 #                                    PATHS                                     #
 #==============================================================================#
 
-SRC_PATH		= src
-BUILD_PATH	= .build
-TEMP_PATH		= .temp
-INC_PATH		= inc
+SRC_PATH			= src
+BUILD_PATH			= .build
+TEMP_PATH			= .temp
+INC_PATH			= inc
 
 FILES				= main.cpp
 FILES				+= printer.cpp
@@ -52,9 +52,9 @@ OBJS				= $(SRC:$(SRC_PATH)/%.cpp=$(BUILD_PATH)/%.o)
 #==============================================================================#
 
 CXX					= c++
-CXXFLAGS		= -Wall -Wextra -Werror
-CXXFLAGS		+= -std=c++98
-DEBUG_FLAGS	= -g3
+CXXFLAGS	  	 	= -Wall -Wextra -Werror
+CXXFLAGS	  	 	+= -std=c++98
+DEBUG_FLAGS	  	 	= -g3
 INC					= -I $(INC_PATH)
 
 
@@ -65,7 +65,7 @@ INC					= -I $(INC_PATH)
 ### Core Utils
 RM			= rm -rf
 AR			= ar rcs
-MKDIR_P	= mkdir -p
+MKDIR_P		= mkdir -p
 
 ### Valgrind
 # VAL_SUP 	= --suppressions=
