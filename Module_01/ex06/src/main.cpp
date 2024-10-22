@@ -18,13 +18,15 @@ static int checkArg(int argc, char **argv);
 int main(int argc, char **argv)
 {
 	Harl harl;
-	std::string level;
 	std::string levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 
 	headerPrinter("Harl 2.0 Filter", 50, '-', BRED);
 
 	if (checkArg(argc, argv) == EXIT_FAILURE)
 		return(EXIT_FAILURE);
+	
+	std::string lvl = argv[1];
+	harl.complain(lvl);
 
 	return (0);
 }
@@ -40,14 +42,14 @@ static int checkArg(int argc, char **argv)
 	if (argc != 2)
 	{
 		std::cout << RED "Error: " BWHT "Usage: " YEL "./HarlFilter "
-													  "<level>\n" NC;
+													  "<lvl>\n" NC;
 		sepPrinter(WIDTH, '-', RED, 2);
 		return (EXIT_FAILURE);
 	}
 	std::string arg = argv[1];
 	if (arg != "DEBUG" && arg != "INFO" && arg != "WARNING" && arg != "ERROR")
 	{
-		std::cout << RED "Filter Error: " BWHT "Invalid level. Use:\n" 
+		std::cout << RED "Filter Error: " BWHT "Invalid lvl. Use:\n" 
 					BYEL "DEBUG || INFO || WARNING || ERROR\n" NC;
 		sepPrinter(WIDTH, '-', RED, 2);
 		return (EXIT_FAILURE);
