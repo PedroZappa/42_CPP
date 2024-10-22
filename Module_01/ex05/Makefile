@@ -6,7 +6,7 @@
 #    By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/14 14:51:25 by passunca          #+#    #+#              #
-#    Updated: 2024/10/22 11:02:10 by passunca         ###   ########.fr        #
+#    Updated: 2024/10/22 12:21:44 by passunca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ TEMP_PATH		= .temp
 INC_PATH		= inc
 
 FILES				= main.cpp
-FILES				+= printer.cpp
+FILES				+= Harl.cpp
 
 SRC					= $(addprefix $(SRC_PATH)/, $(FILES))
 OBJS				= $(SRC:$(SRC_PATH)/%.cpp=$(BUILD_PATH)/%.o)
