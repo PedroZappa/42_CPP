@@ -33,6 +33,7 @@
 megaphone
 phonebook
 bankAccount
+hardFilter
 
 #Debug/Test
 **/gdb.txt
