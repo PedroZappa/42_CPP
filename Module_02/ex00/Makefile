@@ -6,7 +6,7 @@
 #    By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/14 14:51:25 by passunca          #+#    #+#              #
-#    Updated: 2024/10/22 14:34:47 by passunca         ###   ########.fr        #
+#    Updated: 2024/10/23 19:35:19 by passunca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ ARG				=
 #                                     NAMES                                    #
 #==============================================================================#
 
-NAME 			 	= harlFilter
+NAME 			 	= fixed.out
 
 ### Message Vars
 _SUCCESS 		= [$(GRN)SUCCESS$(D)]
@@ -37,12 +37,12 @@ _SEP	 			= ===================================================
 #==============================================================================#
 
 SRC_PATH		= src
-BUILD_PATH		= .build
+BUILD_PATH	= .build
 TEMP_PATH		= .temp
 INC_PATH		= inc
 
 FILES				= main.cpp
-FILES				+= Harl.cpp
+FILES				+= Fixed.cpp
 FILES				+= printer.cpp
 
 SRC					= $(addprefix $(SRC_PATH)/, $(FILES))
@@ -53,9 +53,9 @@ OBJS				= $(SRC:$(SRC_PATH)/%.cpp=$(BUILD_PATH)/%.o)
 #==============================================================================#
 
 CXX					= c++
-CXXFLAGS	  	 	= -Wall -Wextra -Werror
-CXXFLAGS	  	 	+= -std=c++98
-DEBUG_FLAGS	  	 	= -g3
+CXXFLAGS	  = -Wall -Wextra -Werror
+CXXFLAGS	  += -std=c++98
+DEBUG_FLAGS	= -g3
 INC					= -I $(INC_PATH)
 
 
