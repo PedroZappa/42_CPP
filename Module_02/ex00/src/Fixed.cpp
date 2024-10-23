@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 19:18:37 by passunca          #+#    #+#             */
-/*   Updated: 2024/10/23 20:17:50 by passunca         ###   ########.fr       */
+/*   Updated: 2024/10/23 20:24:52 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ Fixed::~Fixed(void)
  */
 int Fixed::getRawBits(void) const
 {
-	std::cout << "Getting bits bits:\n" NC;
+	std::cout << "Getting bits:\n" NC;
 	return (_value);
 }
 
