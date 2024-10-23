@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 12:27:37 by passunca          #+#    #+#             */
-/*   Updated: 2024/10/23 20:22:27 by passunca         ###   ########.fr       */
+/*   Updated: 2024/10/23 20:26:14 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ int main()
 
 	headerPrinter("Setting Copy Raw Bits", WIDTH, '-', BMAG);
 	copy.setRawBits(777);
+	printRawBits(og, copy, assign_copy);
+
+	headerPrinter("Setting Assigned Copy Raw Bits", WIDTH, '-', BMAG);
+	assign_copy.setRawBits(888);
 	printRawBits(og, copy, assign_copy);
 	sepPrinter(WIDTH, '-', GRN, 2);
 
