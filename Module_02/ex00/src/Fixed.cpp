@@ -17,7 +17,7 @@ const int Fixed::_bits = 8;
 /**
  * @brief Constructor
  */
-Fixed::Fixed(void)
+Fixed::Fixed(void) : _value(0)
 {
 	std::cout << BWHT "Fixed point number";
 	std::cout << GRN " created ✅\n" NC;
@@ -26,7 +26,7 @@ Fixed::Fixed(void)
 /**
  * @brief Copy Constructor
  */
-Fixed::Fixed(const Fixed &copy)
+Fixed::Fixed(const Fixed &copy) : _value(copy._value)
 {
 	std::cout << BWHT "Fixed point number";
 	std::cout << YEL " copied\n" NC;
@@ -34,7 +34,7 @@ Fixed::Fixed(const Fixed &copy)
 }
 
 /**
- * @brief Copy Assignment Operator
+ * @brief Copy Assignment Operator Overload
  */
 Fixed &Fixed::operator=(const Fixed &copy)
 {
