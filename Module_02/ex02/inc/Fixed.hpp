@@ -49,9 +49,15 @@ class Fixed
 
 	~Fixed(void);
 
+	/**
+	 * @brief Get and Set
+	 */
 	int getRawBits(void) const;
 	void setRawBits(const int raw);
 
+	/**
+	 * @brief Convert
+	 */
 	float toFloat(void) const;
 	int toInt(void) const;
 
