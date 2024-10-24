@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/23 19:01:52 by passunca          #+#    #+#             */
-/*   Updated: 2024/10/23 20:21:19 by passunca         ###   ########.fr       */
+/*   Created: 2024/10/24 17:04:12 by passunca          #+#    #+#             */
+/*   Updated: 2024/10/24 18:06:34 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,32 @@ class Fixed
   public:
 	Fixed(void);
 	Fixed(const Fixed &copy);
+	Fixed(const int value);
+	Fixed(const float value);
 	Fixed &operator=(const Fixed &copy);
 	~Fixed(void);
 
 	int getRawBits(void) const;
 	void setRawBits(const int raw);
 
+	float toFloat(void) const;
+	int toInt(void) const;
+
   private:
 	static const int _bits;
 	int _value;
 };
 
+/**
+ * @brief Overload of the insertion operator
+ * @details Conventionally declared outside the class definition allowing it to
+ * work with the standard ostream objects like `std::cout` as the left operand.
+ * This symmetric design style goes in line with the standard library
+ * implementation of stream operators for built-in types
+ * */
+std::ostream &operator<<(std::ostream &out, const Fixed &fixed);
+
+/** UI Helpers **/
 void headerPrinter(const std::string &headerText,
 				   int inWidth,
 				   char sep,

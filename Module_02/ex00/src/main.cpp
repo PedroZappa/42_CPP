@@ -12,6 +12,8 @@
 
 #include "../inc/Fixed.hpp"
 
+#define WIDTH 45
+
 void printRawBits(const Fixed &og,
 				  const Fixed &copy,
 				  const Fixed &assign_copy);
@@ -43,6 +45,12 @@ int main()
 	return (0);
 }
 
+/**
+ * @brief Print Raw Bits
+ * @param og reference to original object
+ * @param copy reference to copy object
+ * @param assign_copy reference to assigned copy object
+*/
 void printRawBits(const Fixed &og, const Fixed &copy, const Fixed &assign_copy)
 {
 	std::cout << YEL "Original Object:\n" NC;
