@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 18:39:32 by passunca          #+#    #+#             */
-/*   Updated: 2024/10/25 18:52:27 by passunca         ###   ########.fr       */
+/*   Updated: 2024/10/25 18:58:31 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 static Fixed GetTriangleArea(Point a, Point b, Point c);
 
 /**
- * @brief Check if point is within triangle
+ * @brief Binary Space Partitioning 
+ * Check if point is within triangle
  * @param a triangle vertice
  * @param b triangle vertice
  * @param c triangle vertice

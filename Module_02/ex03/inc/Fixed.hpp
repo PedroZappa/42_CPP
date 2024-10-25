@@ -6,14 +6,13 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 16:03:53 by passunca          #+#    #+#             */
-/*   Updated: 2024/10/25 16:03:57 by passunca         ###   ########.fr       */
+/*   Updated: 2024/10/25 19:07:42 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FIXED_HPP
 #define FIXED_HPP
 
-#include "Ansi.h"   // For ANSI color codes
 #include <iostream> // For std::cout
 
 /**
@@ -84,13 +83,6 @@ class Fixed
  * implementation of stream operators for built-in types
  * */
 std::ostream &operator<<(std::ostream &out, const Fixed &fixed);
-
-/** UI Helpers **/
-void headerPrinter(const std::string &headerText,
-				   int inWidth,
-				   char sep,
-				   const char *sepColor);
-void sepPrinter(int inWidth, char sepChar, const char *color, int nLines);
 
 #endif
 
