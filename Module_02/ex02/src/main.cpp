@@ -12,16 +12,28 @@
 
 #include "../inc/Fixed.hpp"
 
+#define WIDTH 45
+
 int main(void)
 {
+	headerPrinter("Now we're Fix Pointing!!", WIDTH, '-', BRED);
 	Fixed a;
 	Fixed const b(Fixed(5.05f) * Fixed(2));
+
+	sepPrinter(WIDTH, '-', BGRN, 2);
 	std::cout << a << std::endl;
+	sepPrinter(WIDTH, '-', BGRN, 1);
 	std::cout << ++a << std::endl;
+	sepPrinter(WIDTH, '-', BGRN, 1);
 	std::cout << a << std::endl;
-	std::cout << a++ << std::endl;
+	sepPrinter(WIDTH, '-', BGRN, 2);
+	std::cout << a++ << std::endl; // Uses Copy Constructor
+	sepPrinter(WIDTH, '-', BGRN, 1);
 	std::cout << a << std::endl;
+	sepPrinter(WIDTH, '-', BGRN, 1);
 	std::cout << b << std::endl;
 	std::cout << Fixed::max(a, b) << std::endl;
+	sepPrinter(WIDTH, '-', BGRN, 2);
+
 	return 0;
 }

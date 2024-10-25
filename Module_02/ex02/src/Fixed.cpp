@@ -40,7 +40,7 @@ Fixed::Fixed(const Fixed &copy) : _value(copy._value)
  * */
 Fixed::Fixed(const int value)
 {
-	std::cout << BYEL "int" BWHT "constructor called" NC;
+	std::cout << BYEL "int" BWHT "constructor called\n" NC;
 	this->_value = (value << Fixed::_bits);
 }
 
@@ -51,7 +51,7 @@ Fixed::Fixed(const int value)
  * */
 Fixed::Fixed(const float value)
 {
-	std::cout << BYEL "float" BWHT "constructor called" NC;
+	std::cout << BYEL "float" BWHT "constructor called\n" NC;
 	this->_value = (value * (1 << Fixed::_bits));
 }
 

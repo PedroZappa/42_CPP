@@ -16,13 +16,15 @@
 
 int main(void)
 {
+	headerPrinter("Towards a more useful Fixed Point Number", WIDTH, '-', BRED);
 	Fixed a;
 	const Fixed b(10);
 	const Fixed c(42.42f);
 	const Fixed d(b);
 
 	a = Fixed(1234.4321f);
-
+	
+	sepPrinter(WIDTH, '-', BGRN, 2);
 	std::cout << "a is " << a << std::endl;
 	std::cout << "b is " << b << std::endl;
 	std::cout << "c is " << c << std::endl;
@@ -33,5 +35,6 @@ int main(void)
 	std::cout << "c is " << c.toInt() << " as integer" << std::endl;
 	std::cout << "d is " << d.toInt() << " as integer" << std::endl;
 	
+	sepPrinter(WIDTH, '-', BGRN, 2);
 	return (0);
 }
