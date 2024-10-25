@@ -6,16 +6,17 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 18:39:32 by passunca          #+#    #+#             */
-/*   Updated: 2024/10/25 18:58:31 by passunca         ###   ########.fr       */
+/*   Updated: 2024/10/25 20:57:44 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/Point.hpp"
 
-static Fixed GetTriangleArea(Point a, Point b, Point c);
+static Fixed abs(Fixed f);
+Fixed GetTriangleArea(Point a, Point b, Point c);
 
 /**
- * @brief Binary Space Partitioning 
+ * @brief Binary Space Partitioning
  * Check if point is within triangle
  * @param a triangle vertice
  * @param b triangle vertice
@@ -33,8 +34,7 @@ bool bsp(const Point &a, const Point &b, const Point &c, const Point &point) {
 
 	bool isWithin = (ABC == (PAB + PAC + PBC));
 
-	bool isOnEdge =
-		((PAB.toFloat() == 0) && (PAC.toFloat() == 0) && (PBC.toFloat() == 0));
+	bool isOnEdge = (PAB.toFloat() && PAC.toFloat() && PBC.toFloat());
 
 	return (isWithin && isOnEdge);
 }
@@ -48,12 +48,19 @@ bool bsp(const Point &a, const Point &b, const Point &c, const Point &point) {
  * @details Triangle Area Formula
  * area = ((x1 * (y2 - y3)) + (x2 * (y3 - y1)) + (x3 * (y1 - y2))) / 2
  */
-static Fixed GetTriangleArea(Point a, Point b, Point c) {
+Fixed GetTriangleArea(Point a, Point b, Point c) {
 	Fixed area;
 
 	area = ((a.getX() * (b.getY() - c.getY())) +
 			(b.getX() * (c.getY() - a.getY())) +
 			(c.getX() * (a.getY() - b.getY()))) /
 		2;
-	return (area);
+	return (abs(area));
+}
+
+/** @brief Get absolute value of a fixed point
+ * @param f fixed point value
+ * */
+static Fixed abs(Fixed f) {
+	return (f = ((f < 0) ? (f * -1) : f));
 }

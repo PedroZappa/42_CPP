@@ -6,17 +6,13 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 16:05:00 by passunca          #+#    #+#             */
-/*   Updated: 2024/10/25 19:18:04 by passunca         ###   ########.fr       */
+/*   Updated: 2024/10/25 20:55:22 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/printer.hpp"
-#include "../inc/Point.hpp"
+#include "../inc/bsp.hpp"
 
 bool isEqual(Point a, Point b);
-
-#define PLANE_W 60
-#define PLANE_H 30
 
 /**
  * @brief Prints Header w/ adjustable width
@@ -67,17 +63,15 @@ void sepPrinter(int inWidth, char sepChar, const char *color, int nLines) {
  * @param p Point
  */
 void printPlane(Point a, Point b, Point c, Point p) {
-	for (int i = -1; i < PLANE_H; ++i) {
-		std::cout << "\t";
-		for (int j = -1; j < PLANE_W; ++j) {
+	for (int i = 0; i < PLANE_H; i++) {
+		// std::cout << "\t";
+		for (int j = 0; j < PLANE_W; j++) {
 			Point curr(i, j);
 			if (bsp(a, b, c, curr) && !isEqual(curr, p)) {
-				std::cout << BRED "⊗" NC;
-			}
-			else if (isEqual(curr, p)) {
 				std::cout << BGRN "⊗" NC;
-			}
-			else {
+			} else if (isEqual(curr, p)) {
+				std::cout << BMAG "⊗" NC;
+			} else {
 				std::cout << ".";
 			}
 		}

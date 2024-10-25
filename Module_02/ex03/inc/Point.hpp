@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 17:53:03 by passunca          #+#    #+#             */
-/*   Updated: 2024/10/25 18:59:06 by passunca         ###   ########.fr       */
+/*   Updated: 2024/10/25 20:21:46 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #define POINT_HPP
 
 #include "Fixed.hpp"
-#include <cstdlib>
-#include <cmath>
 
 class Point {
   public:
@@ -34,8 +32,6 @@ class Point {
 	const Fixed _x;
 	const Fixed _y;
 };
-
-bool bsp(const Point &a, const Point &b, const Point &c, const Point &point);
 
 /**  @brief Overload of the insertion operator */
 std::ostream &operator<<(std::ostream &out, const Point &point);
