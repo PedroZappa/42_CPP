@@ -57,13 +57,6 @@ void PhoneBook::add(void) {
             << BGRN << "\tContact added successfully" << NC << std::endl;
 }
 
-bool PhoneBook::_isPrintable(std::string str) {
-  for (size_t i = 0; i < str.length(); i++)
-    if (!std::isprint(str[i]))
-      return (false);
-  return (true);
-}
-
 void PhoneBook::search(void) {
   int id, max;
 
@@ -82,23 +75,6 @@ void PhoneBook::search(void) {
               << BRED << id << " : Is not a valid ID!" << NC << std::endl;
   else
     this->_contacts[id].printContact();
-}
-
-void PhoneBook::_printPhoneBook(void) {
-  std::string field;
-
-  std::cout << std::endl;
-  std::cout << "|     Index|First Name| Last Name|  Nickname|" << std::endl;
-  for (int i = 0; i <= (MAX_CONTACTS - 1); i++) {
-    std::cout << "|" << std::setw(10) << i << "|";
-    field = this->_contacts[i].getFirstName();
-    std::cout << std::setw(10) << PhoneBook::formatString(field) << "|";
-    field = this->_contacts[i].getLastName();
-    std::cout << std::setw(10) << PhoneBook::formatString(field) << "|";
-    field = this->_contacts[i].getNickName();
-    std::cout << std::setw(10) << PhoneBook::formatString(field) << "|"
-              << std::endl;
-  }
 }
 
 /// @brief Print Menu
@@ -126,3 +102,28 @@ std::string PhoneBook::formatString(std::string str) {
     return (str.substr(0, 9) + ".");
   return (str);
 }
+
+bool PhoneBook::_isPrintable(std::string str) {
+  for (size_t i = 0; i < str.length(); i++)
+    if (!std::isprint(str[i]))
+      return (false);
+  return (true);
+}
+
+void PhoneBook::_printPhoneBook(void) {
+  std::string field;
+
+  std::cout << std::endl;
+  std::cout << "|     Index|First Name| Last Name|  Nickname|" << std::endl;
+  for (int i = 0; i <= (MAX_CONTACTS - 1); i++) {
+    std::cout << "|" << std::setw(10) << i << "|";
+    field = this->_contacts[i].getFirstName();
+    std::cout << std::setw(10) << PhoneBook::formatString(field) << "|";
+    field = this->_contacts[i].getLastName();
+    std::cout << std::setw(10) << PhoneBook::formatString(field) << "|";
+    field = this->_contacts[i].getNickName();
+    std::cout << std::setw(10) << PhoneBook::formatString(field) << "|"
+              << std::endl;
+  }
+}
+
