@@ -81,7 +81,7 @@ static void exitErr(const std::string &msg)
 	std::cout << "Error: " << msg << "\n";
 	usage();
 	msg.~basic_string();
-	exit(EXIT_SUCCESS);
+	std::exit(EXIT_FAILURE);
 }
 
 static void usage(void)
