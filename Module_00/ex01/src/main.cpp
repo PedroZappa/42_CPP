@@ -18,7 +18,7 @@ int main(void) {
   PhoneBook phonebook = PhoneBook();
   std::string cmd;
 
-  while (true) {
+  while (!std::cin.eof()) {
     phonebook.printMenu();
     std::getline(std::cin, cmd);
     cmd = toLower(cmd);
@@ -27,8 +27,6 @@ int main(void) {
     else if (cmd == "search")
       phonebook.search();
     else if (cmd == "exit")
-      break;
-    else if (std::cin.eof())
       break;
     else
       std::cout << BRED << "\tInvalid command" << NC << std::endl;

@@ -68,7 +68,7 @@ void PhoneBook::search(void) {
   int id, max;
 
   // Get largest supported index
-  max = (this->_n > (MAX_CONTACTS - 1)) ? (MAX_CONTACTS - 1) : --this->_n;
+  max = this->_n % MAX_CONTACTS;
   this->_printPhoneBook();
   std::cout << "SELECT ID : ";
   std::cin >> id;
