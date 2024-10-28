@@ -6,7 +6,7 @@
 #    By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/14 14:51:25 by passunca          #+#    #+#              #
-#    Updated: 2024/10/25 16:04:37 by passunca         ###   ########.fr        #
+#    Updated: 2024/10/25 20:14:15 by passunca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,10 @@ INC_PATH		= inc
 
 FILES			= main.cpp
 FILES			+= Fixed.cpp
+FILES			+= Point.cpp
 FILES			+= printer.cpp
+FILES			+= math.cpp
+FILES			+= tests.cpp
 
 SRC				= $(addprefix $(SRC_PATH)/, $(FILES))
 OBJS			= $(SRC:$(SRC_PATH)/%.cpp=$(BUILD_PATH)/%.o)

@@ -44,7 +44,6 @@ class PhoneBook
 		Contact		_contacts[MAX_CONTACTS];
 		int			_n;
 
-		void		_display(void);
 		bool		_isPrintable(std::string str);
 		void		_printPhoneBook(void);
 };
