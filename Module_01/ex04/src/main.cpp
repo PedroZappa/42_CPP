@@ -20,11 +20,9 @@ static std::string replace(const std::string &in,
 						   const std::string &replaceWith);
 static void writeToFile(const std::string filename, const std::string &content);
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
 	headerPrinter("Sed is for loosers", WIDTH, '*', BGRN);
-	try
-	{
+	try {
 		std::cout << "Checking input arguments...\n";
 		checkArgs(argc, argv);
 		std::string toReplace = argv[2];
@@ -32,19 +30,19 @@ int main(int argc, char **argv)
 		sepPrinter(WIDTH, '-', YEL, 1);
 		std::cout << "Reading " BWHT << argv[1] << NC " file...\n";
 		std::string in = readFile(argv[1]);
-	
+
 		sepPrinter(WIDTH, '-', YEL, 1);
 		std::cout << "Replacing '" YEL << toReplace << NC "' with '" GRN
-				  << replaceWith << NC "' in " BWHT << argv[1] << NC " file...\n";
+				  << replaceWith << NC "' in " BWHT << argv[1]
+				  << NC " file...\n";
 		std::string out = replace(in, toReplace, replaceWith);
-		
+
 		sepPrinter(WIDTH, '-', YEL, 1);
-		std::cout << "Writing to '" BWHT << argv[1] << ".replace'" NC " file...\n";
+		std::cout << "Writing to '" BWHT << argv[1]
+				  << ".replace'" NC " file...\n";
 		writeToFile(argv[1], out);
 		headerPrinter("Exiting now...", WIDTH, '*', HMAG);
-	}
-	catch (const std::exception &e)
-	{
+	} catch (const std::exception &e) {
 		std::cerr << RED "Error: " << e.what() << "\n" NC;
 		sepPrinter(WIDTH, '.', BRED, 1);
 		usage();
@@ -58,16 +56,13 @@ int main(int argc, char **argv)
  * @param argv
  * @throw std::invalid_argument
  */
-static void checkArgs(int argc, char **argv)
-{
-	if (argc != 4)
-	{
+static void checkArgs(int argc, char **argv) {
+	if (argc != 4) {
 		std::cerr << RED "Error: Wrong number of arguments\n" NC;
 		throw std::invalid_argument("Wrong number of arguments");
 	}
 	std::string toCheck = argv[2];
-	if (toCheck.empty())
-	{
+	if (toCheck.empty()) {
 		std::cerr << RED "Error: Empty string\n" NC;
 		throw std::invalid_argument("Empty string");
 	}
@@ -76,8 +71,7 @@ static void checkArgs(int argc, char **argv)
 /**
  * @brief Print usage
  */
-static void usage(void)
-{
+static void usage(void) {
 	std::cout << "Usage: ./replace <filename> <toReplace> <replaceWith>\n";
 }
 
@@ -86,8 +80,7 @@ static void usage(void)
  * @param filename name of file to read from
  * @return std::string
  */
-static std::string readFile(const std::string &filename)
-{
+static std::string readFile(const std::string &filename) {
 	std::ifstream file;
 	std::string content;
 	std::string buffer;
@@ -95,8 +88,7 @@ static std::string readFile(const std::string &filename)
 	file.open(filename.c_str());
 	if (!file.is_open())
 		throw std::runtime_error("Failed to open file");
-	else
-	{
+	else {
 		while (std::getline(file, buffer))
 			content.append(buffer + "\n");
 		file.close();
@@ -114,14 +106,12 @@ static std::string readFile(const std::string &filename)
  */
 static std::string replace(const std::string &in,
 						   const std::string &toReplace,
-						   const std::string &replaceWith)
-{
+						   const std::string &replaceWith) {
 	std::string out;
 	size_t nextReplace = 0;
 	size_t start = 0;
 
-	while ((nextReplace = in.find(toReplace, start)) != std::string::npos)
-	{
+	while ((nextReplace = in.find(toReplace, start)) != std::string::npos) {
 		out.append(in, start, (nextReplace - start)); // append before/in-between
 		out.append(replaceWith);                      // append replaceWith
 		start = (nextReplace + toReplace.length());   // skip to_replace
@@ -135,8 +125,7 @@ static std::string replace(const std::string &in,
  * @param filename
  * @param content
  */
-static void writeToFile(const std::string filename, const std::string &content)
-{
+static void writeToFile(const std::string filename, const std::string &content) {
 	std::ofstream out;
 	std::string newFilename;
 
@@ -144,8 +133,7 @@ static void writeToFile(const std::string filename, const std::string &content)
 	out.open(newFilename.c_str());
 	if (!out.is_open())
 		throw std::runtime_error("Failed to open file");
-	else
-	{
+	else {
 		out << content;
 		out.close();
 	}
