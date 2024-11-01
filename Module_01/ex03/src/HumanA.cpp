@@ -17,8 +17,8 @@
  * @param name human's name
  * @param weapon human's weapon
  * */
-HumanA::HumanA(std::string name, Weapon &weapon) : _name(name), _weapon(weapon)
-{
+HumanA::HumanA(std::string name, Weapon &weapon)
+	: _name(name), _weapon(weapon) {
 	std::cout << GRN "HumanA " YEL << _name << " with " << _weapon.getType()
 			  << GRN " created \n" NC;
 }
@@ -26,8 +26,7 @@ HumanA::HumanA(std::string name, Weapon &weapon) : _name(name), _weapon(weapon)
 /**
  * @brief HumanA:: HumanA object destructor
  * */
-HumanA::~HumanA(void)
-{
+HumanA::~HumanA(void) {
 	std::cout << RED "HumanA " BWHT << _name << " with " << _weapon.getType()
 			  << RED " destroyed ☠☠☠\n" NC;
 }
@@ -35,8 +34,7 @@ HumanA::~HumanA(void)
 /**
  * @brief HumanA:: attack function
  * */
-void HumanA::attack(void) const
-{
+void HumanA::attack(void) const {
 	std::cout << YEL << _name << BWHT " attacks with their " YEL
 			  << _weapon.getType() << "\n" NC;
 }

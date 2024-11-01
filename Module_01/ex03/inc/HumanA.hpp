@@ -16,8 +16,7 @@
 #include "Ansi.h"
 #include "Weapon.hpp"
 
-class HumanA
-{
+class HumanA {
   public:
 	HumanA(std::string name, Weapon &weapon);
 	~HumanA();
@@ -26,8 +25,7 @@ class HumanA
 
   private:
 	std::string _name;
-	Weapon &_weapon; // Reference: cannot be NULL and cannot be changed 
-
+	Weapon &_weapon; // Reference: cannot be NULL and cannot be changed
 };
 
 #endif

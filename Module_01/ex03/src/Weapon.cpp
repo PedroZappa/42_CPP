@@ -16,31 +16,27 @@
  * @brief Construct a new Weapon:: Weapon object
  * @param type the type of the weapon
  * */
-Weapon::Weapon(std::string type) : _type(type)
-{
+Weapon::Weapon(std::string type) : _type(type) {
 }
 
 /**
  * @brief Destroy the Weapon:: Weapon object
  * */
-Weapon::~Weapon(void)
-{
+Weapon::~Weapon(void) {
 }
 
-/** 
+/**
  * @brief Sets the type of the weapon
  * @param newType the new type of the weapon
  * */
-void Weapon::setType(std::string newType)
-{
+void Weapon::setType(std::string newType) {
 	_type = newType;
 }
 
-/** 
+/**
  * @brief Gets a reference to the type of the weapon
  * @return std::string& a reference to the type of the weapon
  * */
-const std::string &Weapon::getType(void) const
-{
+const std::string &Weapon::getType(void) const {
 	return (_type);
 }
