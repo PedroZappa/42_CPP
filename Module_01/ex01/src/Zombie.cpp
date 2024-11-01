@@ -15,8 +15,7 @@
 /**
  * @brief Zombie Class Constructor
  */
-Zombie::Zombie(void)
-{
+Zombie::Zombie(void) {
 }
 
 /**
@@ -27,15 +26,13 @@ Zombie::Zombie(void)
  * - more efficient than assignment;
  * - Mandatory for const or reference inits
  */
-Zombie::Zombie(std::string name) : _name(name)
-{
+Zombie::Zombie(std::string name) : _name(name) {
 }
 
 /**
  * @brief Zombie Class Destructor
  */
-Zombie::~Zombie(void)
-{
+Zombie::~Zombie(void) {
 	std::cout << RED << "Zombie " << BWHT << _name;
 	std::cout << RED << " destroyed ☠☠☠" << NC << "\n";
 }
@@ -45,8 +42,7 @@ Zombie::~Zombie(void)
 /**
  * @brief Announce Zombie
  */
-void Zombie::announce(void)
-{
+void Zombie::announce(void) {
 	std::cout << _name << ": " << BMAG "BraiiiiiiinnnzzzZ..." << NC << "\n";
 }
 
@@ -54,7 +50,6 @@ void Zombie::announce(void)
  * @brief Set Zombie's name
  * @param name Zombie's name
  */
-void Zombie::setName(const std::string &name)
-{
+void Zombie::setName(const std::string &name) {
 	_name = name;
 }

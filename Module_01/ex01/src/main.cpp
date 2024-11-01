@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "../inc/Zombie.hpp"
-#include <limits>
-#include <stdexcept>
 
 static void headerPrinter(void);
 static void sepPrinter(void);

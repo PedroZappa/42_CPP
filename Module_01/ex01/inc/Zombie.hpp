@@ -13,14 +13,14 @@
 #ifndef ZOMBIE_HPP
 #define ZOMBIE_HPP
 
-#include <string>	// std::string
-#include <iostream>	// std::cout std::endl
-#include <cstdlib>	// EXIT_SUCCESS
+#include "Ansi.h"
+#include <cstdlib>  // EXIT_SUCCESS
+#include <ctime>    // time()
+#include <iostream> // std::cout std::endl
+#include <limits>   // std::numeric_limits
+#include <string>   // std::string
 
-# include "Ansi.h"
-
-class Zombie
-{
+class Zombie {
   public:
 	Zombie(void);
 	Zombie(std::string name);
@@ -33,6 +33,6 @@ class Zombie
 	std::string _name;
 };
 
-Zombie	*zombieHorde(int N, std::string name);
+Zombie *zombieHorde(int N, std::string name);
 
 #endif
