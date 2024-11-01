@@ -13,7 +13,7 @@
 #include "../inc/Zombie.hpp"
 
 /**
- * @brief Create a Zombie and return it
+ * @brief Create a Zombie in the Heap
  * @param name Zombie's name
  * @return Zombie
  */

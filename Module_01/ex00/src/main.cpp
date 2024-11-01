@@ -24,14 +24,16 @@ int main(void) {
 	Zombie *zombie;
 
 	headerPrinter();
-	std::cout << YEL << "Name a new Zombie: " << NC;
+	std::cout << YEL "Name a new Zombie: " NC;
 	std::getline(std::cin, zombieName);
-	std::cout << YEL << "Name a new Chump: " << NC;
+	std::cout << YEL "Name a new Chump: " NC;
 	std::getline(std::cin, chumpName);
 	
 	sepPrinter();
+	// Allocating in the Heap
 	zombie = newZombie(zombieName);
 	zombie->announce();
+	// Allocating in the Stack
 	randomChump(chumpName);
 
 	sepPrinter();

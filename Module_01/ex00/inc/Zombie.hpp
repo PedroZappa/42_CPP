@@ -13,14 +13,12 @@
 #ifndef ZOMBIE_HPP
 #define ZOMBIE_HPP
 
-#include <string>	// std::string
-#include <iostream>	// std::cout std::endl
-#include <cstdlib>	// EXIT_SUCCESS
+#include "Ansi.h"
+#include <cstdlib>  // EXIT_SUCCESS
+#include <iostream> // std::cout std::endl
+#include <string>   // std::string
 
-# include "Ansi.h"
-
-class Zombie
-{
+class Zombie {
   public:
 	Zombie(void);
 	Zombie(std::string name);
