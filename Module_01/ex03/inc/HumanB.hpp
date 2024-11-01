@@ -16,18 +16,17 @@
 #include "Ansi.h"
 #include "Weapon.hpp"
 
-class HumanB
-{
-  private:
-	std::string _name;
-	Weapon *_weapon; // May be NULL
-
+class HumanB {
   public:
 	HumanB(std::string name);
 	~HumanB();
 
 	void attack(void) const;
 	void setWeapon(Weapon &weapon);
+
+  private:
+	std::string _name;
+	Weapon *_weapon; // May be NULL
 };
 
 #endif

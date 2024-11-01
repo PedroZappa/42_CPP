@@ -18,14 +18,16 @@
 
 class HumanA
 {
-  private:
-	std::string _name;
-	Weapon &_weapon; // Reference: cannot be NULL and cannot be changed 
   public:
 	HumanA(std::string name, Weapon &weapon);
 	~HumanA();
 
 	void attack(void) const;
+
+  private:
+	std::string _name;
+	Weapon &_weapon; // Reference: cannot be NULL and cannot be changed 
+
 };
 
 #endif

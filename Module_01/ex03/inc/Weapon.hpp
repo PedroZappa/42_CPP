@@ -15,17 +15,16 @@
 
 #include <iostream>
 
-class Weapon
-{
-  private:
-	std::string _type;
-
+class Weapon {
   public:
 	Weapon(std::string type);
 	~Weapon(void);
 
-	void setType(std::string newType); // Sets _type
-	const std::string &getType(void) const;  // Gets a reference to _type
+	void setType(std::string newType);      // Sets _type
+	const std::string &getType(void) const; // Gets a reference to _type
+
+  private:
+	std::string _type;
 };
 
 #endif
