@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../inc/Brain.hpp"
-#include <cstdlib>
 
 /** 
 * @brief Demystification of References & Pointers 
@@ -22,7 +21,7 @@ int main(void)
 	// Unmodifiable string; stores the actual string data;
 	// Cannot be reassigned (because const)
 	// Has it's own memory location
-	// 'stringREF' can NOT be NULL
+  // 'string' can NOT be modified
 	std::string const string = "HI THIS IS BRAIN"; 
 	// Pointer to unmodifiable string; stores address of string data
 	// Has its own memory location
