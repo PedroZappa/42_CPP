@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:35:03 by passunca          #+#    #+#             */
-/*   Updated: 2024/11/02 12:53:44 by passunca         ###   ########.fr       */
+/*   Updated: 2024/11/02 12:57:49 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,18 +66,39 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &rhs) {
  */
 std::ostream &operator<<(std::ostream &ofs, const ClapTrap &rhs) {
 	std::cout << BWHT "ClapTrap name: " YEL << rhs.getName() << NC;
-  std::cout << BWHT " hit points: " YEL << rhs.getHitPoints() << NC;
-  std::cout << BWHT " energy points: " YEL << rhs.getEnergyPoints() << NC;
-  std::cout << BWHT " attack damage: " YEL << rhs.getAttackDamage() << NC;
-  return (ofs);
+	std::cout << BWHT " hit points: " YEL << rhs.getHitPoints() << NC;
+	std::cout << BWHT " energy points: " YEL << rhs.getEnergyPoints() << NC;
+	std::cout << BWHT " attack damage: " YEL << rhs.getAttackDamage() << NC;
+	return (ofs);
 }
 
 /* @brief Getters */
-std::string ClapTrap::getName(void) const { return (this->_name); }
+std::string ClapTrap::getName(void) const {
+	return (this->_name);
+}
+int ClapTrap::getAttackDamage(void) const {
+	return (this->_attackDamage);
+}
+int ClapTrap::getHitPoints(void) const {
+	return (this->_hitPoints);
+}
+int ClapTrap::getEnergyPoints(void) const {
+	return (this->_energyPoints);
+}
 
-int ClapTrap::getAttackDamage(void) const { return (this->_attackDamage); }
-
-int ClapTrap::getHitPoints(void) const { return (this->_hitPoints); }
-
-int ClapTrap::getEnergyPoints(void) const { return (this->_energyPoints); }
-
+/**
+* @brief ClapTrap Attack
+* @param target string
+* */
+void ClapTrap::attack(const std::string &target) {
+	if (this->_energyPoints == 0) {
+		std::cout << "ClapTrap " << this->_name << " has no energy left!\n";
+		return;
+	}
+	if (this->_hitPoints == 0) {
+		std::cout << "ClapTrap " << this->_name << " has no hit points left!\n";
+		return;
+	}
+	std::cout << "ClapTrap " << this->_name << " attacks " << target
+			  << ", causing " << this->_attackDamage << " points of damage!\n";
+}
