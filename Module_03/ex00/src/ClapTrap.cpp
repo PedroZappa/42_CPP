@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:35:03 by passunca          #+#    #+#             */
-/*   Updated: 2024/11/02 12:51:24 by passunca         ###   ########.fr       */
+/*   Updated: 2024/11/02 12:53:44 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,3 +71,13 @@ std::ostream &operator<<(std::ostream &ofs, const ClapTrap &rhs) {
   std::cout << BWHT " attack damage: " YEL << rhs.getAttackDamage() << NC;
   return (ofs);
 }
+
+/* @brief Getters */
+std::string ClapTrap::getName(void) const { return (this->_name); }
+
+int ClapTrap::getAttackDamage(void) const { return (this->_attackDamage); }
+
+int ClapTrap::getHitPoints(void) const { return (this->_hitPoints); }
+
+int ClapTrap::getEnergyPoints(void) const { return (this->_energyPoints); }
+
