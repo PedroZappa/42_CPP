@@ -19,7 +19,7 @@ const int Fixed::_bits = 8;
  */
 Fixed::Fixed(void) : _value(0)
 {
-	std::cout << BWHT "Fixed point number";
+	std::cout << BYEL "Fixed point number";
 	std::cout << GRN " created ✅\n" NC;
 }
 
@@ -60,7 +60,7 @@ Fixed::Fixed(const float value)
  */
 Fixed &Fixed::operator=(const Fixed &copy)
 {
-	std::cout << BWHT "Fixed point number";
+	std::cout << BYEL "Fixed point number";
 	std::cout << MAG " assigned\n" NC;
 	if (this != &copy)
 		this->_value = copy.getRawBits();
@@ -103,7 +103,7 @@ void Fixed::setRawBits(int const raw)
  */
 float Fixed::toFloat(void) const
 {
-	return ((float)this->_value / (1 << Fixed::_bits));
+	return (static_cast<float>(this->_value) / (1 << Fixed::_bits));
 }
 
 /**

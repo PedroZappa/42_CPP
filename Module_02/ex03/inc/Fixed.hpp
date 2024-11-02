@@ -71,8 +71,13 @@ class Fixed
 	static const Fixed &max(const Fixed &lhs, const Fixed &rhs);
 
   private:
+  // Static variables are shared among all instances of the class
+  // There is only one _bits variable for all instances
+  // _bits determines how to interpret the _value as a fixed-point number
 	static const int _bits;
 	int _value;
+  // Each instance of the class has its own _value
+  // Holds the actual value of the fixed-point number
 };
 
 /**
