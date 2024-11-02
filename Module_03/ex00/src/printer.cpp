@@ -32,13 +32,10 @@ void headerPrinter(const std::string &headerText,
 	int rightPad = (totalPad - leftPad);
 
 	// Print Header
-	std::cout << sepColor;
-	std::cout << std::string(width, sep) << "\n";
-	std::cout << BWHT;
-	std::cout << std::string(leftPad, ' ') << headerText
+	std::cout << sepColor << std::string(width, sep) << "\n";
+	std::cout << BWHT << std::string(leftPad, ' ') << headerText
 			  << std::string(rightPad, ' ') << "\n";
-	std::cout << sepColor;
-	std::cout << std::string(width, sep) << "\n" NC;
+	std::cout << sepColor << std::string(width, sep) << "\n" NC;
 }
 
 /**

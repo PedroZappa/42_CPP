@@ -65,10 +65,10 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &rhs) {
  * @param rhs ClapTrap
  */
 std::ostream &operator<<(std::ostream &ofs, const ClapTrap &rhs) {
-	std::cout << BWHT "ClapTrap name: " YEL << rhs.getName() << NC;
-	std::cout << BWHT " hit points: " YEL << rhs.getHitPoints() << NC;
-	std::cout << BWHT " energy points: " YEL << rhs.getEnergyPoints() << NC;
-	std::cout << BWHT " attack damage: " YEL << rhs.getAttackDamage() << NC;
+	std::cout << BWHT "ClapTrap name : " YEL << rhs.getName() << "\n" NC;
+	std::cout << BWHT "Hit points : " YEL << rhs.getHitPoints() << "\n" NC;
+	std::cout << BWHT "Energy points : " YEL << rhs.getEnergyPoints() << "\n" NC;
+	std::cout << BWHT "Attack damage : " YEL << rhs.getAttackDamage() << "\n" NC;
 	return (ofs);
 }
 
@@ -85,49 +85,53 @@ int ClapTrap::getHitPoints(void) const {
 int ClapTrap::getEnergyPoints(void) const {
 	return (this->_energyPoints);
 }
+bool ClapTrap::getStatus(void) const {
+	if (this->_hitPoints == 0) {
+		std::cout << "ClapTrap " << this->_name << " is dead!\n";
+		return (false);
+	}
+	if (this->_energyPoints == 0) {
+		std::cout << "ClapTrap " << this->_name << " outs of energy!\n";
+		return (false);
+	}
+	return (true);
+}
 
 /**
-* @brief ClapTrap Attack
-* @param target string
-* */
+ * @brief ClapTrap Attack
+ * @param target string
+ * */
 void ClapTrap::attack(const std::string &target) {
-	if (this->_energyPoints == 0) {
-		std::cout << "ClapTrap " << this->_name << " has no energy left!\n";
+	if (!this->getStatus())
 		return;
-	}
-	if (this->_hitPoints == 0) {
-		std::cout << "ClapTrap " << this->_name << " is already dead!\n";
-		return;
-	}
-  this->_energyPoints--;
+	--this->_energyPoints;
 	std::cout << "ClapTrap " << this->_name << " attacks " << target
 			  << ", causing " << this->_attackDamage << " points of damage!\n";
 }
 
 /**
-* @brief ClapTrap Take Damage
-* @param amount int
-* */
+ * @brief ClapTrap Take Damage
+ * @param amount int
+ * */
 void ClapTrap::takeDamage(unsigned int amount) {
-  if (this->_hitPoints == 0) {
-    std::cout << "ClapTrap " << this->_name << " has no hit points left!\n";
-    return;
-  }
-  this->_hitPoints -= amount;
-  std::cout << "ClapTrap " << this->_name << " takes " << amount
-        << " points of damage!\n";
+	if (!this->getStatus())
+		return;
+	this->_hitPoints -= amount;
+	if (this->_hitPoints < 0) // avoid negative hit points
+		this->_hitPoints = 0;
+	std::cout << "ClapTrap " << this->_name << " takes " << amount
+			  << " points of damage!\n";
 }
 
 /**
-* @brief ClapTrap Be Repaired
-* @param amount int
-* */
+ * @brief ClapTrap Be Repaired
+ * @param amount int
+ * */
 void ClapTrap::beRepaired(unsigned int amount) {
-  if (this->_hitPoints == 0) {
-    std::cout << "ClapTrap " << this->_name << " has no hit points left!\n";
-    return;
-  }
-  this->_hitPoints += amount;
-  std::cout << "ClapTrap " << this->_name << " is repaired for " << amount
-        << " hit points!\n";
+	if (!this->getStatus())
+		return;
+	--this->_energyPoints;
+	this->_hitPoints += amount;
+	std::cout << "ClapTrap " << this->_name << " is repaired for " << amount
+			  << " hit points!\n";
 }

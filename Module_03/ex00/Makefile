@@ -42,6 +42,7 @@ TEMP_PATH		= .temp
 INC_PATH		= inc
 
 FILES			= main.cpp
+FILES			+= ClapTrap.cpp
 FILES			+= printer.cpp
 
 SRC				= $(addprefix $(SRC_PATH)/, $(FILES))
