@@ -124,7 +124,10 @@ Fixed &Fixed::operator--() {
 	return (*this);
 }
 
-/** @brief Postfix Decrement Operator Overload */
+/** @brief Postfix Decrement Operator Overload 
+ *  @details The int parameter is a dummy parameter, 
+ *  used to differentiate between the prefix and postfix operators.
+ * */
 Fixed Fixed::operator--(int value) {
 	(void)value;
 	Fixed buf = *this;

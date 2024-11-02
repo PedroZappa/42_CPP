@@ -17,6 +17,8 @@
 #include "../inc/Point.hpp"
 #include "ansi.h" // For ANSI color codes
 #include <iostream>
+#include <iomanip> // For std::setw
+#include <sstream>
 
 #define WIDTH 60
 #define PLANE_W 60

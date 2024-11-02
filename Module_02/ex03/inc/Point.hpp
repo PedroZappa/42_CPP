@@ -35,4 +35,5 @@ class Point {
 
 /**  @brief Overload of the insertion operator */
 std::ostream &operator<<(std::ostream &out, const Point &point);
+
 #endif
