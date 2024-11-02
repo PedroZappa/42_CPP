@@ -96,9 +96,38 @@ void ClapTrap::attack(const std::string &target) {
 		return;
 	}
 	if (this->_hitPoints == 0) {
-		std::cout << "ClapTrap " << this->_name << " has no hit points left!\n";
+		std::cout << "ClapTrap " << this->_name << " is already dead!\n";
 		return;
 	}
+  this->_energyPoints--;
 	std::cout << "ClapTrap " << this->_name << " attacks " << target
 			  << ", causing " << this->_attackDamage << " points of damage!\n";
+}
+
+/**
+* @brief ClapTrap Take Damage
+* @param amount int
+* */
+void ClapTrap::takeDamage(unsigned int amount) {
+  if (this->_hitPoints == 0) {
+    std::cout << "ClapTrap " << this->_name << " has no hit points left!\n";
+    return;
+  }
+  this->_hitPoints -= amount;
+  std::cout << "ClapTrap " << this->_name << " takes " << amount
+        << " points of damage!\n";
+}
+
+/**
+* @brief ClapTrap Be Repaired
+* @param amount int
+* */
+void ClapTrap::beRepaired(unsigned int amount) {
+  if (this->_hitPoints == 0) {
+    std::cout << "ClapTrap " << this->_name << " has no hit points left!\n";
+    return;
+  }
+  this->_hitPoints += amount;
+  std::cout << "ClapTrap " << this->_name << " is repaired for " << amount
+        << " hit points!\n";
 }
