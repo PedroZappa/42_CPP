@@ -88,17 +88,18 @@ static void log(Point p, Point a, Point b, Point c) {
 	areas << "\nPBC: " << std::setw(width) << std::left << std::fixed
 		  << std::setprecision(prec) << PBC.toFloat();
 
-	// Print both columns side by side
+  // Access ostringstrem's strings
 	std::string coord_str = coordinates.str();
 	std::string area_str = areas.str();
-	// string::size_type represents sizes and positions in a string
+	// NOTE: string::size_type represents sizes and positions in a string
 	// Designed to be large enough to represent any string on the system
 	// Ensures the support for strings of any length without risking overflow
 	std::string::size_type coord_pos = 0, area_pos = 0;
 	std::string::size_type coord_end, area_end;
 
+	// Print both columns side by side
 	while (coord_pos != std::string::npos || area_pos != std::string::npos) {
-		coord_end = coord_str.find('\n', coord_pos); // Find section end of line
+		coord_end = coord_str.find('\n', coord_pos); // Find end of line
 		area_end = area_str.find('\n', area_pos);
 
 		// Store sections for printing
