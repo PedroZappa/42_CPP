@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:35:03 by passunca          #+#    #+#             */
-/*   Updated: 2024/11/02 12:42:48 by passunca         ###   ########.fr       */
+/*   Updated: 2024/11/02 12:51:24 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,31 @@ ClapTrap::ClapTrap(const ClapTrap &copy) {
  */
 ClapTrap::~ClapTrap(void) {
 	std::cout << BWHT "ClapTrap destructor called ❌" << std::endl;
+}
+
+/**
+ * @brief Copy Assignment Operator Overload
+ * @param rhs ClapTrap
+ */
+ClapTrap &ClapTrap::operator=(const ClapTrap &rhs) {
+	if (this != &rhs) {
+		this->_name = rhs.getName();
+		this->_hitPoints = rhs.getHitPoints();
+		this->_energyPoints = rhs.getEnergyPoints();
+		this->_attackDamage = rhs.getAttackDamage();
+	}
+	return (*this);
+}
+
+/**
+ * @brief Insertion Operator Overload
+ * @param ofs
+ * @param rhs ClapTrap
+ */
+std::ostream &operator<<(std::ostream &ofs, const ClapTrap &rhs) {
+	std::cout << BWHT "ClapTrap name: " YEL << rhs.getName() << NC;
+  std::cout << BWHT " hit points: " YEL << rhs.getHitPoints() << NC;
+  std::cout << BWHT " energy points: " YEL << rhs.getEnergyPoints() << NC;
+  std::cout << BWHT " attack damage: " YEL << rhs.getAttackDamage() << NC;
+  return (ofs);
 }
