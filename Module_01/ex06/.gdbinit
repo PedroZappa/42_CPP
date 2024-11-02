@@ -21,15 +21,18 @@ set print array-indexes on
 define main
   display argc
   display argv@argc
-	display size
-	display *horde
+	display harl
+	display level
+	display levels[i]
+	display i
+	display index
 end
 
 ### Go GDB Go! I Choose YOU! 
 
 # main
 break main
-run 2 Z Z
+run WARNING
 fs cmd
 rfr
 
