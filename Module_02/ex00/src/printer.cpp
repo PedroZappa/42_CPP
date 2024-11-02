@@ -20,8 +20,7 @@
 void headerPrinter(const std::string &headerText,
 				   int inWidth,
 				   char sep,
-				   const char *sepColor)
-{
+				   const char *sepColor) {
 	// Calculate minimum required width
 	int textLen = headerText.length();
 	int minWidth = textLen + 4; // Add padding around the text
@@ -46,13 +45,10 @@ void headerPrinter(const std::string &headerText,
  * @brief Prints a separator line
  * @param inWidth The width of the separator line
  */
-void sepPrinter(int inWidth, char sepChar, const char* color, int nLines)
-{
-    std::cout << color;
-    for (int i = 0; i < nLines; ++i) {
-        std::cout << std::string(inWidth, sepChar) << "\n";
-    }
-    std::cout << NC;
+void sepPrinter(int inWidth, char sepChar, const char *color, int nLines) {
+	std::cout << color;
+	for (int i = 0; i < nLines; ++i) {
+		std::cout << std::string(inWidth, sepChar) << "\n";
+	}
+	std::cout << NC;
 }
-
-

@@ -22,8 +22,7 @@
  * A class that represents a fixed-point number
  * with '_bits' bits of precision
  */
-class Fixed
-{
+class Fixed {
   public:
 	Fixed(void);
 	Fixed(const Fixed &copy);

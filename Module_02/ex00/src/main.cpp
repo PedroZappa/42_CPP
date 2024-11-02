@@ -14,18 +14,15 @@
 
 #define WIDTH 45
 
-void printRawBits(const Fixed &og,
-				  const Fixed &copy,
-				  const Fixed &assign_copy);
+void printRawBits(const Fixed &og, const Fixed &copy, const Fixed &assign_copy);
 
-int main()
-{
+int main() {
 	Fixed og;
 	Fixed copy(og);
 	Fixed assign_copy = copy;
 
 	headerPrinter("Fixed Point Numbers and Copy Constructors", WIDTH, '-', BRED);
-	
+
 	headerPrinter("Original Raw Bits", WIDTH, '-', BBLU);
 	printRawBits(og, copy, assign_copy);
 
@@ -50,9 +47,8 @@ int main()
  * @param og reference to original object
  * @param copy reference to copy object
  * @param assign_copy reference to assigned copy object
-*/
-void printRawBits(const Fixed &og, const Fixed &copy, const Fixed &assign_copy)
-{
+ */
+void printRawBits(const Fixed &og, const Fixed &copy, const Fixed &assign_copy) {
 	std::cout << YEL "Original Object:\n" NC;
 	std::cout << "Address: " BWHT << &og << "\n" NC;
 	std::cout << CYN "Raw Bits:\n" NC << og.getRawBits() << "\n";
