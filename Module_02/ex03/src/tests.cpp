@@ -59,16 +59,16 @@ static void log(Point p, Point a, Point b, Point c) {
 	// Prepare coordinates column
 	coordinates << std::setw(width) << std::left << BYEL "Coordinates:\t\t" NC;
 	coordinates << "\n P: " << std::left << std::fixed << std::setprecision(prec)
-				<< std::setw(width - (width / 2)) << p.getX().toFloat() << " , "
+				<< std::setw(width / 2) << p.getX().toFloat() << " , "
 				<< std::setw(width) << p.getY().toFloat();
 	coordinates << "\n A: " << std::left << std::fixed << std::setprecision(prec)
-				<< std::setw(width - (width / 2)) << a.getX().toFloat() << " , "
+				<< std::setw(width / 2) << a.getX().toFloat() << " , "
 				<< std::setw(width) << a.getY().toFloat();
 	coordinates << "\n B: " << std::left << std::fixed << std::setprecision(prec)
-				<< std::setw(width - (width / 2)) << b.getX().toFloat() << " , "
+				<< std::setw(width / 2) << b.getX().toFloat() << " , "
 				<< std::setw(width) << b.getY().toFloat();
 	coordinates << "\n C: " << std::left << std::fixed << std::setprecision(prec)
-				<< std::setw(width - (width / 2)) << c.getX().toFloat() << " , "
+				<< std::setw(width / 2) << c.getX().toFloat() << " , "
 				<< std::setw(width) << c.getY().toFloat();
 
 	// Calculate areas
