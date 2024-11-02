@@ -6,7 +6,7 @@
 #    By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/14 14:51:25 by passunca          #+#    #+#              #
-#    Updated: 2024/11/02 12:32:21 by passunca         ###   ########.fr        #
+#    Updated: 2024/11/02 20:16:05 by passunca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ INC_PATH		= inc
 
 FILES			= main.cpp
 FILES			+= ClapTrap.cpp
+FILES			+= ScavTrap.cpp
 FILES			+= printer.cpp
 
 SRC				= $(addprefix $(SRC_PATH)/, $(FILES))

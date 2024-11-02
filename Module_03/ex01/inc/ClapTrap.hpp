@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:25:13 by passunca          #+#    #+#             */
-/*   Updated: 2024/11/02 20:13:48 by passunca         ###   ########.fr       */
+/*   Updated: 2024/11/02 20:27:16 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "ansi.h"
 #include <iostream>
 #include <string>
+#include <cstdlib> // EXIT_SUCCESS
 
 class ClapTrap {
   public:
@@ -39,15 +40,17 @@ class ClapTrap {
 
 	// Getters
 	std::string getName(void) const;
+	std::string getType(void) const;
 	int getHitPoints(void) const;
 	int getEnergyPoints(void) const;
 	int getAttackDamage(void) const;
-	bool getStatus(void) const;
+	bool getStatus(std::string type) const;
 
   protected:
 	// Protected Attributes are accessible to derived classes
 	// Reduce the level of encapsulation compared to private members
 	std::string _name;
+	std::string _type;
 	int _hitPoints;
 	int _energyPoints;
 	int _attackDamage;

@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 19:38:51 by passunca          #+#    #+#             */
-/*   Updated: 2024/11/02 19:50:53 by passunca         ###   ########.fr       */
+/*   Updated: 2024/11/02 20:37:52 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ class ScavTrap : public ClapTrap {
 	ScavTrap(void);
 	ScavTrap(std::string name);
 	ScavTrap(const ScavTrap &copy);
-	~ScavTrap(void);
+	virtual ~ScavTrap();
 
 	// Operators Overloads
 	ScavTrap &operator=(const ScavTrap &rhs);
