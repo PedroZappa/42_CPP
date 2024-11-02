@@ -159,7 +159,7 @@ void Fixed::setRawBits(int const raw) {
  * @return float
  */
 float Fixed::toFloat(void) const {
-	return ((float)this->_value / (1 << Fixed::_bits));
+	return (static_cast<float>(this->_value) / (1 << Fixed::_bits));
 }
 
 /**
