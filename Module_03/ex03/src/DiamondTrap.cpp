@@ -16,11 +16,12 @@
  */
 DiamondTrap::DiamondTrap(void)
 	: ClapTrap("DiamondTrap_clap_name"), FragTrap(), ScavTrap() {
+	FragTrap frag("tempFrag");
 	this->_name = "DiamondTrap";
 	this->_type = "DiamondTrap";
-	this->_hitPoints = FragTrap::getHitPoints();
+	this->_hitPoints = frag.getHitPoints();
 	this->_energyPoints = ScavTrap::getEnergyPoints();
-	this->_attackDamage = FragTrap::getAttackDamage();
+	this->_attackDamage = frag.getAttackDamage();
 	std::cout << BBLU "DiamondTrap" BWHT " default constructor called ✅"
 			  << std::endl;
 }
@@ -30,11 +31,12 @@ DiamondTrap::DiamondTrap(void)
  */
 DiamondTrap::DiamondTrap(std::string name)
 	: ClapTrap(name + "_clap_name"), FragTrap(name), ScavTrap(name) {
+	FragTrap frag("tempFrag");
 	this->_name = name;
 	this->_type = "DiamondTrap";
-	this->_hitPoints = FragTrap::getHitPoints();
+	this->_hitPoints = frag.getHitPoints();
 	this->_energyPoints = ScavTrap::getEnergyPoints();
-	this->_attackDamage = FragTrap::getAttackDamage();
+	this->_attackDamage = frag.getAttackDamage();
 	std::cout << BBLU "DiamondTrap" BWHT " parameterized constructor called ✅"
 			  << std::endl;
 }
