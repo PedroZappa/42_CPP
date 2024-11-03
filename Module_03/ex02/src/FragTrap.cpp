@@ -82,5 +82,5 @@ void FragTrap::highFivesGuys(void)
 {
 	if (!this->getStatus("FragTrap"))
 		return;
-	std::cout << BRED "FragTrap " BWHT "high fives guyz! ⚡" << std::endl;
+	std::cout << BRED "FragTrap " BWHT "high five guyz! ⚡" << std::endl;
 }

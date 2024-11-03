@@ -94,29 +94,25 @@ int ClapTrap::getHitPoints(void) const {
 int ClapTrap::getEnergyPoints(void) const {
 	return (this->_energyPoints);
 }
+
 bool ClapTrap::getStatus(std::string type) const {
-	if (this->_hitPoints == 0) {
-		if (this->_type == "ClapTrap")
-			std::cout << BGRN << type << BWHT " " << this->_name << " is dead!\n";
-		if (this->_type == "ScavTrap")
-			std::cout << BMAG << type << BWHT " " << this->_name << " is dead!\n";
-		if (this->_type == "FragTrap")
-			std::cout << BRED << type << BWHT " " << this->_name << " is dead!\n";
-		return (false);
-	}
-	if (this->_energyPoints == 0) {
-		if (this->_type == "ClapTrap")
-			std::cout << BGRN << type << BWHT " " << this->_name
-					  << " out of energy!\n";
-		if (this->_type == "ScavTrap")
-			std::cout << BMAG << type << BWHT " " << this->_name
-					  << " out of energy!\n";
-		if (this->_type == "FragTrap")
-			std::cout << BRED << type << BWHT " " << this->_name
-					  << " out of energy!\n";
-		return (false);
-	}
-	return (true);
+    std::string color;
+    std::string message;
+
+    if (this->_hitPoints == 0 || this->_energyPoints == 0) {
+        if (this->_type == "ClapTrap")
+            color = BGRN;
+        else if (this->_type == "ScavTrap")
+            color = BMAG;
+        else if (this->_type == "FragTrap")
+            color = BRED;
+
+        message = (this->_hitPoints == 0) ? " is dead!\n" : " out of energy! 󱏵\n";
+
+        std::cout << color << type << BWHT " " << this->_name << message;
+        return false;
+    }
+    return true;
 }
 
 /**
@@ -124,42 +120,45 @@ bool ClapTrap::getStatus(std::string type) const {
  * @param target string
  * */
 void ClapTrap::attack(const std::string &target) {
-	if (!this->getStatus(this->_type))
-		return;
-	--this->_energyPoints;
-	if (this->getType() == "ClapTrap")
-		std::cout << BGRN "ClapTrap" BWHT " " << this->getName()
-				  << " attacks " BRED << target << BWHT ", causing " BRED
-				  << this->getAttackDamage() << BWHT " points of damage!\n";
-	if (this->getType() == "ScavTrap")
-		std::cout << BMAG "ScavTrap " BWHT << this->getName()
-				  << " attacks " BRED << target << BWHT ", causing " BRED
-				  << this->getAttackDamage() << BWHT " points of damage!\n";
-	if (this->getType() == "FragTrap")
-		std::cout << BRED "FragTrap " BWHT << this->getName()
-				  << " attacks " BRED << target << BWHT ", causing " BRED
-				  << this->getAttackDamage() << BWHT " points of damage!\n";
+    if (!this->getStatus(this->_type))
+        return;
+    
+    --this->_energyPoints;
+    std::string color;
+    
+    if (this->getType() == "ClapTrap")
+        color = BGRN;
+    else if (this->getType() == "ScavTrap")
+        color = BMAG;
+    else if (this->getType() == "FragTrap")
+        color = BRED;
+
+    std::cout << color << this->getType() << BWHT " " << this->getName()
+              << " attacks " BRED << target << BWHT ", causing " BRED
+              << this->getAttackDamage() << BWHT " points of damage!\n";
 }
 
 /**
  * @brief ClapTrap Take Damage
- * @param amount int
+ * @param amount unsigned int
  * */
 void ClapTrap::takeDamage(unsigned int amount) {
-	if (!this->getStatus(this->_type))
-		return;
-	this->_hitPoints -= amount;
-	if (this->getHitPoints() < 0) // avoid negative hit points
-		this->_hitPoints = 0;
-	if (this->getType() == "ClapTrap")
-		std::cout << BGRN << "ClapTrap " BWHT << this->getName()
-				  << " takes " BRED << amount << BWHT " points of damage!\n" NC;
-	if (this->getType() == "ScavTrap")
-		std::cout << BMAG << "ScavTrap " BWHT << this->getName()
-				  << " takes " BRED << amount << BWHT " points of damage!\n" NC;
-	if (this->getType() == "FragTrap")
-		std::cout << BRED << "FragTrap " BWHT << this->getName()
-				  << " takes " BRED << amount << BWHT " points of damage!\n" NC;
+    if (!this->getStatus(this->_type))
+        return;
+    
+    this->_hitPoints = ((int)amount > this->_hitPoints) ? 0 : this->_hitPoints - amount;
+
+    std::string color;
+    
+    if (this->getType() == "ClapTrap")
+        color = BGRN;
+    else if (this->getType() == "ScavTrap")
+        color = BMAG;
+    else if (this->getType() == "FragTrap")
+        color = BRED;
+
+    std::cout << color << this->getType() << " " BWHT << this->getName()
+              << " takes " BRED << amount << BWHT " points of damage!\n" NC;
 }
 
 /**

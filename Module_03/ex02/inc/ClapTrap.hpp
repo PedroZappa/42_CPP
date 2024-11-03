@@ -15,6 +15,7 @@
 
 #include "ansi.h"
 #include <iostream>
+#include <limits>
 #include <string>
 #include <cstdlib> // EXIT_SUCCESS
 
