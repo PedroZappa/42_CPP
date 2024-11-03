@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 19:39:48 by passunca          #+#    #+#             */
-/*   Updated: 2024/11/02 21:39:49 by passunca         ###   ########.fr       */
+/*   Updated: 2024/11/03 11:02:56 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,14 @@ void ScavTrap::attack(const std::string &target) {
 	if (!this->getStatus("ScavTrap"))
 		return;
 	--this->_energyPoints;
-	std::cout << BMAG << this->getType() << BWHT " " << this->getName()
+
+	std::string color;
+	if (this->getType() == "ScavTrap")
+		color = BMAG;
+	if (this->getType() == "DiamondTrap")
+		color = BBLU;
+
+	std::cout << color << this->getType() << BWHT " " << this->getName()
 			  << " attacks " BRED << target << BWHT ", causing " BRED
 			  << this->getAttackDamage() << BWHT " points of damage!\n";
 }

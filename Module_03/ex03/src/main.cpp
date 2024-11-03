@@ -6,13 +6,11 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 19:35:26 by passunca          #+#    #+#             */
-/*   Updated: 2024/11/02 21:46:31 by passunca         ###   ########.fr       */
+/*   Updated: 2024/11/03 12:14:09 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/FragTrap.hpp"
-#include "../inc/ScavTrap.hpp"
-#include <cstdlib>
+#include "../inc/DiamondTrap.hpp"
 
 #define WIDTH 80
 #define MAX_TRAPS 3
@@ -23,14 +21,17 @@ typedef enum e_test {
 	SCAVTRAP_TEST,
 	POLYMORPHISM_TEST,
 	FRAGTRAP_TEST,
+	DIAMONDTRAP_TEST,
 	INTERACTION_TEST,
-	RUN_ALL_TESTS
+	RUN_ALL_TESTS,
+	SDELECT_TEST
 } t_test;
 
 void clapTrapTest();
 void scavTrapTest();
 void polymorphismTest();
 void fragTrapTest();
+void diamondTrapTest();
 void interactionTest();
 void clearScreen();
 
@@ -43,18 +44,21 @@ int main(void) {
 		std::cout << BGRN "\t2." NC " ScavTrap Test" << std::endl;
 		std::cout << BGRN "\t3." NC " Polymorphism Test" << std::endl;
 		std::cout << BGRN "\t4." NC " FragTrap Test" << std::endl;
-		std::cout << BGRN "\t5." NC " Interaction Test" << std::endl;
-		std::cout << BGRN "\t6." NC " Run all tests" << std::endl;
+		std::cout << BGRN "\t5." NC " DiamondTrap Test" << std::endl;
+		std::cout << BGRN "\t6." NC " Interaction Test" << std::endl;
+		std::cout << BGRN "\t7." NC " Run all tests" << std::endl;
 		std::cout << BGRN "\t0." NC " Exit" << std::endl;
 		sepPrinter(WIDTH, '-', BYEL, 1);
 		std::cout << BCYN "Enter your choice: " NC;
 
+		// Get user input
 		while (!(std::cin >> choice)) {
 			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			std::cout << BRED "Invalid input. Please enter a number: " NC;
 		}
 
+		// Update the switch statement:
 		switch (choice) {
 		case CLAPTRAP_TEST:
 			clapTrapTest();
@@ -68,6 +72,9 @@ int main(void) {
 		case FRAGTRAP_TEST:
 			fragTrapTest();
 			break;
+		case DIAMONDTRAP_TEST:
+			diamondTrapTest();
+			break;
 		case INTERACTION_TEST:
 			interactionTest();
 			break;
@@ -76,6 +83,7 @@ int main(void) {
 			scavTrapTest();
 			polymorphismTest();
 			fragTrapTest();
+			diamondTrapTest();
 			interactionTest();
 			break;
 		case EXIT:
@@ -90,7 +98,6 @@ int main(void) {
 			sepPrinter(WIDTH, '-', BYEL, 1);
 			std::cout << "Press Enter to continue...";
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			std::cin.ignore();
 			std::cin.get();
 			clearScreen();
 		}
@@ -356,6 +363,45 @@ void fragTrapTest() {
 	sepPrinter(WIDTH, '=', BRED, 2);
 }
 
+void diamondTrapTest() {
+	int test = 1;
+	headerPrinter("Testing DiamondTrap Class", WIDTH, '=', BMAG);
+
+	std::cout << BMAG << test++
+			  << BWHT ". Creating DiamondTrap with default constructor:\n" NC;
+	DiamondTrap defaultDiamondTrap;
+	sepPrinter(WIDTH, '-', BMAG, 1);
+	std::cout << defaultDiamondTrap << std::endl;
+
+	sepPrinter(WIDTH, '-', BMAG, 1);
+	std::cout << BMAG << test++
+			  << BWHT ". Creating DiamondTrap with parameterized "
+					  "constructor:\n" NC;
+	DiamondTrap namedDiamondTrap("DT-001");
+	sepPrinter(WIDTH, '-', BMAG, 1);
+	std::cout << namedDiamondTrap << std::endl;
+
+	sepPrinter(WIDTH, '-', BMAG, 1);
+	std::cout << BMAG << test++
+			  << BWHT ". Testing DiamondTrap attack function:\n" NC;
+	namedDiamondTrap.attack("Enemy");
+	sepPrinter(WIDTH, '-', BMAG, 1);
+	std::cout << namedDiamondTrap << std::endl;
+
+	sepPrinter(WIDTH, '-', BMAG, 1);
+	std::cout << BMAG << test++
+			  << BWHT ". Testing DiamondTrap whoAmI function:\n" NC;
+	namedDiamondTrap.whoAmI();
+
+	sepPrinter(WIDTH, '-', BMAG, 1);
+	std::cout << BMAG << test++
+			  << BWHT ". Testing DiamondTrap inherited functions:\n" NC;
+	namedDiamondTrap.guardGate();
+	namedDiamondTrap.highFivesGuys();
+
+	sepPrinter(WIDTH, '=', BMAG, 2);
+}
+
 void interactionTest() {
 	int test = 1;
 	headerPrinter("Testing Interactions Between Classes", WIDTH, '=', BYEL);
@@ -364,48 +410,59 @@ void interactionTest() {
 	ClapTrap clap("CT-002");
 	ScavTrap scav("ST-002");
 	FragTrap frag("FT-002");
-	std::cout << clap << std::endl << scav << std::endl << frag << std::endl;
+	DiamondTrap diamond("DT-002");
 	sepPrinter(WIDTH, '-', BYEL, 1);
+	std::cout << clap << std::endl
+			  << scav << std::endl
+			  << frag << std::endl
+			  << diamond << std::endl;
 
+	sepPrinter(WIDTH, '-', BYEL, 1);
 	std::cout << BMAG << test++
 			  << BWHT ". Testing attacks between different types:\n" NC;
 	clap.attack("ST-002");
 	scav.takeDamage(clap.getAttackDamage());
 	scav.attack("FT-002");
 	frag.takeDamage(scav.getAttackDamage());
-	frag.attack("CT-002");
-	clap.takeDamage(frag.getAttackDamage());
-	std::cout << clap << std::endl << scav << std::endl << frag << std::endl;
+	frag.attack("DT-002");
+	diamond.takeDamage(frag.getAttackDamage());
+	diamond.attack("CT-002");
+	clap.takeDamage(diamond.getAttackDamage());
 	sepPrinter(WIDTH, '-', BYEL, 1);
+	std::cout << clap << std::endl
+			  << scav << std::endl
+			  << frag << std::endl
+			  << diamond << std::endl;
 
+	sepPrinter(WIDTH, '-', BYEL, 1);
 	std::cout << BMAG << test++ << BWHT ". Testing unique abilities:\n" NC;
 	std::cout << scav.getName() << " triggers Gate Keeper mode.\n";
 	scav.guardGate();
 	std::cout << frag.getName() << " triggers High Five.\n";
 	frag.highFivesGuys();
-	sepPrinter(WIDTH, '-', BYEL, 1);
+	std::cout << diamond.getName() << " reveals its identity.\n";
+	diamond.whoAmI();
 
+	sepPrinter(WIDTH, '-', BYEL, 1);
 	std::cout << BMAG << test++ << BWHT ". Testing polymorphism:\n" NC;
-	ClapTrap *trapArray[MAX_TRAPS];
+	ClapTrap *trapArray[4];
 	trapArray[0] = new ClapTrap("CT-Poly");
-	std::cout << *trapArray[0] << std::endl;
 	trapArray[1] = new ScavTrap("ST-Poly");
-	std::cout << *trapArray[1] << std::endl;
 	trapArray[2] = new FragTrap("FT-Poly");
-	std::cout << *trapArray[2] << std::endl;
-	sepPrinter(WIDTH, '-', BYEL, 1);
+	trapArray[3] = new DiamondTrap("DT-Poly");
 
-	//
-	for (int i = 0; i < MAX_TRAPS; ++i) {
+	for (int i = 0; i < 4; ++i) {
 		sepPrinter(WIDTH, '*', BYEL, 1);
 		std::cout << *trapArray[i] << std::endl;
 		trapArray[i]->attack("Enemy");
 	}
+	sepPrinter(WIDTH, '-', BYEL, 1);
 
 	// Delete all pointers to ClapTraps
-	for (int i = 0; i < MAX_TRAPS; ++i) {
+	for (int i = 0; i < 4; ++i) {
 		delete trapArray[i];
 	}
+
 	sepPrinter(WIDTH, '=', BYEL, 2);
 }
 

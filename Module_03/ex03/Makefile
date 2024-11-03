@@ -6,7 +6,7 @@
 #    By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/14 14:51:25 by passunca          #+#    #+#              #
-#    Updated: 2024/11/02 20:16:05 by passunca         ###   ########.fr        #
+#    Updated: 2024/11/03 10:34:54 by passunca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ ARG				=
 #                                     NAMES                                    #
 #==============================================================================#
 
-NAME 			 	= fragTrap.out
+NAME 			 	= diamondTrap.out
 
 ### Message Vars
 _SUCCESS 		= [$(GRN)SUCCESS$(D)]
@@ -45,6 +45,7 @@ FILES			= main.cpp
 FILES			+= ClapTrap.cpp
 FILES			+= ScavTrap.cpp
 FILES			+= FragTrap.cpp
+FILES			+= DiamondTrap.cpp
 FILES			+= printer.cpp
 
 SRC				= $(addprefix $(SRC_PATH)/, $(FILES))
@@ -57,6 +58,7 @@ OBJS			= $(SRC:$(SRC_PATH)/%.cpp=$(BUILD_PATH)/%.o)
 CXX					= c++
 CXXFLAGS	  = -Wall -Wextra -Werror
 CXXFLAGS	  += -std=c++98
+CXXFLAGS	  += -Wshadow
 DEBUG_FLAGS	= -g3
 INC					= -I $(INC_PATH)
 
