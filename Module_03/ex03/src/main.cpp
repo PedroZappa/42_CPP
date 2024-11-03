@@ -484,6 +484,10 @@ void interactionTest() {
 	trapArray[2]->takeDamage(trapArray[1]->getAttackDamage());
 	trapArray[2]->attack("DT-Poly");
 	trapArray[3]->takeDamage(trapArray[2]->getAttackDamage());
+	trapArray[3]->attack("CT-Poly");
+	trapArray[0]->takeDamage(trapArray[3]->getAttackDamage());
+	std::cout << BWHT << trapArray[0]->getName() << NC " tries to attack:" << std::endl;
+	trapArray[0]->attack("DT-Poly");
 	sepPrinter(WIDTH, '-', BYEL, 1);
 
 	for (int i = 0; i < 4; ++i) {
