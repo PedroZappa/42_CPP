@@ -64,26 +64,19 @@ FragTrap &FragTrap::operator=(const FragTrap &rhs) {
 }
 
 /**
- * @brief Getters
- */
-// int FragTrap::getHitPoints(void) {
-// 	return (FragTrap::getHitPoints());
-// }
-//
-// int FragTrap::getEnergyPoints(void) {
-// 	return (FragTrap::getEnergyPoints());
-// }
-//
-// int FragTrap::getAttackDamage(void) {
-// 	return (FragTrap::getAttackDamage());
-// }
-
-/**
  * @brief ClapTrap High Fives Guys
  * @param target string
  */
 void FragTrap::highFivesGuys(void) {
 	if (!this->getStatus("FragTrap"))
 		return;
-	std::cout << BRED "FragTrap " BWHT "high five guyz! ⚡" << std::endl;
+
+	std::string color;
+	if (this->getType() == "ScavTrap")
+		color = BMAG;
+	if (this->getType() == "DiamondTrap")
+		color = BBLU;
+
+	std::cout << BRED << color << this->getType()
+			  << " " BWHT "high five guyz! ⚡" NC << std::endl;
 }

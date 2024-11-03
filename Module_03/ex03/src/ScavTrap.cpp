@@ -89,6 +89,14 @@ void ScavTrap::attack(const std::string &target) {
 void ScavTrap::guardGate(void) const {
 	if (!this->getStatus("ScavTrap"))
 		return;
-	std::cout << BMAG "ScavTrap " << BWHT << this->getName() << BWHT
+
+	std::string color;
+	if (this->getType() == "ScavTrap")
+		color = BMAG;
+	if (this->getType() == "DiamondTrap")
+		color = BBLU;
+
+	std::cout << BMAG << color << this->getType() << " " << BWHT
+			  << this->getName() << BWHT
 			  << " is now in " BYEL "Gate keeper mode 󰊙" NC << std::endl;
 }

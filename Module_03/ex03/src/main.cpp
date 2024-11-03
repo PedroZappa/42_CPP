@@ -157,7 +157,9 @@ void clapTrapTest() {
 
 	std::cout << BMAG << test++
 			  << BWHT ". Testing ClapTrap actions when out of energy:\n" NC;
+	std::cout << "Try to attack:" << std::endl;
 	namedClapTrap.attack("Enemy");
+	std::cout << "Try to be repaired:" << std::endl;
 	namedClapTrap.beRepaired(1);
 	sepPrinter(WIDTH, '-', BGRN, 1);
 	std::cout << namedClapTrap << std::endl;
@@ -172,8 +174,11 @@ void clapTrapTest() {
 
 	std::cout << BMAG << test++
 			  << BWHT ". Testing ClapTrap actions when dead:\n" NC;
+	std::cout << "Try to attack:" << std::endl;
 	namedClapTrap.attack("Enemy");
+	std::cout << "Try to take damage:" << std::endl;
 	namedClapTrap.takeDamage(5);
+	std::cout << "Try to be repaired:" << std::endl;
 	namedClapTrap.beRepaired(5);
 	sepPrinter(WIDTH, '-', BGRN, 1);
 	std::cout << namedClapTrap << std::endl;
@@ -238,8 +243,11 @@ void scavTrapTest() {
 
 	std::cout << BMAG << test++
 			  << BWHT ". Testing ScavTrap actions when out of energy:\n" NC;
+	std::cout << "Try to attack:" << std::endl;
 	namedScavTrap.attack("Enemy");
+	std::cout << "Try to be repaired:" << std::endl;
 	namedScavTrap.beRepaired(11);
+	std::cout << "Try to guardGate:" << std::endl;
 	namedScavTrap.guardGate();
 	sepPrinter(WIDTH, '-', BCYN, 1);
 	std::cout << namedScavTrap << std::endl;
@@ -338,8 +346,11 @@ void fragTrapTest() {
 
 	std::cout << BMAG << test++
 			  << BWHT ". Testing FragTrap actions when out of energy:\n" NC;
+	std::cout << "Try to attack:" << std::endl;
 	namedFragTrap.attack("Enemy");
+	std::cout << "Try to be repaired:" << std::endl;
 	namedFragTrap.beRepaired(1);
+	std::cout << "Try to high five:" << std::endl;
 	namedFragTrap.highFivesGuys();
 	sepPrinter(WIDTH, '-', BRED, 1);
 	std::cout << namedFragTrap << std::endl;
@@ -354,9 +365,13 @@ void fragTrapTest() {
 
 	std::cout << BMAG << test++
 			  << BWHT ". Testing FragTrap actions when dead:\n" NC;
+	std::cout << "Try to attack:" << std::endl;
 	namedFragTrap.attack("Enemy");
+	std::cout << "Try to take damage:" << std::endl;
 	namedFragTrap.takeDamage(5);
+	std::cout << "Try to be repaired:" << std::endl;
 	namedFragTrap.beRepaired(5);
+	std::cout << "Try to high five:" << std::endl;
 	namedFragTrap.highFivesGuys();
 	sepPrinter(WIDTH, '-', BRED, 1);
 	std::cout << namedFragTrap << std::endl;
@@ -407,6 +422,7 @@ void interactionTest() {
 	headerPrinter("Testing Interactions Between Classes", WIDTH, '=', BYEL);
 
 	std::cout << BMAG << test++ << BWHT ". Creating one of each type:\n" NC;
+	sepPrinter(WIDTH, '-', BYEL, 1);
 	ClapTrap clap("CT-002");
 	ScavTrap scav("ST-002");
 	FragTrap frag("FT-002");
@@ -420,6 +436,7 @@ void interactionTest() {
 	sepPrinter(WIDTH, '-', BYEL, 1);
 	std::cout << BMAG << test++
 			  << BWHT ". Testing attacks between different types:\n" NC;
+	sepPrinter(WIDTH, '-', BYEL, 1);
 	clap.attack("ST-002");
 	scav.takeDamage(clap.getAttackDamage());
 	scav.attack("FT-002");
@@ -436,6 +453,7 @@ void interactionTest() {
 
 	sepPrinter(WIDTH, '-', BYEL, 1);
 	std::cout << BMAG << test++ << BWHT ". Testing unique abilities:\n" NC;
+	sepPrinter(WIDTH, '-', BYEL, 1);
 	std::cout << scav.getName() << " triggers Gate Keeper mode.\n";
 	scav.guardGate();
 	std::cout << frag.getName() << " triggers High Five.\n";
@@ -455,6 +473,22 @@ void interactionTest() {
 		sepPrinter(WIDTH, '*', BYEL, 1);
 		std::cout << *trapArray[i] << std::endl;
 		trapArray[i]->attack("Enemy");
+	}
+	sepPrinter(WIDTH, '-', BYEL, 1);
+	
+	std::cout << BMAG << test++ << BWHT ". Testing attacking eachother:\n" NC;
+	sepPrinter(WIDTH, '-', BYEL, 1);
+	trapArray[0]->attack("ST-Poly");
+	trapArray[1]->takeDamage(trapArray[0]->getAttackDamage());
+	trapArray[1]->attack("FT-Poly");
+	trapArray[2]->takeDamage(trapArray[1]->getAttackDamage());
+	trapArray[2]->attack("DT-Poly");
+	trapArray[3]->takeDamage(trapArray[2]->getAttackDamage());
+	sepPrinter(WIDTH, '-', BYEL, 1);
+
+	for (int i = 0; i < 4; ++i) {
+		sepPrinter(WIDTH, '*', BYEL, 1);
+		std::cout << *trapArray[i] << std::endl;
 	}
 	sepPrinter(WIDTH, '-', BYEL, 1);
 
