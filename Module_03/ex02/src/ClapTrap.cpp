@@ -100,6 +100,8 @@ bool ClapTrap::getStatus(std::string type) const {
 			std::cout << BGRN << type << BWHT " " << this->_name << " is dead!\n";
 		if (this->_type == "ScavTrap")
 			std::cout << BMAG << type << BWHT " " << this->_name << " is dead!\n";
+		if (this->_type == "FragTrap")
+			std::cout << BRED << type << BWHT " " << this->_name << " is dead!\n";
 		return (false);
 	}
 	if (this->_energyPoints == 0) {
@@ -108,6 +110,9 @@ bool ClapTrap::getStatus(std::string type) const {
 					  << " out of energy!\n";
 		if (this->_type == "ScavTrap")
 			std::cout << BMAG << type << BWHT " " << this->_name
+					  << " out of energy!\n";
+		if (this->_type == "FragTrap")
+			std::cout << BRED << type << BWHT " " << this->_name
 					  << " out of energy!\n";
 		return (false);
 	}
@@ -130,6 +135,10 @@ void ClapTrap::attack(const std::string &target) {
 		std::cout << BMAG "ScavTrap " BWHT << this->getName()
 				  << " attacks " BRED << target << BWHT ", causing " BRED
 				  << this->getAttackDamage() << BWHT " points of damage!\n";
+	if (this->getType() == "FragTrap")
+		std::cout << BRED "FragTrap " BWHT << this->getName()
+				  << " attacks " BRED << target << BWHT ", causing " BRED
+				  << this->getAttackDamage() << BWHT " points of damage!\n";
 }
 
 /**
@@ -148,6 +157,9 @@ void ClapTrap::takeDamage(unsigned int amount) {
 	if (this->getType() == "ScavTrap")
 		std::cout << BMAG << "ScavTrap " BWHT << this->getName()
 				  << " takes " BRED << amount << BWHT " points of damage!\n" NC;
+	if (this->getType() == "FragTrap")
+		std::cout << BRED << "FragTrap " BWHT << this->getName()
+				  << " takes " BRED << amount << BWHT " points of damage!\n" NC;
 }
 
 /**
@@ -159,6 +171,6 @@ void ClapTrap::beRepaired(unsigned int amount) {
 		return;
 	--this->_energyPoints;
 	this->_hitPoints += amount;
-	std::cout << BGRN "ClapTrap " BWHT << this->_name << " is repaired for "
-			  << amount << " hit points!\n";
+	std::cout << BGRN << this->_type << " " BWHT << this->_name
+			  << " is repaired for " << amount << " hit points!\n";
 }
