@@ -395,7 +395,7 @@ void interactionTest() {
 	std::cout << *trapArray[2] << std::endl;
 	sepPrinter(WIDTH, '-', BYEL, 1);
 
-	// ClapTraps attacking
+	//
 	for (int i = 0; i < MAX_TRAPS; ++i) {
 		sepPrinter(WIDTH, '*', BYEL, 1);
 		std::cout << *trapArray[i] << std::endl;
