@@ -1,36 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
+/*   Brain.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 19:35:56 by passunca          #+#    #+#             */
-/*   Updated: 2024/11/04 19:41:07 by passunca         ###   ########.fr       */
+/*   Created: 2024/11/04 20:23:01 by passunca          #+#    #+#             */
+/*   Updated: 2024/11/04 20:55:26 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WRONGANIMAL_HPP
-#define WRONGANIMAL_HPP
+#ifndef BRAIN_HPP
+#define BRAIN_HPP
 
-#include "ansi.h"
+#include "Animal.hpp"
 #include <iostream>
 
-class WrongAnimal {
+#define MAX_IDEAS 100
+
+class Brain {
   public:
-	WrongAnimal(void);
-	WrongAnimal(const WrongAnimal &copy);
-	virtual ~WrongAnimal(void);
+	Brain(void);
+	Brain(const Brain &copy);
+	~Brain(void);
 
-	WrongAnimal &operator=(const WrongAnimal &copy);
+	Brain &operator=(const Brain &copy);
 
-	std::string getType() const;
-	void setType(const std::string &type);
+	int getNideas(void) const;
+	std::string getIdea(void) const;
+	void setIdea(std::string &idea, int idx);
+	void think(void) const;
 
-	virtual void makeSound() const;
-
-  protected:
-	std::string _type;
+  private:
+	std::string _ideas[MAX_IDEAS];
+	int _nIdeas;
 };
 
 #endif

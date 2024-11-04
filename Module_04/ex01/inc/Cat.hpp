@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 18:16:41 by passunca          #+#    #+#             */
-/*   Updated: 2024/11/04 20:00:24 by passunca         ###   ########.fr       */
+/*   Updated: 2024/11/04 21:07:45 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define CAT_HPP
 
 #include "Animal.hpp"
+#include "Brain.hpp"
 
 class Cat : public Animal {
   public:
@@ -23,7 +24,14 @@ class Cat : public Animal {
 
 	Cat &operator=(const Cat &copy);
 
+	Brain *getBrain() const;
+
 	void makeSound() const;
+
+  private:
+	Brain *_brain;
 };
+
+std::ostream &operator<<(std::ostream &ofs, const Cat &rhs);
 
 #endif

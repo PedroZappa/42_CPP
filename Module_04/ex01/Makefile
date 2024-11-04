@@ -6,7 +6,7 @@
 #    By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/14 14:51:25 by passunca          #+#    #+#              #
-#    Updated: 2024/11/04 20:18:35 by passunca         ###   ########.fr        #
+#    Updated: 2024/11/04 21:05:54 by passunca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,9 +45,7 @@ FILES			= main.cpp
 FILES			+= Animal.cpp
 FILES			+= Dog.cpp
 FILES			+= Cat.cpp
-FILES			+= WrongAnimal.cpp
-FILES			+= WrongCat.cpp
-FILES			+= WrongDog.cpp
+FILES			+= Brain.cpp
 FILES			+= printer.cpp
 
 SRC				= $(addprefix $(SRC_PATH)/, $(FILES))

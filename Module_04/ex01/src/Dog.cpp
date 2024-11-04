@@ -6,15 +6,14 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 18:20:01 by passunca          #+#    #+#             */
-/*   Updated: 2024/11/04 18:44:00 by passunca         ###   ########.fr       */
+/*   Updated: 2024/11/04 21:03:15 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/Dog.hpp"
 
 /** @brief Default Constructor */
-Dog::Dog(void)
-{
+Dog::Dog(void) : _brain(new Brain()) {
 	Animal::setType("Dog");
 	std::cout << RED "Dog " BWHT << Animal::getType()
 			  << NC " default constructor called " << std::endl;
@@ -34,15 +33,13 @@ Dog::~Dog(void) {
 }
 
 /** @brief Copy Assignment Operator */
-Dog &Dog::operator=(const Dog &rhs)
-{
+Dog &Dog::operator=(const Dog &rhs) {
 	if (this != &rhs)
 		Animal::operator=(rhs);
 	return (*this);
 }
 
 /** @brief Make sound */
-void Dog::makeSound() const
-{
+void Dog::makeSound() const {
 	std::cout << RED "Dog: " BWHT << "woof!" NC << std::endl;
 }

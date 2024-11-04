@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 17:38:21 by passunca          #+#    #+#             */
-/*   Updated: 2024/11/04 19:43:33 by passunca         ###   ########.fr       */
+/*   Updated: 2024/11/04 21:00:56 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #include <cstdlib> // EXIT_SUCCESS
 #include <iostream>
 #include <limits>
+#include <stdexcept>
+#include <sstream>
 #include <string>
 
 class Animal {
