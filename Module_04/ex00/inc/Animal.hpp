@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 17:38:21 by passunca          #+#    #+#             */
-/*   Updated: 2024/11/04 18:28:20 by passunca         ###   ########.fr       */
+/*   Updated: 2024/11/04 19:43:33 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ class Animal {
 	Animal &operator=(const Animal &copy);
 
 	std::string getType() const;
-	
 	void setType(const std::string &type);
 
 	virtual void makeSound() const;

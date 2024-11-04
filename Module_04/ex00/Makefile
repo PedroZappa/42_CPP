@@ -45,6 +45,8 @@ FILES			= main.cpp
 FILES			+= Animal.cpp
 FILES			+= Dog.cpp
 FILES			+= Cat.cpp
+FILES			+= WrongAnimal.cpp
+FILES			+= WrongCat.cpp
 FILES			+= printer.cpp
 
 SRC				= $(addprefix $(SRC_PATH)/, $(FILES))
