@@ -11,14 +11,20 @@
 /* ************************************************************************** */
 
 #include "../inc/HumanB.hpp"
+#include <sstream>
 
 /**
  * @brief HumanB:: HumanB object constructor
  * @param name human's name
  * */
-HumanB::HumanB(std::string name) : _name(name) {
-	std::cout << GRN "HumanB " YEL << _name << " with " << _weapon->getType()
-			  << GRN " created \n" NC;
+HumanB::HumanB(std::string name) : _name(name), _weapon(NULL) {
+	// if (this->_weapon)
+	// 	std::cout << GRN "HumanB " YEL << _name << " with "
+	// 			  << _weapon->getType() << GRN " created " NC << std::endl;
+	std::stringstream ss;
+	ss << "HumanB " << _name;
+	_name = ss.str();
+	std::cout << GRN "HumanB " YEL << ss.str() << " created 🐱" NC << std::endl;
 }
 
 /**
@@ -26,7 +32,7 @@ HumanB::HumanB(std::string name) : _name(name) {
  * */
 HumanB::~HumanB(void) {
 	std::cout << RED "HumanB " BWHT << _name << " with " << _weapon->getType()
-			  << RED " destroyed ☠☠☠\n" NC;
+			  << RED " destroyed ☠☠☠" NC << std::endl;
 }
 
 /**
@@ -37,7 +43,7 @@ void HumanB::attack(void) const {
 		std::cout << BWHT << _name << " is unarmed." NC "\n";
 	else
 		std::cout << YEL << _name << BWHT " attacks with their " YEL
-				  << _weapon->getType() << NC "\n";
+				  << _weapon->getType() << NC << std::endl;
 }
 
 void HumanB::setWeapon(Weapon &weapon) {

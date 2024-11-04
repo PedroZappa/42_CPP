@@ -19,17 +19,16 @@ set print array-indexes on
 
 ### main.cpp
 define main
-  display argc
-  display argv@argc
-	display size
-	display *horde
+  display club
+  display bob
+  display jim
 end
 
 ### Go GDB Go! I Choose YOU! 
 
 # main
 break main
-run 2 Z Z
+run 
 fs cmd
 rfr
 

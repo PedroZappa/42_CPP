@@ -16,8 +16,8 @@
 
 int main() {
 	{
-    // Creates an object of type HumanA;
-    // HumanA must have a name and a Weapon
+		// Creates an object of type HumanA;
+		// HumanA must have a name and a Weapon
 		Weapon club = Weapon("crude spiked club");
 		HumanA bob("Bob", club);
 		bob.attack();
@@ -25,8 +25,8 @@ int main() {
 		bob.attack();
 	}
 	{
-    // Creates an object of type HumanB;
-    // HumanB only needs a name to be initialized
+		// Creates an object of type HumanB;
+		// HumanB only needs a name to be initialized
 		Weapon club = Weapon("crude spiked club");
 		HumanB jim("Jim");
 		jim.setWeapon(club);

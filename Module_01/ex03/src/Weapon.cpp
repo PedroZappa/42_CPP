@@ -17,6 +17,8 @@
  * @param type the type of the weapon
  * */
 Weapon::Weapon(std::string type) : _type(type) {
+	if (type.c_str()[0] == '\0')
+		type = "undefined";
 }
 
 /**

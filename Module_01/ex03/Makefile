@@ -56,7 +56,8 @@ OBJS				= $(SRC:$(SRC_PATH)/%.cpp=$(BUILD_PATH)/%.o)
 CXX					= c++
 CXXFLAGS		= -Wall -Wextra -Werror
 CXXFLAGS		+= -std=c++98
-DEBUG_FLAGS	= -g
+# CXXFLAGS		+= -pedantic-errors
+DEBUG_FLAGS	= -g -fno-limit-debug-info
 INC					= -I $(INC_PATH)
 
 
@@ -129,7 +130,7 @@ vgdb: debug $(NAME) $(TEMP_PATH)			## Debug w/ valgrind (memcheck) & gdb
 	# tmux split-window -v "btop"
 	make get_log
 
-valgrind: all $(NAME) $(TEMP_PATH)			## Debug w/ valgrind (memcheck)
+valgrind: debug $(NAME) $(TEMP_PATH)			## Debug w/ valgrind (memcheck)
 	tmux set-option remain-on-exit on
 	tmux split-window -h "valgrind $(VAL_ARGS) $(VAL_LEAK) ./$(NAME) $(ARG)"
 
