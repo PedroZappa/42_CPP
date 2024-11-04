@@ -14,37 +14,39 @@
 
 static void headerPrinter(void);
 static void sepPrinter(void);
-static void exitErr(const std::string &msg);
 static void usage(void);
 
 /**
  * @brief Zombie and Chump creation test
  */
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
 	int size;
 	(void)argc;
 
 	headerPrinter();
-	if (argc > 3)
-		exitErr("Too many arguments");
-	else if (argc <= 2)
-		exitErr("Too few arguments");
-	try
+	if (argc > 3) {
+		std::cout << RED << "Error: Too many arguments\n";
+		usage();
+		return (EXIT_FAILURE);
+	}
+	if (argc <= 2)
 	{
+		std::cout << RED << "Error: Too few arguments\n";
+		usage();
+		return (EXIT_FAILURE);
+	}
+	try {
 		size = std::atoi(argv[1]);
-		if (size <= 0)
-		{
+		if (size <= 0) {
 			throw std::out_of_range("N must be a positive integer");
 		}
-		if (size > std::numeric_limits<int>::max())
-		{
+		if (size > std::numeric_limits<int>::max()) {
 			throw std::out_of_range("N is too big");
 		}
-	}
-	catch (std::out_of_range &e)
-	{
-		exitErr("N value is out of range");
+	} catch (std::out_of_range &e) {
+		std::cout << RED << "Error: " << e.what() << "\n";
+		usage();
+		return (EXIT_FAILURE);
 	}
 
 	Zombie *horde = zombieHorde(size, argv[2]);
@@ -56,8 +58,7 @@ int main(int argc, char **argv)
 	return (EXIT_SUCCESS);
 }
 
-static void headerPrinter(void)
-{
+static void headerPrinter(void) {
 	std::cout << GRN;
 	std::cout << "=========================" << "\n";
 	std::cout << BWHT;
@@ -66,24 +67,13 @@ static void headerPrinter(void)
 	std::cout << "=========================" << NC << "\n";
 }
 
-static void sepPrinter(void)
-{
+static void sepPrinter(void) {
 	std::cout << GRN;
 	std::cout << "=========================" << "\n";
 	std::cout << "=========================" << NC << "\n";
 }
 
-static void exitErr(const std::string &msg)
-{
-	std::cout << RED;
-	std::cout << "Error: " << msg << "\n";
-	usage();
-	msg.~basic_string();
-	std::exit(EXIT_FAILURE);
-}
-
-static void usage(void)
-{
+static void usage(void) {
 	std::cout << BYEL "Usage: ";
 	std::cout << BWHT "./moarBrainz.out <N> <name>\n" NC;
 }
