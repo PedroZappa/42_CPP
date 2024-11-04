@@ -1,45 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   WrongCat.cpp                                       :+:      :+:    :+:   */
+/*   WrongDog.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 20:04:35 by passunca          #+#    #+#             */
-/*   Updated: 2024/11/04 20:14:26 by passunca         ###   ########.fr       */
+/*   Created: 2024/11/04 20:13:56 by passunca          #+#    #+#             */
+/*   Updated: 2024/11/04 20:15:43 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/WrongCat.hpp"
+#include "../inc/WrongDog.hpp"
 
 /** @brief Default Constructor */
-WrongCat::WrongCat(void) : WrongAnimal() {
-	WrongAnimal::setType("WrongCat");
-	std::cout << CYN "WrongCat " BWHT << WrongAnimal::getType()
+WrongDog::WrongDog(void) : WrongAnimal() {
+	WrongAnimal::setType("WrongDog");
+	std::cout << RED "WrongDog " BWHT << WrongAnimal::getType()
 			  << NC " default constructor called " << std::endl;
 }
 
 /** @brief Copy Constructor */
-WrongCat::WrongCat(const WrongCat &copy) : WrongAnimal(copy) {
+WrongDog::WrongDog(const WrongDog &copy) : WrongAnimal(copy) {
 	*this = copy;
-	std::cout << CYN "WrongCat " BWHT << WrongAnimal::getType()
+	std::cout << RED "WrongDog " BWHT << WrongAnimal::getType()
 			  << NC " copy constructor called " << std::endl;
 }
 
 /** @brief Destructor */
-WrongCat::~WrongCat(void) {
-	std::cout << CYN "WrongCat " BWHT << WrongAnimal::getType()
+WrongDog::~WrongDog(void) {
+	std::cout << RED "WrongDog " BWHT << WrongAnimal::getType()
 			  << NC " destructor called " << std::endl;
 }
 
 /** @brief Copy Assignment Operator */
-WrongCat &WrongCat::operator=(const WrongCat &copy) {
+WrongDog &WrongDog::operator=(const WrongDog &copy) {
 	if (this != &copy)
 		WrongAnimal::operator=(copy);
 	return (*this);
 }
 
 /** @brief Make sound */
-void WrongCat::makeSound() const {
-	std::cout << CYN "WrongCat: " BWHT << "wrong meow!" NC << std::endl;
+void WrongDog::makeSound() const {
+	std::cout << RED "WrongDog: " BWHT << "wrong woof!" NC << std::endl;
 }

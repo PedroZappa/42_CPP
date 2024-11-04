@@ -6,13 +6,14 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 17:37:48 by passunca          #+#    #+#             */
-/*   Updated: 2024/11/04 20:03:54 by passunca         ###   ########.fr       */
+/*   Updated: 2024/11/04 20:17:53 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/Dog.hpp"
 #include "../inc/Cat.hpp"
 #include "../inc/WrongCat.hpp"
+#include "../inc/WrongDog.hpp"
 
 #define WIDTH 60
 
@@ -43,19 +44,23 @@ int main (void)
 	headerPrinter("Testing WrongAnimal Class", WIDTH, '-', BRED);
 	const WrongAnimal *wrongMeta = new WrongAnimal();
 	const WrongAnimal *i2 = new WrongCat();
+	const WrongAnimal *j2 = new WrongDog();
 
 	sepPrinter(WIDTH, '-', BRED, 1);
 	std::cout << YEL "Wrong Tests:" NC << std::endl;
 	std::cout << i2->getType() << " " << std::endl;
+	std::cout << j2->getType() << " " << std::endl;
 
 	sepPrinter(WIDTH, '-', BRED, 1);
 	std::cout << YEL "Sound:" NC << std::endl;
 	i2->makeSound();
+	j2->makeSound();
 	wrongMeta->makeSound();
 
 	sepPrinter(WIDTH, '-', BRED, 1);
 	delete wrongMeta;
 	delete i2;
+	delete j2;
 	sepPrinter(WIDTH, '-', BRED, 1);
 	return (0);
 }
