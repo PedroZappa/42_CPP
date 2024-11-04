@@ -18,13 +18,9 @@
  * @param name human's name
  * */
 HumanB::HumanB(std::string name) : _name(name), _weapon(NULL) {
-	// if (this->_weapon)
-	// 	std::cout << GRN "HumanB " YEL << _name << " with "
-	// 			  << _weapon->getType() << GRN " created " NC << std::endl;
-	std::stringstream ss;
-	ss << "HumanB " << _name;
-	_name = ss.str();
-	std::cout << GRN "HumanB " YEL << ss.str() << " created 🐱" NC << std::endl;
+	if (this->_weapon)
+		std::cout << GRN "HumanB " YEL << _name << " with "
+				  << _weapon->getType() << GRN " created " NC << std::endl;
 }
 
 /**
