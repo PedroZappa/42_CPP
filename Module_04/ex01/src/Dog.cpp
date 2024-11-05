@@ -13,7 +13,7 @@
 #include "../inc/Dog.hpp"
 
 /** @brief Default Constructor */
-Dog::Dog(void) : _brain(new Brain()) {
+Dog::Dog(void) {
 	Animal::setType("Dog");
 	_brain = new Brain();
 	std::cout << RED "Dog " BWHT << Animal::getType()
@@ -22,7 +22,6 @@ Dog::Dog(void) : _brain(new Brain()) {
 
 /** @brief Copy Constructor */
 Dog::Dog(const Dog &copy) : Animal(copy) {
-	*this = copy;
 	_brain = new Brain(*(copy._brain));
 	std::cout << RED "Dog " BWHT << Animal::getType()
 			  << NC " copy constructor called " << std::endl;
@@ -37,8 +36,12 @@ Dog::~Dog(void) {
 
 /** @brief Copy Assignment Operator */
 Dog &Dog::operator=(const Dog &rhs) {
-	if (this != &rhs)
+	if (this != &rhs) {
 		Animal::operator=(rhs);
+		if (_brain != NULL)
+			delete _brain;
+		_brain = new Brain(*(rhs._brain));
+	}
 	return (*this);
 }
 

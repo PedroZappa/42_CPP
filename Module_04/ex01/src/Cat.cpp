@@ -13,7 +13,7 @@
 #include "../inc/Cat.hpp"
 
 /** @brief Default Constructor */
-Cat::Cat(void) : _brain(new Brain()) {
+Cat::Cat(void) {
 	Animal::setType("Cat");
 	_brain = new Brain();
 	std::cout << CYN "Cat " BWHT << Animal::getType()
@@ -22,7 +22,7 @@ Cat::Cat(void) : _brain(new Brain()) {
 
 /** @brief Copy Constructor */
 Cat::Cat(const Cat &copy) : Animal(copy) {
-	*this = copy;
+	_brain = new Brain(*(copy._brain));
 	std::cout << CYN "Cat " BWHT << Animal::getType()
 			  << NC " copy constructor called " << std::endl;
 }
@@ -36,8 +36,7 @@ Cat::~Cat(void) {
 
 /** @brief Copy Assignment Operator */
 Cat &Cat::operator=(const Cat &copy) {
-	if (this != &copy)
-	{
+	if (this != &copy) {
 		Animal::operator=(copy);
 		if (_brain != NULL)
 			delete _brain;
