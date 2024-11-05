@@ -13,12 +13,13 @@
 #include "../inc/Brain.hpp"
 
 /** @brief Constructor ***/
-Brain::Brain(void) : _nIdeas(0) {
+Brain::Brain(void) : _nIdeas(MAX_IDEAS) {
 	for (int i = 0; i < MAX_IDEAS; i++) {
 		std::ostringstream oss;
 		oss << "Idea " << i;
 		this->_ideas[i] = oss.str(); 
 	}
+	std::cout << "Brain default constructor called" << std::endl;
 }
 
 /** @brief Copy constructor ***/
@@ -26,10 +27,12 @@ Brain::Brain(const Brain &copy) {
 	for (int i = 0; i < MAX_IDEAS; i++)
 		this->_ideas[i] = copy._ideas[i];
 	this->_nIdeas = copy._nIdeas;
+	std::cout << "Brain copy constructor called" << std::endl;
 }
 
 /** @brief Destructor ***/
 Brain::~Brain(void) {
+	std::cout << "Brain destructor called" << std::endl;
 }
 
 /** @brief Copy assignment operator ***/
@@ -49,6 +52,8 @@ int	Brain::getNideas(void) const {
 
 /** @brief Get idea ***/
 std::string	Brain::getIdea(void) const {
+	if (this->_nIdeas == 0)
+		return ("No ideas");
 	return (this->_ideas[rand() % this->_nIdeas]);
 }
 

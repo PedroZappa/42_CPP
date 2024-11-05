@@ -19,8 +19,9 @@ set print array-indexes on
 
 ### main.cpp
 define main
-  display argc
-  display argv@argc
+  display *meta
+  display *j
+  display *i
 end
 
 ### Go GDB Go! I Choose YOU! 

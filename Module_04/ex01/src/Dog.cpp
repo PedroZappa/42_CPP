@@ -28,6 +28,7 @@ Dog::Dog(const Dog &copy) : Animal(copy) {
 
 /** @brief Destructaor */
 Dog::~Dog(void) {
+	delete _brain;
 	std::cout << RED "Dog " BWHT << Animal::getType()
 			  << NC " destructor called " << std::endl;
 }

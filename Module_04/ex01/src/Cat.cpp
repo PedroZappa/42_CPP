@@ -28,6 +28,7 @@ Cat::Cat(const Cat &copy) : Animal(copy) {
 
 /** @brief Destructor */
 Cat::~Cat(void) {
+	delete _brain;
 	std::cout << CYN "Cat " BWHT << Animal::getType()
 			  << NC " destructor called " << std::endl;
 }
