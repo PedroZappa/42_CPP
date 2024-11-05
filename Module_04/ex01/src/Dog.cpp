@@ -43,3 +43,8 @@ Dog &Dog::operator=(const Dog &rhs) {
 void Dog::makeSound() const {
 	std::cout << RED "Dog: " BWHT << "woof!" NC << std::endl;
 }
+
+/** @brief Get Brain */
+Brain *Dog::getBrain(void) const {
+	return (_brain);
+}
