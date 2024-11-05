@@ -15,6 +15,7 @@
 /** @brief Default Constructor */
 Dog::Dog(void) : _brain(new Brain()) {
 	Animal::setType("Dog");
+	_brain = new Brain();
 	std::cout << RED "Dog " BWHT << Animal::getType()
 			  << NC " default constructor called " << std::endl;
 }

@@ -15,6 +15,7 @@
 /** @brief Default Constructor */
 Cat::Cat(void) : _brain(new Brain()) {
 	Animal::setType("Cat");
+	_brain = new Brain();
 	std::cout << CYN "Cat " BWHT << Animal::getType()
 			  << NC " default constructor called " << std::endl;
 }
