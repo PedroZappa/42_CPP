@@ -23,6 +23,7 @@ Dog::Dog(void) : _brain(new Brain()) {
 /** @brief Copy Constructor */
 Dog::Dog(const Dog &copy) : Animal(copy) {
 	*this = copy;
+	_brain = new Brain(*(copy._brain));
 	std::cout << RED "Dog " BWHT << Animal::getType()
 			  << NC " copy constructor called " << std::endl;
 }

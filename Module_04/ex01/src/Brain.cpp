@@ -23,7 +23,7 @@ Brain::Brain(void) : _nIdeas(0) {
 }
 
 /** @brief Copy constructor ***/
-Brain::Brain(const Brain &copy) : _nIdeas(copy._nIdeas) {
+Brain::Brain(const Brain &copy) {
 	for (int i = 0; i < MAX_IDEAS; i++)
 		this->_ideas[i] = copy._ideas[i];
 	this->_nIdeas = copy._nIdeas;
