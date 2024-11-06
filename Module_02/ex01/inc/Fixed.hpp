@@ -22,8 +22,7 @@
  * A class that represents a fixed-point number
  * with '_bits' bits of precision
  */
-class Fixed
-{
+class Fixed {
   public:
 	Fixed(void);
 	Fixed(const Fixed &copy);
@@ -35,17 +34,17 @@ class Fixed
 	int getRawBits(void) const;
 	void setRawBits(const int raw);
 
-  // Declared as const because they don't modify the object state
+	// Declared as const because they don't modify the object state
 	float toFloat(void) const;
 	int toInt(void) const;
 
   private:
-  // Static variables are shared among all instances of the class
-  // There is only one _bits variable for all instances
-  // _bits determines how to interpret the _value as a fixed-point number
+	// Static variables are shared among all instances of the class
+	// There is only one _bits variable for all instances
+	// _bits determines how to interpret the _value as a fixed-point number
 	static const int _bits;
-  // Each instance of the class has its own _value
-  // Holds the actual value of the fixed-point number
+	// Each instance of the class has its own _value
+	// Holds the actual value of the fixed-point number
 	int _value;
 };
 

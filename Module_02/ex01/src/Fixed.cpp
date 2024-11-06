@@ -17,8 +17,7 @@ const int Fixed::_bits = 8;
 /**
  * @brief Constructor
  */
-Fixed::Fixed(void) : _value(0)
-{
+Fixed::Fixed(void) : _value(0) {
 	std::cout << BYEL "Fixed point number";
 	std::cout << GRN " created ✅\n" NC;
 }
@@ -26,31 +25,28 @@ Fixed::Fixed(void) : _value(0)
 /**
  * @brief Copy Constructor
  */
-Fixed::Fixed(const Fixed &copy) : _value(copy._value)
-{
+Fixed::Fixed(const Fixed &copy) : _value(copy._value) {
 	std::cout << BYEL "Fixed point number";
 	std::cout << BWHT " copied\n" NC;
 	*this = copy;
 }
 
-/** 
+/**
  * @brief Convert int value to fixed point
  * @param value int
  * @details left-shifting multiplies value by 2^_bits
  * */
-Fixed::Fixed(const int value)
-{
+Fixed::Fixed(const int value) {
 	std::cout << BYEL "int " BWHT "constructor called\n" NC;
 	this->_value = (value << Fixed::_bits);
 }
 
-/** 
+/**
  * @brief Convert float value to fixed point
  * @param value float
- * @details 
+ * @details
  * */
-Fixed::Fixed(const float value)
-{
+Fixed::Fixed(const float value) {
 	std::cout << BYEL "float " BWHT "constructor called\n" NC;
 	this->_value = (value * (1 << Fixed::_bits));
 }
@@ -58,8 +54,7 @@ Fixed::Fixed(const float value)
 /**
  * @brief Copy Assignment Operator Overload
  */
-Fixed &Fixed::operator=(const Fixed &copy)
-{
+Fixed &Fixed::operator=(const Fixed &copy) {
 	std::cout << BYEL "Fixed point number";
 	std::cout << MAG " assigned\n" NC;
 	if (this != &copy)
@@ -71,8 +66,7 @@ Fixed &Fixed::operator=(const Fixed &copy)
 /**
  * @brief Destructor
  */
-Fixed::~Fixed(void)
-{
+Fixed::~Fixed(void) {
 	std::cout << BWHT "Fixed point number";
 	std::cout << RED " destroyed ❌\n" NC;
 }
@@ -81,8 +75,7 @@ Fixed::~Fixed(void)
  * @brief Get Raw Bits
  * @return bits value
  */
-int Fixed::getRawBits(void) const
-{
+int Fixed::getRawBits(void) const {
 	std::cout << "Getting bits:\n" NC;
 	return (this->_value);
 }
@@ -91,8 +84,7 @@ int Fixed::getRawBits(void) const
  * @brief Set bits Bits
  * @param raw raw bits value
  */
-void Fixed::setRawBits(int const raw)
-{
+void Fixed::setRawBits(int const raw) {
 	std::cout << "Setting bits bits:\n" NC;
 	this->_value = raw;
 }
@@ -101,8 +93,7 @@ void Fixed::setRawBits(int const raw)
  * @brief Convert fixed point to float
  * @return float
  */
-float Fixed::toFloat(void) const
-{
+float Fixed::toFloat(void) const {
 	return (static_cast<float>(this->_value) / (1 << Fixed::_bits));
 }
 
@@ -110,16 +101,14 @@ float Fixed::toFloat(void) const
  * @brief Convert fixed point to int
  * @return int
  */
-int Fixed::toInt(void) const
-{
+int Fixed::toInt(void) const {
 	return (this->_value >> Fixed::_bits);
 }
 
 /**
  * @brief Overload the insertion operator
  */
-std::ostream &operator<<(std::ostream &out, const Fixed &fixed)
-{
+std::ostream &operator<<(std::ostream &out, const Fixed &fixed) {
 	out << fixed.toFloat();
 	return (out);
 }

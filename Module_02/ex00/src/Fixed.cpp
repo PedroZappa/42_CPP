@@ -26,19 +26,19 @@ Fixed::Fixed(void) : _value(0) {
  * @brief Copy Constructor
  */
 Fixed::Fixed(const Fixed &copy) : _value(copy._value) {
+	*this = copy;
 	std::cout << BWHT "Fixed point number";
 	std::cout << YEL " copied\n" NC;
-	*this = copy;
 }
 
 /**
  * @brief Copy Assignment Operator Overload
  */
 Fixed &Fixed::operator=(const Fixed &copy) {
-	std::cout << BWHT "Fixed point number";
-	std::cout << MAG " assigned\n" NC;
 	if (this != &copy)
 		this->_value = copy.getRawBits();
+	std::cout << BWHT "Fixed point number";
+	std::cout << MAG " assigned\n" NC;
 	return (*this);
 }
 
@@ -55,8 +55,8 @@ Fixed::~Fixed(void) {
  * @return bits value
  */
 int Fixed::getRawBits(void) const {
-	std::cout << "Getting bits:\n" NC;
 	return (this->_value);
+	std::cout << "Getting bits:\n" NC;
 }
 
 /**
@@ -64,6 +64,6 @@ int Fixed::getRawBits(void) const {
  * @param raw raw bits value
  */
 void Fixed::setRawBits(int const raw) {
-	std::cout << "Setting bits bits:\n" NC;
 	this->_value = raw;
+	std::cout << "Setting bits bits:\n" NC;
 }

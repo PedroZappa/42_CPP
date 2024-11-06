@@ -48,7 +48,7 @@ int main(void) {
 	test("Float Test 1", d, e, f, p5);
 	nextTest();
 	headerPrinter("BSP", WIDTH, '-', BRED);
-	Point p6(Fixed(10), Fixed(15));
+	Point p6(Fixed(10), Fixed(12));
 	test("Float Test 2", d, e, f, p6);
 	nextTest();
 	headerPrinter("BSP", WIDTH, '-', BRED);

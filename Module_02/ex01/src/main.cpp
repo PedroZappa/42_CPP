@@ -14,8 +14,7 @@
 
 #define WIDTH 45
 
-int main(void)
-{
+int main(void) {
 	headerPrinter("Towards a more useful Fixed Point Number", WIDTH, '-', BRED);
 	Fixed a;
 	const Fixed b(10);
@@ -23,7 +22,7 @@ int main(void)
 	const Fixed d(b);
 
 	a = Fixed(1234.4321f);
-	
+
 	sepPrinter(WIDTH, '-', BGRN, 2);
 	std::cout << "a is " << a << std::endl;
 	std::cout << "b is " << b << std::endl;
@@ -35,7 +34,7 @@ int main(void)
 	std::cout << "b is " << b.toInt() << " as integer" << std::endl;
 	std::cout << "c is " << c.toInt() << " as integer" << std::endl;
 	std::cout << "d is " << d.toInt() << " as integer" << std::endl;
-	
+
 	sepPrinter(WIDTH, '-', BGRN, 2);
 	return (0);
 }
