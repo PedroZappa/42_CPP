@@ -49,4 +49,3 @@ void sepPrinter(int inWidth, char sepChar, const char *color, int nLines) {
 	}
 	std::cout << NC;
 }
-

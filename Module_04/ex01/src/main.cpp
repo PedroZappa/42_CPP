@@ -53,6 +53,7 @@ int main(void) {
 	std::cout << "Dog2 thinking (should be unchanged): ";
 	dog2->getBrain()->think();
 
+	sepPrinter(WIDTH, '-', BGRN, 1);
 	// Test Cat's Brain
 	Cat *cat1 = new Cat();
 	Cat *cat2 = new Cat();
