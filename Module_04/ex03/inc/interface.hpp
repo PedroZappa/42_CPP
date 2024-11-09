@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 09:49:39 by passunca          #+#    #+#             */
-/*   Updated: 2024/11/09 10:03:10 by passunca         ###   ########.fr       */
+/*   Updated: 2024/11/09 10:10:39 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #define INTERFACE_HPP
 
 #include "AMateria.hpp"
+#include "ICharacter.hpp"
+#include "IMateriaSource.hpp"
 #include "ansi.h"
 #include <iostream>
 #include <string>
