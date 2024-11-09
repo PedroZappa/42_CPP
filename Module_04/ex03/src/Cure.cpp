@@ -16,21 +16,27 @@
 Cure::Cure(void) {
 	this->_type = "cure";
 	this->_isEquipped = false;
+#ifdef DEBUG
 	std::cout << YEL "Cure " BWHT << _type << NC " constructor called"
 			  << std::endl;
+#endif
 }
 
 /** @brief Copy constructor */
 Cure::Cure(const Cure &other) {
 	*this = other;
+#ifdef DEBUG
 	std::cout << YEL "Cure " BWHT << _type << NC " copy constructor called"
 			  << std::endl;
+#endif
 }
 
 /** @brief Destructor */
 Cure::~Cure(void) {
+#ifdef DEBUG
 	std::cout << YEL "Cure " BWHT << _type << NC " destructor called"
 			  << std::endl;
+#endif
 }
 
 /** @brief Copy assignment operator */

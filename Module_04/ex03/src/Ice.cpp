@@ -16,20 +16,26 @@
 Ice::Ice(void) {
 	this->_type = "ice";
 	this->_isEquipped = false;
+#ifdef DEBUG
 	std::cout << YEL "Ice " BWHT << _type << NC " constructor called"
 			  << std::endl;
+#endif
 }
 
 /** @brief Copy constructor */
 Ice::Ice(const Ice &other) {
 	*this = other;
+#ifdef DEBUG
 	std::cout << YEL "Ice " BWHT << _type << NC " copy constructor called"
 			  << std::endl;
+#endif
 }
 
 /** @brief Destructor */
 Ice::~Ice(void) {
+#ifdef DEBUG
 	std::cout << YEL "Ice " BWHT << _type << NC " destructor called" << std::endl;
+#endif
 }
 
 /** @brief Copy assignment operator */

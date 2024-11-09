@@ -18,6 +18,7 @@ MAKE	= make -C
 SHELL	:= bash --rcfile ~/.bashrc
 
 # Default test values
+# MODE			= debug
 IN_PATH		?= $(SRC_PATH)
 ARG				=
 
@@ -64,6 +65,10 @@ CXXFLAGS	  += -Wshadow
 DEBUG_FLAGS	= -g3
 INC					= -I $(INC_PATH)
 
+# ifeq ($(MODE), debug)
+#     CXXFLAGS += -D DEBUG
+# endif
+
 
 #==============================================================================#
 #                                COMMANDS                                      #
@@ -97,7 +102,7 @@ exec: $(NAME) $(TEMP_PATH)			## Run
 	@echo "$(YEL)Running $(MAG)$(NAME)$(YEL)$(D)"
 	./$(NAME) $(ARG)
 
-debug: CXXFLAGS += $(DEBUG_FLAGS)
+debug: CXXFLAGS += $(DEBUG_FLAGS) -D DEBUG
 debug: fclean $(NAME) $(TEMP_PATH)			## Compile w/ debug symbols
 
 -include $(BUILD_PATH)/%.d
@@ -140,7 +145,7 @@ vgdb: debug $(NAME) $(TEMP_PATH)			## Debug w/ valgrind (memcheck) & gdb
 	# tmux split-window -v "btop"
 	make get_log
 
-valgrind: all $(NAME) $(TEMP_PATH)			## Debug w/ valgrind (memcheck)
+valgrind: debug $(NAME) $(TEMP_PATH)			## Debug w/ valgrind (memcheck)
 	tmux set-option remain-on-exit on
 	tmux split-window -h "valgrind $(VAL_ARGS) $(VAL_LEAK) ./$(NAME) $(ARG)"
 

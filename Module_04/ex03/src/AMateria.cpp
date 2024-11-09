@@ -14,25 +14,36 @@
 
 /** @brief Default Constructor */
 AMateria::AMateria(void) {
+	_type = "AMateria";
+	_isEquipped = false;
+#ifdef DEBUG
 	std::cout << YEL "AMateria " BWHT << _type << NC " constructor called"
 			  << std::endl;
+#endif
 }
 
 /** @brief Copy Constructor */
 AMateria::AMateria(const std::string &type) : _type(type) {
+	_type = "AMateria";
+	_isEquipped = false;
+#ifdef DEBUG
 	std::cout << YEL "AMateria " BWHT << _type << NC " constructor called"
 			  << std::endl;
+#endif
 }
 
 /** @brief Destructor */
 AMateria::~AMateria(void) {
+#ifdef DEBUG
 	std::cout << YEL "AMateria " BWHT << _type << NC " destructor called"
 			  << std::endl;
+#endif
 }
 
 /** @brief Copy Assignment Operator */
 AMateria &AMateria::operator=(const AMateria &copy) {
 	_type = copy._type;
+	_isEquipped = copy._isEquipped;
 	return (*this);
 }
 

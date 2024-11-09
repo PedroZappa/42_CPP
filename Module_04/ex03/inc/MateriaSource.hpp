@@ -15,7 +15,6 @@
 
 #include "IMateriaSource.hpp"
 #include "Character.hpp"
-#include "Ground.hpp"
 
 class MateriaSource : public IMateriaSource {
   public:

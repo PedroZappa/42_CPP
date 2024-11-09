@@ -14,14 +14,18 @@
 
 /** @brief Constructor */
 MateriaSource::MateriaSource(void) : _source() {
+#ifdef DEBUG
 	std::cout << "MateriaSource constructor called" << std::endl;
+#endif
 	for (int i = 0; i < MAX_ITEMS; i++)
 		this->_source[i] = NULL;
 }
 
 /** @brief Copy Constructor */
 MateriaSource::MateriaSource(const MateriaSource &copy) {
+#ifdef DEBUG
 	std::cout << "MateriaSource copy constructor called" << std::endl;
+#endif
 	for (int i = 0; i < MAX_ITEMS; i++) {
 		if (copy._source[i])
 			this->_source[i] = copy._source[i]->clone();
@@ -32,7 +36,9 @@ MateriaSource::MateriaSource(const MateriaSource &copy) {
 
 /** @brief Destructor */
 MateriaSource::~MateriaSource(void) {
+#ifdef DEBUG
 	std::cout << "MateriaSource destructor called" << std::endl;
+#endif
 	for (int i = 0; i < MAX_ITEMS; i++)
 		delete this->_source[i];
 }

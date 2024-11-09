@@ -14,23 +14,31 @@
 
 /** @brief Constructor */
 Character::Character(void) : _inventory(), _name("Zedro") {
+#ifdef DEBUG
 	std::cout << YEL "Character " NC " constructor called" << std::endl;
+#endif
 }
 
 /** @brief Parameterized Constructor */
 Character::Character(const std::string &name) : _inventory(), _name(name) {
+#ifdef DEBUG
 	std::cout << YEL "Character " NC " constructor called" << std::endl;
+#endif
 }
 
 /** @brief Copy Constructor */
 Character::Character(const Character &copy) {
 	*this = copy;
+#ifdef DEBUG
 	std::cout << YEL "Character " NC " copy constructor called" << std::endl;
+#endif
 }
 
 /** @brief Destructor */
 Character::~Character(void) {
+#ifdef DEBUG
 	std::cout << YEL "Character " NC " destructor called" << std::endl;
+#endif
 	for (int i = 0; i < MAX_ITEMS; i++)
 		if (_inventory[i])
 			delete _inventory[i];
@@ -54,7 +62,9 @@ Character &Character::operator=(const Character &rhs) {
 
 /** @brief Overload of the << operator */
 std::ostream &operator<<(std::ostream &ofs, const Character &rhs) {
+#ifndef DEBUG
 	ofs << "Character " << rhs.getName() << " has ";
+#endif
 	for (int i = 0; i < MAX_ITEMS; i++) {
 		if (rhs.getMateria(i))
 			ofs << rhs.getMateria(i)->getType() << " ";
@@ -77,10 +87,9 @@ AMateria *Character::getMateria(int idx) const {
 
 /** @brief Equip */
 void Character::equip(AMateria *m) {
-	if (!m || m->getIsEquipped())
-	{
+	if (!m || m->getIsEquipped()) {
 		std::cout << "You can't equip an already equipped item" << std::endl;
-		return ;
+		return;
 	}
 	for (int i = 0; i < MAX_ITEMS; i++) {
 		if (!_inventory[i]) {
