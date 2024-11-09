@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 10:20:48 by passunca          #+#    #+#             */
-/*   Updated: 2024/11/09 10:45:22 by passunca         ###   ########.fr       */
+/*   Updated: 2024/11/09 11:33:07 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,10 @@ std::ostream &operator<<(std::ostream &ofs, const Character &rhs) {
 	for (int i = 0; i < MAX_ITEMS; i++) {
 		if (rhs.getMateria(i))
 			ofs << rhs.getMateria(i)->getType() << " ";
+	}
+	ofs << std::endl;
+	return (ofs);
+}
 
 /** @brief Getters */
 std::string const &Character::getName() const {

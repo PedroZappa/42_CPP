@@ -14,6 +14,9 @@
 # define ICHARACTER_HPP
 
 #include "interface.hpp"
+#include <iostream>
+
+class AMateria;
 
 class ICharacter {
 	public:

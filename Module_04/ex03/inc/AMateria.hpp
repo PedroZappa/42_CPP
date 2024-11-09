@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 09:52:28 by passunca          #+#    #+#             */
-/*   Updated: 2024/11/09 10:15:03 by passunca         ###   ########.fr       */
+/*   Updated: 2024/11/09 11:32:49 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 #define AMATERIA_HPP
 
 #include "interface.hpp"
+#include <iostream>
+
+class ICharacter;
 
 class AMateria {
   public:

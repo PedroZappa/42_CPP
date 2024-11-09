@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 10:02:48 by passunca          #+#    #+#             */
-/*   Updated: 2024/11/09 10:05:53 by passunca         ###   ########.fr       */
+/*   Updated: 2024/11/09 11:39:20 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 #define IMATERIASOURCE_HPP
 
 #include "interface.hpp"
+#include "AMateria.hpp"
 
 class IMateriaSource {
   public:
-	virtual ~IMateriaSource() {
-	}
+	virtual ~IMateriaSource();
+
 	virtual void learnMateria(AMateria *) = 0;
 	virtual AMateria *createMateria(std::string const &type) = 0;
 };
