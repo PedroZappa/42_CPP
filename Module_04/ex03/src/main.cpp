@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 11:33:23 by passunca          #+#    #+#             */
-/*   Updated: 2024/11/09 11:36:54 by passunca         ###   ########.fr       */
+/*   Updated: 2024/11/09 11:45:41 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../inc/MateriaSource.hpp"
 
 int main(void) {
-	IMateriaSource* src = new MateriaSource();
+	IMateriaSource *src = new MateriaSource();
 	src->learnMateria(new Ice());
 	src->learnMateria(new Cure());
 
