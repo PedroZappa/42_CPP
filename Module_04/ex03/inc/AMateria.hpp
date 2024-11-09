@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 09:52:28 by passunca          #+#    #+#             */
-/*   Updated: 2024/11/09 11:32:49 by passunca         ###   ########.fr       */
+/*   Updated: 2024/11/09 11:49:30 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ class AMateria {
 
   protected:
 	std::string _type;
+	bool _isEquipped;
 };
 
 #endif
