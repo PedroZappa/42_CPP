@@ -6,19 +6,20 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 09:49:39 by passunca          #+#    #+#             */
-/*   Updated: 2024/11/09 11:53:33 by passunca         ###   ########.fr       */
+/*   Updated: 2024/11/09 17:23:12 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INTERFACE_HPP
 #define INTERFACE_HPP
 
+#include "MateriaSource.hpp"
 #include "AMateria.hpp"
-#include "Ice.hpp"
-#include "Cure.hpp"
 #include "Character.hpp"
 #include "ICharacter.hpp"
 #include "IMateriaSource.hpp"
+#include "Ice.hpp"
+#include "Cure.hpp"
 #include "ansi.h"
 #include <iostream>
 #include <string>

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../inc/MateriaSource.hpp"
-#include "../inc/interface.hpp"
 
 /** @brief Constructor */
 MateriaSource::MateriaSource(void) : _source() {

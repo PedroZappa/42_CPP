@@ -6,11 +6,11 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 10:20:48 by passunca          #+#    #+#             */
-/*   Updated: 2024/11/09 11:33:07 by passunca         ###   ########.fr       */
+/*   Updated: 2024/11/09 17:38:04 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/interface.hpp"
+#include "../inc/Character.hpp"
 
 /** @brief Constructor */
 Character::Character(void) : _inventory(), _name("Zedro") {
@@ -64,7 +64,7 @@ std::ostream &operator<<(std::ostream &ofs, const Character &rhs) {
 }
 
 /** @brief Getters */
-std::string const &Character::getName() const {
+const std::string &Character::getName(void) const {
 	return (this->_name);
 }
 
@@ -77,9 +77,15 @@ AMateria *Character::getMateria(int idx) const {
 
 /** @brief Equip */
 void Character::equip(AMateria *m) {
+	if (!m || m->getIsEquipped())
+	{
+		std::cout << "You can't equip an already equipped item" << std::endl;
+		return ;
+	}
 	for (int i = 0; i < MAX_ITEMS; i++) {
 		if (!_inventory[i]) {
 			_inventory[i] = m;
+			m->setIsEquipped(true);
 			return;
 		}
 	}

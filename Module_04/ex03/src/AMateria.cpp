@@ -40,3 +40,18 @@ AMateria &AMateria::operator=(const AMateria &copy) {
 std::string const &AMateria::getType() const {
 	return (_type);
 }
+
+/** @brief Get Is Equipped */
+bool AMateria::getIsEquipped() const {
+	return (_isEquipped);
+}
+
+/** @brief Set Is Equipped */
+void AMateria::setIsEquipped(bool isEquipped) {
+	_isEquipped = isEquipped;
+}
+
+/** @brief Use */
+void AMateria::use(ICharacter &target) {
+	(void)target;
+}

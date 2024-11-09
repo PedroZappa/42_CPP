@@ -6,12 +6,11 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 11:33:23 by passunca          #+#    #+#             */
-/*   Updated: 2024/11/09 11:55:17 by passunca         ###   ########.fr       */
+/*   Updated: 2024/11/09 17:42:34 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/interface.hpp"
-#include "../inc/MateriaSource.hpp"
 
 int main(void) {
 	IMateriaSource *src = new MateriaSource();

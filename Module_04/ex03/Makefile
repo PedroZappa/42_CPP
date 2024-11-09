@@ -45,6 +45,7 @@ FILES			= main.cpp
 FILES			+= AMateria.cpp
 FILES			+= Character.cpp
 FILES			+= Cure.cpp
+FILES			+= Ground.cpp
 FILES			+= Ice.cpp
 FILES			+= MateriaSource.cpp
 FILES			+= printer.cpp

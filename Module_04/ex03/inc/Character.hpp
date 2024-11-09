@@ -6,15 +6,16 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 10:22:02 by passunca          #+#    #+#             */
-/*   Updated: 2024/11/09 10:49:24 by passunca         ###   ########.fr       */
+/*   Updated: 2024/11/09 17:28:28 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CHARACTER_HPP
 #define CHARACTER_HPP
 
-#include "interface.hpp"
 #include "ICharacter.hpp"
+#include "Ground.hpp"
+#include "ansi.h"
 #include <iostream>
 
 #define MAX_ITEMS 4

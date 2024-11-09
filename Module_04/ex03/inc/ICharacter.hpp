@@ -6,14 +6,13 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 09:57:23 by passunca          #+#    #+#             */
-/*   Updated: 2024/11/09 10:50:02 by passunca         ###   ########.fr       */
+/*   Updated: 2024/11/09 17:26:11 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ICHARACTER_HPP
 # define ICHARACTER_HPP
 
-#include "interface.hpp"
 #include <iostream>
 
 class AMateria;
