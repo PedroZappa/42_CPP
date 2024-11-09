@@ -10,10 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/Animal.hpp"
+#include "../inc/AAnimal.hpp"
 
-/**
- * @brief Prints Header w/ adjustable width
+/** @brief Prints Header w/ adjustable width
  * @param headerText Header Title
  * @param inwidth Width of the header
  * */
@@ -38,8 +37,7 @@ void headerPrinter(const std::string &headerText,
 	std::cout << sepColor << std::string(width, sep) << "\n" NC;
 }
 
-/**
- * @brief Prints a separator line
+/** @brief Prints a separator line
  * @param inWidth The width of the separator line
  */
 void sepPrinter(int inWidth, char sepChar, const char *color, int nLines) {
@@ -50,3 +48,7 @@ void sepPrinter(int inWidth, char sepChar, const char *color, int nLines) {
 	std::cout << NC;
 }
 
+/** @brief Clears the screen */
+void clearScreen(void) {
+	std::cout << "\033c";
+}

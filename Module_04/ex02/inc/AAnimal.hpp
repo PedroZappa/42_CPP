@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   AAnimal.hpp                                         :+:      :+:    :+: */
 /*                                                    +:+ +:+         +:+     */
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -17,22 +17,32 @@
 #include <cstdlib> // EXIT_SUCCESS
 #include <iostream>
 #include <limits>
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 #include <string>
 
-class Animal {
+/** @brief AAnimal Abstract Class
+ * Represents a generic Animal */
+class AAnimal {
   public:
-	Animal(void);
-	Animal(const Animal &copy);
-	virtual ~Animal(void);
+	AAnimal(void);
+	AAnimal(const AAnimal &copy);
+	virtual ~AAnimal(void);
 
-	Animal &operator=(const Animal &copy);
+	/** @brief Copy Assignment Operator */
+	AAnimal &operator=(const AAnimal &copy);
 
+	/** @brief Getters and Setters */
 	std::string getType() const;
 	void setType(const std::string &type);
 
-	virtual void makeSound() const;
+	/** @brief Pure Virtual Function
+	 * By using a pure virtual function, the AAnimal class establishes a common
+	 * interface for all derived animal classes while leaving the specific implementation
+	 * of makeSound to each individual animal type. This is a key aspect of polymorphism
+	 * in C++, allowing for different animal types to have their own unique sound-making
+	 * behavior while still adhering to a common interface */
+	virtual void makeSound() const = 0;
 
   protected:
 	std::string _type;
@@ -44,5 +54,6 @@ void headerPrinter(const std::string &headerText,
 				   char sep,
 				   const char *sepColor);
 void sepPrinter(int inWidth, char sepChar, const char *color, int nLines);
+void clearScreen(void);
 
 #endif

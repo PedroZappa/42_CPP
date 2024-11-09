@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.cpp                                         :+:      :+:    :+:   */
+/*   AAnimal.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,43 +13,39 @@
 #include "../inc/AAnimal.hpp"
 
 /** @brief Default Constructor */
-Animal::Animal(void) : _type("Animal") {
-	std::cout << GRN "Animal " BWHT << _type
+AAnimal::AAnimal(void) : _type("AAnimal") {
+	std::cout << GRN "AAnimal " BWHT << _type
 			  << NC " default constructor called " << std::endl;
 }
 
 /** @brief Copy Constructor */
-Animal::Animal(const Animal &copy) {
+AAnimal::AAnimal(const AAnimal &copy) {
 	*this = copy;
-	std::cout << GRN "Animal " BWHT << _type << NC " copy constructor called "
+	std::cout << GRN "AAnimal " BWHT << _type << NC " copy constructor called "
 			  << std::endl;
 }
 
 /** @brief Destructor */
-Animal::~Animal(void) {
-	std::cout << GRN "Animal " BWHT << _type << NC " destructor called "
+AAnimal::~AAnimal(void) {
+	std::cout << GRN "AAnimal " BWHT << _type << NC " destructor called "
 			  << std::endl;
 }
 
 /** @brief Copy Assignment Operator */
-Animal &Animal::operator=(const Animal &copy) {
+AAnimal &AAnimal::operator=(const AAnimal &copy) {
 	if (this != &copy)
 		this->_type = copy._type;
-	std::cout << GRN "Animal " BWHT << _type
+	std::cout << GRN "AAnimal " BWHT << _type
 			  << NC " copy assignment operator called " << std::endl;
 	return (*this);
 }
 
 /** @brief Getters */
-std::string Animal::getType() const {
+std::string AAnimal::getType() const {
 	return (this->_type);
 }
 
 /** @brief Setters */
-void Animal::setType(const std::string &type) {
+void AAnimal::setType(const std::string &type) {
 	this->_type = type;
-}
-
-/** @brief Make sound */
-void Animal::makeSound() const {
 }

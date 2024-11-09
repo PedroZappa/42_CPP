@@ -14,30 +14,30 @@
 
 /** @brief Default Constructor */
 Cat::Cat(void) {
-	Animal::setType("Cat");
+	AAnimal::setType("Cat");
 	_brain = new Brain();
-	std::cout << CYN "Cat " BWHT << Animal::getType()
+	std::cout << CYN "Cat " BWHT << AAnimal::getType()
 			  << NC " default constructor called " << std::endl;
 }
 
 /** @brief Copy Constructor */
-Cat::Cat(const Cat &copy) : Animal(copy) {
+Cat::Cat(const Cat &copy) : AAnimal(copy) {
 	_brain = new Brain(*(copy._brain));
-	std::cout << CYN "Cat " BWHT << Animal::getType()
+	std::cout << CYN "Cat " BWHT << AAnimal::getType()
 			  << NC " copy constructor called " << std::endl;
 }
 
 /** @brief Destructor */
 Cat::~Cat(void) {
 	delete _brain;
-	std::cout << CYN "Cat " BWHT << Animal::getType()
+	std::cout << CYN "Cat " BWHT << AAnimal::getType()
 			  << NC " destructor called " << std::endl;
 }
 
 /** @brief Copy Assignment Operator */
 Cat &Cat::operator=(const Cat &copy) {
 	if (this != &copy) {
-		Animal::operator=(copy);
+		AAnimal::operator=(copy);
 		if (_brain != NULL)
 			delete _brain;
 		_brain = new Brain(*(copy._brain));

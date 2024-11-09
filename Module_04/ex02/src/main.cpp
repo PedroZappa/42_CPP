@@ -14,76 +14,118 @@
 #include "../inc/Dog.hpp"
 
 #define WIDTH 60
+#define N_ANIMALS 10
+
+static void nextTest(void);
+static void simpleTest(void);
+static void copyTest(void);
+static void soundTest(void);
+static void brainTest(void);
 
 int main(void) {
-	headerPrinter("Testing Animal Class", WIDTH, '-', BGRN);
-	const Animal *meta = new Animal();
-	const Animal *j = new Dog();
-	const Animal *i = new Cat();
+	void (*tests[])(void) = {// Array of function pointers
+		simpleTest,
+		copyTest,
+		soundTest,
+		brainTest};
+	size_t n_tests =
+		sizeof(tests) / sizeof(tests[0]); // Number of functions in the array
 
-	sepPrinter(WIDTH, '-', BGRN, 1);
-	std::cout << YEL "Test Animals:" NC << std::endl;
-	std::cout << j->getType() << " " << std::endl;
-	std::cout << i->getType() << " " << std::endl;
+	for (size_t i = 0; i < n_tests; i++) { // Loop through and call each function
+		tests[i]();
+		if (i < n_tests - 1)
+			nextTest();
+	}
+	return EXIT_SUCCESS;
+}
 
-	sepPrinter(WIDTH, '-', BGRN, 1);
-	std::cout << YEL "Sounds please:" NC << std::endl;
-	i->makeSound(); // will output the cat sound!
-	j->makeSound();
-	meta->makeSound();
+/** @brief Simple test */
+static void simpleTest(void) {
+	headerPrinter("Simple Test", WIDTH, '-', BGRN);
+	headerPrinter("Creating array of Animals in the Heap:", WIDTH, '-', BYEL);
+	AAnimal *animals[N_ANIMALS];
+	for (int i = 0; i < N_ANIMALS; i++) {
+		if (i % 2)
+			animals[i] = new Dog();
+		else
+			animals[i] = new Cat();
+	}
+	nextTest();
 
-	sepPrinter(WIDTH, '-', BGRN, 1);
-	std::cout << YEL "Test your brainz!!:" NC << std::endl;
-	// Test Dog's Brain
-	Dog *dog1 = new Dog();
-	Dog *dog2 = new Dog(*dog1); // Copy constructor
+	headerPrinter("Simple Test", WIDTH, '-', BGRN);
+	headerPrinter("Testing array of Animals:", WIDTH, '-', BYEL);
+	for (int i = 0; i < N_ANIMALS; i++)
+		animals[i]->makeSound();
+	nextTest();
 
-	std::cout << "Dog1 thinking: ";
-	dog1->getBrain()->think();
+	headerPrinter("Simple Test", WIDTH, '-', BGRN);
+	headerPrinter("Deleting array of Animals:", WIDTH, '-', BYEL);
+	for (int i = 0; i < N_ANIMALS; i++)
+		delete animals[i];
+	headerPrinter("Simple Test finished!", WIDTH, '-', BGRN);
+}
 
-	std::cout << "Dog2 thinking: ";
-	dog2->getBrain()->think();
+static void copyTest(void) {
+	headerPrinter("Copy Test", WIDTH, '-', BGRN);
 
-	// Modify dog1's brain
-	std::string newIdea = "I love bones!";
-	dog1->getBrain()->setIdea(newIdea, 0);
+	headerPrinter("Creating and copying Cat object:", WIDTH, '-', BYEL);
+	Cat original;
+	Cat copy(original);
 
-	std::cout << "Dog1 thinking after modification: ";
-	dog1->getBrain()->think();
-	std::cout << "Dog2 thinking (should be unchanged): ";
-	dog2->getBrain()->think();
+	sepPrinter(WIDTH, '-', BMAG, 1);
+	std::cout << "Original Cat brain address: " << original.getBrain()
+		<< std::endl;
+	std::cout << "Copied Cat brain address: " << copy.getBrain() << std::endl;
 
-	// Test Cat's Brain
-	Cat *cat1 = new Cat();
-	Cat *cat2 = new Cat();
+	headerPrinter("Creating and assigning Dog object:", WIDTH, '-', BYEL);
+	Dog dog1;
+	Dog dog2 = dog1;
 
-	std::cout << "Cat1 thinking: ";
-	cat1->getBrain()->think();
+	sepPrinter(WIDTH, '-', BMAG, 1);
+	std::cout << "Dog1 brain address: " << dog1.getBrain() << std::endl;
+	std::cout << "Dog2 brain address: " << dog2.getBrain() << std::endl;
 
-	// Assign cat1 to cat2
-	*cat2 = *cat1;
+	headerPrinter("Copy Test finished!", WIDTH, '-', BGRN);
+}
 
-	std::cout << "Cat2 thinking after assignment: ";
-	cat2->getBrain()->think();
+static void soundTest(void) {
+	headerPrinter("Sound Test", WIDTH, '-', BGRN);
 
-	// Modify cat1's brain
-	std::string catIdea = "I want to catch a mouse!";
-	cat1->getBrain()->setIdea(catIdea, 1);
+	Cat cat;
+	Dog dog;
 
-	std::cout << "Cat1 thinking after modification: ";
-	cat1->getBrain()->think();
-	std::cout << "Cat2 thinking (should be unchanged): ";
-	cat2->getBrain()->think();
+	headerPrinter("Testing Cat sound:", WIDTH, '-', BYEL);
+	cat.makeSound();
 
-	sepPrinter(WIDTH, '-', BGRN, 1);
-	delete meta;
-	delete j;
-	delete i;
-	delete dog1;
-	delete dog2;
-	delete cat1;
-	delete cat2;
-	sepPrinter(WIDTH, '-', BGRN, 1);
+	headerPrinter("Testing Dog sound:", WIDTH, '-', BYEL);
+	dog.makeSound();
 
-	return (0);
+	headerPrinter("Sound Test finished!", WIDTH, '-', BGRN);
+}
+
+static void brainTest(void) {
+	headerPrinter("Brain Test", WIDTH, '-', BGRN);
+
+	Cat cat;
+	Dog dog;
+
+	headerPrinter("Testing Cat brain:", WIDTH, '-', BYEL);
+	Brain *catBrain = cat.getBrain();
+	std::cout << "Cat brain address: " << catBrain << std::endl;
+
+	headerPrinter("Testing Dog brain:", WIDTH, '-', BYEL);
+	Brain *dogBrain = dog.getBrain();
+	std::cout << "Dog brain address: " << dogBrain << std::endl;
+
+	headerPrinter("Brain Test finished!", WIDTH, '-', BGRN);
+}
+
+/**
+ * @brief Press enter to continue
+ * @details ignore 1000 characters until '\n' is pressed
+ * */
+static void nextTest(void) {
+	std::cout << BYEL "\nPress ENTER to continue test..." NC;
+	std::cin.ignore(1000, '\n');
+	clearScreen();
 }
