@@ -46,6 +46,7 @@ class Ground {
 	/** @brief Add a materia to the linked list */
 	void addMateria(AMateria *materia);
 	void delMaterias(void);
+	void IprintList(void);
 
 	/** Pointer to the first element of a linked list of materias */
 	MateriasList *_list;

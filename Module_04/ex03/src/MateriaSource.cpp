@@ -17,8 +17,8 @@ MateriaSource::MateriaSource(void) : _source() {
 #ifdef DEBUG
 	std::cout << "MateriaSource constructor called" << std::endl;
 #endif
-	for (int i = 0; i < MAX_ITEMS; i++)
-		this->_source[i] = NULL;
+	// for (int i = 0; i < MAX_ITEMS; i++)
+	// 	this->_source[i] = NULL;
 }
 
 /** @brief Copy Constructor */
@@ -26,12 +26,7 @@ MateriaSource::MateriaSource(const MateriaSource &copy) {
 #ifdef DEBUG
 	std::cout << "MateriaSource copy constructor called" << std::endl;
 #endif
-	for (int i = 0; i < MAX_ITEMS; i++) {
-		if (copy._source[i])
-			this->_source[i] = copy._source[i]->clone();
-		else
-			this->_source[i] = NULL;
-	}
+	*this = copy;
 }
 
 /** @brief Destructor */
@@ -39,16 +34,21 @@ MateriaSource::~MateriaSource(void) {
 #ifdef DEBUG
 	std::cout << "MateriaSource destructor called" << std::endl;
 #endif
-	for (int i = 0; i < MAX_ITEMS; i++)
+	for (int i = 0; i < MAX_ITEMS; i++) {
+		if (!this->_source[i])
+			continue;
 		delete this->_source[i];
+	}
 }
 
 /** @brief Copy Assignment Operator */
 MateriaSource &MateriaSource::operator=(const MateriaSource &copy) {
 	if (this != &copy) {
 		for (int i = 0; i < MAX_ITEMS; i++) {
-			if (this->_source[i])
+			if (this->_source[i]) {
 				delete this->_source[i];
+				this->_source[i] = NULL;
+			}
 			if (copy._source[i])
 				this->_source[i] = copy._source[i]->clone();
 		}
@@ -68,11 +68,13 @@ AMateria *MateriaSource::getMateria(std::string const &type) const {
 /** @brief Learn a new Materia */
 void MateriaSource::learnMateria(AMateria *materia) {
 	for (int i = 0; i < MAX_ITEMS; i++) {
-		if (!this->_source[i]) {
-			this->_source[i] = materia;
-			break;
-		}
+		if (this->_source[i] != NULL)
+			continue;
+		this->_source[i] = materia;
+		materia->setIsEquipped(true);
+		break;
 	}
+	Ground::dropMateria(materia);
 }
 
 /** @brief Create a new Materia */
@@ -81,7 +83,9 @@ AMateria *MateriaSource::createMateria(std::string const &type) {
 		if (this->_source[i] && this->_source[i]->getType() == type) {
 			std::cout << "MateriaSource " << this << " created materia " << type
 					  << std::endl;
-			return (this->_source[i]->clone());
+			AMateria *new_materia = this->_source[i]->clone();
+			new_materia->setIsEquipped(false);
+			return (new_materia);
 		}
 	}
 	std::cout << "MateriaSource " << this << " does not know " << type
@@ -90,20 +94,15 @@ AMateria *MateriaSource::createMateria(std::string const &type) {
 }
 
 /** @brief Print the inventory */
-void MateriaSource::printInventory(int idx, std::ostream &ofs) const {
-	if (idx < 0 || idx >= MAX_ITEMS)
+void MateriaSource::printMateria(int idx, std::ostream &ofs) const {
+	if (idx < 0 || idx >= MAX_ITEMS || !this->_source[idx])
 		return;
-	ofs << "Inventory: ";
-	for (int i = 0; i < MAX_ITEMS; i++) {
-		if (this->_source[i])
-			ofs << this->_source[i]->getType() << " ";
-	}
-	ofs << std::endl;
+	ofs << "Printing Materia: " << this->_source[idx]->getType() << " " << std::endl;
 }
 
 /** @brief Overload of the << operator */
 std::ostream &operator<<(std::ostream &ofs, const MateriaSource &rhs) {
 	for (int i = 0; i < MAX_ITEMS; i++)
-		rhs.printInventory(i, ofs);
+		rhs.printMateria(i, ofs);
 	return (ofs);
 }

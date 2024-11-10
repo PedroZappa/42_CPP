@@ -27,7 +27,7 @@ class MateriaSource : public IMateriaSource {
 	AMateria *getMateria(std::string const &type) const;
 	void learnMateria(AMateria *materia);
 	AMateria *createMateria(std::string const &type);
-	void printInventory(int idx, std::ostream &ofs) const;
+	void printMateria(int idx, std::ostream &ofs) const;
 
   private:
 	AMateria *_source[MAX_ITEMS];

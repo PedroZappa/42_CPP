@@ -65,11 +65,9 @@ std::ostream &operator<<(std::ostream &ofs, const Character &rhs) {
 #ifndef DEBUG
 	ofs << "Character " << rhs.getName() << " has ";
 #endif
-	for (int i = 0; i < MAX_ITEMS; i++) {
+	for (int i = 0; i < MAX_ITEMS; i++)
 		if (rhs.getMateria(i))
-			ofs << rhs.getMateria(i)->getType() << " ";
-	}
-	ofs << std::endl;
+			ofs << rhs.getMateria(i)->getType() << std::endl;
 	return (ofs);
 }
 
@@ -85,6 +83,16 @@ AMateria *Character::getMateria(int idx) const {
 	return (this->_inventory[idx]);
 }
 
+/** @brief Has Materia */
+bool Character::hasMateria(AMateria *materia) const {
+	for (int i = 0; i < MAX_ITEMS; i++) {
+		if (_inventory[i] == materia) {
+			return true;
+		}
+	}
+	return false;
+}
+
 /** @brief Equip */
 void Character::equip(AMateria *m) {
 	if (!m || m->getIsEquipped()) {
@@ -92,8 +100,8 @@ void Character::equip(AMateria *m) {
 		return;
 	}
 	for (int i = 0; i < MAX_ITEMS; i++) {
-		if (!_inventory[i]) {
-			_inventory[i] = m;
+		if (!this->_inventory[i]) {
+			this->_inventory[i] = m;
 			m->setIsEquipped(true);
 			return;
 		}
@@ -105,12 +113,12 @@ void Character::unequip(int idx) {
 	if (idx < 0 || idx >= MAX_ITEMS || !_inventory[idx])
 		return;
 	Ground::dropMateria(_inventory[idx]);
-	_inventory[idx] = NULL;
+	this->_inventory[idx] = NULL;
 }
 
 /** @brief Use */
 void Character::use(int idx, ICharacter &target) {
 	if (idx < 0 || idx >= MAX_ITEMS || !_inventory[idx])
 		return;
-	_inventory[idx]->use(target);
+	this->_inventory[idx]->use(target);
 }

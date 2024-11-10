@@ -31,6 +31,7 @@ class Character : public ICharacter {
 
 	const std::string &getName() const;
 	AMateria *getMateria(int idx) const;
+	bool hasMateria(AMateria *m) const;
 
 	void equip(AMateria *m);
 	void unequip(int idx);

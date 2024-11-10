@@ -13,8 +13,7 @@
 #include "../inc/Ground.hpp"
 
 /** @brief Constructor */
-Ground::Ground() {
-	_list = NULL;
+Ground::Ground() : _list()  {
 #ifdef DEBUG
 	std::cout << "Ground singleton constructor called" << std::endl;
 #endif
@@ -34,18 +33,10 @@ void Ground::addMateria(AMateria *materia) {
 		std::cout << "Materia " << materia->getType() << " is already equiped" << std::endl;
 		return ;
 	}
-	if (_list == NULL) {
-		_list = new MateriasList;
-		_list->materia = materia;
-		_list->next = NULL;
-	} else {
-		MateriasList *tmp = _list;
-		while (tmp->next != NULL)
-			tmp = tmp->next;
-		tmp->next = new MateriasList;
-		tmp->next->materia = materia;
-		tmp->next->next = NULL;
-	}
+	MateriasList *tmp = new MateriasList;
+	tmp->materia = materia;
+	tmp->next = _list;
+	_list = tmp;
 #ifdef DEBUG
 	std::cout << "Materia " << materia->getType() << " added to Ground"
 			  << std::endl;
@@ -71,10 +62,18 @@ void Ground::delMaterias(void) {
 }
 
 /** @brief Print Materias in Ground */
+void Ground::IprintList(void) {
+	MateriasList *curr = _list;
+	while (curr) {
+		std::cout << curr->materia->getType() << std::endl;
+		curr = curr->next;
+	}
+}
+
+/** @brief Print Materias in Ground */
 void Ground::printList(void) {
-#ifdef DEBUG
 	std::cout << "Materias on the Ground: " << std::endl;
-#endif
+	getGround().IprintList();
 }
 
 /** @brief Drop Materias in Ground */
