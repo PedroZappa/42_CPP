@@ -104,7 +104,7 @@ void Character::equip(AMateria *m) {
 void Character::unequip(int idx) {
 	if (idx < 0 || idx >= MAX_ITEMS || !_inventory[idx])
 		return;
-	delete _inventory[idx];
+	Ground::dropMateria(_inventory[idx]);
 	_inventory[idx] = NULL;
 }
 

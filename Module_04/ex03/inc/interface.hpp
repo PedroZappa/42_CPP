@@ -24,6 +24,8 @@
 #include <iostream>
 #include <string>
 
+#define WIDTH 60
+
 /** @brief UI Helper Functions */
 void headerPrinter(const std::string &headerText,
 				   int inWidth,

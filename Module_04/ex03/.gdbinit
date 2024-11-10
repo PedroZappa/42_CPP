@@ -19,9 +19,10 @@ set print array-indexes on
 set print vtbl on
 
 ### main.cpp
-define main
+define subjectTest
   display *src
   display *me
+  display *tmp
 end
 
 ### Go GDB Go! I Choose YOU! 
