@@ -14,11 +14,11 @@
 
 /** @brief DiamondTrap Default Constructor */
 DiamondTrap::DiamondTrap(void)
-	: ClapTrap("DiamondTrap_clap_name"), FragTrap(), ScavTrap() {
+	: FragTrap(), ScavTrap() {
 	FragTrap frag("tempFrag");
-	this->_name = "DiamondTrap_clap_name";
-	ClapTrap::_name = this->_name;
 	this->_type = "DiamondTrap";
+	this->_name = "DiamondTrap";
+	ClapTrap::_name = "DiamondTrap_clap_name";
 	this->_hitPoints = frag.getHitPoints();
 	this->_energyPoints = ScavTrap::getEnergyPoints();
 	this->_attackDamage = frag.getAttackDamage();
@@ -32,8 +32,7 @@ DiamondTrap::DiamondTrap(void)
 DiamondTrap::DiamondTrap(std::string name)
 	: ClapTrap(name + "_clap_name"), FragTrap(name), ScavTrap(name) {
 	FragTrap frag("tempFrag");
-	this->_name = name + "_clap_name";
-	ClapTrap::_name = this->_name;
+	this->_name = name;
 	this->_type = "DiamondTrap";
 	this->_hitPoints = frag.getHitPoints();
 	this->_energyPoints = ScavTrap::getEnergyPoints();
@@ -77,11 +76,9 @@ DiamondTrap &DiamondTrap::operator=(const DiamondTrap &rhs) {
 /** @brief Insertion Operator Overload
  * @param ofs
  */
-std::ostream &operator<<(std::ostream &ofs, const DiamondTrap &rhs) {
-	std::cout << BWHT "DiamondTrap name: " YEL << rhs.getName() << NC << std::endl
-			  << BWHT "ClapTrap name: " YEL << rhs.ClapTrap::getName() << NC
-			  << std::endl
-			  << BWHT "DiamondTrap type: " YEL << rhs.getType() << NC << std::endl
+std::ostream &operator<<(std::ostream &ofs, DiamondTrap &rhs) {
+	rhs.whoAmI();
+	std::cout << BWHT "DiamondTrap type: " YEL << rhs.getType() << NC << std::endl
 			  << BWHT "DiamondTrap hit points: " YEL << rhs.getHitPoints() << NC
 			  << std::endl
 			  << BWHT "DiamondTrap energy points: " YEL << rhs.getEnergyPoints()

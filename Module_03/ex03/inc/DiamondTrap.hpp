@@ -63,6 +63,6 @@ class DiamondTrap : public FragTrap, public ScavTrap {
 };
 
 // Insertion Operator Overload
-std::ostream &operator<<(std::ostream &ofs, const DiamondTrap &rhs);
+std::ostream &operator<<(std::ostream &ofs, DiamondTrap &rhs);
 
 #endif
