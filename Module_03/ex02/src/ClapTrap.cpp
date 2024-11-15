@@ -143,9 +143,12 @@ void ClapTrap::attack(const std::string &target) {
  * @param amount unsigned int
  * */
 void ClapTrap::takeDamage(unsigned int amount) {
-    if (!this->getStatus(this->_type))
-        return;
-    
+	if (this->_hitPoints == 0)
+	{
+		std::cout << this->getType() << " " << this->_name << " is dead!\n";
+		return;
+	}
+
     this->_hitPoints = ((int)amount > this->_hitPoints) ? 0 : this->_hitPoints - amount;
 
     std::string color;
