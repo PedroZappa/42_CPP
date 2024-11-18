@@ -95,8 +95,12 @@ bool Character::hasMateria(AMateria *materia) const {
 
 /** @brief Equip */
 void Character::equip(AMateria *m) {
-	if (!m || m->getIsEquipped()) {
-		std::cout << "You can't equip an already equipped item" << std::endl;
+	if (!m) {
+		std::cout << RED "Can not equip inexistent item" NC << std::endl;
+		return;
+	}
+	if (m->getIsEquipped()) {
+		std::cout << RED "Item already equipped" NC << std::endl;
 		return;
 	}
 	for (int i = 0; i < MAX_ITEMS; i++) {

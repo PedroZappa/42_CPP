@@ -49,48 +49,58 @@ static void subjectTest(void) {
 }
 
 static void equipLimitsTest() {
-	headerPrinter("EXTENDED TEST", WIDTH, '-', BGRN);
-	std::cout << "Create a MateriaSource:"
-			  << std::endl; // Create a MateriaSource to store and create Materia
-	IMateriaSource *src = new MateriaSource();
+    headerPrinter("EQUIP LIMITS", WIDTH, '-', BGRN);
+    std::cout << "Create a MateriaSource:" << std::endl;
+    IMateriaSource *src = new MateriaSource();
 
-	std::cout << "Learning Ice and Cure:"
-			  << std::endl; // Learn Ice and Cure materias
-	src->learnMateria(new Ice());
-	src->learnMateria(new Cure());
+    // Learn materias
+    src->learnMateria(new Ice());
+    src->learnMateria(new Cure());
 
-	std::cout << "Create a Character named \"Zedro\":"
-			  << std::endl; // Create a Character named "Zedro"
-	ICharacter *me = new Character("Zedro");
+    std::cout << "Create a Character named \"Zedro\":" << std::endl;
+    ICharacter *me = new Character("Zedro");
 
-	std::cout << "Equipping Ice and Cure:"
-			  << std::endl; // Equip Ice and Cure materias for "me"
-	AMateria *iceMateria = src->createMateria("ice");
-	AMateria *cureMateria = src->createMateria("cure");
+    sepPrinter(WIDTH, '-', BGRN, 1);
+    std::cout << "Equipping Ice and Cure:" << std::endl;
+    AMateria *iceMateria = src->createMateria("ice");
+    AMateria *cureMateria = src->createMateria("cure");
 
-	me->equip(iceMateria);
-	me->equip(cureMateria);
+    me->equip(iceMateria);
+    me->equip(cureMateria);
 
-	std::cout << "Testing equip limits:"
-			  << std::endl; // Test equip limits (MAX_ITEMS == 4)
-	AMateria *extraMateria1 = src->createMateria("ice");
-	AMateria *extraMateria2 = src->createMateria("cure");
-	me->equip(extraMateria1);
-	me->equip(extraMateria2);
+    std::cout << "Testing equip limits:" << std::endl;
+    AMateria *extraMateria1 = src->createMateria("ice");
+    AMateria *extraMateria2 = src->createMateria("cure");
+    me->equip(extraMateria1);
+    me->equip(extraMateria2);
 
-	std::cout << "Trying to equip beyond limit:"
-			  << std::endl; // Trying to equip beyond limit
-	AMateria *exceedMateria = src->createMateria("ice");
-	me->equip(exceedMateria);
-	// This should not add the materia, as the inventory is full.
-	// Cleanup for `exceedMateria`, if it was not equipped due to inventory limits
-	if (!me->hasMateria(exceedMateria)) {
-		delete exceedMateria;
-		exceedMateria = NULL;
-	}
-	sepPrinter(WIDTH, '-', BGRN, 1);
-	delete me;
-	delete src;
+    // Print equipped materias
+    std::cout << "Equipped materias for \"Zedro\":" << std::endl;
+    for (int i = 0; i < MAX_ITEMS; i++) {
+        AMateria* materia = dynamic_cast<Character*>(me)->getMateria(i);
+        if (materia) {
+            std::cout << "Slot " << i << ": " << materia->getType() << std::endl;
+        } else {
+            std::cout << "Slot " << i << ": Empty" << std::endl;
+        }
+    }
+
+    std::cout << "Trying to equip beyond limit:" << std::endl;
+    AMateria *exceedMateria = src->createMateria("ice");
+    me->equip(exceedMateria);
+
+    // Cleanup for `exceedMateria`, if it was not equipped due to inventory limits
+    if (!me->hasMateria(exceedMateria)) {
+        delete exceedMateria;
+        exceedMateria = NULL;
+        std::cout << "Exceed materia deleted as it couldn't be equipped." << std::endl;
+    }
+
+    sepPrinter(WIDTH, '-', BGRN, 1);
+	me->unequip(0);
+    sepPrinter(WIDTH, '-', BGRN, 1);
+    delete me;
+    delete src;
 }
 
 static void deepCopyTest(void) {
@@ -103,13 +113,13 @@ static void deepCopyTest(void) {
 
 	sepPrinter(WIDTH, '-', BGRN, 1);
 	std::cout << "Before Deep copy:" << std::endl;
-	std::cout << "src " << src << std::endl;
-	std::cout << "src2 " << src2 << std::endl;
+	std::cout << "src\t" << src << std::endl;
+	std::cout << "src2\t" << src2 << std::endl;
 	sepPrinter(WIDTH, '-', BGRN, 1);
 	std::cout << "After Deep copy:" << std::endl;
 	*src2 = *src;
-	std::cout << "src " << src << std::endl;
-	std::cout << "src2 " << src2 << std::endl;
+	std::cout << "src\t" << src << std::endl;
+	std::cout << "src2\t" << src2 << std::endl;
 	sepPrinter(WIDTH, '-', BGRN, 1);
 
 	delete src;

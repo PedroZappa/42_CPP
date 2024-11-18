@@ -15,7 +15,7 @@
 /** @brief Constructor */
 MateriaSource::MateriaSource(void) : _source() {
 #ifdef DEBUG
-	std::cout << "MateriaSource constructor called" << std::endl;
+	std::cout << CYN "MateriaSource" NC " constructor called" << std::endl;
 #endif
 	// for (int i = 0; i < MAX_ITEMS; i++)
 	// 	this->_source[i] = NULL;
@@ -24,7 +24,7 @@ MateriaSource::MateriaSource(void) : _source() {
 /** @brief Copy Constructor */
 MateriaSource::MateriaSource(const MateriaSource &copy) {
 #ifdef DEBUG
-	std::cout << "MateriaSource copy constructor called" << std::endl;
+	std::cout << CYN "MateriaSource " NC "copy constructor called" << std::endl;
 #endif
 	*this = copy;
 }
@@ -68,11 +68,11 @@ AMateria *MateriaSource::getMateria(std::string const &type) const {
 /** @brief Learn a new Materia */
 void MateriaSource::learnMateria(AMateria *materia) {
 	for (int i = 0; i < MAX_ITEMS; i++) {
-		if (this->_source[i] != NULL)
+		if (this->_source[i])
 			continue;
 		this->_source[i] = materia;
 		materia->setIsEquipped(true);
-		break;
+		return ;
 	}
 	Ground::dropMateria(materia);
 }
@@ -81,10 +81,10 @@ void MateriaSource::learnMateria(AMateria *materia) {
 AMateria *MateriaSource::createMateria(std::string const &type) {
 	for (int i = 0; i < MAX_ITEMS; i++) {
 		if (this->_source[i] && this->_source[i]->getType() == type) {
-			std::cout << "MateriaSource " << this << " created materia " << type
-					  << std::endl;
 			AMateria *new_materia = this->_source[i]->clone();
 			new_materia->setIsEquipped(false);
+			std::cout << CYN "MateriaSource " NC << this << " created materia " << type
+					  << " " << new_materia << std::endl;
 			return (new_materia);
 		}
 	}
