@@ -32,7 +32,7 @@ MateriaSource::MateriaSource(const MateriaSource &copy) {
 /** @brief Destructor */
 MateriaSource::~MateriaSource(void) {
 #ifdef DEBUG
-	std::cout << "MateriaSource destructor called" << std::endl;
+	std::cout << CYN "MateriaSource " NC "destructor called" << std::endl;
 #endif
 	for (int i = 0; i < MAX_ITEMS; i++) {
 		if (!this->_source[i])

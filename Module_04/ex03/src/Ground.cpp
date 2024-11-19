@@ -15,7 +15,7 @@
 /** @brief Constructor */
 Ground::Ground() : _list()  {
 #ifdef DEBUG
-	std::cout << "Ground singleton constructor called" << std::endl;
+	std::cout << GRN "Ground" NC " singleton constructor called" << std::endl;
 #endif
 }
 
@@ -23,14 +23,14 @@ Ground::Ground() : _list()  {
 Ground::~Ground() {
 	delMaterias();
 #ifdef DEBUG
-	std::cout << "Ground singleton destructor called" << std::endl;
+	std::cout << GRN "Ground " NC "singleton destructor called" << std::endl;
 #endif
 }
 
 /** @brief Add Materia to Ground */
 void Ground::addMateria(AMateria *materia) {
 	if (materia->getIsEquipped() == true) {
-		std::cout << "Materia " << materia->getType() << " is already equiped" << std::endl;
+		std::cout << "Materia " << materia->getType() << " already equiped" << std::endl;
 		return ;
 	}
 	MateriasList *tmp = new MateriasList;

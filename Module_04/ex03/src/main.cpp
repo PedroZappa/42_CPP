@@ -14,16 +14,14 @@
 
 static void subjectTest(void);
 static void equipLimitsTest();
-static void deepCopyTest(void);
 
 int main(void) {
 	subjectTest();
 	equipLimitsTest();
-	deepCopyTest();
 	return (0);
 }
 
-static void subjectTest(void){
+static void subjectTest(void) {
 	Ice *ice = new Ice();
 	Cure *cure = new Cure();
 	headerPrinter("SUBJECT TEST", WIDTH, '-', BGRN);
@@ -51,85 +49,71 @@ static void subjectTest(void){
 }
 
 static void equipLimitsTest() {
-	// Ice *ice = new Ice();
-	// Cure *cure = new Cure();
-	// Ice *ice2 = new Ice();
-	// Cure *cure2 = new Cure();
-    headerPrinter("EQUIP LIMITS", WIDTH, '-', BGRN);
-    std::cout << "Create a MateriaSource:" << std::endl;
-    IMateriaSource *src = new MateriaSource();
-
-    // Learn materias
-    src->learnMateria(new Ice());
-    src->learnMateria(new Cure());
-
-    std::cout << "Create a Character named \"Zedro\":" << std::endl;
-    ICharacter *me = new Character("Zedro");
-
-    sepPrinter(WIDTH, '-', BGRN, 1);
-    std::cout << "Equipping Ice and Cure:" << std::endl;
-    AMateria *iceMateria = src->createMateria("ice");
-    AMateria *cureMateria = src->createMateria("cure");
-
-    me->equip(iceMateria);
-    me->equip(cureMateria);
-
-    std::cout << "Testing equip limits:" << std::endl;
-    AMateria *extraMateria1 = src->createMateria("ice");
-    AMateria *extraMateria2 = src->createMateria("cure");
-    me->equip(extraMateria1);
-    me->equip(extraMateria2);
-
-    // Print equipped materias
-    std::cout << "Equipped materias for \"Zedro\":" << std::endl;
-    for (int i = 0; i < MAX_ITEMS; i++) {
-        AMateria* materia = dynamic_cast<Character*>(me)->getMateria(i);
-        if (materia) {
-            std::cout << "Slot " << i << ": " << materia->getType() << std::endl;
-        } else {
-            std::cout << "Slot " << i << ": Empty" << std::endl;
-        }
-    }
-
-    std::cout << "Trying to equip beyond limit:" << std::endl;
-    AMateria *exceedMateria = src->createMateria("ice");
-    me->equip(exceedMateria);
-
-    // Cleanup for `exceedMateria`, if it was not equipped due to inventory limits
-    if (!me->hasMateria(exceedMateria)) {
-        delete exceedMateria;
-        exceedMateria = NULL;
-        std::cout << "Exceed materia deleted as it couldn't be equipped." << std::endl;
-    }
-
-    sepPrinter(WIDTH, '-', BGRN, 1);
-	me->unequip(0);
-    sepPrinter(WIDTH, '-', BGRN, 1);
-    delete me;
-    delete src;
-    delete iceMateria;
-    // delete cureMateria;
-}
-
-static void deepCopyTest(void) {
-	headerPrinter("DEEP COPY TEST", WIDTH, '-', BGRN);
-
+	headerPrinter("EQUIP LIMITS", WIDTH, '-', BGRN);
+	std::cout << "Create a MateriaSource:" << std::endl;
 	IMateriaSource *src = new MateriaSource();
-	IMateriaSource *src2 = new MateriaSource();
+
+	// Learn materias
 	src->learnMateria(new Ice());
 	src->learnMateria(new Cure());
 
+	std::cout << "Create a Character named \"Zedro\":" << std::endl;
+	ICharacter *me = new Character("Zedro");
+
 	sepPrinter(WIDTH, '-', BGRN, 1);
-	std::cout << "Before Deep copy:" << std::endl;
-	std::cout << "src\t" << src << std::endl;
-	std::cout << "src2\t" << src2 << std::endl;
+	std::cout << "Equipping Ice and Cure:" << std::endl;
+	AMateria *iceMateria = src->createMateria("ice");
+	AMateria *cureMateria = src->createMateria("cure");
+
+
+	me->equip(iceMateria);
+	me->equip(cureMateria);
+
+	std::cout << "Testing equip limits:" << std::endl;
+	AMateria *extraMateria1 = src->createMateria("ice");
+	AMateria *extraMateria2 = src->createMateria("cure");
+	me->equip(extraMateria1);
+	me->equip(extraMateria2);
+
+	// Print equipped materias
+	std::cout << "Equipped materias for \"Zedro\":" << std::endl;
+	for (int i = 0; i < MAX_ITEMS; i++) {
+		AMateria *materia = dynamic_cast<Character *>(me)->getMateria(i);
+		if (materia) {
+			std::cout << "Slot " << i << ": " << materia->getType() << std::endl;
+		} else {
+			std::cout << "Slot " << i << ": Empty" << std::endl;
+		}
+	}
+
+	std::cout << "Trying to equip beyond limit:" << std::endl;
+	AMateria *exceedMateria = src->createMateria("ice");
+	me->equip(exceedMateria);
+
+	// Cleanup for `exceedMateria`, if it was not equipped due to inventory limits
+	if (!me->hasMateria(exceedMateria)) {
+			std::cout << "Exceed materia at " << exceedMateria->getType() << " as it couldn't be equipped."
+				  << std::endl;
+		delete exceedMateria;
+		exceedMateria = NULL;
+	}
+
 	sepPrinter(WIDTH, '-', BGRN, 1);
-	std::cout << "After Deep copy:" << std::endl;
-	*src2 = *src;
-	std::cout << "src\t" << src << std::endl;
-	std::cout << "src2\t" << src2 << std::endl;
+	std::cout << "Unequipping 0 index:" << std::endl;
+	me->unequip(0);
+	std::cout << "Unequipping 1 index:" << std::endl;
+	me->unequip(1);
+	std::cout << "Unequipping 2 index:" << std::endl;
+	me->unequip(2);
+	std::cout << "Unequipping 3 index:" << std::endl;
+	me->unequip(3);
 	sepPrinter(WIDTH, '-', BGRN, 1);
 
 	delete src;
-	delete src2;
+	delete iceMateria;
+	delete cureMateria;
+	delete extraMateria1;
+	delete extraMateria2;
+	delete me;
+	sepPrinter(WIDTH, '-', BGRN, 1);
 }
