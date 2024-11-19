@@ -23,12 +23,14 @@ int main(void) {
 	return (0);
 }
 
-static void subjectTest(void) {
+static void subjectTest(void){
+	Ice *ice = new Ice();
+	Cure *cure = new Cure();
 	headerPrinter("SUBJECT TEST", WIDTH, '-', BGRN);
 	std::cout << "Running subject tests:" << std::endl;
 	IMateriaSource *src = new MateriaSource();
-	src->learnMateria(new Ice());
-	src->learnMateria(new Cure());
+	src->learnMateria(ice);
+	src->learnMateria(cure);
 
 	ICharacter *me = new Character("me");
 
@@ -49,6 +51,10 @@ static void subjectTest(void) {
 }
 
 static void equipLimitsTest() {
+	// Ice *ice = new Ice();
+	// Cure *cure = new Cure();
+	// Ice *ice2 = new Ice();
+	// Cure *cure2 = new Cure();
     headerPrinter("EQUIP LIMITS", WIDTH, '-', BGRN);
     std::cout << "Create a MateriaSource:" << std::endl;
     IMateriaSource *src = new MateriaSource();
@@ -101,6 +107,8 @@ static void equipLimitsTest() {
     sepPrinter(WIDTH, '-', BGRN, 1);
     delete me;
     delete src;
+    delete iceMateria;
+    // delete cureMateria;
 }
 
 static void deepCopyTest(void) {
