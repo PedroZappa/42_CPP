@@ -13,7 +13,7 @@
 #include "../inc/Ground.hpp"
 
 /** @brief Constructor */
-Ground::Ground() : _list()  {
+Ground::Ground() : _list() {
 #ifdef DEBUG
 	std::cout << GRN "Ground" NC " singleton constructor called" << std::endl;
 #endif
@@ -30,8 +30,10 @@ Ground::~Ground() {
 /** @brief Add Materia to Ground */
 void Ground::addMateria(AMateria *materia) {
 	if (materia->getIsEquipped() == true) {
-		std::cout << "Materia " << materia->getType() << " already equiped" << std::endl;
-		return ;
+		std::cout << "Materia " << materia->getType() << " already equiped"
+				  << std::endl;
+	} else {
+		return;
 	}
 	MateriasList *tmp = new MateriasList;
 	tmp->materia = materia;
@@ -56,8 +58,7 @@ void Ground::delMaterias(void) {
 		delete tmp;
 	}
 #ifdef DEBUG
-	std::cout << "Materias deleted from Ground"
-			  << std::endl;
+	std::cout << "Materias deleted from Ground" << std::endl;
 #endif
 }
 

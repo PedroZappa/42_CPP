@@ -110,10 +110,6 @@ static void equipLimitsTest() {
 	sepPrinter(WIDTH, '-', BGRN, 1);
 
 	delete src;
-	delete iceMateria;
-	delete cureMateria;
-	delete extraMateria1;
-	delete extraMateria2;
 	delete me;
 	sepPrinter(WIDTH, '-', BGRN, 1);
 }
