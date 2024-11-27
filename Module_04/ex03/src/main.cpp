@@ -101,13 +101,6 @@ static void equipLimitsTest() {
 	sepPrinter(WIDTH, '-', BGRN, 1);
 	std::cout << "Unequipping 0 index:" << std::endl;
 	me->unequip(0);
-	std::cout << "Unequipping 1 index:" << std::endl;
-	me->unequip(1);
-	std::cout << "Unequipping 2 index:" << std::endl;
-	me->unequip(2);
-	std::cout << "Unequipping 3 index:" << std::endl;
-	me->unequip(3);
-	sepPrinter(WIDTH, '-', BGRN, 1);
 
 	delete src;
 	delete me;

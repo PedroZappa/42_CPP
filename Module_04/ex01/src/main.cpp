@@ -73,6 +73,7 @@ int main(void) {
 
 	std::cout << "Cat1 thinking after modification: ";
 	cat1->getBrain()->think();
+	cat1->getBrain()->think();
 	std::cout << "Cat2 thinking (should be unchanged): ";
 	cat2->getBrain()->think();
 

@@ -23,6 +23,7 @@ static void soundTest(void);
 static void brainTest(void);
 
 int main(void) {
+	// const AAnimal *meta = new AAnimal();
 	void (*tests[])(void) = {// Array of function pointers
 		simpleTest,
 		copyTest,
