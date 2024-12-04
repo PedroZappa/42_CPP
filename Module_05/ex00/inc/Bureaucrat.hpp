@@ -6,12 +6,13 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:54:02 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/04 16:03:19 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/04 16:39:06 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include <exception>
 #include <string>
+#include <ostream>
 
 class Bureaucrat {
   public:
@@ -40,6 +41,8 @@ class Bureaucrat {
   private:
 	const std::string _name;
 	int _grade;
+	static const int GRADE_MIN = 150;
+	static const int GRADE_MAX = 1;
 };
 
 std::ostream& operator<<(std::ostream &os, const Bureaucrat &bureaucrat);
