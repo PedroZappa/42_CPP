@@ -37,6 +37,7 @@ class Bureaucrat {
 		public:
 			const char *what() const throw();
 	};
+	static const int yo = 666; 
 
   private:
 	const std::string _name;
