@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <exception>
+#include "Ansi.h"
 #include <string>
 #include <ostream>
 
@@ -28,6 +28,7 @@ class Bureaucrat {
 	void incrementGrade();
 	void decrementGrade();
 
+	// ** Exceptions **/
 	class GradeTooHighException : public std::exception {
 		public:
 			const char *what() const throw();
@@ -37,7 +38,6 @@ class Bureaucrat {
 		public:
 			const char *what() const throw();
 	};
-	static const int yo = 666; 
 
   private:
 	const std::string _name;
@@ -47,3 +47,10 @@ class Bureaucrat {
 };
 
 std::ostream& operator<<(std::ostream &os, const Bureaucrat &bureaucrat);
+
+/** @brief UI Helper Functions */
+void headerPrinter(const std::string &headerText,
+				   int inWidth,
+				   char sep,
+				   const char *sepColor);
+void sepPrinter(int inWidth, char sepChar, const char *color, int nLines);
