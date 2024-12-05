@@ -13,17 +13,24 @@
 #include "../inc/Bureaucrat.hpp"
 #include <iostream>
 
+#define WIDTH 50
+
 int main() {
-	Bureaucrat bob("bob", 42);
+	headerPrinter("Form up, you Maggots and Associate!", WIDTH, '=', GRN);
+	Bureaucrat bob("Zedro", 42);
+	std::cout << MAGB "Print original Bureaucrat's grade:" NC << std::endl;
 	std::cout << bob << std::endl;
+	std::cout << MAGB "Print incremented Bureaucrat's grade:" NC << std::endl;
 	bob.incrementGrade();
 	std::cout << bob << std::endl;
+	std::cout << MAGB "Print decremented Bureaucrat's grade:" NC << std::endl;
 	bob.decrementGrade();
 	std::cout << bob << std::endl;
 
 	// Testing GradeTooHighException
+	sepPrinter(WIDTH, '-', GRN, 1);
 	try {
-		Bureaucrat bob2("bob2", 0);
+		Bureaucrat bob2("Pappa", 0);
 		std::cout << bob2 << std::endl;
 		bob2.incrementGrade();
 		std::cout << bob2 << std::endl;
@@ -34,6 +41,7 @@ int main() {
 	}
 
 	// Testing GradeTooLowException
+	sepPrinter(WIDTH, '-', GRN, 1);
 	try {
 		Bureaucrat bob3("bob3", 151);
 		std::cout << bob3 << std::endl;
