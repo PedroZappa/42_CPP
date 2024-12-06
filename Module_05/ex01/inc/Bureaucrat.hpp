@@ -15,6 +15,8 @@
 #include <string>
 #include <ostream>
 
+class Form;
+
 class Bureaucrat {
   public:
 	Bureaucrat();
@@ -45,8 +47,6 @@ class Bureaucrat {
   private:
 	const std::string _name;
 	int _grade;
-	const int _gradeToSign;
-	const int _gradeToExecute;
 	static const int GRADE_MIN = 150;
 	static const int GRADE_MAX = 1;
 };

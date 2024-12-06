@@ -25,11 +25,11 @@ class Form {
 	Form &operator=(Form const &rhs);
 
 	void beSigned(const Bureaucrat &bureaucrat);
-	bool isSigned(void) const; // TODO: TO IMPLEMENT
+	bool isSigned(void) const;
 	
-	std::string getName(void) const; // TODO:L TO IMPLEMENT
-	int getSignGrade(void) const; // TODO: TO IMPLEMENT
-	int getExecGrade(void) const; // TODO: TO IMPLEMENT
+	std::string getName(void) const;
+	int getSignGrade(void) const;
+	int getExecGrade(void) const;
 
 	/** Exceptions **/
 	class GradeTooHighException : public std::exception {

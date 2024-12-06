@@ -16,7 +16,8 @@
 #define WIDTH 50
 
 int main() {
-	headerPrinter("Form up, you Maggots and Associate!", WIDTH, '=', GRN);
+	headerPrinter(
+		"Mommy, when I grow up I wanna be a Bureaucrat!", WIDTH, '=', GRN);
 	Bureaucrat bob("Zedro", 42);
 	std::cout << MAGB "Print original Bureaucrat's grade:" NC << std::endl;
 	std::cout << bob << std::endl;

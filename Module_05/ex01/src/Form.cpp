@@ -46,8 +46,11 @@ void Form::beSigned(const Bureaucrat &bureaucrat) {
 		throw Form::GradeTooLowException();
 }
 
-bool Form::isSigned(void) const {
-	return (this->_signed);
+bool Form::isSigned(void) const
+{
+	if (this->_signed)
+		return (true);
+	return (false);
 }
 
 std::string Form::getName(void) const {

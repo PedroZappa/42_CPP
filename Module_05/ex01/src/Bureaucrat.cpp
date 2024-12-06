@@ -24,6 +24,9 @@ Bureaucrat::Bureaucrat(std::string name, int grade)
 		throw GradeTooHighException();
 	if (this->_grade > GRADE_MIN)
 		throw GradeTooLowException();
+#ifdef DEBUG
+	std::cout << GRN "Bureaucrat" BWHT << " constructor called" NC << std::endl;
+#endif
 }
 
 /** Copy Constructor **/
@@ -66,6 +69,7 @@ void Bureaucrat::decrementGrade() {
 
 void signForm(Form &form) {
 	try {
+		(void)form;
 	} catch (std::exception &e) {
 	}
 }
