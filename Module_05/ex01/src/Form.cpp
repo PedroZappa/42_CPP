@@ -41,12 +41,13 @@ std::ostream &operator<<(std::ostream &os, const Form &rhs) {
 }
 
 /** Getters **/
-void beSigned(const Bureaucrat &bureaucrat) {
-	if (bureaucrat.getSignGrade() > _gradeToSign)	
+void Form::beSigned(const Bureaucrat &bureaucrat) {
+	if (bureaucrat.getGrade() > this->_gradeToSign)	
+		throw Form::GradeTooLowException();
 }
 
 bool Form::isSigned(void) const {
-	return (_signed);
+	return (this->_signed);
 }
 
 std::string Form::getName(void) const {
@@ -59,4 +60,13 @@ int Form::getSignGrade(void) const {
 
 int Form::getExecGrade(void) const {
 	return (this->_gradeToExecute);
+}
+
+/** Exceptions **/
+const char *Form::GradeTooHighException::what() const throw() {
+	return ("Grade too high");
+}
+
+const char *Form::GradeTooLowException::what() const throw() {
+	return ("Grade too low");
 }

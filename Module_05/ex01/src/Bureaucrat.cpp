@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../inc/Bureaucrat.hpp"
+#include <iostream>
 
 /** Constructor **/
 Bureaucrat::Bureaucrat() : _name("default"), _grade(150) {
@@ -61,6 +62,12 @@ void Bureaucrat::decrementGrade() {
 	if (this->_grade >= GRADE_MIN)
 		throw GradeTooLowException();
 	this->_grade++;
+}
+
+void signForm(Form &form) {
+	try {
+	} catch (std::exception &e) {
+	}
 }
 
 const char *Bureaucrat::GradeTooHighException::what() const throw() {

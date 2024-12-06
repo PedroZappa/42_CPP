@@ -28,6 +28,7 @@ class Bureaucrat {
 	int getGrade() const;
 	void incrementGrade();
 	void decrementGrade();
+
 	void signForm(Form &form);
 
 	// ** Exceptions **/
@@ -44,6 +45,8 @@ class Bureaucrat {
   private:
 	const std::string _name;
 	int _grade;
+	const int _gradeToSign;
+	const int _gradeToExecute;
 	static const int GRADE_MIN = 150;
 	static const int GRADE_MAX = 1;
 };
