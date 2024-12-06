@@ -18,14 +18,18 @@ class Bureaucrat;
 
 class Form {
   public:
-	Form(void);
-	Form(std::string name, int gradeToSign, int gradeToExecute);
+	Form(const std::string &name, int gradeToSign, int gradeToExecute);
 	~Form(void);
 
-	Form(Form const &src);
+	Form(const Form &src);
 	Form &operator=(Form const &rhs);
 
 	void beSigned(const Bureaucrat &bureaucrat);
+	bool isSigned(void) const; // TODO: TO IMPLEMENT
+	
+	std::string getName(void) const; // TODO:L TO IMPLEMENT
+	int getSignGrade(void) const; // TODO: TO IMPLEMENT
+	int getExecGrade(void) const; // TODO: TO IMPLEMENT
 
 	/** Exceptions **/
 	class GradeTooHighException : public std::exception {
@@ -40,6 +44,8 @@ class Form {
   private:
 	const std::string _name;
 	bool _signed;
-	int const _gradeToSign;
-	int const _gradeToExecute;
+	const int _gradeToSign;
+	const int _gradeToExecute;
+	static const int GRADE_MIN = 150;
+	static const int GRADE_MAX = 1;
 };
