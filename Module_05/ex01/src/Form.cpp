@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../inc/Form.hpp"
+#include <iostream>
 
 Form::Form(const std::string &name, int gradeToSign, int gradeToExecute)
 	: _name(name), _signed(false), _gradeToSign(gradeToSign),
@@ -42,7 +43,7 @@ std::ostream &operator<<(std::ostream &os, Form &rhs) {
 	std::string sign = rhs.isSigned() ? "🮱 " : "❌";
 
 	os << YEL "FORM" NC << std::endl;
-	os << "Bureaucrat: " BBLU << rhs.getName() << NC << std::endl;
+	os << "Name: " BBLU << rhs.getName() << NC << std::endl;
 	os << "Grade to sign: " GRN << rhs.getSignGrade() << NC << std::endl;
 	os << "Grade to execute: " GRN << rhs.getExecGrade() << NC << std::endl;
 	os << "Signature Status: " << sign << std::endl;
@@ -50,21 +51,8 @@ std::ostream &operator<<(std::ostream &os, Form &rhs) {
 }
 
 /** Getters **/
-void Form::beSigned(const Bureaucrat &bureaucrat) {
-	if (bureaucrat.getGrade() > this->_gradeToSign)
-		throw Form::GradeTooLowException();
-}
-
 bool Form::isSigned(void) const {
 	return (this->_signed);
-}
-
-void Form::printForm(std::ostream &os) const {
-	os << YEL << "FORM" NC << std::endl;
-	os << "Bureaucrat: " BLU << getName() << NC << std::endl;
-	os << "Grade to sign: " GRN << this->getSignGrade() << NC << std::endl;
-	os << "Grade to execute: " GRN << this->getExecGrade() << NC << std::endl;
-	os << "Signature Status: " << (this->isSigned() ? "🮱 " : "❌") << std::endl;
 }
 
 std::string Form::getName(void) const {
@@ -77,6 +65,14 @@ int Form::getSignGrade(void) const {
 
 int Form::getExecGrade(void) const {
 	return (this->_gradeToExecute);
+}
+
+void Form::beSigned(const Bureaucrat &bureaucrat) {
+	std::cout << bureaucrat << std::endl;
+	std::cout << "Attempting to sign\n" GRN << *this << NC << std::endl;
+	if (bureaucrat.getGrade() > this->_gradeToSign)
+		throw Form::GradeTooLowException();
+	this->_signed = true;
 }
 
 /** Exceptions **/

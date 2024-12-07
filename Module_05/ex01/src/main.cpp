@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "../inc/Bureaucrat.hpp"
+#include "../inc/Bureaucrat.hpp"
 #include "../inc/Form.hpp"
 #include <iostream>
 
@@ -27,9 +27,9 @@ int main() {
 		sizeof(Bureaucrat) * N_BUREAUCRATZ));
 
 	// Create Bureaucrats using placement new
-	new (&bureaucrats[0]) Bureaucrat("Zedro", 1);
-	new (&bureaucrats[1]) Bureaucrat("Zappa", 33);
-	new (&bureaucrats[2]) Bureaucrat("Pedro", 150);
+	new (&bureaucrats[0]) Bureaucrat("Pedro", 149);
+	new (&bureaucrats[1]) Bureaucrat("Zappa", 34);
+	new (&bureaucrats[2]) Bureaucrat("Zedro", 1);
 
 	// Annouce Bureaucrats
 	headerPrinter("Announce Bureaucrats", WIDTH, '=', YEL);
@@ -49,7 +49,21 @@ int main() {
 	new (&forms[2]) Form("Dominator Form", 1, 1);
 
 	headerPrinter("Announce Forms", WIDTH, '=', YEL);
-	
+	for (int i = 0; i < N_FORMZ; i++) {
+		std::cout << forms[i];
+		sepPrinter(WIDTH, '-', GRN, 1);
+	}
+
+	// Sign Forms
+	headerPrinter("Bureaucratizing", WIDTH, '=', YEL);
+
+	for (int i = 0; i < N_FORMZ; i++) {
+		bureaucrats[i].signForm(forms[i]);
+		sepPrinter(WIDTH, '-', GRN, 1);
+	}
+
+	// Re-Print Form Status
+	headerPrinter("Forms Status", WIDTH, '=', YEL);
 	for (int i = 0; i < N_FORMZ; i++) {
 		std::cout << forms[i];
 		sepPrinter(WIDTH, '-', GRN, 1);

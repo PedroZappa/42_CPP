@@ -37,7 +37,7 @@ Bureaucrat::Bureaucrat(const Bureaucrat &other) {
 /** Destructor **/
 Bureaucrat::~Bureaucrat() {
 #ifdef DEBUG
-std::cout << RED "Bureaucrat" BWHT << " destructor called" NC << std::endl;
+	std::cout << RED "Bureaucrat" BWHT << " destructor called" NC << std::endl;
 #endif
 }
 
@@ -48,7 +48,6 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other) {
 	this->_grade = other._grade;
 	return (*this);
 }
-
 
 std::ostream &operator<<(std::ostream &os, const Bureaucrat &bureaucrat) {
 	os << "Name: " MAG << bureaucrat.getName()
@@ -77,10 +76,13 @@ void Bureaucrat::decrementGrade() {
 	this->_grade++;
 }
 
-void signForm(Form &form) {
+void Bureaucrat::signForm(Form &form) {
 	try {
-		(void)form;
+		form.beSigned(*this);
+		std::cout << YEL << _name << NC " Signed Form " BBLU << form.getName()
+				  << NC << std::endl;
 	} catch (std::exception &e) {
+		std::cerr << RED << e.what() << NC << std::endl;
 	}
 }
 

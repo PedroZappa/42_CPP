@@ -10,7 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
+
 #include "Ansi.h"
+#include "Form.hpp"
 #include <string>
 #include <ostream>
 

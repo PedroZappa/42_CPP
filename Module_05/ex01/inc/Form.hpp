@@ -10,10 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
+
 #include "Ansi.h"
 #include "Bureaucrat.hpp"
 #include <ostream>
 #include <string>
+
+class Bureaucrat;
 
 class Form {
   public:
@@ -25,7 +29,6 @@ class Form {
 
 	void beSigned(const Bureaucrat &bureaucrat);
 	bool isSigned(void) const;
-	void printForm(std::ostream &os) const;
 	
 	std::string getName(void) const;
 	int getSignGrade(void) const;
