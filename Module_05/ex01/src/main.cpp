@@ -41,7 +41,7 @@ int main() {
 
 	// Create Forms
 	Form *forms =
-		static_cast<Form *>(operator new[](sizeof(Form) * N_BUREAUCRATZ));
+		static_cast<Form *>(operator new[](sizeof(Form) * N_FORMZ));
 
 	// Create Forms using placement new
 	new (&forms[0]) Form("Creation Form", 150, 150);
@@ -50,8 +50,8 @@ int main() {
 
 	headerPrinter("Announce Forms", WIDTH, '=', YEL);
 	
-	for (int i = 0; i < N_FORMZ; ++i) {
-		std::cout << forms[i] << std::endl;
+	for (int i = 0; i < N_FORMZ; i++) {
+		std::cout << forms[i];
 		sepPrinter(WIDTH, '-', GRN, 1);
 	}
 

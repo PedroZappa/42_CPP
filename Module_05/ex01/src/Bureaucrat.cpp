@@ -36,6 +36,9 @@ Bureaucrat::Bureaucrat(const Bureaucrat &other) {
 
 /** Destructor **/
 Bureaucrat::~Bureaucrat() {
+#ifdef DEBUG
+std::cout << RED "Bureaucrat" BWHT << " destructor called" NC << std::endl;
+#endif
 }
 
 /** Copy assignment operator **/

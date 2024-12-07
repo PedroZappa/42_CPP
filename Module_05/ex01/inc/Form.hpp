@@ -15,8 +15,6 @@
 #include <ostream>
 #include <string>
 
-// class Bureaucrat;
-
 class Form {
   public:
 	Form(const std::string &name, int gradeToSign, int gradeToExecute);
@@ -51,3 +49,5 @@ class Form {
 	static const int GRADE_MIN = 150;
 	static const int GRADE_MAX = 1;
 };
+
+std::ostream &operator<<(std::ostream &os, Form &rhs);
