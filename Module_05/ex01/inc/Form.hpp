@@ -11,10 +11,11 @@
 /* ************************************************************************** */
 
 #include "Ansi.h"
+#include "Bureaucrat.hpp"
 #include <ostream>
 #include <string>
 
-class Bureaucrat;
+// class Bureaucrat;
 
 class Form {
   public:
@@ -22,10 +23,11 @@ class Form {
 	~Form(void);
 
 	Form(const Form &src);
-	Form &operator=(Form const &rhs);
+	Form &operator=(const Form &rhs);
 
 	void beSigned(const Bureaucrat &bureaucrat);
 	bool isSigned(void) const;
+	void printForm(std::ostream &os) const;
 	
 	std::string getName(void) const;
 	int getSignGrade(void) const;

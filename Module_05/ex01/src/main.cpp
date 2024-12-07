@@ -10,25 +10,53 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/Bureaucrat.hpp"
+// #include "../inc/Bureaucrat.hpp"
+#include "../inc/Form.hpp"
 #include <iostream>
 
-#define WIDTH 50
+#define WIDTH 53
+#define N_BUREAUCRATZ 3
+#define N_FORMZ 3
 
 int main() {
-	headerPrinter("Form up, you Maggots and Associate!", WIDTH, '=', GRN);
-	Bureaucrat zedro("Zedro", 33);
+	headerPrinter(
+		"😈 Form up, you Maggots and Bureaucritize! 😈", WIDTH, '=', GRN);
 
-	std::cout << YEL "Testing Bureaucrat" NC << std::endl;
-	std::cout << "Name: " << zedro.getName() << std::endl;
-	std::cout << "Grade: " << zedro.getGrade() << std::endl;
+	// Create Bureaucrats
+	Bureaucrat *bureaucrats = static_cast<Bureaucrat *>(operator new[](
+		sizeof(Bureaucrat) * N_BUREAUCRATZ));
 
-	// Increment grade
-	zedro.incrementGrade();
-	std::cout << "Incremented grade: " << zedro.getGrade() << std::endl;
+	// Create Bureaucrats using placement new
+	new (&bureaucrats[0]) Bureaucrat("Zedro", 1);
+	new (&bureaucrats[1]) Bureaucrat("Zappa", 33);
+	new (&bureaucrats[2]) Bureaucrat("Pedro", 150);
+
+	// Annouce Bureaucrats
+	headerPrinter("Announce Bureaucrats", WIDTH, '=', YEL);
+
+	for (int i = 0; i < N_BUREAUCRATZ; ++i) {
+		std::cout << bureaucrats[i] << std::endl;
+		sepPrinter(WIDTH, '-', GRN, 1);
+	}
+
+	// Create Forms
+	Form *forms =
+		static_cast<Form *>(operator new[](sizeof(Form) * N_BUREAUCRATZ));
+
+	// Create Forms using placement new
+	new (&forms[0]) Form("Creation Form", 150, 150);
+	new (&forms[1]) Form("Init Form", 33, 33);
+	new (&forms[2]) Form("Dominator Form", 1, 1);
+
+	headerPrinter("Announce Forms", WIDTH, '=', YEL);
 	
-	// Decrement grade
-	zedro.decrementGrade();
-	std::cout << "Decremented grade: " << zedro.getGrade() << std::endl;
+	for (int i = 0; i < N_FORMZ; ++i) {
+		std::cout << forms[i] << std::endl;
+		sepPrinter(WIDTH, '-', GRN, 1);
+	}
+
+	// Free Bureaucrats and Forms
+	operator delete[](bureaucrats);
+	operator delete[](forms);
 	return (0);
 }

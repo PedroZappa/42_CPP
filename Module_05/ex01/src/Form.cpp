@@ -29,6 +29,14 @@ Form::Form(const Form &src)
 Form::~Form(void) {
 }
 
+/** Operator Overloads **/
+Form &Form::operator=(const Form &rhs) {
+	if (this == &rhs)
+		return (*this);
+	this->_signed = rhs._signed;
+	return (*this);
+}
+
 std::ostream &operator<<(std::ostream &os, const Form &rhs) {
 	std::string sign = rhs.isSigned() ? "🮱 " : "❌";
 
@@ -42,15 +50,23 @@ std::ostream &operator<<(std::ostream &os, const Form &rhs) {
 
 /** Getters **/
 void Form::beSigned(const Bureaucrat &bureaucrat) {
-	if (bureaucrat.getGrade() > this->_gradeToSign)	
+	if (bureaucrat.getGrade() > this->_gradeToSign)
 		throw Form::GradeTooLowException();
 }
 
-bool Form::isSigned(void) const
-{
+bool Form::isSigned(void) const {
 	if (this->_signed)
 		return (true);
 	return (false);
+}
+
+void Form::printForm(std::ostream &os) const
+{
+	os << YEL << "FORM" NC << std::endl;
+	os << "Bureaucrat: " BLU << getName() << NC << std::endl;
+	os << "Grade to sign: " GRN << this->getSignGrade() << NC << std::endl;
+	os << "Grade to execute: " GRN << this->getExecGrade() << NC << std::endl;
+	os << "Signature Status: " << (this->isSigned() ? "🮱 " : "❌") << std::endl;
 }
 
 std::string Form::getName(void) const {

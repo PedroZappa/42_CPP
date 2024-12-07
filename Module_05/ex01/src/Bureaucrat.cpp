@@ -46,6 +46,13 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other) {
 	return (*this);
 }
 
+
+std::ostream &operator<<(std::ostream &os, const Bureaucrat &bureaucrat) {
+	os << "Name: " MAG << bureaucrat.getName()
+	   << "\n" NC "Bureaucracy Grade: " GRN << bureaucrat.getGrade() << NC;
+	return (os);
+}
+
 /** Getters **/
 const std::string Bureaucrat::getName() const {
 	return (this->_name);
@@ -80,10 +87,4 @@ const char *Bureaucrat::GradeTooHighException::what() const throw() {
 
 const char *Bureaucrat::GradeTooLowException::what() const throw() {
 	return ("Grade too low");
-}
-
-std::ostream &operator<<(std::ostream &os, const Bureaucrat &bureaucrat) {
-	os << YEL << bureaucrat.getName() << NC ", bureaucrat grade " GRN
-	   << bureaucrat.getGrade() << NC;
-	return (os);
 }

@@ -44,6 +44,7 @@ INC_PATH		= inc
 
 FILES			= main.cpp
 FILES			+= Bureaucrat.cpp
+FILES			+= Form.cpp
 FILES			+= printer.cpp
 
 SRC				= $(addprefix $(SRC_PATH)/, $(FILES))
