@@ -6,7 +6,7 @@
 #    By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/04 15:24:15 by passunca          #+#    #+#              #
-#    Updated: 2024/12/04 15:52:17 by passunca         ###   ########.fr        #
+#    Updated: 2024/12/08 11:14:00 by passunca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,9 @@ FILES			= main.cpp
 FILES			+= printer.cpp
 FILES			+= Bureaucrat.cpp
 FILES			+= AForm.cpp
+FILES			+= ShrubberyCreationForm.cpp
+FILES			+= RobotomyRequestForm.cpp
+FILES			+= PresidentialPardonForm.cpp
 
 SRC				= $(addprefix $(SRC_PATH)/, $(FILES))
 OBJS			= $(SRC:$(SRC_PATH)/%.cpp=$(BUILD_PATH)/%.o)

@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 10:51:57 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/08 11:06:07 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/08 11:14:36 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void RobotomyRequestForm::execute(void) const {
 #ifdef DEBUG
 	std::cout << "RobotomyRequestForm execute called" << std::endl;
 #endif
-	std:srand(static_cast<unsigned int>(std::time(NULL)));
+	std::srand(static_cast<unsigned int>(std::time(NULL)));
 
 	std::cout << YEL "[Drilling Noises...]" NC << std::endl;
 	if ((std::rand() % 2) == 0)
