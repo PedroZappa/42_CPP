@@ -25,14 +25,14 @@ class AForm {
 	~AForm(void);
 
 	AForm(const AForm &src);
-	AForm &operator=(const AForm &rhs);
 
-	void beSigned(const Bureaucrat &bureaucrat);
 	bool isSigned(void) const;
 
 	std::string getName(void) const;
 	int getSignGrade(void) const;
 	int getExecGrade(void) const;
+
+	void beSigned(const Bureaucrat &bureaucrat);
 
 	virtual void execute(const Bureaucrat &executor) const = 0;
 
@@ -57,6 +57,8 @@ class AForm {
 	const int _gradeToExecute;
 	static const int GRADE_MIN = 150;
 	static const int GRADE_MAX = 1;
+
+	AForm &operator=(const AForm &rhs); // So that forms cannot be duplicated
 };
 
 std::ostream &operator<<(std::ostream &os, AForm &rhs);

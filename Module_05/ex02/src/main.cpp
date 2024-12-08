@@ -6,12 +6,14 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:28:32 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/04 16:33:38 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/08 10:11:01 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/Bureaucrat.hpp"
-#include "../inc/AForm.hpp"
+#include "../inc/ShrubberyCreationForm.hpp"
+#include "../inc/RobotomyRequestForm.hpp"
+#include "../inc/PresidentialPardonForm.hpp"
 #include <iostream>
 
 #define WIDTH 53
@@ -19,26 +21,48 @@
 #define N_FORMZ 3
 
 int main() {
-	headerPrinter(
-		"😈 No, you need form 28B, not 28C! 😈", WIDTH, '=', GRN);
+	headerPrinter("😈 No, you need form 28B, not 28C! 😈", WIDTH, '=', GRN);
 
-	// Create Bureaucrats
-	Bureaucrat *bureaucrats = static_cast<Bureaucrat *>(operator new[](
-		sizeof(Bureaucrat) * N_BUREAUCRATZ));
+	try {
+		Bureaucrat boss("Boss", 1);
+		Bureaucrat intern("Intern", 140);
 
-	// Create Bureaucrats using placement new
-	new (&bureaucrats[0]) Bureaucrat("Pedro", 150);
-	new (&bureaucrats[1]) Bureaucrat("Zappa", 33);
-	new (&bureaucrats[2]) Bureaucrat("Zedro", 1);
+		ShrubberyCreationForm shrub("garden");
+		RobotomyRequestForm robot("Bender");
+		PresidentialPardonForm pardon("Arthur Dent");
 
-	// Annouce Bureaucrats
-	headerPrinter("Announce Bureaucrats", WIDTH, '=', YEL);
+		// Test signing and executing with different bureaucrat levels
+		intern.signForm(shrub);
+		intern.executeForm(shrub); // Should work
 
-	for (int i = 0; i < N_BUREAUCRATZ; ++i) {
-		std::cout << bureaucrats[i] << std::endl;
-		sepPrinter(WIDTH, '-', GRN, 1);
+		boss.signForm(robot);
+		boss.executeForm(robot); // Should work
+
+		boss.signForm(pardon);
+		intern.executeForm(pardon); // Should fail - grade too low
+		boss.executeForm(pardon);   // Should work
+
+	} catch (const std::exception &e) {
+		std::cout << "Error: " << e.what() << std::endl;
 	}
-
+	//
+	// // Create Bureaucrats
+	// Bureaucrat *bureaucrats = static_cast<Bureaucrat *>(operator new[](
+	// 	sizeof(Bureaucrat) * N_BUREAUCRATZ));
+	//
+	// // Create Bureaucrats using placement new
+	// new (&bureaucrats[0]) Bureaucrat("Pedro", 150);
+	// new (&bureaucrats[1]) Bureaucrat("Zappa", 33);
+	// new (&bureaucrats[2]) Bureaucrat("Zedro", 1);
+	//
+	// // Annouce Bureaucrats
+	// headerPrinter("Announce Bureaucrats", WIDTH, '=', YEL);
+	//
+	// for (int i = 0; i < N_BUREAUCRATZ; ++i) {
+	// 	std::cout << bureaucrats[i] << std::endl;
+	// 	sepPrinter(WIDTH, '-', GRN, 1);
+	// }
+	//
 	// Create Forms
 	// Form *forms =
 	// 	static_cast<Form *>(operator new[](sizeof(Form) * N_FORMZ));
@@ -70,7 +94,7 @@ int main() {
 	// }
 
 	// Free Bureaucrats and Forms
-	operator delete[](bureaucrats);
+	// operator delete[](bureaucrats);
 	// operator delete[](forms);
 	return (0);
 }

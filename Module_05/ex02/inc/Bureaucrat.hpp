@@ -12,10 +12,10 @@
 
 #pragma once
 
-#include "Ansi.h"
 #include "AForm.hpp"
-#include <string>
+#include "Ansi.h"
 #include <ostream>
+#include <string>
 
 class AForm;
 
@@ -26,7 +26,6 @@ class Bureaucrat {
 	~Bureaucrat();
 
 	Bureaucrat(const Bureaucrat &other);
-	Bureaucrat& operator=(const Bureaucrat &other);
 
 	const std::string getName() const;
 	int getGrade() const;
@@ -34,16 +33,16 @@ class Bureaucrat {
 	void decrementGrade();
 
 	void signForm(AForm &form);
+	void executeForm(AForm const &form) const; // TODO:
 
 	// ** Exceptions **/
 	class GradeTooHighException : public std::exception {
-		public:
-			const char *what() const throw();
+	  public:
+		const char *what() const throw();
 	};
-
 	class GradeTooLowException : public std::exception {
-		public:
-			const char *what() const throw();
+	  public:
+		const char *what() const throw();
 	};
 
   private:
@@ -51,9 +50,11 @@ class Bureaucrat {
 	int _grade;
 	static const int GRADE_MIN = 150;
 	static const int GRADE_MAX = 1;
+
+	Bureaucrat &operator=(const Bureaucrat &other);
 };
 
-std::ostream& operator<<(std::ostream &os, const Bureaucrat &bureaucrat);
+std::ostream &operator<<(std::ostream &os, const Bureaucrat &bureaucrat);
 
 /** @brief UI Helper Functions */
 void headerPrinter(const std::string &headerText,
