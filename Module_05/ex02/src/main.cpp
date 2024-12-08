@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:28:32 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/08 11:54:23 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/08 11:55:21 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int main() {
 		Bureaucrat intern("Intern", 10);
 
 		ShrubberyCreationForm shrub("garden");
-		RobotomyRequestForm robot("Bender");
+		RobotomyRequestForm robot("Marvin");
 		PresidentialPardonForm pardon("Arthur Dent");
 		sepPrinter(WIDTH, '=', GRN, 1);
 
