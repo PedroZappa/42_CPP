@@ -27,8 +27,8 @@ int main() {
 		sizeof(Bureaucrat) * N_BUREAUCRATZ));
 
 	// Create Bureaucrats using placement new
-	new (&bureaucrats[0]) Bureaucrat("Pedro", 149);
-	new (&bureaucrats[1]) Bureaucrat("Zappa", 34);
+	new (&bureaucrats[0]) Bureaucrat("Pedro", 150);
+	new (&bureaucrats[1]) Bureaucrat("Zappa", 33);
 	new (&bureaucrats[2]) Bureaucrat("Zedro", 1);
 
 	// Annouce Bureaucrats
