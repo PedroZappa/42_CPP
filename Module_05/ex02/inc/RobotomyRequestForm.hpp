@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 10:47:11 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/08 10:49:08 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/08 10:58:43 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 #include "AForm.hpp"
 #include <cstdlib>
+#include <iostream>
 #include <ctime>
 
 class RobotomyRequestForm : public AForm {
