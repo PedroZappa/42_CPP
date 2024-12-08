@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.hpp                                           :+:      :+:    :+:   */
+/*   AForm.hpp                                           :+:      :+:    :+: */
 /*                                                    +:+ +:+         +:+     */
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#pragma once // Equivalent to #ifndef and #define
 
 #include "Ansi.h"
 #include "Bureaucrat.hpp"
@@ -19,29 +19,35 @@
 
 class Bureaucrat;
 
-class Form {
+class AForm {
   public:
-	Form(const std::string &name, int gradeToSign, int gradeToExecute);
-	~Form(void);
+	AForm(const std::string &name, int gradeToSign, int gradeToExecute);
+	~AForm(void);
 
-	Form(const Form &src);
-	Form &operator=(const Form &rhs);
+	AForm(const AForm &src);
+	AForm &operator=(const AForm &rhs);
 
 	void beSigned(const Bureaucrat &bureaucrat);
 	bool isSigned(void) const;
-	
+
 	std::string getName(void) const;
 	int getSignGrade(void) const;
 	int getExecGrade(void) const;
 
+	virtual void execute(const Bureaucrat &executor) const = 0;
+
 	/** Exceptions **/
 	class GradeTooHighException : public std::exception {
-		public:
-			const char *what() const throw();
+	  public:
+		const char *what() const throw();
 	};
 	class GradeTooLowException : public std::exception {
-		public:
-			const char *what() const throw();
+	  public:
+		const char *what() const throw();
+	};
+	class FormNotSignedException : public std::exception {
+	  public:
+		const char *what() const throw();
 	};
 
   private:
@@ -53,4 +59,4 @@ class Form {
 	static const int GRADE_MAX = 1;
 };
 
-std::ostream &operator<<(std::ostream &os, Form &rhs);
+std::ostream &operator<<(std::ostream &os, AForm &rhs);

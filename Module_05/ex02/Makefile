@@ -43,9 +43,9 @@ TEMP_PATH		= .temp
 INC_PATH		= inc
 
 FILES			= main.cpp
-FILES			+= Bureaucrat.cpp
-FILES			+= Form.cpp
 FILES			+= printer.cpp
+FILES			+= Bureaucrat.cpp
+FILES			+= AForm.cpp
 
 SRC				= $(addprefix $(SRC_PATH)/, $(FILES))
 OBJS			= $(SRC:$(SRC_PATH)/%.cpp=$(BUILD_PATH)/%.o)

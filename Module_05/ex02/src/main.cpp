@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../inc/Bureaucrat.hpp"
-#include "../inc/Form.hpp"
+#include "../inc/AForm.hpp"
 #include <iostream>
 
 #define WIDTH 53
@@ -40,37 +40,37 @@ int main() {
 	}
 
 	// Create Forms
-	Form *forms =
-		static_cast<Form *>(operator new[](sizeof(Form) * N_FORMZ));
-
-	// Create Forms using placement new
-	new (&forms[0]) Form("Creation Form", 150, 150);
-	new (&forms[1]) Form("Init Form", 33, 33);
-	new (&forms[2]) Form("Dominator Form", 1, 1);
-
-	headerPrinter("Announce Forms", WIDTH, '=', YEL);
-	for (int i = 0; i < N_FORMZ; i++) {
-		std::cout << forms[i];
-		sepPrinter(WIDTH, '-', GRN, 1);
-	}
-
-	// Sign Forms
-	headerPrinter("Bureaucratizing", WIDTH, '=', YEL);
-
-	for (int i = 0; i < N_FORMZ; i++) {
-		bureaucrats[i].signForm(forms[i]);
-		sepPrinter(WIDTH, '-', GRN, 1);
-	}
-
-	// Re-Print Form Status
-	headerPrinter("Forms Status", WIDTH, '=', YEL);
-	for (int i = 0; i < N_FORMZ; i++) {
-		std::cout << forms[i];
-		sepPrinter(WIDTH, '-', GRN, 1);
-	}
+	// Form *forms =
+	// 	static_cast<Form *>(operator new[](sizeof(Form) * N_FORMZ));
+	//
+	// // Create Forms using placement new
+	// new (&forms[0]) Form("Creation Form", 150, 150);
+	// new (&forms[1]) Form("Init Form", 33, 33);
+	// new (&forms[2]) Form("Dominator Form", 1, 1);
+	//
+	// headerPrinter("Announce Forms", WIDTH, '=', YEL);
+	// for (int i = 0; i < N_FORMZ; i++) {
+	// 	std::cout << forms[i];
+	// 	sepPrinter(WIDTH, '-', GRN, 1);
+	// }
+	//
+	// // Sign Forms
+	// headerPrinter("Bureaucratizing", WIDTH, '=', YEL);
+	//
+	// for (int i = 0; i < N_FORMZ; i++) {
+	// 	bureaucrats[i].signForm(forms[i]);
+	// 	sepPrinter(WIDTH, '-', GRN, 1);
+	// }
+	//
+	// // Re-Print Form Status
+	// headerPrinter("Forms Status", WIDTH, '=', YEL);
+	// for (int i = 0; i < N_FORMZ; i++) {
+	// 	std::cout << forms[i];
+	// 	sepPrinter(WIDTH, '-', GRN, 1);
+	// }
 
 	// Free Bureaucrats and Forms
 	operator delete[](bureaucrats);
-	operator delete[](forms);
+	// operator delete[](forms);
 	return (0);
 }
