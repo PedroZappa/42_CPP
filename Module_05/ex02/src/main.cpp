@@ -20,8 +20,6 @@
 #define N_BUREAUCRATZ 3
 #define N_FORMZ 3
 
-void formTester(Bureaucrat &bureaucrat, AForm &form);
-
 int main() {
 	headerPrinter("😈 No, you need form 28B, not 28C! 😈", WIDTH, '=', GRN);
 
@@ -67,12 +65,4 @@ int main() {
 		std::cout << "Error: " << e.what() << std::endl;
 	}
 	return (0);
-}
-
-void formTester(Bureaucrat &b, AForm &f) {
-	std::cout << " [ " GRN << b.getName() << NC " testing form " << f.getName()
-			  << " ] " << std::endl;
-
-	// Try to sign: Grade is too Low
-	b.signForm(f);
 }
