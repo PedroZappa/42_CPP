@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 10:51:57 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/08 11:14:36 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/08 11:26:04 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &copy)
 #ifdef DEBUG
 	std::cout << "RobotomyRequestForm copy constructor called" << std::endl;
 #endif
-	*this = copy;
 }
 
 void RobotomyRequestForm::execute(void) const {

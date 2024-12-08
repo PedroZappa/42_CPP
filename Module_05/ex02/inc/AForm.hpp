@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 16:15:15 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/08 11:02:24 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/08 11:23:04 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ class AForm {
 	void beSigned(const Bureaucrat &bureaucrat);
 
 	void execute(const Bureaucrat &executor) const;
-	// virtual void execute(void) const = 0;
+	virtual void execute(void) const = 0;
 
 	/** Exceptions **/
 	class GradeTooHighException : public std::exception {

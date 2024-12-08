@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AForm.cpp                                           :+:      :+:    :+:   */
+/*   AForm.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 16:15:11 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/05 16:59:14 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/08 11:23:48 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,15 @@ void AForm::beSigned(const Bureaucrat &bureaucrat) {
 	this->_signed = true;
 }
 
-
+void AForm::execute(const Bureaucrat &executor) const {
+	std::cout << executor << std::endl;
+	std::cout << "Attempting to execute\n" GRN << this << NC << std::endl;
+	if (!this->_signed)
+		throw AForm::FormNotSignedException();
+	if (executor.getGrade() > this->_gradeToExecute)
+		throw AForm::GradeTooLowException();
+	this->execute();
+}
 
 /** Exceptions **/
 const char *AForm::GradeTooHighException::what() const throw() {
