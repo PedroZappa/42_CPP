@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:28:32 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/08 11:42:42 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/08 11:48:46 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int main() {
 		headerPrinter("😈 Burocratize Intern! Do it NOW! 😈", WIDTH, '=', YEL);
 		intern.signForm(shrub);
 		intern.executeForm(shrub); // Should work
+		// Cat created file to terminal
+		std::system("cat garden_shrubbery");
 		sepPrinter(WIDTH, '=', GRN, 1);
 
 		headerPrinter("😈 Burocratize Like a Boss! GO GO GO! 😈", WIDTH, '=', YEL);

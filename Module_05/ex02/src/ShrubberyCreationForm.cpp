@@ -6,35 +6,27 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 10:13:24 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/08 10:44:34 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/08 11:47:33 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ShrubberyCreationForm.hpp"
 
-const std::string ShrubberyCreationForm::_shrubbery = "                      &&"
-													  "           &&&&&"
-													  "         &&&\\/& &&&"
-													  "        &&|,/  |/& &&"
-													  "         &&/   /  /_&  "
-													  "&&"
-													  "           \\  {  "
-													  "|_____/_&"
-													  "           {  / /       "
-													  "   &&&"
-													  "           `, "
-													  "\{___________/_&&"
-													  "            } }{       "
-													  "\""
-													  "            }{{         "
-													  "\\____&"
-													  "           {}{          "
-													  " `&\\&&"
-													  "           {{}          "
-													  "   &&"
-													  "     , -=-~{ .-^- _"
-													  "ejm        `}"
-													  "            {";
+const std::string ShrubberyCreationForm::_shrubbery =
+"       ,.,\n"
+"      MMMM_    ,..,\n"
+"        \"_ \"__\"MMMMM          ,...,,\n"
+" ,..., __.\" --\"    ,.,     _-\"MMMMMMM\n"
+"MMMMMM\"___ \"_._   MMM\"_.\"\" _ \"\"\"\"\"\"\n"
+" \"\"\"\"\"    \"\" , \\_.   \"_. .\"\n"
+"        ,., _\"__ \\__./ .\"\n"
+"       MMMMM_\"  \"_    ./\n"
+"        ''''      (    )\n"
+" ._______________.-'____\"---._.\n"
+"  \\                          /\n"
+"   \\________________________/\n"
+"   (_)                    (_)\n"
+"   Corwyn Yasuo Miyagishima\n";
 
 /** Constructor **/
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target)
