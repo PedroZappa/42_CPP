@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 16:15:11 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/08 11:36:46 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/08 11:52:49 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void AForm::beSigned(const Bureaucrat &bureaucrat) {
 
 void AForm::execute(const Bureaucrat &executor) const {
 	std::cout << executor << std::endl;
-	std::cout << "Attempting to execute\n" GRN << this << NC << std::endl;
+	std::cout << "Attempting to execute " GRN << this->getName() << NC << std::endl;
 	if (!this->_signed)
 		throw AForm::FormNotSignedException();
 	if (executor.getGrade() > this->_gradeToExecute)

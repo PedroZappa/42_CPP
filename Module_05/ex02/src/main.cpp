@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:28:32 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/08 11:48:46 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/08 11:54:23 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int main() {
 		// Test signing and executing with different bureaucrat levels
 		headerPrinter("😈 Burocratize Intern! Do it NOW! 😈", WIDTH, '=', YEL);
 		intern.signForm(shrub);
+		sepPrinter(WIDTH, '=', GRN, 1);
 		intern.executeForm(shrub); // Should work
 		// Cat created file to terminal
 		std::system("cat garden_shrubbery");
@@ -44,12 +45,15 @@ int main() {
 
 		headerPrinter("😈 Burocratize Like a Boss! GO GO GO! 😈", WIDTH, '=', YEL);
 		boss.signForm(robot);
+		sepPrinter(WIDTH, '=', GRN, 1);
 		boss.executeForm(robot); // Should work
 		sepPrinter(WIDTH, '=', GRN, 1);
 
 		headerPrinter("😈 Burocracy Failure! 😈", WIDTH, '=', YEL);
 		boss.signForm(pardon);
+		sepPrinter(WIDTH, '=', GRN, 1);
 		intern.executeForm(pardon); // Should fail - grade too low
+		sepPrinter(WIDTH, '=', GRN, 1);
 		boss.executeForm(pardon);   // Should work
 		sepPrinter(WIDTH, '=', GRN, 1);
 
