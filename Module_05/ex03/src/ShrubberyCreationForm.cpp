@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 10:13:24 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/08 11:50:27 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/08 17:17:26 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ const std::string ShrubberyCreationForm::_shrubbery =
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target)
 	: AForm("ShrubberyCreationForm", 145, 137), _target(target) {
 #ifdef DEBUG
-	std::cout << "ShrubberyCreationForm constructor called" << std::endl;
+	std::cout << YEL "ShrubberyCreationForm" NC " constructor called" << std::endl;
 #endif
 }
 
 /** Destructor **/
 ShrubberyCreationForm::~ShrubberyCreationForm(void) {
 #ifdef DEBUG
-	std::cout << "ShrubberyCreationForm destructor called" << std::endl;
+	std::cout << RED "ShrubberyCreationForm " NC " destructor called" << std::endl;
 #endif
 }
 

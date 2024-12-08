@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 11:09:01 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/08 11:13:26 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/08 17:19:44 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,15 @@
 PresidentialPardonForm::PresidentialPardonForm(const std::string &target)
 	: AForm("PresidentialPardonForm", 25, 5), _target(target) {
 #ifdef DEBUG
-	std::cout << "PresidentialPardonForm default constructor called" << std::endl;
+	std::cout << YEL "PresidentialPardonForm" NC " default constructor called"
+			  << std::endl;
 #endif
 }
 
 /** Destructor **/
 PresidentialPardonForm::~PresidentialPardonForm(void) {
 #ifdef DEBUG
-	std::cout << "PresidentialPardonForm destructor called" << std::endl;
+	std::cout << RED "PresidentialPardonForm" NC " destructor called" << std::endl;
 #endif
 }
 

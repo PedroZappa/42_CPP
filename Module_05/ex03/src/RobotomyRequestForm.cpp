@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 10:51:57 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/08 11:26:04 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/08 17:19:58 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 RobotomyRequestForm::RobotomyRequestForm(const std::string &target)
 	: AForm("RobotomyRequestForm", 72, 45), _target(target) {
 #ifdef DEBUG
-	std::cout << "RobotomyRequestForm constructor called" << std::endl;
+	std::cout << YEL "RobotomyRequestForm" NC " constructor called" << std::endl;
 #endif
 }
 
 /** Destructor **/
 RobotomyRequestForm::~RobotomyRequestForm(void) {
 #ifdef DEBUG
-	std::cout << "RobotomyRequestForm destructor called" << std::endl;
+	std::cout << RED "RobotomyRequestForm" NC " destructor called" << std::endl;
 #endif
 }
 

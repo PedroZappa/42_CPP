@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 12:12:43 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/08 12:15:03 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/08 16:40:11 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,18 @@ class Intern {
 	Intern(const Intern &src);
 	const Intern &operator=(const Intern &copy);
 
-	AForm *makeForm(std::string formName, std::string target) const;
+	/** Form Creator **/
+	AForm *makeForm(const std::string &formName, const std::string &target) const;
+
+	/** Exceptions **/
+	class UnknownFormException : public std::exception {
+	  public:
+		const char *what() const throw();
+	};
 
   private:
-	AForm *createShrubberyCreationForm(const std::string target) const;
-	AForm *createRobotomyRequestForm(const std::string target) const;
-	AForm *createPresidentialPardonForm(const std::string target) const;
+	/** Factory methods **/
+	AForm *createShrubberyCreationForm(const std::string &target) const;
+	AForm *createRobotomyRequestForm(const std::string &target) const;
+	AForm *createPresidentialPardonForm(const std::string &target) const;
 };

@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 16:15:15 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/08 11:23:04 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/08 17:00:22 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ class Bureaucrat;
 class AForm {
   public:
 	AForm(const std::string &name, int gradeToSign, int gradeToExecute);
-	~AForm(void);
+	virtual ~AForm(void);
 
 	AForm(const AForm &src);
 	AForm &operator=(const AForm &rhs);
