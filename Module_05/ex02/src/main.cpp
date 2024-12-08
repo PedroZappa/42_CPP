@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:28:32 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/08 12:02:45 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/08 12:09:15 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int main() {
 	headerPrinter("😈 No, you need form 28B, not 28C! 😈", WIDTH, '=', GRN);
 
 	try {
-		Bureaucrat boss("Boss", 1);
-		Bureaucrat intern("Intern", 33);
+		Bureaucrat boss("Zaphod", 1);
+		Bureaucrat intern("Ford", 33);
 		Bureaucrat zedro("Zedro", 10);
 
 		ShrubberyCreationForm shrub("garden");
@@ -37,7 +37,7 @@ int main() {
 		sepPrinter(WIDTH, '=', GRN, 1);
 
 		// Test signing and executing with different bureaucrat levels
-		headerPrinter("😈 Burocratize Intern! Do it NOW! 😈", WIDTH, '=', YEL);
+		headerPrinter("😈 Burocratize Ford! Do it NOW! 😈", WIDTH, '=', YEL);
 		intern.signForm(shrub);
 		sepPrinter(WIDTH, '=', GRN, 1);
 		intern.executeForm(shrub); // Should work
@@ -45,7 +45,7 @@ int main() {
 		std::system("cat garden_shrubbery");
 		sepPrinter(WIDTH, '=', GRN, 1);
 
-		headerPrinter("😈 Burocratize Like a Boss! GO GO GO! 😈", WIDTH, '=', YEL);
+		headerPrinter("😈 Burocratize Like a President! 😈", WIDTH, '=', YEL);
 		boss.signForm(robot);
 		sepPrinter(WIDTH, '=', GRN, 1);
 		boss.executeForm(robot); // Should work
