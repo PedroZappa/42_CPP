@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 16:15:11 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/08 11:23:48 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/08 11:36:46 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int AForm::getExecGrade(void) const {
 
 void AForm::beSigned(const Bureaucrat &bureaucrat) {
 	std::cout << bureaucrat << std::endl;
-	std::cout << "Attempting to sign\n" GRN << *this << NC << std::endl;
+	std::cout << "Attempting to sign " GRN << this->getName() << NC << std::endl;
 	if (bureaucrat.getGrade() > this->_gradeToSign)
 		throw AForm::GradeTooLowException();
 	this->_signed = true;

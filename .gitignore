@@ -40,3 +40,4 @@ harlFilter
 **/.temp
 **/.build
 *.replace
+*_shrubbery
