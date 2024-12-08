@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:28:32 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/08 11:55:21 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/08 12:02:45 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,13 @@ int main() {
 
 	try {
 		Bureaucrat boss("Boss", 1);
-		Bureaucrat intern("Intern", 10);
+		Bureaucrat intern("Intern", 33);
+		Bureaucrat zedro("Zedro", 10);
 
 		ShrubberyCreationForm shrub("garden");
 		RobotomyRequestForm robot("Marvin");
 		PresidentialPardonForm pardon("Arthur Dent");
+		ShrubberyCreationForm unsign("unsigned");
 		sepPrinter(WIDTH, '=', GRN, 1);
 
 		// Test signing and executing with different bureaucrat levels
@@ -55,6 +57,10 @@ int main() {
 		intern.executeForm(pardon); // Should fail - grade too low
 		sepPrinter(WIDTH, '=', GRN, 1);
 		boss.executeForm(pardon);   // Should work
+		sepPrinter(WIDTH, '=', GRN, 1);
+
+		headerPrinter("😈 Execute Unsigned Form you Maggot!! 😈", WIDTH, '=', YEL);
+		zedro.executeForm(unsign); // Should fail - unsigned form
 		sepPrinter(WIDTH, '=', GRN, 1);
 
 	} catch (const std::exception &e) {
