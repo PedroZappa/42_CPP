@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AForm.hpp                                           :+:      :+:    :+: */
+/*   AForm.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 16:15:15 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/05 17:05:00 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/08 10:46:00 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ class AForm {
 	~AForm(void);
 
 	AForm(const AForm &src);
+	AForm &operator=(const AForm &rhs);
 
 	bool isSigned(void) const;
 
@@ -34,7 +35,8 @@ class AForm {
 
 	void beSigned(const Bureaucrat &bureaucrat);
 
-	virtual void execute(const Bureaucrat &executor) const = 0;
+	void execute(const Bureaucrat &executor) const;
+	// virtual void execute(void) const = 0;
 
 	/** Exceptions **/
 	class GradeTooHighException : public std::exception {
@@ -57,8 +59,6 @@ class AForm {
 	const int _gradeToExecute;
 	static const int GRADE_MIN = 150;
 	static const int GRADE_MAX = 1;
-
-	AForm &operator=(const AForm &rhs); // So that forms cannot be duplicated
 };
 
 std::ostream &operator<<(std::ostream &os, AForm &rhs);

@@ -6,13 +6,17 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 10:07:50 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/08 10:10:02 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/08 10:42:46 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include "AForm.hpp"
+#include <fstream>
+#include <iostream>
+#include <stdexcept>
+#include <sys/stat.h>
 
 class ShrubberyCreationForm : public AForm {
   public:
@@ -21,7 +25,7 @@ class ShrubberyCreationForm : public AForm {
 
 	ShrubberyCreationForm(const ShrubberyCreationForm &src);
 
-	void execute(const Bureaucrat &executor) const;
+	virtual void execute(void) const;
 
   private:
 	const std::string _target;
