@@ -18,25 +18,25 @@
 int main() {
 	headerPrinter(
 		"Mommy, when I grow up I wanna be a Bureaucrat!", WIDTH, '=', GRN);
-	Bureaucrat bob("Zedro", 42);
+	Bureaucrat zedro("Zedro", 42);
 	std::cout << MAGB "Print original Bureaucrat's grade:" NC << std::endl;
-	std::cout << bob << std::endl;
+	std::cout << zedro << std::endl;
 	std::cout << MAGB "Print incremented Bureaucrat's grade:" NC << std::endl;
-	bob.incrementGrade();
-	std::cout << bob << std::endl;
+	zedro.incrementGrade();
+	std::cout << zedro << std::endl;
 	std::cout << MAGB "Print decremented Bureaucrat's grade:" NC << std::endl;
-	bob.decrementGrade();
-	std::cout << bob << std::endl;
+	zedro.decrementGrade();
+	std::cout << zedro << std::endl;
 
 	// Testing GradeTooHighException
 	sepPrinter(WIDTH, '-', GRN, 1);
 	try {
-		Bureaucrat bob2("Pappa", 0);
-		std::cout << bob2 << std::endl;
-		bob2.incrementGrade();
-		std::cout << bob2 << std::endl;
-		bob2.decrementGrade();
-		std::cout << bob2 << std::endl;
+		Bureaucrat pappa("Pappa", 0);
+		std::cout << pappa << std::endl;
+		pappa.incrementGrade();
+		std::cout << pappa << std::endl;
+		pappa.decrementGrade();
+		std::cout << pappa << std::endl;
 	} catch (const Bureaucrat::GradeTooHighException &e) {
 		std::cout << e.what() << std::endl;
 	}
@@ -44,12 +44,12 @@ int main() {
 	// Testing GradeTooLowException
 	sepPrinter(WIDTH, '-', GRN, 1);
 	try {
-		Bureaucrat bob3("bob3", 151);
-		std::cout << bob3 << std::endl;
-		bob3.incrementGrade();
-		std::cout << bob3 << std::endl;
-		bob3.decrementGrade();
-		std::cout << bob3 << std::endl;
+		Bureaucrat buh("Buh", 151);
+		std::cout << buh << std::endl;
+		buh.incrementGrade();
+		std::cout << buh << std::endl;
+		buh.decrementGrade();
+		std::cout << buh << std::endl;
 	} catch (const Bureaucrat::GradeTooLowException &e) {
 		std::cout << e.what() << std::endl;
 	}
