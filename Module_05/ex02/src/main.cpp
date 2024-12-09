@@ -40,7 +40,7 @@ int main() {
 		sepPrinter(WIDTH, '=', GRN, 1);
 		intern.executeForm(shrub); // Should work
 		// Cat created file to terminal
-		std::system("cat garden_shrubbery");
+		// std::system("cat garden_shrubbery");
 		sepPrinter(WIDTH, '=', GRN, 1);
 
 		headerPrinter("😈 Burocratize Like a President! 😈", WIDTH, '=', YEL);
