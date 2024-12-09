@@ -79,6 +79,8 @@ void AForm::execute(const Bureaucrat &executor) const {
 	std::cout << executor << std::endl;
 	std::cout << "Attempting to execute " GRN << this->getName() << NC
 			  << std::endl;
+	std::cout << "Grade required to sign: " YEL << this->_gradeToSign << NC
+			  << std::endl;
 	std::cout << "Grade required to execute: " YEL << this->_gradeToExecute
 			  << NC << std::endl;
 	if (!this->_signed)
