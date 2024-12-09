@@ -13,6 +13,7 @@
 #include "../inc/Form.hpp"
 #include <iostream>
 
+/** Constructor **/
 Form::Form(const std::string &name, int gradeToSign, int gradeToExecute)
 	: _name(name), _signed(false), _gradeToSign(gradeToSign),
 	  _gradeToExecute(gradeToExecute) {
@@ -22,12 +23,14 @@ Form::Form(const std::string &name, int gradeToSign, int gradeToExecute)
 		throw Form::GradeTooHighException();
 }
 
+/** Copy Constructor **/
 Form::Form(const Form &src)
 	: _name(src._name), _signed(src._signed), _gradeToSign(src._gradeToSign),
 	  _gradeToExecute(src._gradeToExecute) {
 	*this = src;
 }
 
+/** Destructor **/
 Form::~Form(void) {
 }
 
