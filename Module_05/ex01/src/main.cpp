@@ -56,7 +56,6 @@ int main() {
 
 	// Sign Forms
 	headerPrinter("Bureaucratizing", WIDTH, '=', YEL);
-
 	for (int i = 0; i < N_FORMZ; i++) {
 		bureaucrats[i].signForm(forms[i]);
 		sepPrinter(WIDTH, '-', GRN, 1);

@@ -34,7 +34,7 @@ Form::Form(const Form &src)
 Form::~Form(void) {
 }
 
-/** Operator Overloads **/
+/** Equality Operator Overloads **/
 Form &Form::operator=(const Form &rhs) {
 	if (this == &rhs)
 		return (*this);
@@ -42,6 +42,7 @@ Form &Form::operator=(const Form &rhs) {
 	return (*this);
 }
 
+/** Insertion Operator Overload **/
 std::ostream &operator<<(std::ostream &os, Form &rhs) {
 	std::string sign = rhs.isSigned() ? "🮱 " : "❌";
 
