@@ -69,6 +69,8 @@ int AForm::getExecGrade(void) const {
 
 void AForm::beSigned(const Bureaucrat &bureaucrat) {
 	std::cout << bureaucrat << std::endl;
+	std::cout << "Grade required to sign: " YEL << this->_gradeToSign << NC
+			  << std::endl;
 	std::cout << "Attempting to sign " GRN << this->getName() << NC << std::endl;
 	if (bureaucrat.getGrade() > this->_gradeToSign)
 		throw AForm::GradeTooLowException();
