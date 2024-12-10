@@ -43,3 +43,26 @@ ScalarConverter &ScalarConverter::operator=(const ScalarConverter &other)
 	return (*this);
 }
 
+/** Check Types **/
+t_types ScalarConverter::getType(const std::string &param) {
+	if (isChar(param) == 1)
+		return (CHAR);
+	else if (isInt(param) == 1)
+		return (INT);
+	else if (isFloat(param) == 1)
+		return (FLOAT);
+	else if (isDouble(param) == 1)
+		return (DOUBLE);
+	else
+		return (ERR);
+}
+
+bool ScalarConverter::isChar(const std::string &param) {
+	if (param.size() != 1) // String size must be 1
+		return (false);
+	if (!std::isprint(param[0])) // Check if char is printable
+		return (false);
+	if (std::isdigit(param[0])) // Check if char is a digit
+		return (false);
+	return (true);
+}

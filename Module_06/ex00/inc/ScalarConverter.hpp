@@ -23,12 +23,21 @@ typedef enum e_types {
 
 class ScalarConverter {
   public:
+	static void convert(const std::string &input);
+
+  private:
+	// To avoid instantiation
 	ScalarConverter(void);
 	ScalarConverter(const ScalarConverter &other);
 	~ScalarConverter(void);
 
 	ScalarConverter &operator=(const ScalarConverter &other);
 
-  private:
-	static void convert(const std::string &input);
+
+	// Check Types
+	static t_types getType(const std::string &param);
+	static bool isChar(const std::string &param);
+	static bool isInt(const std::string &param);
+	static bool isFloat(const std::string &param);
+	static bool isDouble(const std::string &param);
 };
