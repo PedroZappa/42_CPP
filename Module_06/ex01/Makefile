@@ -6,7 +6,7 @@
 #    By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/10 09:01:08 by passunca          #+#    #+#              #
-#    Updated: 2024/12/10 09:04:10 by passunca         ###   ########.fr        #
+#    Updated: 2024/12/11 13:47:44 by passunca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ INC_PATH		= inc
 FILES			= main.cpp
 FILES			+= printer.cpp
 FILES			+= Serializer.cpp
+FILES			+= Data.cpp
 
 SRC				= $(addprefix $(SRC_PATH)/, $(FILES))
 OBJS			= $(SRC:$(SRC_PATH)/%.cpp=$(BUILD_PATH)/%.o)
