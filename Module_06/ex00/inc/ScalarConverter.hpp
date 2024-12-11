@@ -11,16 +11,18 @@
 /* ************************************************************************** */
 
 #include "Ansi.h"
+#include <cstdlib>
+#include <iomanip>
 #include <iostream>
 #include <limits>
-#include <cstdlib>
 
 typedef enum e_types {
 	ERR,
 	CHAR,  // 'c', 'a'
 	INT,   // 0, 42, -42
 	FLOAT, // 0.0f, 42.42f, -42.42f, -inff, +inff, nanf
-	DOUBLE // 0.0, -4.2, 4.2, -inf, +inf, nan
+	DOUBLE,// 0.0, -4.2, 4.2, -inf, +inf, nan
+	PSEUDO_LITERAL,
 } t_types;
 
 class ScalarConverter {
@@ -41,7 +43,8 @@ class ScalarConverter {
 	static bool isInt(const std::string &param);
 	static bool isFloat(const std::string &param);
 	static bool isDouble(const std::string &param);
-
+	static bool isPseudoLiteral(const std::string &param);
+	//
 	// Convert Types
 	static void convertData(const std::string &param, long double nbr);
 	static void convertChar(const std::string &param, char c);
@@ -53,6 +56,6 @@ class ScalarConverter {
 	static bool isOverflow(const std::string &param, t_types type);
 
 	// Print
-	static void printPseudoLiteral(const std::string &param, t_types type);
+	static void printPseudoLiteral(const std::string &param);
 	static void printInvalidInput(const std::string &param);
 };

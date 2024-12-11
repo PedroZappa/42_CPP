@@ -53,7 +53,7 @@ OBJS			= $(SRC:$(SRC_PATH)/%.cpp=$(BUILD_PATH)/%.o)
 #                              COMPILER & FLAGS                                #
 #==============================================================================#
 
-CXX					= c++
+CXX					= g++
 CXXFLAGS	  = -Wall -Wextra -Werror
 CXXFLAGS	  += -std=c++98
 CXXFLAGS	  += #-Wshadow
@@ -119,9 +119,50 @@ $(TEMP_PATH):
 test: all 			## Run tests
 	@echo "$(YEL)Running $(MAG)$(NAME)$(YEL)$(D)"
 	@echo "$(YEL)$(_SEP)$(D)"
-	@echo "$(YEL) Running $(BWHI)Debug$(YEL) filter...$(D)"
-	./$(NAME) 
+	@echo "$(YEL) Running $(BGRN)char$(YEL) Tests...$(D)"
 	@echo "$(YEL)$(_SEP)$(D)"
+	./$(NAME) 'z'
+	@echo "$(YEL)$(_SEP)$(D)"
+	./$(NAME) ";"
+	@echo "$(YEL)$(_SEP)$(D)"
+	./$(NAME) '*'
+	@echo "$(YEL)$(_SEP)$(D)"
+	./$(NAME) 
+	@echo "$(RED)$(_SEP)$(D)"
+	@echo "$(YEL) Running $(BGRN)int$(YEL) Tests...$(D)"
+	@echo "$(YEL)$(_SEP)$(D)"
+	./$(NAME) 1
+	@echo "$(YEL)$(_SEP)$(D)"
+	./$(NAME) 42
+	@echo "$(YEL)$(_SEP)$(D)"
+	./$(NAME) +42
+	@echo "$(YEL)$(_SEP)$(D)"
+	./$(NAME) -666
+	@echo "$(RED)$(_SEP)$(D)"
+	@echo "$(YEL) Running $(BGRN)float$(YEL) Tests...$(D)"
+	@echo "$(YEL)$(_SEP)$(D)"
+	./$(NAME) 42.42f
+	@echo "$(YEL)$(_SEP)$(D)"
+	./$(NAME) 0.0f
+	@echo "$(YEL)$(_SEP)$(D)"
+	./$(NAME) -inff
+	@echo "$(YEL)$(_SEP)$(D)"
+	./$(NAME) +inff
+	@echo "$(YEL)$(_SEP)$(D)"
+	./$(NAME) nanf
+	@echo "$(RED)$(_SEP)$(D)"
+	@echo "$(YEL) Running $(BGRN)double$(YEL) Tests...$(D)"
+	@echo "$(YEL)$(_SEP)$(D)"
+	./$(NAME) 42.42
+	@echo "$(YEL)$(_SEP)$(D)"
+	./$(NAME) 0.0
+	@echo "$(YEL)$(_SEP)$(D)"
+	./$(NAME) -inf
+	@echo "$(YEL)$(_SEP)$(D)"
+	./$(NAME) +inf
+	@echo "$(YEL)$(_SEP)$(D)"
+	./$(NAME) nan
+
 
 ##@ Debug Rules 
 

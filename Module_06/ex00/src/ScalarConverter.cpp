@@ -52,6 +52,8 @@ t_types ScalarConverter::getType(const std::string &param) {
 		return (FLOAT);
 	else if (isDouble(param) == 1)
 		return (DOUBLE);
+	else if (isPseudoLiteral(param) == 1)
+		return (PSEUDO_LITERAL);
 	else
 		return (ERR);
 }
@@ -78,24 +80,23 @@ bool ScalarConverter::isInt(const std::string &param) {
 
 bool ScalarConverter::isFloat(const std::string &param) {
 	size_t i = 0;
-	if (param[0] == '-' || param[0] == '+') // Support for signed numbers
+	if (param[i] == '-' || param[i] == '+') // Support for signed numbers
 		++i;
-
 	size_t dot_i = param.find('.'); // Find dot index
 	size_t f_i = param.find('f');   // Find 'f' index
-	if ((dot_i == std::string::npos) || (f_i != std::string::npos) ||
+	if ((dot_i == std::string::npos) || (f_i == std::string::npos) ||
 		(f_i != param.length() - 1)) // No dot
 		return (false);
 	// Find decimal and floating parts
-	std::string int_part = param.substr(i, dot_i - i);
+	std::string int_part = param.substr(i, (dot_i - i));
 	std::string frac_part = param.substr((dot_i + 1), (f_i - dot_i - 1));
 	if (int_part.empty() || frac_part.empty()) // Empty parts
 		return (false);
 	// Check if integral and decimal parts are digits
-	for (size_t idx = 0; idx < int_part.length(); ++idx)
+	for (size_t idx = 0; idx < int_part.length(); idx++)
 		if (!std::isdigit(int_part[idx]))
 			return (false);
-	for (size_t idx = 0; idx < frac_part.length(); ++idx)
+	for (size_t idx = 0; idx < frac_part.length(); idx++)
 		if (!std::isdigit(frac_part[idx]))
 			return (false);
 	return (true);
@@ -125,6 +126,11 @@ bool ScalarConverter::isDouble(const std::string &param) {
 	return (true);
 }
 
+bool ScalarConverter::isPseudoLiteral(const std::string &param) {
+	return ((param == "nan") || (param == "nanf") || (param == "+inf") ||
+			(param == "-inf") || (param == "+inff") || (param == "-inff"));
+}
+//
 //** Convert Types **/
 void ScalarConverter::convert(const std::string &input) {
 	switch (getType(input)) {
@@ -136,8 +142,10 @@ void ScalarConverter::convert(const std::string &input) {
 		return convertData(input, std::atof(input.c_str()));
 	case DOUBLE:
 		return convertData(input, std::strtold(input.c_str(), NULL));
+	case PSEUDO_LITERAL:
+		return printPseudoLiteral(input);
 	default:
-		std::cout << "Invalid input" << std::endl;
+		printInvalidInput(input);
 		break;
 	}
 }
@@ -154,7 +162,7 @@ void ScalarConverter::convertChar(const std::string &param, char c) {
 	if (isOverflow(param, CHAR))
 		std::cout << "overflow" << std::endl;
 	else if (!std::isprint(c))
-		std::cout << "non-printable" << std::endl;
+		std::cout << "not printable" << std::endl;
 	else
 		std::cout << "'" << c << "'" << std::endl;
 }
@@ -172,7 +180,7 @@ void ScalarConverter::convertFloat(const std::string &param, float f) {
 	if (isOverflow(param, FLOAT))
 		std::cout << "overflow" << std::endl;
 	else
-		std::cout << f << "f" << std::endl;
+		std::cout << std::fixed << std::setprecision(1) << f << "f" << std::endl;
 }
 
 void ScalarConverter::convertDouble(const std::string &param, double d) {
@@ -195,10 +203,10 @@ bool ScalarConverter::isOverflow(const std::string &param, t_types type) {
 		return (nbr < std::numeric_limits<int>::min() ||
 				nbr > std::numeric_limits<int>::max());
 	case FLOAT:
-		return (nbr < std::numeric_limits<float>::min() ||
+		return (nbr < -std::numeric_limits<float>::max() ||
 				nbr > std::numeric_limits<float>::max());
 	case DOUBLE:
-		return (nbr < std::numeric_limits<double>::min() ||
+		return (nbr < -std::numeric_limits<double>::max() ||
 				nbr > std::numeric_limits<double>::max());
 	default:
 		return (false);
@@ -206,22 +214,16 @@ bool ScalarConverter::isOverflow(const std::string &param, t_types type) {
 }
 
 // Print
-void ScalarConverter::printPseudoLiteral(const std::string &param, t_types type) {
-	if (type == CHAR)
-		std::cout << "char: invalid" << std::endl;
-	if (type == INT)
-		std::cout << "int: invalid" << std::endl;
+void ScalarConverter::printPseudoLiteral(const std::string &param) {
+	std::cout << "char: invalid" << std::endl;
+	std::cout << "int: invalid" << std::endl;
 
 	if (param.find("nan") != std::string::npos) {
-		if (type == FLOAT)
-			std::cout << "float: nanf" << std::endl;
-		if (type == DOUBLE)
-			std::cout << "double: nan" << std::endl;
+		std::cout << "float: nanf" << std::endl;
+		std::cout << "double: nan" << std::endl;
 	} else {
-		if (type == FLOAT)
-			std::cout << "float: " << param[0] << "inff" << std::endl;
-		if (type == DOUBLE)
-			std::cout << "double: " << param[0] << "inf" << std::endl;
+		std::cout << "float: " << param[0] << "inff" << std::endl;
+		std::cout << "double: " << param[0] << "inf" << std::endl;
 	}
 }
 
