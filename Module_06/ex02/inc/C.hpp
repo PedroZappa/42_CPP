@@ -1,27 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Base.hpp                                           :+:      :+:    :+:   */
+/*   C.hpp                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/11 14:56:32 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/11 16:25:30 by passunca         ###   ########.fr       */
+/*   Created: 2024/12/11 15:20:34 by passunca          #+#    #+#             */
+/*   Updated: 2024/12/11 15:20:54 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include <string>
+#include "Base.hpp"
 
-class Base {
-  public:
-	virtual ~Base(void);
-};
-
-/** @brief UI Helper Functions */
-void headerPrinter(const std::string &headerText,
-				   int inWidth,
-				   char sep,
-				   const char *sepColor);
-void sepPrinter(int inWidth, char sepChar, const char *color, int nLines);
+class C : public Base {};

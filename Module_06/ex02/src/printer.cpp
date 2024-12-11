@@ -6,11 +6,11 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 14:54:49 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/11 15:11:39 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/11 16:24:54 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/Ansi.h"
+#include "../inc/Ansi.hpp"
 #include <iostream>
 
 /** @brief Prints Header w/ adjustable width
