@@ -162,7 +162,7 @@ void ScalarConverter::convertChar(const std::string &param, char c) {
 	if (isOverflow(param, CHAR))
 		std::cout << "overflow" << std::endl;
 	else if (!std::isprint(c))
-		std::cout << "not printable" << std::endl;
+		std::cout << "Non displayable" << std::endl;
 	else
 		std::cout << "'" << c << "'" << std::endl;
 }
@@ -215,8 +215,8 @@ bool ScalarConverter::isOverflow(const std::string &param, t_types type) {
 
 // Print
 void ScalarConverter::printPseudoLiteral(const std::string &param) {
-	std::cout << "char: invalid" << std::endl;
-	std::cout << "int: invalid" << std::endl;
+	std::cout << "char: impossible" << std::endl;
+	std::cout << "int: impossible" << std::endl;
 
 	if (param.find("nan") != std::string::npos) {
 		std::cout << "float: nanf" << std::endl;

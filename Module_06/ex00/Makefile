@@ -53,7 +53,7 @@ OBJS			= $(SRC:$(SRC_PATH)/%.cpp=$(BUILD_PATH)/%.o)
 #                              COMPILER & FLAGS                                #
 #==============================================================================#
 
-CXX					= g++
+CXX					= c++
 CXXFLAGS	  = -Wall -Wextra -Werror
 CXXFLAGS	  += -std=c++98
 CXXFLAGS	  += #-Wshadow
