@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:31:35 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/11 13:53:37 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/11 14:12:11 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,3 +27,10 @@ class Serializer
 		Serializer &operator=(const Serializer &other);
 		~Serializer(void);
 };
+
+/** @brief UI Helper Functions */
+void headerPrinter(const std::string &headerText,
+				   int inWidth,
+				   char sep,
+				   const char *sepColor);
+void sepPrinter(int inWidth, char sepChar, const char *color, int nLines);

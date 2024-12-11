@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:44:48 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/11 13:51:32 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/11 14:14:05 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,14 @@
 
 int main()
 {
-	Data* data = new Data();
+	headerPrinter( "Serializer", 50, '-', YEL);
+	Data *data = new Data();
 	std::cout << data << std::endl;
 	uintptr_t raw = Serializer::serialize(data);
 	std::cout << raw << std::endl;
-	Data* data2 = Serializer::deserialize(raw);
+	Data *data2 = Serializer::deserialize(raw);
 	std::cout << data2 << std::endl;
-
+	sepPrinter(50, '-', GRN, 1);
+	delete data;
 	return (0);
 }
