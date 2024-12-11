@@ -125,6 +125,106 @@ bool ScalarConverter::isDouble(const std::string &param) {
 	return (true);
 }
 
-//** Convertion Functions **/
-//
-//
+//** Convert Types **/
+void ScalarConverter::convert(const std::string &input) {
+	switch (getType(input)) {
+	case CHAR:
+		return convertData(input, input[0]);
+	case INT:
+		return convertData(input, std::atoi(input.c_str()));
+	case FLOAT:
+		return convertData(input, std::atof(input.c_str()));
+	case DOUBLE:
+		return convertData(input, std::strtold(input.c_str(), NULL));
+	default:
+		std::cout << "Invalid input" << std::endl;
+		break;
+	}
+}
+
+void ScalarConverter::convertData(const std::string &param, long double nbr) {
+	convertChar(param, static_cast<char>(nbr));
+	convertInt(param, static_cast<int>(nbr));
+	convertFloat(param, static_cast<float>(nbr));
+	convertDouble(param, static_cast<double>(nbr));
+}
+
+void ScalarConverter::convertChar(const std::string &param, char c) {
+	std::cout << "char: ";
+	if (isOverflow(param, CHAR))
+		std::cout << "overflow" << std::endl;
+	else if (!std::isprint(c))
+		std::cout << "non-printable" << std::endl;
+	else
+		std::cout << "'" << c << "'" << std::endl;
+}
+
+void ScalarConverter::convertInt(const std::string &param, int i) {
+	std::cout << "int: ";
+	if (isOverflow(param, INT))
+		std::cout << "overflow" << std::endl;
+	else
+		std::cout << i << std::endl;
+}
+
+void ScalarConverter::convertFloat(const std::string &param, float f) {
+	std::cout << "float: ";
+	if (isOverflow(param, FLOAT))
+		std::cout << "overflow" << std::endl;
+	else
+		std::cout << f << "f" << std::endl;
+}
+
+void ScalarConverter::convertDouble(const std::string &param, double d) {
+	std::cout << "double: ";
+	if (isOverflow(param, DOUBLE))
+		std::cout << "overflow" << std::endl;
+	else
+		std::cout << d << std::endl;
+}
+
+/** Check Limits **/
+bool ScalarConverter::isOverflow(const std::string &param, t_types type) {
+	long double nbr = std::strtold(param.c_str(), NULL);
+
+	switch (type) {
+	case CHAR:
+		return (nbr < std::numeric_limits<char>::min() ||
+				nbr > std::numeric_limits<char>::max());
+	case INT:
+		return (nbr < std::numeric_limits<int>::min() ||
+				nbr > std::numeric_limits<int>::max());
+	case FLOAT:
+		return (nbr < std::numeric_limits<float>::min() ||
+				nbr > std::numeric_limits<float>::max());
+	case DOUBLE:
+		return (nbr < std::numeric_limits<double>::min() ||
+				nbr > std::numeric_limits<double>::max());
+	default:
+		return (false);
+	}
+}
+
+// Print
+void ScalarConverter::printPseudoLiteral(const std::string &param, t_types type) {
+	if (type == CHAR)
+		std::cout << "char: invalid" << std::endl;
+	if (type == INT)
+		std::cout << "int: invalid" << std::endl;
+
+	if (param.find("nan") != std::string::npos) {
+		if (type == FLOAT)
+			std::cout << "float: nanf" << std::endl;
+		if (type == DOUBLE)
+			std::cout << "double: nan" << std::endl;
+	} else {
+		if (type == FLOAT)
+			std::cout << "float: " << param[0] << "f" << std::endl;
+		if (type == DOUBLE)
+			std::cout << "double: " << param[0] << std::endl;
+	}
+}
+
+void ScalarConverter::printInvalidInput(const std::string &param) {
+	std::cout << "Error: Invalid input: " << param << std::endl;
+}

@@ -12,6 +12,7 @@
 
 #include "Ansi.h"
 #include <iostream>
+#include <limits>
 
 typedef enum e_types {
 	ERR,
@@ -46,4 +47,11 @@ class ScalarConverter {
 	static void convertInt(const std::string &param, int i);
 	static void convertFloat(const std::string &param, float f);
 	static void convertDouble(const std::string &param, double d);
+
+	// Check Limits
+	static bool isOverflow(const std::string &param, t_types type);
+
+	// Print
+	static void printPseudoLiteral(const std::string &param, t_types type);
+	static void printInvalidInput(const std::string &param);
 };
