@@ -35,8 +35,7 @@ ScalarConverter::~ScalarConverter(void) {
 }
 
 /** Assignment Operator */
-ScalarConverter &ScalarConverter::operator=(const ScalarConverter &other)
-{
+ScalarConverter &ScalarConverter::operator=(const ScalarConverter &other) {
 	if (this == &other)
 		return (*this);
 	*this = other;
@@ -66,3 +65,66 @@ bool ScalarConverter::isChar(const std::string &param) {
 		return (false);
 	return (true);
 }
+
+bool ScalarConverter::isInt(const std::string &param) {
+	size_t i = 0;
+	if (param[0] == '-' || param[0] == '+') // Support for signednumbers
+		++i;
+	while (param[i]) // Check for digits
+		if (!std::isdigit(param[i++]))
+			return (false);
+	return (true);
+}
+
+bool ScalarConverter::isFloat(const std::string &param) {
+	size_t i = 0;
+	if (param[0] == '-' || param[0] == '+') // Support for signed numbers
+		++i;
+
+	size_t dot_i = param.find('.'); // Find dot index
+	size_t f_i = param.find('f');   // Find 'f' index
+	if ((dot_i == std::string::npos) || (f_i != std::string::npos) ||
+		(f_i != param.length() - 1)) // No dot
+		return (false);
+	// Find decimal and floating parts
+	std::string int_part = param.substr(i, dot_i - i);
+	std::string frac_part = param.substr((dot_i + 1), (f_i - dot_i - 1));
+	if (int_part.empty() || frac_part.empty()) // Empty parts
+		return (false);
+	// Check if integral and decimal parts are digits
+	for (size_t idx = 0; idx < int_part.length(); ++idx)
+		if (!std::isdigit(int_part[idx]))
+			return (false);
+	for (size_t idx = 0; idx < frac_part.length(); ++idx)
+		if (!std::isdigit(frac_part[idx]))
+			return (false);
+	return (true);
+}
+
+bool ScalarConverter::isDouble(const std::string &param) {
+	size_t i = 0;
+	if (param[i] == '+' || param[i] == '-')
+		++i;
+
+	size_t dot_i = param.find('.');
+	if (dot_i == std::string::npos)
+		return (false);
+
+	std::string int_part = param.substr(i, (dot_i - i));
+	std::string frac_part =
+		param.substr((dot_i + 1), (param.length() - dot_i - 1));
+	if (int_part.empty() || frac_part.empty())
+		return (false);
+
+	for (size_t idx = 0; idx < int_part.length(); ++idx)
+		if (!std::isdigit(int_part[idx]))
+			return (false);
+	for (size_t idx = 0; idx < frac_part.length(); ++idx)
+		if (!std::isdigit(frac_part[idx]))
+			return (false);
+	return (true);
+}
+
+//** Convertion Functions **/
+//
+//
