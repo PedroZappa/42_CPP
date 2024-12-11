@@ -219,9 +219,9 @@ void ScalarConverter::printPseudoLiteral(const std::string &param, t_types type)
 			std::cout << "double: nan" << std::endl;
 	} else {
 		if (type == FLOAT)
-			std::cout << "float: " << param[0] << "f" << std::endl;
+			std::cout << "float: " << param[0] << "inff" << std::endl;
 		if (type == DOUBLE)
-			std::cout << "double: " << param[0] << std::endl;
+			std::cout << "double: " << param[0] << "inf" << std::endl;
 	}
 }
 
