@@ -26,7 +26,7 @@ ARG				=
 #                                     NAMES                                    #
 #==============================================================================#
 
-NAME 			 	= Casts.out
+NAME 			 	= ScalarConverter.out
 
 ### Message Vars
 _SUCCESS 		= [$(GRN)SUCCESS$(D)]
@@ -44,6 +44,7 @@ INC_PATH		= inc
 
 FILES			= main.cpp
 FILES			+= printer.cpp
+FILES			+= ScalarConverter.cpp
 
 SRC				= $(addprefix $(SRC_PATH)/, $(FILES))
 OBJS			= $(SRC:$(SRC_PATH)/%.cpp=$(BUILD_PATH)/%.o)

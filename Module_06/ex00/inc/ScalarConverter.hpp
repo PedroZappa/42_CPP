@@ -13,6 +13,7 @@
 #include "Ansi.h"
 #include <iostream>
 #include <limits>
+#include <cstdlib>
 
 typedef enum e_types {
 	ERR,
