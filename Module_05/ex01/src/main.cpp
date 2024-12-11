@@ -44,7 +44,7 @@ int main() {
 		static_cast<Form *>(operator new[](sizeof(Form) * N_FORMZ));
 
 	// Create Forms using placement new
-	new (&forms[0]) Form("Creation Form", 150, 150);
+	new (&forms[0]) Form("Creation Form", 149, 150);
 	new (&forms[1]) Form("Init Form", 33, 33);
 	new (&forms[2]) Form("Dominator Form", 1, 1);
 
