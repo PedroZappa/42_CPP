@@ -14,6 +14,7 @@
 
 #include <string>
 #include <iostream>
+#include "Ansi.h"
 
 class Base {
   public:

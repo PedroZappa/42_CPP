@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/Ansi.hpp"
+#include "../inc/Ansi.h"
 #include "../inc/Base.hpp"
 #include <cstdlib> // rand()
 #include <iostream>
@@ -23,10 +23,13 @@ int main(void) {
 	for (int i = 0; i < 10; ++i) {
 		Base *ptr = Base::generate();
 		Base &ref = *ptr;
+		std::cout << "Identify Pointer: ";
 		Base::identify(ptr);
-		Base::identify(ref);
-		delete ptr;
 		sepPrinter(WIDTH, '-', GRN, 1);
+		std::cout << "Identify Reference: ";
+		Base::identify(ref);
+		sepPrinter(WIDTH, '-', GRN, 2);
+		delete ptr;
 	}
 	return (0);
 }

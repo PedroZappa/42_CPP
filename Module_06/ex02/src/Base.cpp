@@ -12,6 +12,8 @@
 
 #include "../inc/Base.hpp"
 #include <cstdlib> // rand()
+#include <fcntl.h> // open()
+#include <unistd.h> // read()
 
 Base::~Base(void) {
 #ifdef DEBUG
@@ -20,7 +22,17 @@ Base::~Base(void) {
 }
 
 Base *Base::generate(void) {
-	switch (rand() % 3) {
+	int fd = open("/dev/urandom", O_RDONLY);
+	if (fd < 0) {
+		return NULL;
+	}
+	unsigned int random_number;
+	ssize_t result = read(fd, &random_number, sizeof(random_number));
+	close(fd);
+	if (result != sizeof(random_number)) {
+		return NULL;
+	}
+	switch (random_number % 3) {
 	case 0:
 		return (new A());
 	case 1:
@@ -33,11 +45,11 @@ Base *Base::generate(void) {
 
 void Base::identify(Base *p) {
 	if (dynamic_cast<A *>(p))
-		std::cout << "A" << std::endl;
+		std::cout << YEL "A" NC << std::endl;
 	else if (dynamic_cast<B *>(p))
-		std::cout << "B" << std::endl;
+		std::cout << MAG "B" NC << std::endl;
 	else if (dynamic_cast<C *>(p))
-		std::cout << "C" << std::endl;
+		std::cout << BLU "C" NC << std::endl;
 	else
 		std::cout << "Unknown type" << std::endl;
 }
@@ -45,18 +57,17 @@ void Base::identify(Base *p) {
 void Base::identify(Base &p) {
 	try {
 		(void)dynamic_cast<A &>(p);
-		std::cout << "A" << std::endl;
+		std::cout << YEL "A" NC << std::endl;
 	} catch (std::exception &e) {
 	}
 	try {
 		(void)dynamic_cast<B &>(p);
-		std::cout << "B" << std::endl;
+		std::cout << MAG "B" NC << std::endl;
 	} catch (std::exception &e) {
 	}
 	try {
 		(void)dynamic_cast<C &>(p);
-		std::cout << "C" << std::endl;
+		std::cout << BLU "C" NC << std::endl;
 	} catch (std::exception &e) {
 	}
 }
-
