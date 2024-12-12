@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   printer.cpp                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/11 14:54:49 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/11 16:24:54 by passunca         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "../inc/Ansi.h"
 #include <iostream>
@@ -53,4 +42,5 @@ void sepPrinter(int inWidth, char sepChar, const char *color, int nLines) {
 void clearScreen(void) {
 	std::cout << "\033c";
 }
+
 
