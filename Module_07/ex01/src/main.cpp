@@ -18,7 +18,7 @@ int main(void) {
 	size_t charArrLen = sizeof(charArr) / sizeof(char);
 	sepPrinter(50, '=', GRN, 1);
 	std::cout << "Print Array of Chars: ";
-	iter(charArr, charArrLen, printElement<char>);
+	iter(charArr, (charArr + charArrLen), printElement<char>);
 	std::cout << std::endl;
 
 	// Test Ints
@@ -26,7 +26,7 @@ int main(void) {
 	size_t intArrLen = sizeof(intArr) / sizeof(int);
 	sepPrinter(50, '=', GRN, 1);
 	std::cout << "Print Array of Ints: ";
-	iter(intArr, intArrLen, printElement<int>);
+	iter(intArr, (intArr + intArrLen), printElement<int>);
 	std::cout << std::endl;
 
 	// Test Strings
@@ -34,7 +34,7 @@ int main(void) {
 	size_t strArrLen = sizeof(strArr) / sizeof(std::string);
 	sepPrinter(50, '=', GRN, 1);
 	std::cout << "Print Array of Strings: ";
-	iter(strArr, strArrLen, printElement<std::string>);
+	iter(strArr, (strArr + strArrLen), printElement<std::string>);
 	std::cout << std::endl;
 
 	// Test Double
@@ -42,7 +42,7 @@ int main(void) {
 	size_t doubleArrLen = sizeof(doubleArr) / sizeof(double);
 	sepPrinter(50, '=', GRN, 1);
 	std::cout << "Print Array of Doubles: ";
-	iter(doubleArr, doubleArrLen, printElement<double>);
+	iter(doubleArr, (doubleArr + doubleArrLen), printElement<double>);
 	std::cout << std::endl;
 
 	// Test Custom Data
@@ -50,7 +50,7 @@ int main(void) {
 	size_t dataArrLen = sizeof(dataArr) / sizeof(t_data);
 	sepPrinter(50, '=', GRN, 1);
 	std::cout << "Print Array of Custom Data: ";
-	iter(dataArr, dataArrLen, printElement<t_data>);
+	iter(dataArr, (dataArr + dataArrLen), printElement<t_data>);
 	std::cout << std::endl;
 
 	return 0;
