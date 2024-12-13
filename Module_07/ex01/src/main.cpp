@@ -14,7 +14,7 @@
 
 int main(void) {
 	// Test Chars
-	char charArr[] = {'a', 'b', 'c', 'd', 'e'};
+	char charArr[] = {'z', 'e', 'd', 'r', 'o'};
 	size_t charArrLen = sizeof(charArr) / sizeof(char);
 	sepPrinter(50, '=', GRN, 1);
 	std::cout << "Print Array of Chars: ";
