@@ -38,7 +38,8 @@ typedef struct s_data {
 	}
 } t_data;
 
-std::ostream &operator<<(std::ostream &os, const t_data &data) {
+// Inline to avoid ODR violations
+inline std::ostream &operator<<(std::ostream &os, const t_data &data) {
 	os << "{i: " << data.i << ", str: " << data.str << "}";
 	return os;
 }

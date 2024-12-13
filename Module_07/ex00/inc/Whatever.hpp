@@ -52,8 +52,8 @@ template <typename T> T max(T a, T b) {
 	return (a > b ? a : b);
 }
 
-//
-std::ostream &operator<<(std::ostream &os, const t_data &data) {
+// Inline to avoid ODR (One Definition Rule) violations
+inline std::ostream &operator<<(std::ostream &os, const t_data &data) {
 	os << "{i: " << data.i << ", str: " << data.str << "}";
 	return os;
 }

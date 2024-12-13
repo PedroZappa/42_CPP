@@ -23,13 +23,15 @@ int main(void) {
 		copy[i] = nbrs[i];
 	}
 	// Print Array
-	std::cout << "Array of Ints: ";
+	sepPrinter(50, '=', GRN, 1);
+	std::cout << YEL "Array of Ints: " NC;
 	for (int i = 0; i < N; i++) {
-		std::cout << nbrs[i] << " ";
+		std::cout << BMAG << nbrs[i] << NC << " ";
 	}
 	std::cout << std::endl;
+	sepPrinter(50, '=', GRN, 1);
 
-	//
+	// Free Array
 	delete[] copy;
 	return (0);
 }
