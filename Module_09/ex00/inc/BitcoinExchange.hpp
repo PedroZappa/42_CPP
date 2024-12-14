@@ -25,6 +25,7 @@
 
 class BitcoinExchange {
   public:
+	// Constructors
 	BitcoinExchange(void);
 	BitcoinExchange(const BitcoinExchange &other);
 	BitcoinExchange &operator=(const BitcoinExchange &other);
@@ -54,7 +55,7 @@ class BitcoinExchange {
 	void removeSpace(std::string &str);
 	void trimSpaces(std::string &str);
 	std::tm *parseDate(const std::string &date, const std::string &format) const;
-	float getNearestDate(const std::tm &date) const;
+	float getNearestDate(const std::string &date) const;
 	long toLongDate(const std::string &date) const;
 
 	// Exceptions

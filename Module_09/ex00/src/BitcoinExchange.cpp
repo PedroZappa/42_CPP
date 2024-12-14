@@ -13,7 +13,9 @@
 #include "../inc/BitcoinExchange.hpp"
 #include <cctype>
 
-/** Constructors and Destructors */
+/* ************************************************************************** */
+/*                        Constructors and Destructors                        */
+/* ************************************************************************** */
 
 BitcoinExchange::BitcoinExchange(void) : _db() {
 #ifdef DEBUG
@@ -47,7 +49,9 @@ BitcoinExchange::~BitcoinExchange(void) {
 #endif
 }
 
-/** Public Member Functions */
+/* ************************************************************************** */
+/*                          Public Member Functions                           */
+/* ************************************************************************** */
 
 void BitcoinExchange::readData(const std::string &file) {
 #ifdef DEBUG
@@ -134,7 +138,9 @@ size_t BitcoinExchange::getDbSize(void) const {
 	return (this->_db.size());
 }
 
-/** Checkers **/
+/* ************************************************************************** */
+/*                                  Checkers                                  */
+/* ************************************************************************** */
 
 bool BitcoinExchange::isInputValid(std::string &input) {
 	this->removeSpace(input);
@@ -203,4 +209,20 @@ bool BitcoinExchange::isSameDate(const std::tm *d1, const std::tm *d2) const {
 		(d1->tm_mday == d2->tm_mday))
 		return (true);
 	return (false);
+}
+
+/* ************************************************************************** */
+/*                                  Printers                                  */
+/* ************************************************************************** */
+
+void BitcoinExchange::printVals(const std::string &date,
+								const std::string &value) const {
+	std::map<std::string, float>::const_iterator it = this->_db.find(date);
+	std::cout << date << " => " << value << " = ";
+	if (it != this->_db.end()) {
+		std::cout << std::atof(value.c_str()) * it->second << std::endl;
+		return;
+	}
+	std::cout << std::atof(value.c_str()) * this->getNearestDate(date)
+			  << std::endl;
 }
