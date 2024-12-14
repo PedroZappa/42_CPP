@@ -15,11 +15,12 @@
 
 #include "Ansi.h"
 #include <algorithm>
-#include <ctime>
-#include <cstring> // std::memset
 #include <cctype>
+#include <cstring> // std::memset
+#include <ctime>
 #include <fstream>  // std::ifstream
 #include <iostream> // std::cerr
+#include <limits> // std::numeric_limits
 #include <map>
 #include <sstream> // std::stringstream
 #include <stdexcept>
@@ -64,28 +65,27 @@ class BitcoinExchange {
 	class InvalidInputException : public std::exception {
 	  public:
 		const char *what() const throw();
-	}; 
-	
+	};
+
 	class InvalidDateException : public std::exception {
 	  public:
 		const char *what() const throw();
 	};
-	
+
 	class InvalidValueException : public std::exception {
 	  public:
 		const char *what() const throw();
 	};
-	
+
 	class NegativeValueException : public std::exception {
 	  public:
 		const char *what() const throw();
 	};
-	
+
 	class OutOfRangeException : public std::exception {
 	  public:
 		const char *what() const throw();
 	};
-
 };
 
 /** @brief UI Helper Functions */

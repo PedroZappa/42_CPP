@@ -267,3 +267,22 @@ std::tm *BitcoinExchange::parseDate(const std::string &date,
 
 	return (readDate);
 }
+
+float BitcoinExchange::getNearestDate(const std::string &date) const {
+	std::map<std::string, float>::const_iterator it;
+	std::map<std::string, float>::const_iterator ite;
+	size_t minRange = std::numeric_limits<size_t>::max();
+	long longD = this->toLongDate(date);
+	long dateDifff;
+
+	for (it = this->_db.begin(); it != this->_db.end(); ++it) {
+		dateDifff = (std::abs(this->toLongDate(it->first) - longD));
+		if ((dateDifff < minRange)  && (dateDifff > 0)) {
+			minRange = dateDifff;
+			ite = it;
+		}
+	}
+	if (ite == this->_db.end())
+		return (0.0);
+	return (it->second);
+}
