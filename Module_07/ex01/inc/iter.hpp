@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once 
+#ifndef ITER_HPP
+#define ITER_HPP
 
 #include "Ansi.h"
 #include <iostream>
@@ -70,3 +71,4 @@ void headerPrinter(const std::string &headerText,
 				   const char *sepColor);
 void sepPrinter(int inWidth, char sepChar, const char *color, int nLines);
 
+#endif

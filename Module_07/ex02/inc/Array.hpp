@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#ifndef ARRAY_HPP
+#define ARRAY_HPP
 
 #include "Ansi.h"
 #include <cstdlib> // rand()
@@ -95,3 +96,5 @@ void headerPrinter(const std::string &headerText,
 				   char sep,
 				   const char *sepColor);
 void sepPrinter(int inWidth, char sepChar, const char *color, int nLines);
+
+#endif

@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#ifndef WHATEVER_HPP
+#define WHATEVER_HPP
 
 #include "Ansi.h"
 #include <iostream>
@@ -57,3 +58,5 @@ inline std::ostream &operator<<(std::ostream &os, const t_data &data) {
 	os << "{i: " << data.i << ", str: " << data.str << "}";
 	return os;
 }
+
+#endif
