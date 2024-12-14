@@ -160,3 +160,29 @@ bool BitcoinExchange::isDateValid(const std::string &date) const {
 	delete readDate;
 	return (true);
 }
+
+bool BitcoinExchange::isValueValid(const std::string &value) const {
+	// Ensure Value is not empty
+	if (value.empty())
+		return (false);
+
+	// Check for Sign
+	bool sign = ((value[0] == '-') || (value[0] == '+'));
+	if (sign && value.size() == 1) // Only a sign, no digits
+		return (false);
+
+	// Ensure Value Rules
+	size_t startIdx = (sign ? 1 : 0);
+	if (!std::isdigit(value[startIdx]) && value[startIdx] != '.')
+		return (false);
+	if (value.find_first_not_of("0123456789.", startIdx) != std::string::npos)
+		return (false);
+
+	// Ensure Decimal Point rules
+	if (value.find_first_of('.') != value.find_last_of('.'))
+		return (false);
+	if (value.back() == '.')
+		return (false);
+
+	return (true);
+}
