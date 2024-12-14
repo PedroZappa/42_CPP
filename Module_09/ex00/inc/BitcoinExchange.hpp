@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 12:53:52 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/14 13:06:58 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/14 16:57:26 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,18 @@
 #include <map>
 #include <stdexcept>
 #include <string>
+#include <fstream> // std::ifstream
+#include <sstream> // std::stringstream
 
 class BitcoinExchange {
   public:
 	BitcoinExchange(void);
 	BitcoinExchange(const BitcoinExchange &other);
-	~BitcoinExchange(void);
 	BitcoinExchange &operator=(const BitcoinExchange &other);
+	~BitcoinExchange(void);
 
-	void readData(const std::string &file);
+	// Public Functions
+	void readData(const std::string &file); // [X]:
 	void processData(const std::string &file);
 	void printData(void) const;
 	size_t getDbSize(void) const;
