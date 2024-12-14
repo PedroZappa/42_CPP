@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 11:04:11 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/14 12:17:15 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/14 12:24:10 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void Span::addNumber(int n) {
 void Span::addRange(std::vector<int>::iterator begin,
 					std::vector<int>::iterator end) {
 	int range = std::abs(end - begin); // Calculate the number of elements to add
-	if (this->_container.size() + range > this->getSize())
+	if ((this->_container.size() + range) > this->getSize())
 		throw ContainerFull();
 	for (; begin != end; ++begin) { // Add all elements in the range
 		this->_container.push_back(*begin);
