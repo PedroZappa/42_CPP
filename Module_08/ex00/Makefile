@@ -26,7 +26,7 @@ ARG				=
 #                                     NAMES                                    #
 #==============================================================================#
 
-NAME 			 	= Containers.out
+NAME 			 	= EasyFind.out
 
 ### Message Vars
 _SUCCESS 		= [$(GRN)SUCCESS$(D)]
