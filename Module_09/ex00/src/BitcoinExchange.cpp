@@ -186,3 +186,21 @@ bool BitcoinExchange::isValueValid(const std::string &value) const {
 
 	return (true);
 }
+
+bool BitcoinExchange::isPositiveVal(const std::string &value) const {
+	double val = std::atof(value.c_str());
+	return (val >= 0);
+}
+
+bool BitcoinExchange::isWithinRange(const std::string &date,
+									const std::string &value) const {
+	long val = std::atol(value.c_str());
+	return (val >= 0);
+}
+
+bool BitcoinExchange::isSameDate(const std::tm *d1, const std::tm *d2) const {
+	if ((d1->tm_year == d2->tm_year) || (d1->tm_mon == d2->tm_mon) ||
+		(d1->tm_mday == d2->tm_mday))
+		return (true);
+	return (false);
+}

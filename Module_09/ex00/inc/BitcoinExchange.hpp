@@ -45,7 +45,7 @@ class BitcoinExchange {
 	bool isValueValid(const std::string &value) const;
 	bool isPositiveVal(const std::string &value) const;
 	bool isWithinRange(const std::string &range, const std::string &value) const;
-	bool isSameDate(const std::tm &date1, const std::tm &date2) const;
+	bool isSameDate(const std::tm *d1, const std::tm *d2) const;
 
 	// Printers
 	void printVals(const std::string &date, const std::string &value) const;
