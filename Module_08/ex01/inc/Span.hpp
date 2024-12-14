@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 10:55:01 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/14 11:27:00 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/14 12:10:40 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,12 @@ class Span {
 	unsigned int _size;
 	std::vector<int> _container;
 };
+
+/** @brief UI Helper Functions */
+void headerPrinter(const std::string &headerText,
+				   int inWidth,
+				   char sep,
+				   const char *sepColor);
+void sepPrinter(int inWidth, char sepChar, const char *color, int nLines);
 
 #endif

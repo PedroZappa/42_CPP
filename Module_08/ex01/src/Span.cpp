@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 11:04:11 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/14 11:38:24 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/14 12:17:15 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,24 @@
 /** Parameterized Constructor **/
 Span::Span(unsigned int N) : _size(N) {
 #ifdef DEBUG
-	std::cout << "Span constructor called" << std::endl;
+	std::cout << BLU "Span " NC " constructor called" << std::endl;
 #endif
-	this->_container.clear();
+	// this->_container.clear();
 	this->_container.reserve(N);
 }
 
 /** Copy Constructor **/
-Span::Span(Span const &src) {
+Span::Span(Span const &copy) {
 #ifdef DEBUG
 	std::cout << "Span copy constructor called" << std::endl;
 #endif
-	*this = src;
+	*this = copy;
 }
 
 /** Destructor **/
 Span::~Span(void) {
 #ifdef DEBUG
-	std::cout << "Span destructor called" << std::endl;
+	std::cout << RED "Span" NC " destructor called" << std::endl;
 #endif
 }
 
@@ -72,27 +72,25 @@ size_t Span::shortestSpan(void) const {
 	size_t shortest = std::numeric_limits<size_t>::max();
 	size_t diff;
 
-	if ((this->_container.empty()) || (this->_container.size() == 1))
+	if ((toSort.empty()) || (toSort.size() == 1))
 		throw EmptySpan();
 	std::sort(toSort.begin(), toSort.end());
-	for (std::vector<int>::const_iterator it = toSort.begin(); it != toSort.end();
-		 it++) {
+	for (std::vector<int>::const_iterator it = toSort.begin();
+		 (it != (toSort.end() - 1));
+		 it++)
 		diff = (abs(*it - *(it + 1)));
-		if (diff < shortest)
-			shortest = diff;
-	}
+	if (diff < shortest)
+		shortest = diff;
 	return (shortest);
 }
 
 size_t Span::longestSpan(void) const {
-	if (this->_container.empty() || (this->_container.size() <= 1))
+	if (this->_container.size() <= 1)
 		throw EmptySpan();
-	std::vector<int>::const_iterator min = std::min_element(
-		this->_container.begin(), this->_container.end()
-	);
-	std::vector<int>::const_iterator max = std::max_element(
-		this->_container.begin(), this->_container.end()
-	);
+	std::vector<int>::const_iterator min =
+		std::min_element(this->_container.begin(), this->_container.end());
+	std::vector<int>::const_iterator max =
+		std::max_element(this->_container.begin(), this->_container.end());
 	return (*max - *min);
 }
 
@@ -114,17 +112,10 @@ void Span::addNumber(int n) {
 
 void Span::addRange(std::vector<int>::iterator begin,
 					std::vector<int>::iterator end) {
-	int range = (std::abs(end - begin) + 1);
-	std::vector<int>::iterator tmp = begin;
-	if (begin > end) {
-		begin = end;
-		end = tmp;
-	}
-	if ((begin == end) && (this->_container.size() < this->getSize()))
-		this->_container.push_back(*begin);
-	else if ((this->_container.size() + range) > this->getSize())
-		for (; begin != end; begin++)
-			this->_container.push_back(*begin);
-	else
+	int range = std::abs(end - begin); // Calculate the number of elements to add
+	if (this->_container.size() + range > this->getSize())
 		throw ContainerFull();
+	for (; begin != end; ++begin) { // Add all elements in the range
+		this->_container.push_back(*begin);
+	}
 }
