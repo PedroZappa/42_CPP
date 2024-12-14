@@ -297,3 +297,27 @@ long BitcoinExchange::toLongDate(std::string &date) {
 	long longD = std::atol(date.c_str());
 	return (longD);
 }
+
+/* ************************************************************************** */
+/*                                 Exceptions                                 */
+/* ************************************************************************** */
+
+const char *BitcoinExchange::InvalidInput::what(void) const throw() {
+	return (RED "Invalid Input" NC);
+}
+
+const char *BitcoinExchange::InvalidDate::what(void) const throw() {
+	return (RED "Invalid Date" NC);
+}
+
+const char *BitcoinExchange::InvalidValue::what(void) const throw() {
+	return (RED "Invalid Value" NC);
+}
+
+const char *BitcoinExchange::NegativeValue::what(void) const throw() {
+	return (RED "Negative Value" NC);
+}
+
+const char *BitcoinExchange::OutOfRange::what(void) const throw() {
+	return (RED "Out of Range" NC);
+}

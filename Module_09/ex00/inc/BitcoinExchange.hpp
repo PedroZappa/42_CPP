@@ -62,27 +62,27 @@ class BitcoinExchange {
 	long toLongDate(std::string &date);
 
 	// Exceptions
-	class InvalidInputException : public std::exception {
+	class InvalidInput: public std::exception {
 	  public:
 		const char *what() const throw();
 	};
 
-	class InvalidDateException : public std::exception {
+	class InvalidDate: public std::exception {
 	  public:
 		const char *what() const throw();
 	};
 
-	class InvalidValueException : public std::exception {
+	class InvalidValue: public std::exception {
 	  public:
 		const char *what() const throw();
 	};
 
-	class NegativeValueException : public std::exception {
+	class NegativeValue: public std::exception {
 	  public:
 		const char *what() const throw();
 	};
 
-	class OutOfRangeException : public std::exception {
+	class OutOfRange: public std::exception {
 	  public:
 		const char *what() const throw();
 	};
