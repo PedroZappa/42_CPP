@@ -129,6 +129,10 @@ void BitcoinExchange::printData(void) const {
 	}
 }
 
+size_t BitcoinExchange::getDbSize(void) const {
+	return (this->_db.size());
+}
+
 /** Checkers **/
 
 bool BitcoinExchange::isInputValid(std::string &input) {
