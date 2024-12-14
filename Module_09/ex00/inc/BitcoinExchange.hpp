@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 12:53:52 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/14 16:57:26 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/14 19:44:19 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,18 @@ class BitcoinExchange {
 	bool isDateValid(const std::string &date) const;
 	bool isValueValid(const std::string &value) const;
 	bool isPositiveVal(const std::string &value) const;
-	bool isWithinRange(const std::string &range, const std::string &value) const;
+	bool isWithinRange(const std::string &value) const;
 	bool isSameDate(const std::tm *d1, const std::tm *d2) const;
 
 	// Printers
-	void printVals(const std::string &date, const std::string &value) const;
+	void printVals(std::string &date, const std::string &value);
 
 	// Private Helpers
 	void removeSpace(std::string &str);
 	void trimSpaces(std::string &str);
 	std::tm *parseDate(const std::string &date, const std::string &format) const;
 	float getNearestDate(std::string &date);
-	long toLongDate(std::string &date);
+	long toLongDate(std::string date);
 
 	// Exceptions
 	class InvalidInput: public std::exception {

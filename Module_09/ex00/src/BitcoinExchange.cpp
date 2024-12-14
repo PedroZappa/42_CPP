@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 16:48:12 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/14 16:56:40 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/14 20:15:23 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void BitcoinExchange::readData(const std::string &file) {
 
 	std::string input;
 	std::getline(infile, input);
-	if (input != "data,exchange_rate")
+	if (input != "date,exchange_rate")
 		throw std::runtime_error("Error: invalid file header");
 
 	while (std::getline(infile, input)) {
@@ -116,7 +116,7 @@ void BitcoinExchange::processData(const std::string &file) {
 			std::cerr << "Error: " NC "invalid value" << std::endl;
 		else if (!this->isPositiveVal(value))
 			std::cerr << "Error: " NC "invalid value" << std::endl;
-		else if (!this->isWithinRange(date, value))
+		else if (!this->isWithinRange(value))
 			std::cerr << "Error: " NC "invalid value" << std::endl;
 		else
 			this->printVals(date, value);
@@ -186,8 +186,6 @@ bool BitcoinExchange::isValueValid(const std::string &value) const {
 	// Ensure Decimal Point rules
 	if (value.find_first_of('.') != value.find_last_of('.'))
 		return (false);
-	if (value.back() == '.')
-		return (false);
 
 	return (true);
 }
@@ -197,8 +195,7 @@ bool BitcoinExchange::isPositiveVal(const std::string &value) const {
 	return (val >= 0);
 }
 
-bool BitcoinExchange::isWithinRange(const std::string &date,
-									const std::string &value) const {
+bool BitcoinExchange::isWithinRange(const std::string &value) const {
 	long val = std::atol(value.c_str());
 	return (val >= 0);
 }
@@ -214,8 +211,8 @@ bool BitcoinExchange::isSameDate(const std::tm *d1, const std::tm *d2) const {
 /*                                  Printers                                  */
 /* ************************************************************************** */
 
-void BitcoinExchange::printVals(const std::string &date,
-								const std::string &value) const {
+void BitcoinExchange::printVals(std::string &date,
+								const std::string &value) {
 	std::map<std::string, float>::const_iterator it = this->_db.find(date);
 	std::cout << date << " => " << value << " = ";
 	if (it != this->_db.end()) {
@@ -252,7 +249,7 @@ std::tm *BitcoinExchange::parseDate(const std::string &date,
 									const std::string &format) const {
 	std::tm *readDate = new std::tm();
 	std::memset(readDate, 0, sizeof(std::tm));
-	
+
 	// Set Date string according to format
 	if (!strptime(date.c_str(), format.c_str(), readDate)) {
 		delete readDate;
@@ -260,6 +257,7 @@ std::tm *BitcoinExchange::parseDate(const std::string &date,
 	}
 
 	struct std::tm time = *readDate;
+	mktime(&time); // Normalize date
 	if (!this->isSameDate(&time, readDate)) {
 		delete readDate;
 		return (NULL);
@@ -271,13 +269,13 @@ std::tm *BitcoinExchange::parseDate(const std::string &date,
 float BitcoinExchange::getNearestDate(std::string &date) {
 	std::map<std::string, float>::const_iterator it;
 	std::map<std::string, float>::const_iterator ite;
-	size_t minRange = std::numeric_limits<size_t>::max();
+	long minRange = std::numeric_limits<size_t>::max();
 	long longD = this->toLongDate(date);
 	long dateDifff;
 
 	for (it = this->_db.begin(); it != this->_db.end(); ++it) {
 		dateDifff = (std::abs(this->toLongDate(it->first) - longD));
-		if ((dateDifff < minRange)  && (dateDifff > 0)) {
+		if ((dateDifff < minRange) && (dateDifff > 0)) {
 			minRange = dateDifff;
 			ite = it;
 		}
@@ -287,7 +285,7 @@ float BitcoinExchange::getNearestDate(std::string &date) {
 	return (it->second);
 }
 
-long BitcoinExchange::toLongDate(std::string &date) {
+long BitcoinExchange::toLongDate(std::string date) {
 	for (size_t i = 0; i < date.length(); i++) {
 		if (date[i] == '-') {
 			date.erase(date.begin() + 1);

@@ -6,7 +6,7 @@
 #    By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/14 12:26:53 by passunca          #+#    #+#              #
-#    Updated: 2024/12/14 12:54:49 by passunca         ###   ########.fr        #
+#    Updated: 2024/12/14 20:08:39 by passunca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ INC_PATH		= inc
 
 FILES			= main.cpp
 FILES			+= printer.cpp
+FILES			+= BitcoinExchange.cpp
 
 SRC				= $(addprefix $(SRC_PATH)/, $(FILES))
 OBJS			= $(SRC:$(SRC_PATH)/%.cpp=$(BUILD_PATH)/%.o)
