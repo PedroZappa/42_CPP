@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 16:48:12 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/14 20:15:23 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/14 20:38:38 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,19 +105,19 @@ void BitcoinExchange::processData(const std::string &file) {
 		ss >> rest;                  // Extract rest of input
 		this->removeSpace(rest);
 		if (!rest.empty()) {
-			std::cerr << RED "Error: " NC "invalid input" << std::endl;
+			std::cerr << RED "Error: " NC "empty input" << std::endl;
 			continue;
 		}
 		this->trimSpaces(date);
 		this->trimSpaces(value);
 		if (!this->isDateValid(date))
-			std::cerr << "Error: " NC "invalid date" << std::endl;
+			std::cerr << "Error: " NC "bad input => " << input << std::endl;
 		else if (!this->isValueValid(value))
 			std::cerr << "Error: " NC "invalid value" << std::endl;
 		else if (!this->isPositiveVal(value))
-			std::cerr << "Error: " NC "invalid value" << std::endl;
+			std::cerr << "Error: " NC "not a positive number" << std::endl;
 		else if (!this->isWithinRange(value))
-			std::cerr << "Error: " NC "invalid value" << std::endl;
+			std::cerr << "Error: " NC "value out of range" << std::endl;
 		else
 			this->printVals(date, value);
 	}
@@ -144,8 +144,9 @@ size_t BitcoinExchange::getDbSize(void) const {
 bool BitcoinExchange::isInputValid(std::string &input) {
 	this->removeSpace(input);
 	if (input.empty() || (input.find_first_not_of('|') == std::string::npos) ||
-		(input.find_first_not_of('|') != input.find_last_not_of('|')) ||
-		(input.find_first_of('|') == input.length() - 1))
+		(input.find_first_of('|') != input.find_last_of('|')) ||
+		(input.find_first_of('|') == 0) ||
+		(input.find_first_of('|') == (input.length() - 1)))
 		return (false);
 	return (true);
 }
@@ -197,7 +198,7 @@ bool BitcoinExchange::isPositiveVal(const std::string &value) const {
 
 bool BitcoinExchange::isWithinRange(const std::string &value) const {
 	long val = std::atol(value.c_str());
-	return (val >= 0);
+	return (val <= 1000);
 }
 
 bool BitcoinExchange::isSameDate(const std::tm *d1, const std::tm *d2) const {
@@ -211,16 +212,15 @@ bool BitcoinExchange::isSameDate(const std::tm *d1, const std::tm *d2) const {
 /*                                  Printers                                  */
 /* ************************************************************************** */
 
-void BitcoinExchange::printVals(std::string &date,
-								const std::string &value) {
+void BitcoinExchange::printVals(std::string &date, const std::string &value) {
 	std::map<std::string, float>::const_iterator it = this->_db.find(date);
 	std::cout << date << " => " << value << " = ";
 	if (it != this->_db.end()) {
 		std::cout << std::atof(value.c_str()) * it->second << std::endl;
-		return;
+	} else {
+		std::cout << std::atof(value.c_str()) * this->getNearestDate(date)
+				  << std::endl;
 	}
-	std::cout << std::atof(value.c_str()) * this->getNearestDate(date)
-			  << std::endl;
 }
 
 /* ************************************************************************** */
@@ -268,12 +268,12 @@ std::tm *BitcoinExchange::parseDate(const std::string &date,
 
 float BitcoinExchange::getNearestDate(std::string &date) {
 	std::map<std::string, float>::const_iterator it;
-	std::map<std::string, float>::const_iterator ite;
+	std::map<std::string, float>::const_iterator ite = this->_db.end();
 	long minRange = std::numeric_limits<size_t>::max();
 	long longD = this->toLongDate(date);
 	long dateDifff;
 
-	for (it = this->_db.begin(); it != this->_db.end(); ++it) {
+	for (it = this->_db.begin(); it != this->_db.end(); it++) {
 		dateDifff = (std::abs(this->toLongDate(it->first) - longD));
 		if ((dateDifff < minRange) && (dateDifff > 0)) {
 			minRange = dateDifff;
@@ -282,13 +282,13 @@ float BitcoinExchange::getNearestDate(std::string &date) {
 	}
 	if (ite == this->_db.end())
 		return (0.0);
-	return (it->second);
+	return (ite->second);
 }
 
 long BitcoinExchange::toLongDate(std::string date) {
 	for (size_t i = 0; i < date.length(); i++) {
 		if (date[i] == '-') {
-			date.erase(date.begin() + 1);
+			date.erase(date.begin() + i);
 			--i;
 		}
 	}

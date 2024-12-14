@@ -28,6 +28,7 @@ int main(int argc, char **argv) {
 
 	try {
 		exchange.processData(argv[1]);
+		// exchange.printData();
 	} catch (std::exception &e) {
 		std::cerr << e.what() << std::endl;
 		return (1);

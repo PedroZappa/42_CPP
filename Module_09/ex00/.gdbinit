@@ -40,6 +40,12 @@ define readData
   display input
 end
 
+define processData
+  display file
+  display infile
+  display input
+end
+
 ### Go GDB Go! I Choose YOU! 
 
 # STOP @ main

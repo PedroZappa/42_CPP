@@ -54,10 +54,11 @@ OBJS			= $(SRC:$(SRC_PATH)/%.cpp=$(BUILD_PATH)/%.o)
 #==============================================================================#
 
 CXX					= c++
+# CXX					= gcc
 CXXFLAGS	  = -Wall -Wextra -Werror
 CXXFLAGS	  += -std=c++98
 CXXFLAGS	  += #-Wshadow
-DEBUG_FLAGS	= -g3
+DEBUG_FLAGS	= -g
 INC					= -I $(INC_PATH)
 
 # ifeq ($(MODE), debug)
