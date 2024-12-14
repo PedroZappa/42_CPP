@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../inc/BitcoinExchange.hpp"
+#include <cctype>
 
 /** Constructors and Destructors */
 
@@ -141,5 +142,21 @@ bool BitcoinExchange::isInputValid(std::string &input) {
 		(input.find_first_not_of('|') != input.find_last_not_of('|')) ||
 		(input.find_first_of('|') == input.length() - 1))
 		return (false);
+	return (true);
+}
+
+bool BitcoinExchange::isDateValid(const std::string &date) const {
+	if ((std::count(date.begin(), date.end(), '-') != 2) || (date.length() != 10))
+		return (false);
+
+	for (size_t i = 0; i < date.length(); i++)
+		if (!std::isdigit(date[i]) && (date[i] != '-'))
+			return (false);
+
+	std::tm *readDate = this->parseDate(date, "%Y-%m-%d");
+	if (readDate == NULL)
+		return (false);
+
+	delete readDate;
 	return (true);
 }

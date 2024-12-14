@@ -53,7 +53,7 @@ class BitcoinExchange {
 	// Operations
 	void removeSpace(std::string &str);
 	void trimSpaces(std::string &str);
-	std::tm parseDate(const std::string &date, const std::string &format) const;
+	std::tm *parseDate(const std::string &date, const std::string &format) const;
 	float getNearestDate(const std::tm &date) const;
 	long toLongDate(const std::string &date) const;
 
