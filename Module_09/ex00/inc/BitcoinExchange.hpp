@@ -13,13 +13,15 @@
 #ifndef BITCOINEXCHANGE_HPP
 #define BITCOINEXCHANGE_HPP
 
+#include "Ansi.h"
 #include <algorithm>
 #include <ctime>
+#include <fstream>  // std::ifstream
+#include <iostream> // std::cerr
 #include <map>
+#include <sstream> // std::stringstream
 #include <stdexcept>
 #include <string>
-#include <fstream> // std::ifstream
-#include <sstream> // std::stringstream
 
 class BitcoinExchange {
   public:
@@ -38,9 +40,9 @@ class BitcoinExchange {
 	std::map<std::string, float> _db; // MAP CONTAINER
 
 	// Checkers
-	bool isValidInput(const std::string &input) const;
-	bool isValidDate(const std::string &date) const;
-	bool isValidVal(const std::string &value) const;
+	bool isInputValid(const std::string &input) const;
+	bool isDateValid(const std::string &date) const;
+	bool isValueValid(const std::string &value) const;
 	bool isPositiveVal(const std::string &value) const;
 	bool isWithinRange(const std::string &range, const std::string &value) const;
 	bool isSameDate(const std::tm &date1, const std::tm &date2) const;
@@ -54,6 +56,33 @@ class BitcoinExchange {
 	std::tm parseDate(const std::string &date, const std::string &format) const;
 	float getNearestDate(const std::tm &date) const;
 	long toLongDate(const std::string &date) const;
+
+	// Exceptions
+	class InvalidInputException : public std::exception {
+	  public:
+		const char *what() const throw();
+	}; 
+	
+	class InvalidDateException : public std::exception {
+	  public:
+		const char *what() const throw();
+	};
+	
+	class InvalidValueException : public std::exception {
+	  public:
+		const char *what() const throw();
+	};
+	
+	class NegativeValueException : public std::exception {
+	  public:
+		const char *what() const throw();
+	};
+	
+	class OutOfRangeException : public std::exception {
+	  public:
+		const char *what() const throw();
+	};
+
 };
 
 /** @brief UI Helper Functions */
