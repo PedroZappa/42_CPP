@@ -268,7 +268,7 @@ std::tm *BitcoinExchange::parseDate(const std::string &date,
 	return (readDate);
 }
 
-float BitcoinExchange::getNearestDate(const std::string &date) const {
+float BitcoinExchange::getNearestDate(std::string &date) {
 	std::map<std::string, float>::const_iterator it;
 	std::map<std::string, float>::const_iterator ite;
 	size_t minRange = std::numeric_limits<size_t>::max();
@@ -285,4 +285,15 @@ float BitcoinExchange::getNearestDate(const std::string &date) const {
 	if (ite == this->_db.end())
 		return (0.0);
 	return (it->second);
+}
+
+long BitcoinExchange::toLongDate(std::string &date) {
+	for (size_t i = 0; i < date.length(); i++) {
+		if (date[i] == '-') {
+			date.erase(date.begin() + 1);
+			--i;
+		}
+	}
+	long longD = std::atol(date.c_str());
+	return (longD);
 }

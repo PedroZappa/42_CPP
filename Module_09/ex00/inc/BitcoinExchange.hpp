@@ -20,7 +20,7 @@
 #include <ctime>
 #include <fstream>  // std::ifstream
 #include <iostream> // std::cerr
-#include <limits> // std::numeric_limits
+#include <limits>   // std::numeric_limits
 #include <map>
 #include <sstream> // std::stringstream
 #include <stdexcept>
@@ -58,8 +58,8 @@ class BitcoinExchange {
 	void removeSpace(std::string &str);
 	void trimSpaces(std::string &str);
 	std::tm *parseDate(const std::string &date, const std::string &format) const;
-	float getNearestDate(const std::string &date) const;
-	long toLongDate(const std::string &date) const;
+	float getNearestDate(std::string &date);
+	long toLongDate(std::string &date);
 
 	// Exceptions
 	class InvalidInputException : public std::exception {
