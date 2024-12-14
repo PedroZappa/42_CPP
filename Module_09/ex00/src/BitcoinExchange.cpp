@@ -56,15 +56,15 @@ void BitcoinExchange::readData(const std::string &file) {
 	if (!infile.is_open())
 		throw std::runtime_error("Error: could not open file");
 
-	std::string line;
-	std::getline(infile, line);
-	if (line != "data,exchange_rate")
+	std::string input;
+	std::getline(infile, input);
+	if (input != "data,exchange_rate")
 		throw std::runtime_error("Error: invalid file header");
 
-	while (std::getline(infile, line)) {
+	while (std::getline(infile, input)) {
 		std::string date;
 		std::string value;
-		std::stringstream ss(line);
+		std::stringstream ss(input);
 
 		std::getline(ss, date, ','); // Extract date
 		ss >> value;                 // Extract value
@@ -82,23 +82,23 @@ void BitcoinExchange::processData(const std::string &file) {
 	if (!infile.is_open())
 		throw std::runtime_error("Error: could not open file");
 
-	std::string line;
-	std::getline(infile, line);
-	if (line != "date | value")
+	std::string input;
+	std::getline(infile, input);
+	if (input != "date | value")
 		throw std::runtime_error("Error: invalid file header");
-	while (std::getline(infile, line)) {
+	while (std::getline(infile, input)) {
 		std::string date;
 		std::string value;
 		std::string rest;
-		std::stringstream ss(line);
+		std::stringstream ss(input);
 
-		if (!this->isInputValid(line)) {
+		if (!this->isInputValid(input)) {
 			std::cerr << "Error: " NC "invalid input" << std::endl;
 			continue;
 		}
 		std::getline(ss, date, '|'); // Extract date
 		ss >> value;                 // Extract value
-		ss >> rest;                  // Extract rest of line
+		ss >> rest;                  // Extract rest of input
 		this->removeSpace(rest);
 		if (!rest.empty()) {
 			std::cerr << RED "Error: " NC "invalid input" << std::endl;
@@ -106,7 +106,7 @@ void BitcoinExchange::processData(const std::string &file) {
 		}
 		this->trimSpaces(date);
 		this->trimSpaces(value);
-		if (!this->isDateValid(date)) 
+		if (!this->isDateValid(date))
 			std::cerr << "Error: " NC "invalid date" << std::endl;
 		else if (!this->isValueValid(value))
 			std::cerr << "Error: " NC "invalid value" << std::endl;
@@ -115,16 +115,27 @@ void BitcoinExchange::processData(const std::string &file) {
 		else if (!this->isWithinRange(date, value))
 			std::cerr << "Error: " NC "invalid value" << std::endl;
 		else
-			this->printVals(date,value);
-		
-		this->printVals(date, value);
+			this->printVals(date, value);
 	}
 
 	infile.close();
 }
 
+void BitcoinExchange::printData(void) const {
+	std::map<std::string, float>::const_iterator it;
+
+	for (it = this->_db.begin(); it != this->_db.end(); ++it) {
+		std::cout << it->first << " => " << it->second << std::endl;
+	}
+}
+
 /** Checkers **/
 
-bool BitcoinExchange::isInputValid(const std::string &input) const {
-	// TODO:
+bool BitcoinExchange::isInputValid(std::string &input) {
+	this->removeSpace(input);
+	if (input.empty() || (input.find_first_not_of('|') == std::string::npos) ||
+		(input.find_first_not_of('|') != input.find_last_not_of('|')) ||
+		(input.find_first_of('|') == input.length() - 1))
+		return (false);
+	return (true);
 }

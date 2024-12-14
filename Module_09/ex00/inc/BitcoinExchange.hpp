@@ -40,7 +40,7 @@ class BitcoinExchange {
 	std::map<std::string, float> _db; // MAP CONTAINER
 
 	// Checkers
-	bool isInputValid(const std::string &input) const;
+	bool isInputValid(std::string &input);
 	bool isDateValid(const std::string &date) const;
 	bool isValueValid(const std::string &value) const;
 	bool isPositiveVal(const std::string &value) const;
