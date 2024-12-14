@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../inc/BitcoinExchange.hpp"
-#include <cctype>
 
 /* ************************************************************************** */
 /*                        Constructors and Destructors                        */
@@ -234,10 +233,8 @@ void BitcoinExchange::printVals(const std::string &date,
 void BitcoinExchange::removeSpace(std::string &str) {
 	if (str.empty())
 		return;
-	for (size_t i = 0; i < str.length(); i++)
-	{
-		if (std::isspace(str[i]))
-		{
+	for (size_t i = 0; i < str.length(); i++) {
+		if (std::isspace(str[i])) {
 			str.erase(str.begin() + i);
 			--i;
 		}
@@ -249,4 +246,24 @@ void BitcoinExchange::trimSpaces(std::string &str) {
 		return;
 	str.erase(str.find_last_not_of(' ') + 1); // remove trailing spaces
 	str.erase(0, str.find_first_not_of(' ')); // remove leading spaces
+}
+
+std::tm *BitcoinExchange::parseDate(const std::string &date,
+									const std::string &format) const {
+	std::tm *readDate = new std::tm();
+	std::memset(readDate, 0, sizeof(std::tm));
+	
+	// Set Date string according to format
+	if (!strptime(date.c_str(), format.c_str(), readDate)) {
+		delete readDate;
+		return (NULL);
+	}
+
+	struct std::tm time = *readDate;
+	if (!this->isSameDate(&time, readDate)) {
+		delete readDate;
+		return (NULL);
+	}
+
+	return (readDate);
 }

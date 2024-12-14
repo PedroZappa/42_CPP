@@ -16,6 +16,8 @@
 #include "Ansi.h"
 #include <algorithm>
 #include <ctime>
+#include <cstring> // std::memset
+#include <cctype>
 #include <fstream>  // std::ifstream
 #include <iostream> // std::cerr
 #include <map>
