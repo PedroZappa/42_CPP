@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 12:34:14 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/14 12:45:01 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/14 12:46:16 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ void test_iteration_order();
 void test_mixing_operations_and_iteration();
 
 int main() {
+	headerPrinter("MutantStack", 50, '-', GRN);
     test_default_constructor();
     test_push_pop_operations();
     test_copy_constructor();

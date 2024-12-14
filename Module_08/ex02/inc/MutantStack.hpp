@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 12:28:39 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/14 12:43:22 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/14 12:45:59 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "../inc/Ansi.h"
 #include <deque>
 #include <stack>
+#include <iostream>
 
 template <typename T> class MutantStack : public std::stack<T, std::deque<T> > {
   public:
@@ -45,5 +46,12 @@ template <typename T> class MutantStack : public std::stack<T, std::deque<T> > {
 
   private:
 };
+
+/** @brief UI Helper Functions */
+void headerPrinter(const std::string &headerText,
+				   int inWidth,
+				   char sep,
+				   const char *sepColor);
+void sepPrinter(int inWidth, char sepChar, const char *color, int nLines);
 
 #endif
