@@ -226,3 +226,27 @@ void BitcoinExchange::printVals(const std::string &date,
 	std::cout << std::atof(value.c_str()) * this->getNearestDate(date)
 			  << std::endl;
 }
+
+/* ************************************************************************** */
+/*                              Private Helpers                               */
+/* ************************************************************************** */
+
+void BitcoinExchange::removeSpace(std::string &str) {
+	if (str.empty())
+		return;
+	for (size_t i = 0; i < str.length(); i++)
+	{
+		if (std::isspace(str[i]))
+		{
+			str.erase(str.begin() + i);
+			--i;
+		}
+	}
+}
+
+void BitcoinExchange::trimSpaces(std::string &str) {
+	if (str.empty())
+		return;
+	str.erase(str.find_last_not_of(' ') + 1); // remove trailing spaces
+	str.erase(0, str.find_first_not_of(' ')); // remove leading spaces
+}

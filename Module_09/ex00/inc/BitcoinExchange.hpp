@@ -51,7 +51,7 @@ class BitcoinExchange {
 	// Printers
 	void printVals(const std::string &date, const std::string &value) const;
 
-	// Operations
+	// Private Helpers
 	void removeSpace(std::string &str);
 	void trimSpaces(std::string &str);
 	std::tm *parseDate(const std::string &date, const std::string &format) const;
