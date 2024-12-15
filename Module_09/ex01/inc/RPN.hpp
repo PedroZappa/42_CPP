@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 09:27:40 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/15 11:05:20 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/15 11:10:50 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "Ansi.h"
 #include <iostream>
 #include <cstring>
+#include <cstdlib>
 #include <stack>
 
 #define OPS "+-*/"

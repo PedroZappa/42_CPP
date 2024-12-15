@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 09:35:04 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/15 11:06:15 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/15 11:12:11 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ bool RPN::calculate(std::string expr) {
 		if (std::isdigit(cC) || hasSign) { // if the current char is a digit
 			int n = (std::atoi(expr.substr(i, (len - 1)).c_str())); // convert
 			this->_stack.push(n); // push to stack
-		} else if (nC && std::isspace(nC) && std::strchr(OPS, cC) ||
+		} else if ((nC && std::isspace(nC) && std::strchr(OPS, cC)) ||
 				   (std::strchr(OPS, cC) && !nC)) { //
 			if (!doOp(cC))      // Attempt to do the operation
 				return (false); // return if the operation is not valid
@@ -132,7 +132,7 @@ bool RPN::doOp(const char &op) {
 	return (true);
 }
 
-int ops(const int &operand1, const int &operand2, const char &op) {
+int RPN::ops(const int &operand1, const int &operand2, const char &op) {
 	switch (op) {
 	case '+':
 		return (operand1 + operand2);
