@@ -6,13 +6,14 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 09:27:40 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/15 09:33:03 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/15 09:59:37 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RPN_HPP
 # define RPN_HPP
 
+#include "Ansi.h"
 #include <iostream>
 #include <cstring>
 #include <stack>
@@ -25,7 +26,7 @@ class RPN {
 	~RPN(void);
 
 	// Public Helpers
-	void parseInput(const std::string elem) const;
+	void parseInput(std::string input);
 
 private:
 	std::stack<int> _stack;
