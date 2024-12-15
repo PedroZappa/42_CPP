@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 11:56:39 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/15 12:06:01 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/15 12:11:25 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ class PmergeMe {
 
 	// Public Functions
 	void parseArgs(int argc, char **argv);
-	void compute(void);
+	void computeExecTime(std::string &container);
 	double execTime(std::string &container);
 
 	// Templates for Merging
 	template <typename C>
 	void mergeSort(C &container);
 	template <typename C>
-	void merge(C &container);
+	void merge(C &left, C &right, C &og);
 
   private:
 	std::vector<int> _vector;
