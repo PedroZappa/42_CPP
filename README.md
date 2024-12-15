@@ -416,11 +416,31 @@ Used for string-based I/O:
 * `std::istringstream`: Input stream from a string.
 * `std::ostringstream`: Output stream to a string.
 * `std::stringstream`: Bidirectional string stream.
+```c++
+std::ostringstream oss;
+oss << "Number: " << 42;
+std::string result = oss.str(); // Output: "Number: 42"
+
+std::istringstream iss("123 456");
+int x, y;
+iss >> x >> y; // Parse integers from string
+```
 
 4. **Stream Buffers**:
 
 Classes that handle low-level buffering:
+
 * `std::streambuf`: Base class for all stream buffers.
+```c++
+std::ofstream logFile("log.txt");
+std::streambuf* originalBuf = std::cout.rdbuf(); // Save original buffer
+std::cout.rdbuf(logFile.rdbuf()); // Redirect std::cout to logFile
+
+std::cout << "Logging to file now!" << std::endl;
+
+std::cout.rdbuf(originalBuf); // Restore original buffer
+```
+
 * Derived classes (e.g., `std::filebuf`) support specific sources like files.
 
 5. **Error States**:
@@ -431,10 +451,29 @@ Streams have error handling built-in:
 * `bad()`: Check if a serious error occurred.
 * `clear()`: Reset error flags.
 
+> Checking stream state:
+```c++
+std::ifstream file("nonexistent.txt");
+if (!file) {
+    std::cerr << "Error opening file!" << std::endl;
+}
+```
+
+> Clear error state:
+```c++
+file.clear(); // Reset error flags
+```
+
 6. **Manipulators**:
 
 Format and manipulate I/O:
 * Standard manipulators (e.g., `std::endl`, `std::setw`, `std::setprecision`).
+```c++
+std::cout << std::hex << 255 << std::endl; // Output: "ff" (hexadecimal)
+std::cout << std::setw(5) << std::setfill('0') << 42 << std::endl; // Output: "00042"
+
+std::cout << std::fixed << std::setprecision(2) << 3.14159 << std::endl; // Output: 3.14
+```
 * User-defined manipulators for custom behavior.
 
 ___
