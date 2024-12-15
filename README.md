@@ -370,70 +370,72 @@ ___
 
 1. **Console I/O**:
 
-* Handled via standard streams:
-    * `std::cin`: Standard input (console input).
-    ```c++
-    int a;
-    std::cin >> a; // Read an integer from console
-    ```
-    * `std::cout`: Standard output (console output).
-    ```c++
-    std::cout << "Hello, World!" << std::endl; // Print a string with newline
-    ```
+> Handled via standard streams:
+* `std::cin`: Standard input (console input).
+```c++
+int a;
+std::cin >> a; // Read an integer from console
+```
 
-    * `std::cerr`: Standard error stream (unbuffered).
-    ```c++
-    std::cerr << "Error!" << std::endl;
-    ```
-    * `std::clog`: Standard log stream (buffered).
-    ```c++
-    std::clog << "Log message" << std::endl;
-    ```
+* `std::cout`: Standard output (console output).
+```c++
+std::cout << "Hello, World!" << std::endl; // Print a string with newline
+```
+
+* `std::cerr`: Standard error stream (unbuffered).
+```c++
+std::cerr << "Error!" << std::endl;
+```
+
+* `std::clog`: Standard log stream (buffered).
+```c++
+std::clog << "Log message" << std::endl;
+```
 
 2. **File I/O**
 
-* Handled by file stream classes:
-    * `std::ifstream`: Input file stream (for reading from files).
-    * `std::ofstream`: Output file stream (for writing to files).
-    ```c++
-    std::ofstream outFile("output.txt");
-    outFile << "Hello, File!" << std::endl; // Write to file
-    outFile.close();
+> Handled by file stream classes:
+* `std::ifstream`: Input file stream (for reading from files).
+* `std::ofstream`: Output file stream (for writing to files).
+```c++
+std::ofstream outFile("output.txt");
+outFile << "Hello, File!" << std::endl; // Write to file
+outFile.close();
 
-    std::ifstream inFile("output.txt");
-    std::string content;
-    inFile >> content; // Read from file
-    std::cout << content << std::endl;
-    inFile.close();
-    ```
-    * `std::fstream`: File stream for both input and output.
+std::ifstream inFile("output.txt");
+std::string content;
+inFile >> content; // Read from file
+std::cout << content << std::endl;
+inFile.close();
+```
+* `std::fstream`: File stream for both input and output.
 
 3. **String Streams**:
 
-* Used for string-based I/O:
-    * `std::istringstream`: Input stream from a string.
-    * `std::ostringstream`: Output stream to a string.
-    * `std::stringstream`: Bidirectional string stream.
+Used for string-based I/O:
+* `std::istringstream`: Input stream from a string.
+* `std::ostringstream`: Output stream to a string.
+* `std::stringstream`: Bidirectional string stream.
 
 4. **Stream Buffers**:
 
-* Classes that handle low-level buffering:
-    * `std::streambuf`: Base class for all stream buffers.
-    * Derived classes (e.g., `std::filebuf`) support specific sources like files.
+Classes that handle low-level buffering:
+* `std::streambuf`: Base class for all stream buffers.
+* Derived classes (e.g., `std::filebuf`) support specific sources like files.
 
 5. **Error States**:
 
-* Streams have error handling built-in:
-    * `eof()`: Check if the end-of-file is reached.
-    * `fail()`: Check if a logical error occurred.
-    * `bad()`: Check if a serious error occurred.
-    * `clear()`: Reset error flags.
+Streams have error handling built-in:
+* `eof()`: Check if the end-of-file is reached.
+* `fail()`: Check if a logical error occurred.
+* `bad()`: Check if a serious error occurred.
+* `clear()`: Reset error flags.
 
 6. **Manipulators**:
 
-* Format and manipulate I/O:
-    * Standard manipulators (e.g., `std::endl`, `std::setw`, `std::setprecision`).
-    * User-defined manipulators for custom behavior.
+Format and manipulate I/O:
+* Standard manipulators (e.g., `std::endl`, `std::setw`, `std::setprecision`).
+* User-defined manipulators for custom behavior.
 
 ___
 ## Initialization Lists
