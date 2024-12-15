@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 09:35:04 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/15 10:53:23 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/15 11:06:15 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,4 +110,38 @@ bool RPN::calculate(std::string expr) {
 			++i;
 	}
 	return (true);
+}
+
+bool RPN::doOp(const char &op) {
+	if (this->_stack.size() < 2) {
+		std::cerr << RED "Error:" NC " not enough operands" << std::endl;
+		return (false);
+	}
+	int operand1 = this->_stack.top(); // Get operand at the top of the stack
+	this->_stack.pop();                // Pop operand at the top of the stack
+	int operand2 = this->_stack.top(); // Get next operand
+	this->_stack.pop();                // Pop next operand
+
+	if ((operand1 == 0) && (op == '/')) // Check for division by zero
+	{
+		std::cerr << RED "Error:" NC " division by zero" << std::endl;
+		return (false);
+	}
+	int result = ops(operand1, operand2, op); // Perform the operation
+	this->_stack.push(result); // Push the result to the stack
+	return (true);
+}
+
+int ops(const int &operand1, const int &operand2, const char &op) {
+	switch (op) {
+	case '+':
+		return (operand1 + operand2);
+	case '-':
+		return (operand2 - operand1);
+	case '*':
+		return (operand1 * operand2);
+	case '/':
+		return (operand2 / operand1);
+	}
+	return (0);
 }

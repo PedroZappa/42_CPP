@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 09:27:40 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/15 10:48:48 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/15 11:05:20 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ private:
 	void trimSpaces(std::string &str);
 	bool isStringValid(std::string elem) const;
 	bool calculate(std::string expr);
-	bool doOp(char &op);
+	bool doOp(const char &op);
+	int ops(const int &operand1, const int &operand2, const char &op);
 };
 
 #endif
