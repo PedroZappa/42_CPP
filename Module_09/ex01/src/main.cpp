@@ -14,8 +14,8 @@
 
 int main(int argc, char **argv) {
 	if (argc != 2) {
-		std::cerr << "Usage: ./RPN <operand1> <operand2> <operator>" << std::endl;
-		std::cerr << "Example: ./RPN \"21 21 +\"" << std::endl;
+		std::cerr << RED "Usage: " NC "./RPN <operand1> <operand2> <operator>" << std::endl;
+		std::cerr << YEL "Example: " NC "./RPN \"21 21 +\"" << std::endl;
 		return (EXIT_FAILURE);
 	}
 
