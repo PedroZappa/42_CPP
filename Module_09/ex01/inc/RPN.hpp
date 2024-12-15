@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 09:27:40 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/15 09:59:37 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/15 10:48:48 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 #include <iostream>
 #include <cstring>
 #include <stack>
+
+#define OPS "+-*/"
+#define SIGNS "+-"
 
 class RPN {
 	public:
@@ -34,7 +37,7 @@ private:
 	// Private Helpers
 	void trimSpaces(std::string &str);
 	bool isStringValid(std::string elem) const;
-	bool calculate(std::string elem);
+	bool calculate(std::string expr);
 	bool doOp(char &op);
 };
 
