@@ -397,7 +397,7 @@ std::clog << "Log message" << std::endl;
 > Handled by file stream classes:
 * `std::ifstream`: Input file stream (for reading from files).
 * `std::ofstream`: Output file stream (for writing to files).
-```c++
+```cpp
 std::ofstream outFile("output.txt");
 outFile << "Hello, File!" << std::endl; // Write to file
 outFile.close();
