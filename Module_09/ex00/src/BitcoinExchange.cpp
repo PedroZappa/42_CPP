@@ -121,7 +121,6 @@ void BitcoinExchange::processData(const std::string &file) {
 		else
 			this->printVals(date, value);
 	}
-
 	infile.close();
 }
 
@@ -216,9 +215,9 @@ void BitcoinExchange::printVals(std::string &date, const std::string &value) {
 	std::map<std::string, float>::const_iterator it = this->_db.find(date);
 	std::cout << date << " => " << value << " = ";
 	if (it != this->_db.end()) {
-		std::cout << std::atof(value.c_str()) * it->second << std::endl;
+		std::cout << (std::atof(value.c_str()) * it->second) << std::endl;
 	} else {
-		std::cout << std::atof(value.c_str()) * this->getNearestDate(date)
+		std::cout << (std::atof(value.c_str()) * this->getNearestDate(date))
 				  << std::endl;
 	}
 }
@@ -268,21 +267,20 @@ std::tm *BitcoinExchange::parseDate(const std::string &date,
 
 float BitcoinExchange::getNearestDate(std::string &date) {
 	std::map<std::string, float>::const_iterator it;
-	std::map<std::string, float>::const_iterator ite = this->_db.end();
-	long minRange = std::numeric_limits<size_t>::max();
-	long longD = this->toLongDate(date);
-	long dateDifff;
+	long long minRange = std::numeric_limits<long long>::max();
+	long long longD = this->toLongDate(date); // Convert to long
+	long long dateDiff;
+	float result = -1; // Default value (-1 == invalid)
 
 	for (it = this->_db.begin(); it != this->_db.end(); it++) {
-		dateDifff = (std::abs(this->toLongDate(it->first) - longD));
-		if ((dateDifff < minRange) && (dateDifff > 0)) {
-			minRange = dateDifff;
-			ite = it;
+		// Compute absolute difference
+		dateDiff = (std::abs(this->toLongDate(it->first) - longD));
+		if ((dateDiff < minRange) && (dateDiff != 0)) {
+			minRange = dateDiff; // Update closest date 
+			result = it->second;
 		}
 	}
-	if (ite == this->_db.end())
-		return (0.0);
-	return (ite->second);
+	return (result);
 }
 
 long BitcoinExchange::toLongDate(std::string date) {

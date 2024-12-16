@@ -46,6 +46,29 @@ define processData
   display input
 end
 
+define parseDate
+  display date
+  display format
+  display readDate
+  display time
+end
+
+define printVals
+  display date
+  display value
+  display it
+end
+
+define getNearestDate
+  display date
+  display it
+  display minRange
+  display longD
+  display dateDiff
+  display this->_db.begin()
+  display result
+end
+
 ### Go GDB Go! I Choose YOU! 
 
 # STOP @ main
@@ -56,9 +79,22 @@ end
 # rfr
 
 # STOP @ readData
-break readData
+# break readData
+# run input.txt
+# fs cmd
+# readData
+# rfr
+
+# STOP @ processData
+# break processData
+# run input.txt
+# fs cmd
+# processData
+# rfr
+
+# STOP @ getNearestDate
+break getNearestDate
 run input.txt
 fs cmd
-readData
+getNearestDate
 rfr
-
