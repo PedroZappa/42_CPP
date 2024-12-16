@@ -33,6 +33,15 @@
 * [Module_05](#module_05)
 * [Module_06](#module_06)
 * [Module_07](#module_07)
+  * [Templates ](#templates-)
+    * [Function Templates](#function-templates)
+    * [Class Templates](#class-templates)
+    * [Template Parameters](#template-parameters)
+      * [Non-Type Template Parameters;](#non-type-template-parameters)
+      * [Template Instantiation](#template-instantiation)
+      * [Template Specialization](#template-specialization)
+        * [Full Specialization](#full-specialization)
+      * [Partial Specialization](#partial-specialization)
 * [Module_08](#module_08)
 * [Module_09](#module_09)
 
@@ -348,6 +357,9 @@ ___
 ```c++
 friend void print();
 ```
+
+- Is a function that is not a member of a class but has access to its `private` and `protected` members. Declaring a function as a friend is done using the `friend` keyword inside the class.
+
 ___
 ### Inline Functions
 
@@ -356,6 +368,13 @@ ___
 ```c++
 inline void print();
 ```
+
+* The function's code is directly substituted at its call site, avoiding the overhead of a function call. This substitution happens during compilation.
+    - **Improves performance** by eliminating function call overhead for small, frequently-used functions.
+    - Modern compilers **automatically inline functions** they deem suitable, even without the inline keyword.
+
+> :NOTE: The inline keyword is a hint, not a command; the compiler decides whether to inline or not.
+
 ___
 ### Operator Overloading
 
@@ -364,8 +383,12 @@ ___
 ```c++
 MyClass operator+(const MyClass& other);
 ```
+
+- Is the process of redefining the behavior of operators (e.g., `+`, `-`, `==`) for user-defined types, enabling them to work with objects in a custom way while maintaining intuitive syntax.
+
 ___
 ## C++98 I/O Streams
+
 > C++98 divides I/O streams into several categories based on their purpose:
 
 1. **Console I/O**:
@@ -477,7 +500,23 @@ std::cout << std::fixed << std::setprecision(2) << 3.14159 << std::endl; // Outp
 * User-defined manipulators for custom behavior.
 
 ___
+
 ## Initialization Lists
+
+- Is used to initialize class member variables directly **at the time of object creation**, before the constructor body is executed. 
+
+- It is used in the constructor declaration and is efficient for initializing members.
+
+```c++
+ClassName(parameters) : member1(value1), member2(value2) {
+    // Constructor body
+}
+```
+* Initializes members directly, avoiding default construction followed by reassignment.
+* Initializes `const` or `reference` (`&`) members (which must be initialized at creation).
+* Initializes base classes in derived classes.
+* Providing better performance for complex objects.
+* Members are initialized in the order of their declaration in the class, not the order in the initialization list.
 
 ___
 ## Static
@@ -571,7 +610,141 @@ ___
 ___
 
 # Module_07
-- C++ Templates
+> C++ Templates
+
+## Templates 
+
+* They enable the creation of `functions`, `classes`, and even `aliases` that work with any data type.
+
+### Function Templates
+
+Function templates allow you to write a single function that works for multiple data types.
+
+```c++
+template <typename T>
+T add(T a, T b) {
+    return a + b;
+}
+
+// Usage
+int main() {
+    cout << add(5, 10) << endl;       // Works with integers
+    cout << add(5.5, 10.2) << endl;   // Works with doubles
+}
+```
+
+### Class Templates
+
+```c++
+template <typename T>
+class Box {
+    T value;
+public:
+    Box(T v) : value(v) {}
+    T getValue() { return value; }
+};
+
+// Usage
+int main() {
+    Box<int> intBox(42);         // Box for integers
+    Box<string> strBox("Hello"); // Box for strings
+    cout << intBox.getValue() << endl;
+    cout << strBox.getValue() << endl;
+}
+```
+> You can also use template `<class T>` instead of template `<typename T>`—both are equivalent.
+
+### Template Parameters
+
+Templates are parameterized by one or more `template parameters`, of three kinds: `non-type`, `type`, and `template`.
+
+* The compiler deduces the type of the template arguments at compile time.
+
+> For example, in `add(5, 10)`, the compiler deduces `T` as `int`.
+
+#### Non-Type Template Parameters;
+* Templates can take `non-type` parameters (e.g., integer values).
+
+```c++
+template <typename T, int N>
+class Array {
+    T arr[N];
+public:
+    void set(int index, T value) { arr[index] = value; }
+    T get(int index) { return arr[index]; }
+};
+
+// Usage:
+int main() {
+    Array<int, 5> intArray;
+    intArray.set(0, 42);
+    cout << intArray.get(0) << endl; // Prints: 42
+}
+```
+* When you use a template, the compiler generates a specific version of the template for the given type(s). This process is called `template instantiation`.
+
+#### Template Instantiation
+
+You can explicitly tell the compiler to instantiate a template for a specific type.
+
+```c++
+template <typename T>
+T multiply(T a, T b) {
+    return a * b;
+}
+
+// Explicit instantiation for `int`
+template int multiply<int>(int, int);
+```
+If you don't explicitly instantiate, the compiler automatically generates the required instantiation when you use the template.
+
+#### Template Specialization
+
+##### Full Specialization
+
+This replaces the generic template entirely for a specific type.
+
+```c++
+template <typename T>
+class Printer {
+public:
+    void print(T value) {
+        cout << value << endl;
+    }
+};
+
+// Specialized for `char`
+template <>
+class Printer<char> {
+public:
+    void print(char value) {
+        cout << "Char: " << value << endl;
+    }
+};
+```
+
+#### Partial Specialization
+
+This customizes the behavior for a subset of template parameters, particularly useful with class templates.
+
+```c++
+template <typename T, typename U>
+class Pair {
+    T first;
+    U second;
+public:
+    Pair(T a, U b) : first(a), second(b) {}
+};
+
+// Partial specialization when both types are the same
+template <typename T>
+class Pair<T, T> {
+    T first;
+    T second;
+public:
+    Pair(T a, T b) : first(a), second(b) {}
+};
+```
 
 ___
 
