@@ -10,8 +10,6 @@
     * [Special Member Functions](#special-member-functions)
     * [Static Member Functions](#static-member-functions)
     * [Const Member Functions](#const-member-functions)
-    * [Overloaded Functions](#overloaded-functions)
-      * [Advantages of Function Overloading:](#advantages-of-function-overloading)
     * [Virtual functions](#virtual-functions)
       * [Virtual Table (vtable)](#virtual-table-vtable)
       * [Pure virtual functions](#pure-virtual-functions)
@@ -41,6 +39,10 @@
     * [Types of References](#types-of-references)
     * [Pointers vs References](#pointers-vs-references)
 * [Module_02](#module_02)
+  * [Ad-hoc Polymorphism](#ad-hoc-polymorphism)
+    * [Function Overloading](#function-overloading)
+      * [Advantages of Function Overloading:](#advantages-of-function-overloading)
+  * [Orthodox Canonical Form](#orthodox-canonical-form)
 * [Module_03](#module_03)
 * [Module_04](#module_04)
 * [Module_05](#module_05)
@@ -237,68 +239,6 @@ int getValue() const;
 * The `const` keyword indicates that the function will not alter the object's state (i.e., it won't modify non-static member variables or call non-const member functions).
 
 * Enforces `Const Correctness`, ensuring that the function can be called on const objects, guaranteeing read-only access to the object's data.
-
-___
-### Overloaded Functions
-
-* Enable multiple functions with the same name but different parameters.
-
-```c++
-void print(int x);
-void print(double y);
-```
-* Overloaded functions must have the same name but different parameter lists.
-
-* Parameter differences can include:
-    * The `number` of parameters.
-    * The `types` of parameters.
-    * The `order` of parameters.
-
-```c++
-#include <iostream>
-using namespace std;
-
-class Calculator {
-public:
-    // Add two integers
-    int add(int a, int b) {
-        return a + b;
-    }
-
-    // Add three integers
-    int add(int a, int b, int c) {
-        return a + b + c;
-    }
-
-    // Add two doubles
-    double add(double a, double b) {
-        return a + b;
-    }
-};
-
-int main() {
-    Calculator calc;
-
-    cout << "Add two integers: " << calc.add(2, 3) << endl;          // Calls add(int, int)
-    cout << "Add three integers: " << calc.add(2, 3, 4) << endl;    // Calls add(int, int, int)
-    cout << "Add two doubles: " << calc.add(2.5, 3.5) << endl;      // Calls add(double, double)
-
-    return 0;
-}
-```
-#### Advantages of Function Overloading:
-
-1. Improves Code Readability:
-
-*  The same function name can be reused for logically similar operations, making the code easier to understand.
-
-2. Enhanced Functionality:
-
-* You can define specialized versions of the same operation for different parameter types or combinations.
-
-3. Flexibility:
-
-* Enables a function to handle multiple use cases (e.g., adding integers, floats, or other data types).
 
 ___
 ### Virtual functions
@@ -764,16 +704,89 @@ const int& ref = x;  // ref is a constant reference to x
 
 | Feature              | Reference                             | Pointer                           |
 |----------------------|---------------------------------------|-----------------------------------|
-| Initialization       | Must be initialized when declared     | Can be uninitialized or null     |
-| Rebinding            | Cannot be reassigned to a different variable | Can be reassigned to point to different objects |
-| Dereferencing        | Implicit dereferencing                | Requires explicit dereferencing with `*` |
-| Nullability          | Cannot be null                        | Can be null                      |
+| `Initialization`       | Must be initialized when declared     | Can be uninitialized or null     |
+| `Rebinding`            | Cannot be reassigned to a different variable | Can be reassigned to point to different objects |
+| `Dereferencing`        | Implicit dereferencing                | Requires explicit dereferencing with `*` |
+| `Nullability`          | Cannot be null                        | Can be null                      |
 
 
 ___
 
 # Module_02
 - Ad-hoc polymorphism, operator overloading and Orthodox Canonical class form
+
+## Ad-hoc Polymorphism
+
+Ad-hoc polymorphism is a type of polymorphism in C++ (and other programming languages) where a function or operator behaves differently depending on the type of its arguments. It is the simplest form of polymorphism and is achieved through `function overloading` and `operator overloading`.
+
+In contrast to `subtype polymorphism` (also called inheritance-based polymorphism), which involves `subclassing` and `inheritanc`e, ad-hoc polymorphism doesn't require a hierarchy of classes. Instead, it allows multiple functions or operators with the same name to behave differently based on their arguments' types or the number of arguments passed to them.
+
+### Function Overloading
+
+Function overloading is the most common example of ad-hoc polymorphism. It occurs when multiple functions have the same name but differ in their `parameter types`, `number of parameters`, or `order of parameters`.
+
+* Enable multiple functions with the same name but different parameters.
+
+```c++
+void print(int x);
+void print(double y);
+```
+* Overloaded functions must have the same name but different parameter lists.
+
+* Parameter differences can include:
+    * The `number` of parameters.
+    * The `types` of parameters.
+    * The `order` of parameters.
+
+```c++
+#include <iostream>
+using namespace std;
+
+class Calculator {
+public:
+    // Add two integers
+    int add(int a, int b) {
+        return a + b;
+    }
+
+    // Add three integers
+    int add(int a, int b, int c) {
+        return a + b + c;
+    }
+
+    // Add two doubles
+    double add(double a, double b) {
+        return a + b;
+    }
+};
+
+int main() {
+    Calculator calc;
+
+    cout << "Add two integers: " << calc.add(2, 3) << endl;          // Calls add(int, int)
+    cout << "Add three integers: " << calc.add(2, 3, 4) << endl;    // Calls add(int, int, int)
+    cout << "Add two doubles: " << calc.add(2.5, 3.5) << endl;      // Calls add(double, double)
+
+    return 0;
+}
+```
+#### Advantages of Function Overloading:
+
+1. Improves Code Readability:
+
+*  The same function name can be reused for logically similar operations, making the code easier to understand.
+
+2. Enhanced Functionality:
+
+* You can define specialized versions of the same operation for different parameter types or combinations.
+
+3. Flexibility:
+
+* Enables a function to handle multiple use cases (e.g., adding integers, floats, or other data types).
+
+
+## Orthodox Canonical Form
+
 
 ___
 
