@@ -22,46 +22,25 @@ typedef struct s_data {
 	int i;
 	std::string str;
 
-	bool operator<(const s_data &other) const {
-		return (i < other.i) || (i == other.i && str < other.str);
-	}
-
-	bool operator>(const s_data &other) const {
-		return (i > other.i) || (i == other.i && str > other.str);
-	}
-
-	s_data &operator=(const s_data &other) {
-		if (this != &other) {
-			i = other.i;
-			str = other.str;
-		}
-		return *this;
-	}
+	bool operator<(const s_data &other) const;
+	bool operator>(const s_data &other) const;
+	s_data &operator=(const s_data &other);
 } t_data;
 
 // Inline to avoid ODR violations
-inline std::ostream &operator<<(std::ostream &os, const t_data &data) {
-	os << "{i: " << data.i << ", str: " << data.str << "}";
-	return os;
-}
+inline std::ostream &operator<<(std::ostream &os, const t_data &data);
 
 // Templates
-// template <typename T, typename F>
-// void iter(T *arr, size_t len, F f) {
-// 	for (size_t i = 0; i < len; i++) {
-// 		f(arr[i]);
-// 	}
-// }
-template <typename Iterator, typename F>
-void iter(Iterator begin, Iterator end, F f) {
-    for (Iterator it = begin; it != end; ++it) {
-        f(*it);
-    }
+template <typename T, typename F>
+void iter(T *arr, size_t len, F f) {
+	for (size_t i = 0; i < len; i++) {
+		f(arr[i]);
+	}
 }
 
 template <typename T>
 void printElement(const T &element) {
-	std::cout << element << " ";
+	std::cout << YEL << element << NC << " ";
 }
 
 /** @brief UI Helper Functions */
