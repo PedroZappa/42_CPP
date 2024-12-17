@@ -18,8 +18,6 @@
     * [Operator Overloading](#operator-overloading)
   * [C++98 I/O Streams](#c98-io-streams)
   * [Initialization Lists](#initialization-lists)
-  * [Static](#static)
-  * [Const](#const)
   * [What Is the Orthodox Canonical Form? (OCF)](#what-is-the-orthodox-canonical-form-ocf)
   * [Lifetime](#lifetime)
     * [What Is Lifetime?](#what-is-lifetime)
@@ -84,6 +82,12 @@
     * [Interface Polymorphism:](#interface-polymorphism)
     * [Advantages of Interfaces](#advantages-of-interfaces)
 * [Module_05](#module_05)
+  * [Throwing Exceptions](#throwing-exceptions)
+    * [Catching Exceptions](#catching-exceptions)
+    * [Exception Class Hierarchy](#exception-class-hierarchy)
+    * [Re-throwing Exceptions:](#re-throwing-exceptions)
+    * [Stack Unwinding:](#stack-unwinding)
+    * [Important Considerations](#important-considerations)
 * [Module_06](#module_06)
 * [Module_07](#module_07)
   * [Templates ](#templates-)
@@ -102,7 +106,7 @@
 <!-- mtoc-end -->
 ___
 # C++ - Module 00
-- Namespaces, classes, member functions, stdio streams, initialization lists, static, const, & other basic stuff
+> Namespaces, classes, member functions, stdio streams, initialization lists, static, const, & other basic stuff
 
 ___
 ## Strings
@@ -511,13 +515,6 @@ ClassName(parameters) : member1(value1), member2(value2) {
 * Members are initialized in the order of their declaration in the class, not the order in the initialization list.
 
 ___
-## Static
-
-___
-## Const
-
-
-___
 ## What Is the Orthodox Canonical Form? (OCF)
 
 It's a set of conventions ruling the definition of classes in C++.
@@ -571,7 +568,7 @@ RAII is also known as SBRM : **Scope-Bound Resource Management**, after the basi
 ___
 
 # Module_01
-- Memory allocation, pointers to members, references, switch statement
+> Memory allocation, pointers to members, references, switch statement
 
 ## Memory Allocation
 
@@ -750,7 +747,7 @@ const int& ref = x;  // ref is a constant reference to x
 ___
 
 # Module_02
-- Ad-hoc polymorphism, operator overloading and Orthodox Canonical class form
+> Ad-hoc polymorphism, operator overloading and Orthodox Canonical class form
 
 ## Ad-hoc Polymorphism
 
@@ -907,7 +904,7 @@ MyClass& operator=(MyClass&& other) noexcept {
 ___
 
 # Module_03
-- Inheritance
+> Inheritance
 
 ## Basics of Inheritance
 
@@ -1114,7 +1111,7 @@ class D : public B, public C {
 ___
 
 # Module_04
-- Subtype Polymorphism, abstract classes, interfaces
+> Subtype Polymorphism, abstract classes, interfaces
 
 ## Subtype Polymorphism
 
@@ -1253,20 +1250,97 @@ public:
 
 | **Aspect**        | **Interface**                           | **Abstract Class**                          |
 |--------------------|-----------------------------------------|---------------------------------------------|
-| **Content**        | Only pure virtual functions.           | Can have both pure virtual and concrete functions. |
-| **Inheritance**    | Typically used for multiple inheritance. | Supports single and multiple inheritance.   |
+| **Content**        | Only pure `virtual functions`.           | Can have both `pure virtual` and `concrete functions`. |
+| **Inheritance**    | Typically used for `multiple inheritance`. | Supports `single` and `multiple inheritance`.   |
 | **Data Members**   | No data members allowed.               | Can have data members.                      |
-| **Usage**          | Defines a strict contract for derived classes. | Provides partial implementation to be shared. |
+| **Usage**          | Defines a `strict contract` for derived classes. | Provides `partial implementation` to be shared. |
 
 ___
 
 # Module_05
-- Repetition and Exceptions
+> Repetition and Exceptions
+
+Exceptions provide a mechanism for handling errors and other exceptional conditions in a structured way.
+
+### Throwing Exceptions
+
+
+* An exception is thrown using the `throw` keyword.
+
+```c++
+throw std::runtime_error("Error occurred!");
+```
+
+* Can throw any object, but typically an `exception class` (e.g., `std::exception` or derived types) is used.
+
+
+### Catching Exceptions
+
+* Exceptions are caught using `try` and `catch` blocks.
+
+```c++
+try {
+    // Code that might throw an exception
+    throw std::runtime_error("Something went wrong!");
+} catch (const std::exception& e) {
+    // Handle the exception
+    std::cout << "Caught exception: " << e.what() << std::endl;
+}
+```
+
+### Exception Class Hierarchy
+
+* The standard library provides `std::exception` as the base class for all standard exceptions.
+* Common derived classes include:
+    * `std::runtime_error``
+    * `std::logic_error`
+    * `std::bad_alloc` (thrown by new on memory allocation failure)
+* You can define your own exception classes.
+
+### Re-throwing Exceptions:
+
+You can rethrow a caught exception with `throw`; inside a `catch` block.
+
+```cpp
+try {
+    // Some code
+} catch (const std::exception& e) {
+    // Log or partially handle
+    throw; // Re-throw the exception
+}
+```
+
+### Stack Unwinding:
+
+* When an exception is thrown, the runtime performs `stack unwinding`:
+    * Destructors for all objects in the current scope are called in reverse order of their creation.
+
+### Important Considerations
+
+* Avoid Throwing from Destructors
+
+Throwing an exception from a destructor during stack unwinding causes `std::terminate()` to be called.
+
+* Uncaught Exceptions
+
+If an exception is thrown and not caught, `std::terminate()` is called.
+
+* Catch-All Handler:
+
+Use `catch(...)` to catch any type of exception:
+
+```c++
+try {
+    // Some code
+} catch (...) {
+    std::cout << "Unknown exception caught." << std::endl;
+}
+```
 
 ___
 
 # Module_06
-- C++ cast
+> C++ cast
 
 ___
 
@@ -1414,10 +1488,10 @@ public:
 ___
 
 # Module_08
-- Templated containers, iterators, algorithms
+> Templated containers, iterators, algorithms
 
 ___
 
 # Module_09
-- STL
+> STL
 
