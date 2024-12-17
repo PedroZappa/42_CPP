@@ -43,7 +43,23 @@
     * [Function Overloading](#function-overloading)
       * [Advantages of Function Overloading:](#advantages-of-function-overloading)
   * [Orthodox Canonical Form](#orthodox-canonical-form)
+    * [Default Constructor](#default-constructor)
+    * [Destructor](#destructor)
+    * [Copy Constructor](#copy-constructor)
+    * [Copy Assignment Operator](#copy-assignment-operator)
+    * [Move Constructor (C++11)](#move-constructor-c11)
+    * [Move Assignment Operator (C++11)](#move-assignment-operator-c11)
 * [Module_03](#module_03)
+  * [Basics of Inheritance](#basics-of-inheritance)
+  * [Types of Inheritance](#types-of-inheritance)
+    * [Single Inheritance](#single-inheritance)
+    * [Multiple Inheritance](#multiple-inheritance)
+    * [Multilevel Inheritance](#multilevel-inheritance)
+    * [Hierarchical Inheritance](#hierarchical-inheritance)
+    * [Hybrid Inheritance: ](#hybrid-inheritance-)
+    * [Access Control in Inheritance](#access-control-in-inheritance)
+  * [Overriding and Polymorphism](#overriding-and-polymorphism)
+    * [Function Overriding ](#function-overriding-)
 * [Module_04](#module_04)
 * [Module_05](#module_05)
 * [Module_06](#module_06)
@@ -631,7 +647,7 @@ MyClass* pObj = &obj;
 
 ## References
 
-* Cannot Be Null
+* `Cannot Be Null`
 
 A reference must always refer to an object or variable; it cannot be null. If a reference is initialized, it must refer to a valid memory location.* Must Be Initialized
 
@@ -639,7 +655,7 @@ A reference must always refer to an object or variable; it cannot be null. If a 
 int& ref = someVariable;  // Always valid
 ```
 
-* Must Be Initialized
+* `Must Be Initialized`
 
 References must be initialized when they are declared. Unlike pointers, you cannot declare a reference without assigning it to an object.
 
@@ -648,7 +664,7 @@ int x = 5;
 int& ref = x;  // ref is initialized and must always refer to 'x'
 ```
 
-* No Rebinding
+* `No Rebinding`
 
 Once a reference is initialized, it cannot be made to refer to another variable. A reference is bound to the variable it was initialized with, and it cannot be changed to refer to something else.
 
@@ -657,7 +673,7 @@ int x = 10, y = 20;
 int& ref = x;
 ref = y;  // ref now holds the value 20, but it still refers to x
 ```
-* Automatic Dereferencing
+* `Automatic Dereferencing`
 
 A reference automatically dereferences the variable it refers to. You don’t need to use the dereference operator (`*`) like with pointers. This makes using references more convenient than pointers in many cases.
 
@@ -708,7 +724,6 @@ const int& ref = x;  // ref is a constant reference to x
 | `Rebinding`            | Cannot be reassigned to a different variable | Can be reassigned to point to different objects |
 | `Dereferencing`        | Implicit dereferencing                | Requires explicit dereferencing with `*` |
 | `Nullability`          | Cannot be null                        | Can be null                      |
-
 
 ___
 
@@ -772,26 +787,202 @@ int main() {
 ```
 #### Advantages of Function Overloading:
 
-1. Improves Code Readability:
+1. `Improves Code Readability`:
 
 *  The same function name can be reused for logically similar operations, making the code easier to understand.
 
-2. Enhanced Functionality:
+2. `Enhanced Functionality`:
 
 * You can define specialized versions of the same operation for different parameter types or combinations.
 
-3. Flexibility:
+3. `Flexibility`:
 
 * Enables a function to handle multiple use cases (e.g., adding integers, floats, or other data types).
 
 
 ## Orthodox Canonical Form
 
+Is a set of functions that are typically implemented in a class to manage its resource ownership properly. These functions ensure correct `construction`, `destruction`, `copying`, and `moving` of objects and are especially important when a class owns dynamically allocated resources.
+
+`The Orthodox Canonical Form` ensures that:
+
+* **Resource management** is handled correctly, `avoiding memory leaks` or `dangling pointers`.
+* `Copying` and `assignment` behave predictably and **do not result in shallow copies when deep copies are required**.
+* **Performance is optimized** by transferring ownership of resources in move operations rather than duplicating them unnecessarily.
+
+### Default Constructor
+
+A constructor that allows creating an object without passing any arguments. It initializes the object to a valid state.
+
+```c++
+class MyClass {
+public:
+    MyClass() {
+        // Initialize the object
+    }
+};
+```
+
+### Destructor
+
+Ensures proper cleanup of resources when the object is destroyed.
+
+```c++
+~MyClass() {
+    // Release resources
+}
+```
+
+### Copy Constructor
+
+Defines how an object is copied when passed by value or initialized from another object of the same type. It performs a `deep copy` if the class owns resources.
+
+```c++
+MyClass(const MyClass& other) {
+    // Copy resources from 'other'
+}
+```
+
+### Copy Assignment Operator
+
+Defines how an object is assigned from another object of the same type. It performs a deep copy and handles self-assignment.
+
+```c++
+MyClass& operator=(const MyClass& other) {
+    if (this != &other) {
+        // Release current resources
+        // Copy resources from 'other'
+    }
+    return *this;
+}
+```
+
+### Move Constructor (C++11)
+
+Defines how resources are transferred from a temporary object (rvalue) to a new object.
+
+```c++
+MyClass(MyClass&& other) noexcept {
+    // Transfer resources from 'other' to 'this'
+    // Leave 'other' in a valid but unspecified state
+}
+```
+
+### Move Assignment Operator (C++11)
+
+Defines how resources are transferred during assignment from a temporary object (rvalue).
+
+```c++
+MyClass& operator=(MyClass&& other) noexcept {
+    if (this != &other) {
+        // Release current resources
+        // Transfer resources from 'other' to 'this'
+    }
+    return *this;
+}
+```
 
 ___
 
 # Module_03
 - Inheritance
+
+## Basics of Inheritance
+
+Inheritance allows a class (`derived class`) to reuse and extend the functionality of another class (`base class`).
+
+```c++
+class Base {
+   // Base class members
+};
+
+class Derived : access_specifier Base {
+   // Derived class members
+};
+```
+
+* **Access Specifier**:
+    * `public`: Public and protected members of the base class retain their access levels in the derived class.
+    * `protected`: Public and protected members of the base class become protected in the derived class.
+    * `private`: Public and protected members of the base class become private in the derived class.
+
+## Types of Inheritance
+
+### Single Inheritance
+
+A class derives from a single base class.
+
+```c++
+class A {};
+class B : public A {};
+```
+
+### Multiple Inheritance
+
+A class derives from multiple base classes.
+
+```c++
+class A {};
+class B {};
+class C : public A, public B {};
+```
+
+### Multilevel Inheritance
+
+A class derives from another derived class.
+
+```c++
+class A {};
+class B : public A {};
+class C : public B {};
+```
+
+### Hierarchical Inheritance
+
+Multiple classes derive from a single base class.
+
+```c++
+class A {};
+class B : public A {};
+class C : public A {};
+```
+
+### Hybrid Inheritance: 
+
+A combination of the above types, often involving multiple and hierarchical inheritance.
+
+### Access Control in Inheritance
+
+| **Base Class Member** | **Public Inheritance** | **Protected Inheritance** | **Private Inheritance** |
+|------------------------|------------------------|----------------------------|--------------------------|
+| **Public**            | Public                | Protected                  | Private                  |
+| **Protected**         | Protected             | Protected                  | Private                  |
+| **Private**           | Not Inherited         | Not Inherited              | Not Inherited            |
+`Private members of the base class` are not accessible directly by the derived class, but they can be accessed through public/protected methods in the base class.
+
+
+## Overriding and Polymorphism
+
+### Function Overriding 
+
+A derived class can redefine a base class function. The base class function must be marked as `virtual` for proper runtime polymorphism.
+
+```c++
+class Base {
+public:
+    virtual void display() {
+        std::cout << "Base class display" << std::endl;
+    }
+};
+
+class Derived : public Base {
+public:
+    void display() override {  // C++98 does not require the `override` keyword, but it's good practice.
+        std::cout << "Derived class display" << std::endl;
+    }
+};
+```
+
 
 ___
 
