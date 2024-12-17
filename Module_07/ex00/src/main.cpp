@@ -10,7 +10,34 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/Whatever.hpp"
+#include "../inc/whatever.hpp"
+
+// Custom Data Type For testing
+typedef struct s_data {
+	int i;
+	std::string str;
+
+	bool operator<(const s_data &other) const {
+		return (i < other.i) || (i == other.i && str < other.str);
+	}
+
+	bool operator>(const s_data &other) const {
+		return (i > other.i) || (i == other.i && str > other.str);
+	}
+
+	s_data &operator=(const s_data &other) {
+		if (this != &other) {
+			i = other.i;
+			str = other.str;
+		}
+		return *this;
+	}
+} t_data;
+
+std::ostream &operator<<(std::ostream &os, const t_data &data) {
+	os << "{i: " << data.i << ", str: " << data.str << "}";
+	return os;
+}
 
 int main(void) {
 	// Integer
