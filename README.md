@@ -60,6 +60,13 @@
     * [Access Control in Inheritance](#access-control-in-inheritance)
   * [Overriding and Polymorphism](#overriding-and-polymorphism)
     * [Function Overriding ](#function-overriding-)
+    * [Virtual Functions and Polymorphism](#virtual-functions-and-polymorphism)
+    * [Constructors and Destructors in Inheritance](#constructors-and-destructors-in-inheritance)
+      * [Base Class Constructor](#base-class-constructor)
+    * [Destructor](#destructor-1)
+  * [Scope Resolution](#scope-resolution)
+  * [Ambiguity in Multiple Inheritance](#ambiguity-in-multiple-inheritance)
+  * [Virtual Inheritance](#virtual-inheritance)
 * [Module_04](#module_04)
 * [Module_05](#module_05)
 * [Module_06](#module_06)
@@ -983,7 +990,112 @@ public:
 };
 ```
 
+### Virtual Functions and Polymorphism
 
+* A **virtual function** allows runtime binding, enabling polymorphism.
+* **Virtual Table** (`vtable`): C++ uses vtables for runtime function resolution in polymorphism.
+* **Pure Virtual Functions**: A virtual function declared with `= 0` is `pure virtual`, making the class abstract.
+
+
+### Constructors and Destructors in Inheritance
+
+#### Base Class Constructor
+
+* The base class constructor is called before the derived class constructor.
+* The derived class must explicitly invoke non-default base class constructors:
+
+```c++
+class Base {
+public:
+    Base(int x) { std::cout << "Base constructor" << std::endl; }
+};
+
+class Derived : public Base {
+public:
+    Derived(int x, int y) : Base(x) {
+        std::cout << "Derived constructor" << std::endl;
+    }
+};
+```
+
+### Destructor
+
+If a base class destructor is declared as `virtual`, the derived class destructor is invoked correctly during object destruction.
+
+```c++
+class Base {
+public:
+    virtual ~Base() { std::cout << "Base destructor" << std::endl; }
+};
+
+class Derived : public Base {
+public:
+    ~Derived() { std::cout << "Derived destructor" << std::endl; }
+};
+```
+
+##  Scope Resolution
+The `::` operator can access base class members that are hidden by derived class members.
+
+
+```c++
+class Base {
+public:
+    int value = 10;
+};
+
+class Derived : public Base {
+public:
+    int value = 20;
+    void display() {
+        std::cout << "Base value: " << Base::value << std::endl;
+        std::cout << "Derived value: " << value << std::endl;
+    }
+};
+```
+
+## Ambiguity in Multiple Inheritance
+
+Ambiguity arises when a derived class inherits multiple base classes with members of the same name.
+
+> `Solution`: Use the scope resolution operator.
+
+```c++
+class A {
+public:
+    void show() { std::cout << "A's show" << std::endl; }
+};
+
+class B {
+public:
+    void show() { std::cout << "B's show" << std::endl; }
+};
+
+class C : public A, public B {
+public:
+    void display() {
+        A::show();
+        B::show();
+    }
+};
+```
+
+## Virtual Inheritance
+
+Resolves the `diamond problem` in multiple inheritance by ensuring that the base class is shared among all derived classes.
+
+```c++
+class A {
+public:
+    int value;
+};
+
+class B : virtual public A {};
+class C : virtual public A {};
+class D : public B, public C {
+    // A is shared, no duplication of 'value'
+};
+```
 ___
 
 # Module_04
