@@ -54,7 +54,7 @@ template <typename T> class Array {
 
 	// Functz
 	unsigned int size(void) const {
-		return this->_len;
+		return (this->_len);
 	}
 
 	// operator Overload

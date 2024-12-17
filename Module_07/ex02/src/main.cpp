@@ -18,18 +18,35 @@ int main(void) {
 	Array<int> nbrs(N);
 	int *copy = new int[N];
 	srand(time(NULL));
-	for (int i = 0; i < N; i++) {
-		nbrs[i] = rand() % 100;
-		copy[i] = nbrs[i];
+
+	// Test Exception
+	try
+	{
+		std::cout << nbrs[N] << std::endl;
 	}
-	// Print Array
-	sepPrinter(50, '=', GRN, 1);
-	std::cout << YEL "Array of Ints: " NC;
-	for (int i = 0; i < N; i++) {
-		std::cout << BMAG << nbrs[i] << NC << " ";
+	catch(const std::exception &e)
+	{
+		std::cerr << e.what() << std::endl;
 	}
-	std::cout << std::endl;
-	sepPrinter(50, '=', GRN, 1);
+
+	// Fill Array
+	try {
+		for (int i = 0; i < N; i++) {
+			nbrs[i] = rand() % 100;
+			copy[i] = nbrs[i];
+		}
+		// Print Array
+		sepPrinter(50, '=', GRN, 1);
+		std::cout << YEL "Array of Ints: " NC;
+		for (int i = 0; i < N; i++) {
+			std::cout << BMAG << nbrs[i] << NC << " ";
+		}
+		std::cout << std::endl;
+		sepPrinter(50, '=', GRN, 1);
+
+	} catch (const std::exception &e) {
+		std::cerr << e.what() << std::endl;
+	}
 
 	// Free Array
 	delete[] copy;
