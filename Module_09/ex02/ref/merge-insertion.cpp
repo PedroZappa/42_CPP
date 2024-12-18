@@ -14,32 +14,18 @@
 #include "../inc/Ansi.h"
 #include "../inc/PmergeMe.hpp"
 #include <algorithm>
-#include <utility>
-#include <iterator>
 #include <iostream>
+#include <iterator>
+#include <utility>
 #include <vector>
 
 #define WIDTH 50
 
-// Template to print a vector
 template <typename T>
-void printVector(const std::vector<T>& vec, const std::string& label = "Vector") {
-	std::cout << label << ":\n[";
-	for (typename std::vector<T>::const_iterator it = vec.begin(); it != vec.end(); ++it) {
-		std::cout << *it << (it != vec.end() - 1 ? "," : "");
-	}
-	std::cout << "]\n";
-}
-
-// Specialization to print a vector of pairs
+void printVector(const std::vector<T> &vec, const std::string &label = "Vector");
 template <typename T1, typename T2>
-void printVector(const std::vector<std::pair<T1, T2>>& vec, const std::string& label = "Vector of Pairs") {
-	std::cout << label << ":\n[";
-	for (typename std::vector<std::pair<T1, T2>>::const_iterator it = vec.begin(); it != vec.end(); ++it) {
-		std::cout << "(" << it->first << ", " << it->second << ")" << (it != vec.end() - 1 ? "," : "");
-	}
-	std::cout << "]\n";
-}
+void printVector(const std::vector<std::pair<T1, T2>> &vec,
+				 const std::string &label = "Vector of Pairs");
 
 int main(int argc, char **argv) {
 	headerPrinter("Merge-(Jacobsthal)-Insertion", WIDTH, '=', GRN);
@@ -47,7 +33,6 @@ int main(int argc, char **argv) {
 	std::vector<int> input = {3, 1, 4, 11, 8, 5, 9, 2, 6, 10, 12, 7, 13};
 	int odd = -1;
 	printVector(input, "Unsorted vector");
-	sepPrinter(WIDTH, '-', GRN, 1);
 
 	// Check if vector size is odd or even
 	if (input.size() % 2) {
@@ -66,7 +51,6 @@ int main(int argc, char **argv) {
 		// pairs = [(3, 1), (4, 11), (8, 5), (9, 2), (6, 10), (12, 7)];
 	}
 	printVector(pairs, "Vector of Pairs");
-	sepPrinter(WIDTH, '-', GRN, 1);
 
 	// Sort the vector of pairs, placing the larger number in the first position
 	typedef std::vector<std::pair<int, int>>::iterator pairVectorIter;
@@ -81,7 +65,6 @@ int main(int argc, char **argv) {
 	// pairs = [(3, 1), (11, 4), (8, 5), (9, 2), (10, 6), (12, 7)];
 
 	printVector(pairs, "Vector of Pairs after swapping");
-	sepPrinter(WIDTH, '-', GRN, 1);
 
 	// Sort the vector of pairs be the first element of each pair in ascending order
 	printf("Sorting vector of pairs...\n");
@@ -89,7 +72,6 @@ int main(int argc, char **argv) {
 	// pairs = [(3, 1), (8, 5), (9, 2), (10, 6), (11, 4), (12, 7)];
 
 	printVector(pairs, "Vector of Pairs after sorting");
-	sepPrinter(WIDTH, '-', GRN, 1);
 
 	// Create "vector splits", and split the vector of pairs into two vectors
 	std::vector<int> main;
@@ -111,15 +93,11 @@ int main(int argc, char **argv) {
 	// if input  vector was odd, add the last element to the pend vector
 	if (odd != -1)
 		pend.push_back(odd);
+	else
+		printf("Vector is Even, no last element added\n");
 	// pend = [1, 5, 2, 6, 4, 7, 13];
 
-	printf("Pend vector with last element added:\n");
-	printf("[");
-	for (std::vector<int>::iterator it = pend.begin(); it != pend.end(); ++it) {
-		printf("%d%s", *it, (it != pend.end() - 1) ? "," : "");
-	}
-	printf("]\n");
-	sepPrinter(WIDTH, '-', GRN, 1);
+	printVector(pend, "Pend vector w/ last element added");
 
 	/** 2. Jacobsthal I choose yoou! **/
 	// Generate list of indexes to inform insertion sorting pend into main
@@ -138,7 +116,6 @@ int main(int argc, char **argv) {
 	// jacobsthal = [0, 1, 3, 5];
 
 	printVector(jacobsthal, "Jacobsthal vector");
-	sepPrinter(WIDTH, '-', GRN, 1);
 
 	// Create vector of ints to store the insertion order list
 	std::vector<int> insertion;
@@ -185,7 +162,6 @@ int main(int argc, char **argv) {
 	// insertion = [0, 1, 3, 2, 5, 4]
 
 	printVector(insertion, "Insertion vector");
-	sepPrinter(WIDTH, '-', GRN, 1);
 
 	/** 3. Final Insertion Sort **/
 	for (std::vector<int>::iterator it = insertion.begin(); it != insertion.end();
@@ -201,9 +177,35 @@ int main(int argc, char **argv) {
 	}
 	// main = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 
-	printf("Sorted Main vector:\n");
 	printVector(main, "Sorted Main vector");
-	sepPrinter(WIDTH, '-', GRN, 1);
 
 	return (0);
+}
+
+// Template to print a vector
+template <typename T>
+void printVector(const std::vector<T> &vec, const std::string &label) {
+	std::cout << label << ":\n[";
+	for (typename std::vector<T>::const_iterator it = vec.begin();
+		 it != vec.end();
+		 ++it) {
+		std::cout << *it << (it != vec.end() - 1 ? "," : "");
+	}
+	std::cout << "]\n";
+	sepPrinter(WIDTH, '-', GRN, 1);
+}
+
+// Specialization to print a vector of pairs
+template <typename T1, typename T2>
+void printVector(const std::vector<std::pair<T1, T2>> &vec,
+				 const std::string &label) {
+	std::cout << label << ":\n[";
+	for (typename std::vector<std::pair<T1, T2>>::const_iterator it = vec.begin();
+		 it != vec.end();
+		 ++it) {
+		std::cout << "(" << it->first << ", " << it->second << ")"
+				  << (it != vec.end() - 1 ? "," : "");
+	}
+	std::cout << "]\n";
+	sepPrinter(WIDTH, '-', GRN, 1);
 }

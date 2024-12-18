@@ -118,7 +118,15 @@ $(TEMP_PATH):
 ##@ Test Rules 🧪
 
 jacobsthal: 
-	g++ ref/merge-insertion.cpp src/printer.cpp -o jacobsthal.out && ./jacobsthal.out
+	g++ -g ref/merge-insertion.cpp src/printer.cpp -o jacobsthal.out && ./jacobsthal.out
+
+gdb_jacobsthal: jacobsthal
+	tmux split-window -h "gdb --tui --args ./jacobsthal.out"
+	tmux resize-pane -L 5
+	# tmux split-window -v "btop"
+	make get_log
+	
+
 test_all:						## Run All tests
 	echo "test"
 
