@@ -17,7 +17,7 @@ set print vtbl on
 
 set print pretty on
 # set print elements 2
-set print object on
+# set print object on
 set print static-members on
 set print array on
 set print array-indexes on
@@ -30,9 +30,7 @@ set debuginfod urls "https://debuginfod.ubuntu.com/"
 define main
   display input
   display pairs
-  display jacobsthal
   display nextNumber
-  display pend.size()
   display insertion
 end
 

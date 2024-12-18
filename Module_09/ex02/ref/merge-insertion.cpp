@@ -170,6 +170,7 @@ int main(int argc, char **argv) {
 		std::vector<int>::iterator position;
 
 		value = pend[*it]; // get the value at the index in the pend vector
+		// pend.erase(pend.begin()); // erase the value from the pend vector
 		// position: the first element greater then the value in main vector
 		position = std::upper_bound(main.begin(), main.end(), value);
 		// insert the value before the position found
