@@ -14,22 +14,39 @@
 #include "../inc/Ansi.h"
 #include "../inc/PmergeMe.hpp"
 #include <algorithm>
+#include <utility>
+#include <iterator>
 #include <iostream>
 #include <vector>
 
 #define WIDTH 50
+
+// Template to print a vector
+template <typename T>
+void printVector(const std::vector<T>& vec, const std::string& label = "Vector") {
+	std::cout << label << ":\n[";
+	for (typename std::vector<T>::const_iterator it = vec.begin(); it != vec.end(); ++it) {
+		std::cout << *it << (it != vec.end() - 1 ? "," : "");
+	}
+	std::cout << "]\n";
+}
+
+// Specialization to print a vector of pairs
+template <typename T1, typename T2>
+void printVector(const std::vector<std::pair<T1, T2>>& vec, const std::string& label = "Vector of Pairs") {
+	std::cout << label << ":\n[";
+	for (typename std::vector<std::pair<T1, T2>>::const_iterator it = vec.begin(); it != vec.end(); ++it) {
+		std::cout << "(" << it->first << ", " << it->second << ")" << (it != vec.end() - 1 ? "," : "");
+	}
+	std::cout << "]\n";
+}
 
 int main(int argc, char **argv) {
 	headerPrinter("Merge-(Jacobsthal)-Insertion", WIDTH, '=', GRN);
 	/** 1. Divide & Conquer **/
 	std::vector<int> input = {3, 1, 4, 11, 8, 5, 9, 2, 6, 10, 12, 7, 13};
 	int odd = -1;
-	printf("Unsorted vector:\n");
-	printf("[");
-	for (std::vector<int>::iterator it = input.begin(); it != input.end(); ++it) {
-		printf("%d%s", *it, (it != input.end() - 1) ? "," : "");
-	}
-	printf("]\n");
+	printVector(input, "Unsorted vector");
 	sepPrinter(WIDTH, '-', GRN, 1);
 
 	// Check if vector size is odd or even
@@ -48,17 +65,7 @@ int main(int argc, char **argv) {
 		pairs.push_back(std::make_pair(*it, *(it + 1)));
 		// pairs = [(3, 1), (4, 11), (8, 5), (9, 2), (6, 10), (12, 7)];
 	}
-	printf("Vector of Pairs:\n");
-	printf("[");
-	for (std::vector<std::pair<int, int>>::iterator it = pairs.begin();
-		 it != pairs.end();
-		 ++it) {
-		printf("(%d, %d)%s",
-			   it->first,
-			   it->second,
-			   (it != pairs.end() - 1) ? "," : "");
-	}
-	printf("]\n");
+	printVector(pairs, "Vector of Pairs");
 	sepPrinter(WIDTH, '-', GRN, 1);
 
 	// Sort the vector of pairs, placing the larger number in the first position
@@ -73,17 +80,7 @@ int main(int argc, char **argv) {
 	}
 	// pairs = [(3, 1), (11, 4), (8, 5), (9, 2), (10, 6), (12, 7)];
 
-	printf("Vector of Pairs after swapping:\n");
-	printf("[");
-	for (std::vector<std::pair<int, int>>::iterator it = pairs.begin();
-		 it != pairs.end();
-		 ++it) {
-		printf("(%d, %d)%s",
-			   it->first,
-			   it->second,
-			   (it != pairs.end() - 1) ? "," : "");
-	}
-	printf("]\n");
+	printVector(pairs, "Vector of Pairs after swapping");
 	sepPrinter(WIDTH, '-', GRN, 1);
 
 	// Sort the vector of pairs be the first element of each pair in ascending order
@@ -91,17 +88,7 @@ int main(int argc, char **argv) {
 	std::sort(pairs.begin(), pairs.end());
 	// pairs = [(3, 1), (8, 5), (9, 2), (10, 6), (11, 4), (12, 7)];
 
-	printf("Vector of Pairs after sorting:\n");
-	printf("[");
-	for (std::vector<std::pair<int, int>>::iterator it = pairs.begin();
-		 it != pairs.end();
-		 ++it) {
-		printf("(%d, %d)%s",
-			   it->first,
-			   it->second,
-			   (it != pairs.end() - 1) ? "," : "");
-	}
-	printf("]\n");
+	printVector(pairs, "Vector of Pairs after sorting");
 	sepPrinter(WIDTH, '-', GRN, 1);
 
 	// Create "vector splits", and split the vector of pairs into two vectors
@@ -116,19 +103,9 @@ int main(int argc, char **argv) {
 	// main = [3, 8, 9, 10, 11, 12];
 	// pend = [1, 5, 2, 6, 4, 7];
 
-	printf("Main vector:\n");
-	printf("[");
-	for (std::vector<int>::iterator it = main.begin(); it != main.end(); ++it) {
-		printf("%d%s", *it, (it != main.end() - 1) ? "," : "");
-	}
-	printf("]\n");
+	printVector(main, "Main vector");
 
-	printf("Pend vector:\n");
-	printf("[");
-	for (std::vector<int>::iterator it = pend.begin(); it != pend.end(); ++it) {
-		printf("%d%s", *it, (it != pend.end() - 1) ? "," : "");
-	}
-	printf("]\n");
+	printVector(pend, "Pend vector");
 	sepPrinter(WIDTH, '-', GRN, 1);
 
 	// if input  vector was odd, add the last element to the pend vector
@@ -160,14 +137,7 @@ int main(int argc, char **argv) {
 	}
 	// jacobsthal = [0, 1, 3, 5];
 
-	printf("Jacobsthal vector:\n");
-	printf("[");
-	for (std::vector<int>::iterator it = jacobsthal.begin();
-		 it != jacobsthal.end();
-		 ++it) {
-		printf("%d%s", *it, (it != jacobsthal.end() - 1) ? "," : "");
-	}
-	printf("]\n");
+	printVector(jacobsthal, "Jacobsthal vector");
 	sepPrinter(WIDTH, '-', GRN, 1);
 
 	// Create vector of ints to store the insertion order list
@@ -214,13 +184,7 @@ int main(int argc, char **argv) {
 	}
 	// insertion = [0, 1, 3, 2, 5, 4]
 
-	printf("Insertion vector:\n");
-	printf("[");
-	for (std::vector<int>::iterator it = insertion.begin(); it != insertion.end();
-		 ++it) {
-		printf("%d%s", *it, (it != insertion.end() - 1) ? "," : "");
-	}
-	printf("]\n");
+	printVector(insertion, "Insertion vector");
 	sepPrinter(WIDTH, '-', GRN, 1);
 
 	/** 3. Final Insertion Sort **/
@@ -238,11 +202,7 @@ int main(int argc, char **argv) {
 	// main = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 
 	printf("Sorted Main vector:\n");
-	printf("[");
-	for (std::vector<int>::iterator it = main.begin(); it != main.end(); ++it) {
-		printf("%d%s", *it, (it != main.end() - 1) ? "," : "");
-	}
-	printf("]\n");
+	printVector(main, "Sorted Main vector");
 	sepPrinter(WIDTH, '-', GRN, 1);
 
 	return (0);
