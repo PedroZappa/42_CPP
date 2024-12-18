@@ -6,7 +6,7 @@
 #    By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/14 12:26:53 by passunca          #+#    #+#              #
-#    Updated: 2024/12/15 11:44:39 by passunca         ###   ########.fr        #
+#    Updated: 2024/12/18 16:54:20 by passunca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -117,94 +117,10 @@ $(TEMP_PATH):
 
 ##@ Test Rules 🧪
 
+jacobsthal: 
+	g++ ref/merge-insertion.cpp src/printer.cpp -o jacobsthal.out && ./jacobsthal.out
 test_all:						## Run All tests
-	make tests_subject
-	make tests_fail
-	make tests_success
-	make tests_negative
-
-tests_subject: all			## Run Subject tests
-	@echo "$(BLU)$(_SEP)$(D)"
-	@echo "$(YEL)Testing $(MAG)$(NAME)$(YEL)$(D)"
-	@echo "$(BLU)$(_SEP)$(D)"
-	@echo "$(YEL)Running $(GRN)subject tests$(YEL) test...$(D)"
-	./$(NAME) "8 9 * 9 - 9 - 9 - 4 - 1 +"
-	@echo "$(BLU)$(_SEP)$(D)"
-	./$(NAME) "7 7 * 7 -"
-	@echo "$(BLU)$(_SEP)$(D)"
-	./$(NAME) "1 2 * 2 / 2 * 2 4 - +"
-	@echo "$(BLU)$(_SEP)$(D)"
-	./$(NAME) "(1 + 1)"
-
-tests_fail: all 			## Run Failure tests
-	@echo "$(BLU)$(_SEP)$(D)"
-	@echo "$(YEL)Testing $(MAG)$(NAME)$(BRED) FAILURE $(YEL)cases$(D)"
-	@echo "$(BLU)$(_SEP)$(D)"
-	@echo "$(YEL)Running $(BRED)no args$(YEL) test...$(D)"
-	-./$(NAME) 
-	@echo "$(YEL)$(_SEP)$(D)"
-	@echo "$(YEL)Running $(BRED)missing operand$(YEL) test...$(D)"
-	-./$(NAME) 21 +
-	@echo "$(YEL)$(_SEP)$(D)"
-	@echo "$(YEL)Running $(BRED)missing operator$(YEL) test...$(D)"
-	-./$(NAME) 21 21
-	@echo "$(YEL)$(_SEP)$(D)"
-	@echo "$(YEL)Running $(BRED)too many args$(YEL) test...$(D)"
-	-./$(NAME) 21 21 +
-	@echo "$(YEL)$(_SEP)$(D)"
-	@echo "$(YEL)Running $(BRED)missing operator$(YEL) test...$(D)"
-	-./$(NAME) "21 21"
-	@echo "$(YEL)$(_SEP)$(D)"
-	@echo "$(YEL)Running $(BRED)missing operand$(YEL) test...$(D)"
-	-./$(NAME) "21 -"
-	@echo "$(YEL)$(_SEP)$(D)"
-	@echo "$(YEL)Running $(BRED)no operands$(YEL) test...$(D)"
-	-./$(NAME) "-"
-	@echo "$(YEL)$(_SEP)$(D)"
-	-./$(NAME) "(1 1 +)"
-	@echo "$(BLU)$(_SEP)$(D)"
-
-tests_success: all				## Run Success tests
-	@echo "$(YEL)Testing $(MAG)$(NAME)$(BGRN) SUCCESS $(YEL)cases$(D)"
-	@echo "$(BLU)$(_SEP)$(D)"
-	@echo "$(YEL)Running $(BRED)Sum$(YEL) test...$(D)"
-	./$(NAME) "21 21 +"
-	@echo "$(YEL)$(_SEP)$(D)"
-	@echo "$(YEL)Running $(BRED)Subtraction$(YEL) test...$(D)"
-	./$(NAME) "21 21 -"
-	@echo "$(YEL)$(_SEP)$(D)"
-	@echo "$(YEL)Running $(BRED)Multiplication$(YEL) test...$(D)"
-	./$(NAME) "21 21 *"
-	@echo "$(YEL)$(_SEP)$(D)"
-	@echo "$(YEL)Running $(BRED)Division$(YEL) test...$(D)"
-	./$(NAME) "21 21 /"
-	@echo "$(YEL)$(_SEP)$(D)"
-
-tests_negative: all				## Run Success tests
-	@echo "$(YEL)Running $(BRED)Sum with a negative number$(YEL) test...$(D)"
-	./$(NAME) "50 -8 +"
-	@echo "$(YEL)$(_SEP)$(D)"
-	@echo "$(YEL)Running $(BRED)Sum with negative numbers$(YEL) test...$(D)"
-	./$(NAME) "-50 -8 +"
-	@echo "$(YEL)$(_SEP)$(D)"
-	@echo "$(YEL)Running $(BRED)Subtraction with a negative number$(YEL) test...$(D)"
-	./$(NAME) "40 -2 -"
-	@echo "$(YEL)$(_SEP)$(D)"
-	@echo "$(YEL)Running $(BRED)Subtraction with negative numbers$(YEL) test...$(D)"
-	./$(NAME) "-40 -2 -"
-	@echo "$(YEL)$(_SEP)$(D)"
-	@echo "$(YEL)Running $(BRED)Multiplication with a negative number$(YEL) test...$(D)"
-	./$(NAME) "21 -2 *"
-	@echo "$(YEL)$(_SEP)$(D)"
-	@echo "$(YEL)Running $(BRED)Multiplication with negative numbers$(YEL) test...$(D)"
-	./$(NAME) "-21 -2 *"
-	@echo "$(YEL)$(_SEP)$(D)"
-	@echo "$(YEL)Running $(BRED)Division with one negative number$(YEL) test...$(D)"
-	./$(NAME) "84 -2 /"
-	@echo "$(YEL)$(_SEP)$(D)"
-	@echo "$(YEL)Running $(BRED)Division with negative numbers$(YEL) test...$(D)"
-	./$(NAME) "-84 -2 /"
-	@echo "$(YEL)$(_SEP)$(D)"
+	echo "test"
 
 ##@ Debug Rules 
 

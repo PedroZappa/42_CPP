@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 11:56:33 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/15 11:56:36 by passunca         ###   ########.fr       */
+/*   Updated: 2024/12/18 16:47:31 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,14 @@ class PmergeMe {
 	std::vector<int> _vector;
 	std::deque<int> _deque;
 };
+
+
+/** @brief UI Helper Functions */
+void headerPrinter(const std::string &headerText,
+				   int inWidth,
+				   char sep,
+				   const char *sepColor);
+void sepPrinter(int inWidth, char sepChar, const char *color, int nLines);
 
 #endif
 
