@@ -113,6 +113,8 @@ int main(int argc, char **argv) {
 		jacobsthal.push_back(nextNumber);
 		nextNumber = *(jacobsthal.rbegin() + 1) * 2 + jacobsthal.back();
 	}
+	// delete the duplicated 1 from the sequence, as we only need unique indexes
+	jacobsthal.erase(jacobsthal.begin() + 1);
 	// jacobsthal = [0, 1, 3, 5];
 
 	printVector(jacobsthal, "Jacobsthal vector");

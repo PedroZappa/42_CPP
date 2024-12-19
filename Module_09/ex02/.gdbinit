@@ -31,7 +31,7 @@ define main
   display input
   display pairs
   display nextNumber
-  display insertion
+  # display insertion
 end
 
 ### RPN.cpp
