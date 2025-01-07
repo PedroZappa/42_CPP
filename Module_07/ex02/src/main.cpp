@@ -32,7 +32,7 @@ int main(void) {
 	// Fill Array
 	try {
 		for (int i = 0; i < N; i++) {
-			nbrs[i] = rand() % 100;
+			nbrs[i] = (rand() % 100);
 			copy[i] = nbrs[i];
 		}
 		// Print Array
