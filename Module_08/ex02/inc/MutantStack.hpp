@@ -26,7 +26,7 @@ template <typename T> class MutantStack : public std::stack<T, std::deque<T> > {
 	// Constructors
 	MutantStack(void) {
 	}
-	MutantStack(const MutantStack &src) {
+	MutantStack(const MutantStack &src) : stackDeque() {
 		*this = src;
 	}
 	MutantStack &operator=(const MutantStack &src) {
