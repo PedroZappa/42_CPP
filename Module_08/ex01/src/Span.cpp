@@ -75,12 +75,13 @@ size_t Span::shortestSpan(void) const {
 	if ((toSort.empty()) || (toSort.size() == 1))
 		throw EmptySpan();
 	std::sort(toSort.begin(), toSort.end());
-	for (std::vector<int>::const_iterator it = toSort.begin();
-		 (it != (toSort.end() - 1));
-		 it++)
+
+	std::vector<int>::const_iterator it;
+	for (it = toSort.begin(); (it != (toSort.end() - 1)); it++) {
 		diff = (abs(*it - *(it + 1)));
-	if (diff < shortest)
-		shortest = diff;
+		if (diff < shortest)
+			shortest = diff;
+	}
 	return (shortest);
 }
 
