@@ -52,3 +52,8 @@ int main(void) {
 	}
 	sepPrinter(WIDTH, '-', GRN, 1);
 }
+
+const char *NotFound::what() const throw() {
+	return (RED "Value not found" NC);
+}
+
