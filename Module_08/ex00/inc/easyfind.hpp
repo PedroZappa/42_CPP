@@ -25,9 +25,7 @@ template <typename T> typename T::value_type easyfind(T &container, int n);
 // Exception Declaration & Definition
 class NotFound : public std::exception {
   public:
-	virtual const char *what() const throw() {
-		return (RED "Value not found" NC);
-	}
+	virtual const char *what() const throw();
 };
 
 /** @brief UI Helper Functions */
