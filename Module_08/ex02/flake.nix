@@ -16,6 +16,7 @@
       system: let
         pkgs = import nixpkgs {inherit system;};
         llvm = pkgs.llvmPackages_latest;
+        lib = nixpkgs.lib;
 
         # simple script which replaces the functionality of make
         # it works with <math.h> and includes debugging symbols by default
@@ -42,7 +43,23 @@
             stdenv = pkgs.clangStdenv;
           } rec {
             name = "C";
-            CPATH = "~/.nix-profile/include";
+
+            nativeBuildInputs = [
+              pkgs.cmake
+              llvm.lldb
+              pkgs.clang-tools
+              llvm.clang
+              pkgs.gtest
+            ];
+
+            buildInputs = [
+              pkgs.libcxx
+            ];
+            CPATH = builtins.concatStringsSep ":" [
+              (lib.makeSearchPathOutput "dev" "include" [llvm.libcxx])
+              (lib.makeSearchPath "resource-root/include" [llvm.clang])
+            ];
+            # CPATH = "~/.nix-profile/include";
             LIBRARY_PATH = "~/.nix-profile/lib";
             QTDIR = "~/.nix-profile";
 
