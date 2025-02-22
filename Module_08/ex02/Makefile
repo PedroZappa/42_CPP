@@ -15,6 +15,7 @@
 #==============================================================================#
 
 MAKE	= make -C
+BARE	= bear -- make
 SHELL	:= bash --rcfile ~/.bashrc
 
 # Default test values
