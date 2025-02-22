@@ -14,8 +14,8 @@
   } @ inputs:
     utils.lib.eachDefaultSystem (
       system: let
-        p = import nixpkgs {inherit system;};
-        llvm = p.llvmPackages_latest;
+        pkgs = import nixpkgs {inherit system;};
+        llvm = pkgs.llvmPackages_latest;
 
         # simple script which replaces the functionality of make
         # it works with <math.h> and includes debugging symbols by default
@@ -23,7 +23,7 @@
 
         # arguments: outfile
         # basic usage example: mk main [flags]
-        mymake = p.writeShellScriptBin "mk" ''
+        mymake = pkgs.writeShellScriptBin "mk" ''
           if [ -f "$1.c" ]; then
             i="$1.c"
             c=$CC
@@ -36,39 +36,47 @@
           $c -ggdb $i -o $o -lm -Wall $@
         '';
       in {
-        devShell = p.mkShell.override {stdenv = p.clangStdenv;} rec {
-          packages = with p; [
-            # builder
-            gnumake
-            cmake
-            bear
+        # DEV SHELL
+        devShell =
+          pkgs.mkShell.override {
+            stdenv = pkgs.clangStdenv;
+          } rec {
+            name = "C";
+            CPATH = "~/.nix-profile/include";
+            LIBRARY_PATH = "~/.nix-profile/lib";
+            QTDIR = "~/.nix-profile";
 
-            # debugger
-            llvm.lldb
-            gdb
+            packages = with pkgs; [
+              # builder
+              gnumake
+              cmake
+              bear
 
-            # fix headers not found
-            clang-tools
+              # debugger
+              llvm.lldb
+              gdb
 
-            # LSP and compiler
-            llvm.libstdcxxClang
+              # fix headers not found
+              clang-tools
 
-            # other tools
-            cppcheck
-            llvm.libllvm
-            valgrind
-            mymake
+              # LSP and compiler
+              llvm.libstdcxxClang
 
-            # stdlib for cpp
-            llvm.libcxx
+              # other tools
+              cppcheck
+              llvm.libllvm
+              valgrind
+              mymake
 
-            # libs
-            glm
-            SDL2
-            SDL2_gfx
-          ];
-          name = "C";
-        };
+              # stdlib for cpp
+              llvm.libcxx
+
+              # libs
+              glm
+              SDL2
+              SDL2_gfx
+            ];
+          };
       }
     );
 }
