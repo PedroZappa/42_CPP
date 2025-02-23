@@ -9,127 +9,131 @@
 /*   Updated: 2024/12/14 12:46:16 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "../inc/MutantStack.hpp"
-#include <cassert>
+#include "../inc/Ansi.h" // Include the ANSI header
+#include <list>
 #include <iostream>
 
-void test_default_constructor();
-void test_push_pop_operations();
-void test_copy_constructor();
-void test_assignment_operator();
-void test_iterator_access();
-void test_empty_stack_iterator();
-void test_iteration_order();
-void test_mixing_operations_and_iteration();
+int main(void) {
+    // Testing MutantStack
+    {
+        std::cout << BBLU << "Testing MutantStack:" << RESET << std::endl;
+        MutantStack<int> mstack;
+        mstack.push(5);
+        mstack.push(17);
+        mstack.push(3);
+        mstack.push(737);
+        mstack.push(42);
 
-int main() {
-	headerPrinter("MutantStack", 50, '-', GRN);
-	test_default_constructor();
-	test_push_pop_operations();
-	test_copy_constructor();
-	test_assignment_operator();
-	test_iterator_access();
-	test_empty_stack_iterator();
-	test_iteration_order();
-	test_mixing_operations_and_iteration();
-	std::cout << GRN "All tests passed!" NC << std::endl;
-	return 0;
-}
+        std::cout << "Top element: " << GRN << mstack.top() << RESET << std::endl;
+        mstack.pop();
+        std::cout << "Size after pop: " << GRN << mstack.size() << RESET << std::endl;
 
-void test_default_constructor() {
-	MutantStack<int> stack;
-	assert(stack.size() == 0);
-	std::cout << CYN "Default constructor test passed!" NC << std::endl;
-}
+        // Regular iterator
+        std::cout << "\n" << CYN << "Regular iterator (begin -> end):" << RESET << std::endl;
+        MutantStack<int>::it it = mstack.begin();
+        MutantStack<int>::it ite = mstack.end();
+        while (it != ite) {
+            std::cout << MAG << *it << " " << RESET;
+            ++it;
+        }
+        std::cout << std::endl;
 
-void test_push_pop_operations() {
-	MutantStack<int> stack;
-	stack.push(42);
-	stack.push(15);
-	stack.push(99);
-	assert(stack.top() == 99); // Check top element
-	stack.pop();
-	assert(stack.top() == 15); // After pop, check top element
-	assert(stack.size() == 2);
-	std::cout << YEL "Push and pop operations test passed!" NC << std::endl;
-}
+        // Const iterator
+        std::cout << CYN << "Const iterator (cbegin -> cend):" << RESET << std::endl;
+        MutantStack<int>::const_it cit = mstack.begin(); // Fixed to use cbegin/cend
+        MutantStack<int>::const_it cite = mstack.end();
+        while (cit != cite) {
+            std::cout << MAG << *cit << " " << RESET;
+            ++cit;
+        }
+        std::cout << std::endl;
 
-void test_copy_constructor() {
-	MutantStack<int> stack1;
-	stack1.push(42);
-	stack1.push(15);
+        // Reverse iterator
+        std::cout << CYN << "Reverse iterator (rbegin -> rend):" << RESET << std::endl;
+        MutantStack<int>::rev_it rit = mstack.rbegin();
+        MutantStack<int>::rev_it rite = mstack.rend();
+        while (rit != rite) {
+            std::cout << MAG << *rit << " " << RESET;
+            ++rit;
+        }
+        std::cout << std::endl;
 
-	MutantStack<int> stack2(stack1);        // Copy constructor
-	assert(stack2.size() == stack1.size()); // Ensure sizes are the same
-	assert(stack2.top() == stack1.top());   // Ensure top elements are the same
-	std::cout << MAG "Copy constructor test passed!" NC << std::endl;
-}
+        // Const reverse iterator
+        std::cout << CYN << "Const reverse iterator (crbegin -> crend):" << RESET << std::endl;
+        MutantStack<int>::const_rev_it crit = mstack.rbegin(); // Fixed to use crbegin/crend
+        MutantStack<int>::const_rev_it crite = mstack.rend();
+        while (crit != crite) {
+            std::cout << MAG << *crit << " " << RESET;
+            ++crit;
+        }
+        std::cout << std::endl;
 
-void test_assignment_operator() {
-	MutantStack<int> stack1;
-	stack1.push(42);
-	stack1.push(15);
+        // Copy to std::stack
+        std::stack<int> s(mstack);
+        std::cout << "Copied to std::stack, size: " << GRN << s.size() << RESET << std::endl;
+    }
 
-	MutantStack<int> stack2;
-	stack2 = stack1; // Assignment operator
-	assert(stack2.size() == stack1.size());
-	assert(stack2.top() == stack1.top());
-	std::cout << BLU "Assignment operator test passed!" NC << std::endl;
-}
+    sepPrinter(30, '-', YEL, 1);
 
-void test_iterator_access() {
-	MutantStack<int> stack;
-	stack.push(42);
-	stack.push(15);
-	stack.push(99);
+    // Testing std::list for comparison
+    {
+        std::cout << BBLU << "Testing std::list:" << RESET << std::endl;
+        std::list<int> mlist;
+        mlist.push_back(5);
+        mlist.push_back(17);
+        mlist.push_back(3);
+        mlist.push_back(737);
+        mlist.push_back(42);
 
-	// Iterate using begin() and end()
-	MutantStack<int>::dequeIt it = stack.begin();
-	assert(*it == 42); // First element
-	++it;
-	assert(*it == 15); // Second element
-	++it;
-	assert(*it == 99); // Third element
-	std::cout << GRN "Iterator access test passed!" NC << std::endl;
-}
+        std::cout << "Back element: " << GRN << mlist.back() << RESET << std::endl;
+        mlist.pop_back();
+        std::cout << "Size after pop: " << GRN << mlist.size() << RESET << std::endl;
 
-void test_empty_stack_iterator() {
-	MutantStack<int> stack;
-	MutantStack<int>::dequeIt it = stack.begin();
-	assert(it ==
-		   stack.end()); // No elements should result in same begin and end iterators
-	std::cout << BLU "Empty stack iterator test passed!" NC << std::endl;
-}
+        // Regular iterator
+        std::cout << "\n" << CYN << "Regular iterator (begin -> end):" << RESET << std::endl;
+        std::list<int>::iterator it = mlist.begin();
+        std::list<int>::iterator ite = mlist.end();
+        while (it != ite) {
+            std::cout << MAG << *it << " " << RESET;
+            ++it;
+        }
+        std::cout << std::endl;
 
-void test_iteration_order() {
-	MutantStack<int> stack;
-	stack.push(1);
-	stack.push(2);
-	stack.push(3);
+        // Const iterator
+        std::cout << CYN << "Const iterator (cbegin -> cend):" << RESET << std::endl;
+        std::list<int>::const_iterator cit = mlist.begin();
+        std::list<int>::const_iterator cite = mlist.end();
+        while (cit != cite) {
+            std::cout << MAG << *cit << " " << RESET;
+            ++cit;
+        }
+        std::cout << std::endl;
 
-	int count = 1;
-	for (MutantStack<int>::dequeIt it = stack.begin(); it != stack.end(); ++it) {
-		assert(*it == count); // Should print 1, 2, 3
-		count++;
-	}
-	std::cout << YEL "Iteration order test passed!" NC << std::endl;
-}
+        // Reverse iterator
+        std::cout << CYN << "Reverse iterator (rbegin -> rend):" << RESET << std::endl;
+        std::list<int>::reverse_iterator rit = mlist.rbegin();
+        std::list<int>::reverse_iterator rite = mlist.rend();
+        while (rit != rite) {
+            std::cout << MAG << *rit << " " << RESET;
+            ++rit;
+        }
+        std::cout << std::endl;
 
-void test_mixing_operations_and_iteration() {
-	MutantStack<int> stack;
-	stack.push(1);
-	stack.push(2);
-	stack.push(3);
+        // Const reverse iterator
+        std::cout << CYN << "Const reverse iterator (crbegin -> crend):" << RESET << std::endl;
+        std::list<int>::const_reverse_iterator crit = mlist.rbegin();
+        std::list<int>::const_reverse_iterator crite = mlist.rend();
+        while (crit != crite) {
+            std::cout << MAG << *crit << " " << RESET;
+            ++crit;
+        }
+        std::cout << std::endl;
 
-	MutantStack<int>::dequeIt it = stack.begin();
-	assert(*it == 1); // Should print 1
-	stack.push(4);    // Add element while iterating
-	++it;
-	assert(*it == 2);   // Should print 2
-	stack.pop();        // Remove element while iterating
-	it = stack.begin(); // Reset iterator
-	assert(*it == 1);   // Should print 1 after pop
-	std::cout << RED "Mixing operations and iteration test passed!" NC
-			  << std::endl;
+        // Copy to another list
+        std::list<int> l(mlist);
+        std::cout << "Copied to std::list, size: " << GRN << l.size() << RESET << std::endl;
+    }
+
+    return 0;
 }

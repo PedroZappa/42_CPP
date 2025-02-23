@@ -15,33 +15,41 @@
 
 #include "../inc/Ansi.h"
 #include <deque>
-#include <stack>
 #include <iostream>
+#include <stack>
 
-template <typename T> class MutantStack : public std::stack<T, std::deque<T> > {
+template <typename T> class MutantStack : public std::stack<T> {
   public:
-	typedef typename std::stack<T, std::deque<T> > stackDeque;
-	typedef typename std::deque<T>::iterator dequeIt;
-
-	// Constructors
-	MutantStack(void) {
-	}
-	MutantStack(const MutantStack &src) : stackDeque() {
-		*this = src;
-	}
-	MutantStack &operator=(const MutantStack &src) {
-		stackDeque::operator=(src);
-		return (*this);
-	}
-	~MutantStack(void) {
-	}
-
 	// Iterators
-	dequeIt begin(void) {
-		return (this->stackDeque::c.begin());
+	typedef typename std::stack<T>::container_type::iterator it;
+	typedef typename std::stack<T>::container_type::const_iterator const_it;
+	typedef typename std::stack<T>::container_type::reverse_iterator rev_it;
+	typedef
+		typename std::stack<T>::container_type::const_reverse_iterator const_rev_it;
+	// Begin and End getters
+	it begin() {
+		return (this->c.begin());
 	}
-	dequeIt end(void) {
-		return (this->stackDeque::c.end());
+	it end() {
+		return (this->c.end());
+	}
+	const_it begin() const {
+		return (this->c.begin());
+	}
+	const_it end() const {
+		return (this->c.end());
+	}
+	rev_it rbegin() {
+		return (this->c.rbegin());
+	}
+	rev_it rend() {
+		return (this->c.rend());
+	}
+	const_rev_it rbegin() const {
+		return (this->c.rbegin());
+	}
+	const_rev_it rend() const {
+		return (this->c.rend());
 	}
 
   private:
