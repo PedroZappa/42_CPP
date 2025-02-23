@@ -26,6 +26,7 @@ template <typename T> class MutantStack : public std::stack<T> {
 	typedef typename std::stack<T>::container_type::reverse_iterator rev_it;
 	typedef
 		typename std::stack<T>::container_type::const_reverse_iterator const_rev_it;
+	//
 	// Begin and End getters
 	it begin() {
 		return (this->c.begin());
