@@ -14,18 +14,19 @@
 #define PMERGEME_HPP
 
 #include <cctype>
+#include "Ansi.h"
 #include <cstdlib>
 #include <ctime>
 #include <deque>
-#include <exception>
+#include <list>
+#include <iostream>
 #include <sstream>
-#include <stdexcept>
-#include <vector>
 
 class PmergeMe {
   public:
 	PmergeMe(void);
-	PmergeMe(const PmergeMe &copy);
+	PmergeMe(const std::deque<int> &input);
+	PmergeMe(const std::list<int> &input);
 	PmergeMe &operator=(const PmergeMe &other);
 	~PmergeMe(void);
 
@@ -41,7 +42,7 @@ class PmergeMe {
 	void merge(C &left, C &right, C &og);
 
   private:
-	std::vector<int> _vector;
+	std::list<int> _list;
 	std::deque<int> _deque;
 };
 
