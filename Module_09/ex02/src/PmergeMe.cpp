@@ -74,6 +74,9 @@ int PmergeMe::parseArgs(int argc, char **argv) {
 /*                                   Math!!                                   */
 /* ************************************************************************** */
 
+/// @brief Generate the nth jacobsthal number
+/// @param nIdx Index of jacobsthal number
+/// @return nth jacobsthal number
 int PmergeMe::jacobsthalGenerator(std::size_t nIdx) {
 	if (nIdx == 0)
 		return (0);
@@ -86,3 +89,5 @@ int PmergeMe::jacobsthalGenerator(std::size_t nIdx) {
 /* ************************************************************************** */
 /*                                   Vector                                   */
 /* ************************************************************************** */
+
+
