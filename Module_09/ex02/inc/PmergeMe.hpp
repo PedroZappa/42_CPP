@@ -17,16 +17,16 @@
 #include "Ansi.h"
 #include <cstdlib>
 #include <ctime>
-#include <deque>
 #include <list>
+#include <vector>
 #include <iostream>
 #include <sstream>
 
 class PmergeMe {
   public:
 	PmergeMe(void);
-	PmergeMe(const std::deque<int> &input);
 	PmergeMe(const std::list<int> &input);
+	PmergeMe(const std::vector<int> &input);
 	PmergeMe &operator=(const PmergeMe &other);
 	~PmergeMe(void);
 
@@ -42,8 +42,13 @@ class PmergeMe {
 	void merge(C &left, C &right, C &og);
 
   private:
+	std::vector<int> _vector;
 	std::list<int> _list;
-	std::deque<int> _deque;
+
+	// Logging Functions
+	void logVec(void);
+	void logAuxVec(void);
+	void logList(void);
 };
 
 

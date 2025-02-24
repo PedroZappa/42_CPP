@@ -16,29 +16,31 @@
 /*                                Constructors                                */
 /* ************************************************************************** */
 
-PmergeMe::PmergeMe(const std::deque<int> &input) : _deque(input) {}
+PmergeMe::PmergeMe(const std::list<int> &input) : _list(input) {
+}
 
-PmergeMe::PmergeMe(const std::list<int> &input) : _list(input) {}
+PmergeMe::PmergeMe(const std::vector<int> &input) : _vector(input) {
+}
 
 PmergeMe &PmergeMe::operator=(const PmergeMe &other) {
 	if (this != &other) {
-		this->_deque = other._deque;
 		this->_list = other._list;
+		this->_vector = other._vector;
 	}
 	return (*this);
 }
 
-
-PmergeMe::~PmergeMe(void) {}
+PmergeMe::~PmergeMe(void) {
+}
 
 /* ************************************************************************** */
-/*                                Functions                                   */
+/*                                  Parsing                                   */
 /* ************************************************************************** */
 
-void PmergeMe::parseArgs (int argc, char **argv) {
-	std::deque<int> dequeIn;
+void PmergeMe::parseArgs(int argc, char **argv) {
 	std::list<int> listIn;
-	
+	std::vector<int> vectorIn;
+
 	for (int i = 1; i < argc; ++i) {
 		std::stringstream ss(argv[i]);
 		int num;
@@ -48,10 +50,16 @@ void PmergeMe::parseArgs (int argc, char **argv) {
 			exit(1);
 		}
 		while (ss >> num) {
-			dequeIn.push_back(num);
 			listIn.push_back(num);
+			vectorIn.push_back(num);
 		}
 	}
-	this->_deque = dequeIn;
 	this->_list = listIn;
+	this->_vector = vectorIn;
 }
+
+/* ************************************************************************** */
+/*                                   Vector                                   */
+/* ************************************************************************** */
+
+
