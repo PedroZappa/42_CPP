@@ -16,12 +16,18 @@
 /*                                Constructors                                */
 /* ************************************************************************** */
 
+/// @brief ParameterizedConstructor
+/// @param input Positive integer list
 PmergeMe::PmergeMe(const std::list<int> &input) : _list(input) {
 }
 
+/// @brief Parameterized Constructor
+/// @param input Positive integer vector
 PmergeMe::PmergeMe(const std::vector<int> &input) : _vector(input) {
 }
 
+/// @brief Copy Constructor
+/// @param other Object to be copied
 PmergeMe &PmergeMe::operator=(const PmergeMe &other) {
 	if (this != &other) {
 		this->_list = other._list;
@@ -30,6 +36,7 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &other) {
 	return (*this);
 }
 
+/// @brief Destructor
 PmergeMe::~PmergeMe(void) {
 }
 
@@ -37,7 +44,10 @@ PmergeMe::~PmergeMe(void) {
 /*                                  Parsing                                   */
 /* ************************************************************************** */
 
-void PmergeMe::parseArgs(int argc, char **argv) {
+/// @brief Parse input arguments
+/// @param argc Number of arguments
+/// @param argv Array of arguments
+int PmergeMe::parseArgs(int argc, char **argv) {
 	std::list<int> listIn;
 	std::vector<int> vectorIn;
 
@@ -56,10 +66,23 @@ void PmergeMe::parseArgs(int argc, char **argv) {
 	}
 	this->_list = listIn;
 	this->_vector = vectorIn;
+
+	return (EXIT_SUCCESS);
+}
+
+/* ************************************************************************** */
+/*                                   Math!!                                   */
+/* ************************************************************************** */
+
+int PmergeMe::jacobsthalGenerator(std::size_t nIdx) {
+	if (nIdx == 0)
+		return (0);
+	if (nIdx == 1)
+		return (1);
+	return (
+		(2 * jacobsthalGenerator((nIdx + 2)) + jacobsthalGenerator((nIdx + 1))));
 }
 
 /* ************************************************************************** */
 /*                                   Vector                                   */
 /* ************************************************************************** */
-
-

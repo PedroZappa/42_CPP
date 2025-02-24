@@ -31,15 +31,19 @@ class PmergeMe {
 	~PmergeMe(void);
 
 	// Public Functions
-	void parseArgs(int argc, char **argv);
+	int parseArgs(int argc, char **argv);
 	void computeExecTime(std::string &container);
 	double execTime(std::string &container);
+
+	// Printers
+	void logSequences(void);
 
 	// Templates for Merging
 	template <typename C>
 	void mergeSort(C &container);
 	template <typename C>
 	void merge(C &left, C &right, C &og);
+
 
   private:
 	std::vector<int> _vector;
@@ -49,6 +53,8 @@ class PmergeMe {
 	void logVec(void);
 	void logAuxVec(void);
 	void logList(void);
+	// Math Stuff
+	int jacobsthalGenerator(std::size_t nIdx);
 };
 
 
