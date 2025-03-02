@@ -132,17 +132,75 @@ void PmergeMe::createVectorPairs(void) {
 	}
 }
 
-void PmergeMe::maxValueSortVector(std::vector<std::vector<int> > &pair, int n) {
-	(void)n;
-	(void)pair;
+/// @brief Sort a Vector of pairs by their highest value
+void PmergeMe::maxValueSortVector(std::vector<std::vector<int>> &pair, int n) {
+	if (n <= 1)
+		return;
+	else {
+		maxValueSortVector(pair, n - 1);
+		insertInSequenceVector(pair, pair[n - 1], (n - 2));
+	}
 }
 
+/// @brief Recursively insert sort by highest value in pair
+/// @param pair Vector of pairs
+/// @param currPair Pair to be inserted
+/// @param n Index
+void PmergeMe::insertInSequenceVector(std::vector<std::vector<int>> &pair,
+									  const std::vector<int> currPair,
+									  int n) {
+	if ((n >= 0) && (pair[n][1] > currPair[1])) {
+		pair[n + 1] = pair[n];
+		insertInSequenceVector(pair, currPair, (n - 1));
+	} else
+		pair[n + 1] = currPair;
+}
+
+/// @brief Merge Insertion sort on Vector of pairs
+/// @param pend Vector of pending numbers
+/// @param isUneven Boolean to check if the Vector is uneven
+/// @param lastIdx The value at the last index
 void PmergeMe::mergeInsertVectorPairs(std::vector<int> pend,
 									  bool isUneven,
 									  int lastIdx) {
-	(void)pend;
-	(void)isUneven;
-	(void)lastIdx;
+	std::vector<int> &vector = _vector;
+
+	// Insert 1st elem form pend into vector
+	vector.insert(vector.begin(), pend[0]);
+
+	std::vector<int> jacobsthalSequence = generateJacobsthalSequence(pend);
+	std::vector<int> seqIdx;
+	seqIdx.push_back(1); // 1 cause pend element  was already added
+	bool jacobsthalTurn = true;
+	int lastJacobsthal = -1;
+
+	for (std::size_t insert = 1; insert <= pend.size(); ++insert) {
+		int elem = 0;
+		if (!jacobsthalSequence.empty() && jacobsthalTurn) {
+			seqIdx.push_back(jacobsthalSequence[0]);
+			elem = jacobsthalSequence[0 - 1];
+			lastJacobsthal = jacobsthalSequence[0];
+			jacobsthalSequence.erase(jacobsthalSequence.begin());
+			jacobsthalTurn = false;
+		} else {
+			if (std::find(seqIdx.begin(), seqIdx.end(), insert) != seqIdx.end())
+				++insert;
+			if (insert > pend.size())
+				break;
+			elem = pend[insert - 1];
+			seqIdx.push_back(insert);
+			if (lastJacobsthal == (static_cast<int>(insert) + 1))
+				jacobsthalTurn = true;
+		}
+		std::vector<int>::iterator insertLoci =
+			std::upper_bound(vector.begin(), vector.end(), elem);
+		vector.insert(insertLoci, elem);
+	}
+	if (isUneven) {
+		std::vector<int>::iterator insertLoci =
+			std::upper_bound(vector.begin(), vector.end(), lastIdx);
+		vector.insert(insertLoci, lastIdx);
+	}
 }
 
 /// @brief Create a Vector of pending numbers
@@ -173,7 +231,8 @@ void PmergeMe::logSequences(void) {
 void PmergeMe::logVecPair(void) {
 	std::cout << "_vectorPairs: " << _vectorPair.size() << " pairs: ";
 	for (std::size_t i = 0; i < _vectorPair.size(); ++i) {
-		std::cout << "[" << _vectorPair[i][0] << ", " << _vectorPair[i][1] << "] ";
+		std::cout << "[" << _vectorPair[i][0] << ", " << _vectorPair[i][1]
+				  << "] ";
 	}
 	std::cout << std::endl;
 }

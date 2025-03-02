@@ -21,6 +21,7 @@
 #include <iostream>
 #include <list>
 #include <sstream>
+#include <algorithm>
 #include <vector>
 
 class PmergeMe {
@@ -47,9 +48,9 @@ class PmergeMe {
 
   private:
 	std::vector<int> _vector;
-	std::vector< std::vector<int> > _vectorPair;
+	std::vector<std::vector<int>> _vectorPair;
 	std::list<int> _list;
-	std::list< std::list<int> > _listPair;
+	std::list<std::list<int>> _listPair;
 
 	// Logging Functions
 	void logVec(void);
@@ -60,7 +61,10 @@ class PmergeMe {
 	std::vector<int> generateJacobsthalSequence(const std::vector<int> &pend);
 	// Vector
 	void createVectorPairs(void);
-	void maxValueSortVector(std::vector<std::vector<int> > &pair, int n);
+	void maxValueSortVector(std::vector<std::vector<int>> &pair, int n);
+	void insertInSequenceVector(std::vector<std::vector<int>> &pair,
+								const std::vector<int> currPair,
+								int n);
 	void mergeInsertVectorPairs(std::vector<int> pend, bool isUneven, int lastIdx);
 	std::vector<int> createPendVector(void);
 };
