@@ -13,15 +13,15 @@
 #ifndef PMERGEME_HPP
 #define PMERGEME_HPP
 
-#include <cctype>
 #include "Ansi.h"
 #include "Logger.hpp"
+#include <cctype>
 #include <cstdlib>
 #include <ctime>
-#include <list>
-#include <vector>
 #include <iostream>
+#include <list>
 #include <sstream>
+#include <vector>
 
 class PmergeMe {
   public:
@@ -33,6 +33,8 @@ class PmergeMe {
 
 	// Public Functions
 	int parseArgs(int argc, char **argv);
+
+	// time
 	void computeExecTime(std::string &container);
 	double execTime(std::string &container);
 
@@ -41,13 +43,15 @@ class PmergeMe {
 	void logPairs(void);
 
 	// Vector
-	void createVectorPairs(void);
+	void mergeInsertVector(void);
 
   private:
 	std::vector<int> _vector;
-	std::vector<std::pair<int, int> > _vectorPairs;
+	std::vector<int> _vectorMain;
+	std::vector<int> _vectorPair;
 	std::list<int> _list;
-	std::list<std::pair<int, int> > _listPairs;
+	std::list<int> _listMain;
+	std::list<int> _listPair;
 
 	// Logging Functions
 	void logVec(void);
@@ -56,8 +60,10 @@ class PmergeMe {
 	// Math Stuff
 	int jacobsthalGenerator(std::size_t nIdx);
 	std::vector<int> generateJacobsthalSequence(const std::vector<int> &pend);
+	// Vector
+	void createVectorPairs(void);
+	void maxValueSortVector(void);
 };
-
 
 /** @brief UI Helper Functions */
 void headerPrinter(const std::string &headerText,
@@ -67,4 +73,3 @@ void headerPrinter(const std::string &headerText,
 void sepPrinter(int inWidth, char sepChar, const char *color, int nLines);
 
 #endif
-

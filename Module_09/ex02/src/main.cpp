@@ -26,9 +26,7 @@ int main(int argc, char **argv) {
 	// Print Sequences before sorting
 	insertMerger.logSequences();
 
-	// Create Pairs
-	insertMerger.createVectorPairs();
-	insertMerger.logPairs();
+	insertMerger.mergeInsertVector();
 
 	
 	return (EXIT_SUCCESS);

@@ -111,22 +111,36 @@ std::vector<int> PmergeMe::generateJacobsthalSequence(const std::vector<int> &pe
 /*                                   Vector                                   */
 /* ************************************************************************** */
 
+void PmergeMe::mergeInsertVector(void) {
+	
+	createVectorPairs();
+	maxValueSortVector();
+}
+
 /// @brief Create a Vector of pairs and sort them (smaller number first)
 void PmergeMe::createVectorPairs(void) {
 	Logger::info("PmergeMe::createVectorPairs");
-	_vectorPairs.clear();
+	_vectorMain.clear();
+	_vectorPair.clear();
 
 	std::vector<int>::iterator vecIt = _vector.begin();
 
 	while ((vecIt + 1) < _vector.end()) {
-		_vectorPairs.push_back(std::make_pair(*vecIt, *(vecIt + 1)));
-		if (_vectorPairs.back().first > _vectorPairs.back().second)
-			std::swap(_vectorPairs.back().first, _vectorPairs.back().second);
+		_vectorMain.push_back(*vecIt);
+		_vectorPair.push_back(*(vecIt + 1));
 		vecIt += 2;
 	}
-	if ((_vector.size() % 2) != 0)
-		_vectorPairs.push_back(std::make_pair(_vector.back(), -1));
+	if (vecIt != _vector.end())
+		_vectorMain.push_back(*vecIt);
+
+	showContainer(__func__, "_vectorMain", _vectorMain);
+	showContainer(__func__, "_vectorPair", _vectorPair);
 }
+
+void PmergeMe::maxValueSortVector(void) {
+	// if 
+}
+
 
 /* ************************************************************************** */
 /*                                   Logger                                   */
@@ -138,6 +152,6 @@ void PmergeMe::logSequences(void) {
 }
 
 void PmergeMe::logPairs(void) {
-	showContainer(__func__, "PmergeMe::_vectorPairs", _vectorPairs);
+	// showContainer(__func__, "PmergeMe::_vectorPairs", _vectorPairs);
 	// showContainer(__func__, "PmergeMe::_listPairs", _listPairs);
 }
