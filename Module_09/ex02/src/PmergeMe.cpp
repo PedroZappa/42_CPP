@@ -97,7 +97,7 @@ std::vector<int> PmergeMe::generateJacobsthalSequence(const std::vector<int> &pe
 	std::vector<int> jacobsthalSequence;
 	std::size_t jacobsthalIdx = 3; // First useful index
 	int jacobsthalNum = jacobsthalGenerator(jacobsthalIdx);
-	for ( ; jacobsthalNum < pendLen; ++jacobsthalIdx) {
+	for (; jacobsthalNum < pendLen; ++jacobsthalIdx) {
 		jacobsthalSequence.push_back(jacobsthalNum);
 		jacobsthalNum = jacobsthalGenerator(jacobsthalIdx);
 	}
@@ -106,52 +106,74 @@ std::vector<int> PmergeMe::generateJacobsthalSequence(const std::vector<int> &pe
 	return (jacobsthalSequence);
 }
 
-
 /* ************************************************************************** */
 /*                                   Vector                                   */
 /* ************************************************************************** */
 
 void PmergeMe::mergeInsertVector(void) {
-	
+	bool isUneven = ((_vector.size() % 2) != 0);
+	int lastIdx = -1;
+
 	createVectorPairs();
-	maxValueSortVector();
+	maxValueSortVector(_vectorPair, _vectorPair.size());
+	mergeInsertVectorPairs(createPendVector(), isUneven, lastIdx);
 }
 
 /// @brief Create a Vector of pairs and sort them (smaller number first)
 void PmergeMe::createVectorPairs(void) {
 	Logger::info("PmergeMe::createVectorPairs");
-	_vectorMain.clear();
 	_vectorPair.clear();
-
-	std::vector<int>::iterator vecIt = _vector.begin();
-
-	while ((vecIt + 1) < _vector.end()) {
-		_vectorMain.push_back(*vecIt);
-		_vectorPair.push_back(*(vecIt + 1));
-		vecIt += 2;
+	std::vector<int>::iterator it;
+	for (it = _vector.begin(); it < _vector.end(); it += 2) {
+		std::vector<int> pair;
+		pair.push_back(*it);
+		pair.push_back(*(it + 1));
+		_vectorPair.push_back(pair);
 	}
-	if (vecIt != _vector.end())
-		_vectorMain.push_back(*vecIt);
-
-	showContainer(__func__, "_vectorMain", _vectorMain);
-	showContainer(__func__, "_vectorPair", _vectorPair);
 }
 
-void PmergeMe::maxValueSortVector(void) {
-	// if 
+void PmergeMe::maxValueSortVector(std::vector<std::vector<int> > &pair, int n) {
+	(void)n;
+	(void)pair;
 }
 
+void PmergeMe::mergeInsertVectorPairs(std::vector<int> pend,
+									  bool isUneven,
+									  int lastIdx) {
+	(void)pend;
+	(void)isUneven;
+	(void)lastIdx;
+}
+
+/// @brief Create a Vector of pending numbers
+/// @return Vector of pending numbers
+std::vector<int> PmergeMe::createPendVector(void) {
+	_vector.clear();
+	std::vector<int> &vector = _vector;
+	std::vector<int> pend;
+
+	for (std::size_t i = 0; i < _vectorPair.size(); ++i) {
+		vector.push_back(_vectorPair[i][0]);
+		pend.push_back(_vectorPair[i][1]);
+	}
+	return (pend);
+}
 
 /* ************************************************************************** */
 /*                                   Logger                                   */
 /* ************************************************************************** */
 
+/// @brief Log Sequences
 void PmergeMe::logSequences(void) {
 	showContainer(__func__, "PmergeMe::_vector", _vector);
 	showContainer(__func__, "PmergeMe::_list", _list);
 }
 
-void PmergeMe::logPairs(void) {
-	// showContainer(__func__, "PmergeMe::_vectorPairs", _vectorPairs);
-	// showContainer(__func__, "PmergeMe::_listPairs", _listPairs);
+/// @brief Log Vector Pairs
+void PmergeMe::logVecPair(void) {
+	std::cout << "_vectorPairs: " << _vectorPair.size() << " pairs: ";
+	for (std::size_t i = 0; i < _vectorPair.size(); ++i) {
+		std::cout << "[" << _vectorPair[i][0] << ", " << _vectorPair[i][1] << "] ";
+	}
+	std::cout << std::endl;
 }

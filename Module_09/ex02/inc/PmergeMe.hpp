@@ -47,22 +47,22 @@ class PmergeMe {
 
   private:
 	std::vector<int> _vector;
-	std::vector<int> _vectorMain;
-	std::vector<int> _vectorPair;
+	std::vector< std::vector<int> > _vectorPair;
 	std::list<int> _list;
-	std::list<int> _listMain;
-	std::list<int> _listPair;
+	std::list< std::list<int> > _listPair;
 
 	// Logging Functions
 	void logVec(void);
-	void logAuxVec(void);
+	void logVecPair(void);
 	void logList(void);
 	// Math Stuff
 	int jacobsthalGenerator(std::size_t nIdx);
 	std::vector<int> generateJacobsthalSequence(const std::vector<int> &pend);
 	// Vector
 	void createVectorPairs(void);
-	void maxValueSortVector(void);
+	void maxValueSortVector(std::vector<std::vector<int> > &pair, int n);
+	void mergeInsertVectorPairs(std::vector<int> pend, bool isUneven, int lastIdx);
+	std::vector<int> createPendVector(void);
 };
 
 /** @brief UI Helper Functions */
