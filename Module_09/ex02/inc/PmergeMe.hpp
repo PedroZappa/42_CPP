@@ -55,6 +55,7 @@ class PmergeMe {
 	void logList(void);
 	// Math Stuff
 	int jacobsthalGenerator(std::size_t nIdx);
+	std::vector<int> generateJacobsthalSequence(const std::vector<int> &pend);
 };
 
 

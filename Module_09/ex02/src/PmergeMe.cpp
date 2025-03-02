@@ -90,6 +90,23 @@ int PmergeMe::jacobsthalGenerator(std::size_t nIdx) {
 		(2 * jacobsthalGenerator((nIdx + 2)) + jacobsthalGenerator((nIdx + 1))));
 }
 
+std::vector<int> PmergeMe::generateJacobsthalSequence(const std::vector<int> &pend) {
+	Logger::info("PmergeMe::generateJacobsthalSequence");
+
+	int pendLen = pend.size();
+	std::vector<int> jacobsthalSequence;
+	std::size_t jacobsthalIdx = 3; // First useful index
+	int jacobsthalNum = jacobsthalGenerator(jacobsthalIdx);
+	for ( ; jacobsthalNum < pendLen; ++jacobsthalIdx) {
+		jacobsthalSequence.push_back(jacobsthalNum);
+		jacobsthalNum = jacobsthalGenerator(jacobsthalIdx);
+	}
+	showContainer(__func__, "jacobsthalSequence", jacobsthalSequence);
+
+	return (jacobsthalSequence);
+}
+
+
 /* ************************************************************************** */
 /*                                   Vector                                   */
 /* ************************************************************************** */
