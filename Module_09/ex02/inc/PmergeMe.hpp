@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 11:56:33 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/18 16:47:31 by passunca         ###   ########.fr       */
+/*   Updated: 2025/03/02 11:13:14 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <cctype>
 #include "Ansi.h"
+#include "Logger.hpp"
 #include <cstdlib>
 #include <ctime>
 #include <list>
@@ -38,15 +39,12 @@ class PmergeMe {
 	// Printers
 	void logSequences(void);
 
-	// Templates for Merging
-	template <typename C>
-	void mergeSort(C &container);
-	template <typename C>
-	void merge(C &left, C &right, C &og);
-
+	// Vector
+	void createVectorPairs(void);
 
   private:
 	std::vector<int> _vector;
+	std::vector<std::pair<int, int> > _vectorPairs;
 	std::list<int> _list;
 
 	// Logging Functions

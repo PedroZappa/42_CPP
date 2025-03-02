@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 16:42:59 by passunca          #+#    #+#             */
-/*   Updated: 2025/02/24 16:43:02 by passunca         ###   ########.fr       */
+/*   Updated: 2025/03/02 11:20:21 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,15 @@ int main(int argc, char **argv) {
 		return (EXIT_FAILURE);
 	}
 	PmergeMe insertMerger;
-	if (!insertMerger.parseArgs(argc, argv)) {
+	if (insertMerger.parseArgs(argc, argv)) {
 		std::cerr << BRED "Error: Invalid input sequence." NC << std::endl;
 	}
 	// Print Sequences before sorting
 	insertMerger.logSequences();
 
+	// Create Pairs
+	insertMerger.createVectorPairs();
+
+	
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 #    By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/14 12:26:53 by passunca          #+#    #+#              #
-#    Updated: 2024/12/18 16:54:20 by passunca         ###   ########.fr        #
+#    Updated: 2025/03/02 11:15:00 by passunca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SHELL	:= bash --rcfile ~/.bashrc
 # Default test values
 # MODE			= debug
 IN_PATH		?= $(SRC_PATH)
-ARG				=
+ARG				= "3 5 9 7 4"
 
 #==============================================================================#
 #                                     NAMES                                    #
@@ -45,6 +45,7 @@ INC_PATH		= inc
 FILES			= main.cpp
 FILES			+= printer.cpp
 FILES			+= PmergeMe.cpp
+FILES			+= Logger.cpp
 
 SRC				= $(addprefix $(SRC_PATH)/, $(FILES))
 OBJS			= $(SRC:$(SRC_PATH)/%.cpp=$(BUILD_PATH)/%.o)

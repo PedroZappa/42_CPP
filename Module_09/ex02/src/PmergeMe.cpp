@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 11:56:39 by passunca          #+#    #+#             */
-/*   Updated: 2024/12/15 12:11:25 by passunca         ###   ########.fr       */
+/*   Updated: 2025/03/02 11:26:18 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,19 @@
 /*                                Constructors                                */
 /* ************************************************************************** */
 
+PmergeMe::PmergeMe(void) {
+}
+
 /// @brief ParameterizedConstructor
 /// @param input Positive integer list
 PmergeMe::PmergeMe(const std::list<int> &input) : _list(input) {
+	Logger::info("PmergeMe::PmergeMe(const std::list<int> &input)");
 }
 
 /// @brief Parameterized Constructor
 /// @param input Positive integer vector
 PmergeMe::PmergeMe(const std::vector<int> &input) : _vector(input) {
+	Logger::info("PmergeMe::PmergeMe(const std::vector<int> &input)");
 }
 
 /// @brief Copy Constructor
@@ -38,6 +43,7 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &other) {
 
 /// @brief Destructor
 PmergeMe::~PmergeMe(void) {
+	Logger::info("PmergeMe::~PmergeMe()");
 }
 
 /* ************************************************************************** */
@@ -48,24 +54,22 @@ PmergeMe::~PmergeMe(void) {
 /// @param argc Number of arguments
 /// @param argv Array of arguments
 int PmergeMe::parseArgs(int argc, char **argv) {
-	std::list<int> listIn;
-	std::vector<int> vectorIn;
+	Logger::info("PmergeMe::parseArgs()");
+	_vector.clear(); // Ensure containers are empty
+	_list.clear();   // Before filling
 
 	for (int i = 1; i < argc; ++i) {
 		std::stringstream ss(argv[i]);
-		int num;
-		ss >> num;
 		if (std::atoi(argv[i]) <= 0 || ss.fail()) {
 			std::cerr << RED "Error:" NC " invalid input" << std::endl;
 			exit(1);
 		}
-		while (ss >> num) {
-			listIn.push_back(num);
-			vectorIn.push_back(num);
+		int num;
+		while (ss >> num) { // Extract number from stringstream
+			_list.push_back(num);
+			_vector.push_back(num);
 		}
 	}
-	this->_list = listIn;
-	this->_vector = vectorIn;
 
 	return (EXIT_SUCCESS);
 }
@@ -90,4 +94,22 @@ int PmergeMe::jacobsthalGenerator(std::size_t nIdx) {
 /*                                   Vector                                   */
 /* ************************************************************************** */
 
+/// @brief Create a Vector of pairs
+void PmergeMe::createVectorPairs(void) {
+	Logger::info("PmergeMe::createVectorPairs");
 
+	std::vector<int>::iterator vecIt;
+
+	for (vecIt = _vector.begin(); vecIt < _vector.end(); vecIt++) {
+		_vectorPairs.push_back(std::make_pair(*vecIt, *(vecIt + 1)));
+	}
+}
+
+/* ************************************************************************** */
+/*                                   Logger                                   */
+/* ************************************************************************** */
+
+void PmergeMe::logSequences(void) {
+	showContainer(__func__, "PmergeMe::_list", _list);
+	showContainer(__func__, "PmergeMe::_vector", _vector);
+}

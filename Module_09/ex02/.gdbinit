@@ -26,21 +26,25 @@ set print array-indexes on
 set debuginfod enabled on
 set debuginfod urls "https://debuginfod.ubuntu.com/"
 
-### merge-insertion.cpp
+### main.cpp
 define main
-  display input
-  display pairs
-  display nextNumber
-  # display insertion
+  display *argv@argc
+  display insertMerger
 end
 
-### RPN.cpp
+### PmergeMe.cpp
+define parseArgs
+  display *argv@argc
+  display listIn
+  display vectorIn
+end
+
 
 ### Go GDB Go! I Choose YOU! 
 
 # STOP @ main
 break main
-run
+run "3 5 9 7 4"
 main
 fs cmd
 rfr
