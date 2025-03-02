@@ -102,14 +102,13 @@ void PmergeMe::createVectorPairs(void) {
 	std::vector<int>::iterator vecIt = _vector.begin();
 
 	while ((vecIt + 1) < _vector.end()) {
-		if (*vecIt > *(vecIt + 1))
-			_vectorPairs.push_back(std::make_pair(*(vecIt + 1), *vecIt));
-		else
-			_vectorPairs.push_back(std::make_pair(*vecIt, *(vecIt + 1)));
+		_vectorPairs.push_back(std::make_pair(*vecIt, *(vecIt + 1)));
+		if (_vectorPairs.back().first > _vectorPairs.back().second)
+			std::swap(_vectorPairs.back().first, _vectorPairs.back().second);
 		vecIt += 2;
 	}
 	if ((_vector.size() % 2) != 0)
-		_vectorPairs.push_back(std::make_pair(_vector.back(), 0));
+		_vectorPairs.push_back(std::make_pair(_vector.back(), -1));
 }
 
 /* ************************************************************************** */
@@ -117,11 +116,11 @@ void PmergeMe::createVectorPairs(void) {
 /* ************************************************************************** */
 
 void PmergeMe::logSequences(void) {
-	showContainer(__func__, "PmergeMe::_list", _list);
 	showContainer(__func__, "PmergeMe::_vector", _vector);
+	showContainer(__func__, "PmergeMe::_list", _list);
 }
 
 void PmergeMe::logPairs(void) {
-	showContainer(__func__, "PmergeMe::_listPairs", _listPairs);
 	showContainer(__func__, "PmergeMe::_vectorPairs", _vectorPairs);
+	// showContainer(__func__, "PmergeMe::_listPairs", _listPairs);
 }
