@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 16:42:59 by passunca          #+#    #+#             */
-/*   Updated: 2025/03/02 11:20:21 by passunca         ###   ########.fr       */
+/*   Updated: 2025/03/02 11:29:04 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int main(int argc, char **argv) {
 
 	// Create Pairs
 	insertMerger.createVectorPairs();
+	insertMerger.logPairs();
 
 	
 	return (EXIT_SUCCESS);

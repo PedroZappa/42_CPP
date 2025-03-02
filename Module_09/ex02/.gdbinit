@@ -39,11 +39,26 @@ define parseArgs
   display vectorIn
 end
 
+define createVectorPairs
+  display _vector
+  display _vector.end()
+  display _vector.size()
+  display vecIt
+end 
+
 
 ### Go GDB Go! I Choose YOU! 
 
 # STOP @ main
-break main
+# break main
+# run "3 5 9 7 4"
+# main
+# fs cmd
+# rfr
+
+
+# STOP @ main
+break createVectorPairs
 run "3 5 9 7 4"
 main
 fs cmd

@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 11:56:33 by passunca          #+#    #+#             */
-/*   Updated: 2025/03/02 11:13:14 by passunca         ###   ########.fr       */
+/*   Updated: 2025/03/02 11:28:49 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ class PmergeMe {
 
 	// Printers
 	void logSequences(void);
+	void logPairs(void);
 
 	// Vector
 	void createVectorPairs(void);
@@ -46,6 +47,7 @@ class PmergeMe {
 	std::vector<int> _vector;
 	std::vector<std::pair<int, int> > _vectorPairs;
 	std::list<int> _list;
+	std::list<std::pair<int, int> > _listPairs;
 
 	// Logging Functions
 	void logVec(void);

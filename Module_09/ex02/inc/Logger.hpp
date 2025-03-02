@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 10:34:19 by passunca          #+#    #+#             */
-/*   Updated: 2025/03/02 11:22:50 by passunca         ###   ########.fr       */
+/*   Updated: 2025/03/02 11:34:16 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,36 @@ void showContainer(const std::string &funcName,
 	}
 
 	std::cout << output.str() << "\n";
+}
+
+/// @brief Overload to handle containers of std::pair<T, U>
+/// @tparam C The container type (must hold std::pair)
+/// @tparam T First type of pair
+/// @tparam U Second type of pair
+template <typename T, typename U, template <typename, typename> class C>
+void showContainer(const std::string &funcName,
+                   const std::string &contName,
+                   const C<std::pair<T, U>, std::allocator<std::pair<T, U> > > &cont) {
+#ifndef DEBUG
+    return;
+#endif
+
+    Logger::debug(funcName, "Printing container: " + contName);
+
+    std::ostringstream output;
+    typename C<std::pair<T, U>, std::allocator<std::pair<T, U> > >::const_iterator it;
+
+    for (it = cont.begin(); it != cont.end(); ++it) {
+        output << "(" << it->first << ", " << it->second << ")";
+        typename C<std::pair<T, U>, std::allocator<std::pair<T, U> > >::const_iterator next = it;
+        ++next;
+        if (next != cont.end())
+            output << ", ";
+        else
+            output << "\n";
+    }
+
+    std::cout << output.str() << "\n";
 }
 
 #endif

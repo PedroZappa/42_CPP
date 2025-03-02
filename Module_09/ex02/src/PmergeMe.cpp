@@ -6,7 +6,7 @@
 /*   By: passunca <passunca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 11:56:39 by passunca          #+#    #+#             */
-/*   Updated: 2025/03/02 11:26:18 by passunca         ###   ########.fr       */
+/*   Updated: 2025/03/02 11:39:27 by passunca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,15 +94,22 @@ int PmergeMe::jacobsthalGenerator(std::size_t nIdx) {
 /*                                   Vector                                   */
 /* ************************************************************************** */
 
-/// @brief Create a Vector of pairs
+/// @brief Create a Vector of pairs and sort them (smaller number first)
 void PmergeMe::createVectorPairs(void) {
 	Logger::info("PmergeMe::createVectorPairs");
+	_vectorPairs.clear();
 
-	std::vector<int>::iterator vecIt;
+	std::vector<int>::iterator vecIt = _vector.begin();
 
-	for (vecIt = _vector.begin(); vecIt < _vector.end(); vecIt++) {
-		_vectorPairs.push_back(std::make_pair(*vecIt, *(vecIt + 1)));
+	while ((vecIt + 1) < _vector.end()) {
+		if (*vecIt > *(vecIt + 1))
+			_vectorPairs.push_back(std::make_pair(*(vecIt + 1), *vecIt));
+		else
+			_vectorPairs.push_back(std::make_pair(*vecIt, *(vecIt + 1)));
+		vecIt += 2;
 	}
+	if ((_vector.size() % 2) != 0)
+		_vectorPairs.push_back(std::make_pair(_vector.back(), 0));
 }
 
 /* ************************************************************************** */
@@ -112,4 +119,9 @@ void PmergeMe::createVectorPairs(void) {
 void PmergeMe::logSequences(void) {
 	showContainer(__func__, "PmergeMe::_list", _list);
 	showContainer(__func__, "PmergeMe::_vector", _vector);
+}
+
+void PmergeMe::logPairs(void) {
+	showContainer(__func__, "PmergeMe::_listPairs", _listPairs);
+	showContainer(__func__, "PmergeMe::_vectorPairs", _vectorPairs);
 }
