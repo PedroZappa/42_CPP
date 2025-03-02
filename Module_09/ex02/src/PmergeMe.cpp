@@ -132,6 +132,8 @@ void PmergeMe::mergeInsertVector(void) {
 	createVectorPairs(); // split vector into pairs & sort pairs in ascending order
 	maxValueSortVector(_vectorPair, _vectorPair.size());
 	mergeInsertVectorPairs(createPendVector(), isUneven, lastIdx);
+	
+	showContainer(__func__, "vector", _vector);
 }
 
 /// @brief Create a vector of pairs and sort them (smaller number first)
@@ -157,7 +159,7 @@ void PmergeMe::createVectorPairs(void) {
 /// @param pairs Vector of pairs
 /// @param n Number of pairs
 /// Sorts the vector of pairs by the highest value in each pairs.
-void PmergeMe::maxValueSortVector(std::vector<std::vector<int>> &pairs, int n) {
+void PmergeMe::maxValueSortVector(std::vector<std::vector<int> > &pairs, int n) {
 	if (n <= 1)
 		return;
 	else {
@@ -171,7 +173,7 @@ void PmergeMe::maxValueSortVector(std::vector<std::vector<int>> &pairs, int n) {
 /// @param currPair Pair to be inserted
 /// @param n Index
 /// Inserts a pairs into the sorted sequence based on the highest value.
-void PmergeMe::insertInSequenceVector(std::vector<std::vector<int>> &pairs,
+void PmergeMe::insertInSequenceVector(std::vector<std::vector<int> > &pairs,
 									  const std::vector<int> currPair,
 									  int n) {
 	if ((n >= 0) && (pairs[n][1] > currPair[1])) {
@@ -198,7 +200,7 @@ void PmergeMe::mergeInsertVectorPairs(std::vector<int> pend,
 	std::vector<int> seqIdx;
 	seqIdx.push_back(1);          // 1 because pend element was already added
 	bool jacobsthalToggle = true; // Use index from Jacobsthal toggle
-	int lastJacobsthal = -1;
+	int lastJacobsthal = 0;
 
 	for (std::size_t insert = 1; insert <= pend.size(); ++insert) {
 		int elem = 0;
@@ -241,4 +243,19 @@ std::vector<int> PmergeMe::createPendVector(void) {
 	std::vector<int> pend;
 
 	for (std::size_t i = 0; i < _vectorPair.size(); ++i) {
-		vector.push_back(_vectorPair
+		vector.push_back(_vectorPair[i][0]);
+		pend.push_back(_vectorPair[i][1]);
+	}
+	showContainer(__func__, "vector", vector);
+	showContainer(__func__, "pend", pend);
+	return (pend);
+}
+
+/* ************************************************************************** */
+/*                                  Loggers                                   */
+/* ************************************************************************** */
+
+void PmergeMe::logSequences(void) {
+	// Logger::info("PmergeMe::logSequences");
+	// showContainer(__func__, "vectorPair", _vectorPair);
+}
