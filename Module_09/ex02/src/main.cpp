@@ -14,7 +14,7 @@
 
 int main(int argc, char **argv) {
 	// Parse input arguments
-	if (argc != 2) {
+	if (argc < 2) {
 		std::cerr << BRED "Usage: ./PmergeMe <positive int sequence>" NC
 				  << std::endl;
 		return (EXIT_FAILURE);
@@ -24,10 +24,23 @@ int main(int argc, char **argv) {
 		std::cerr << BRED "Error: Invalid input sequence." NC << std::endl;
 	}
 	// Print Sequences before sorting
-	insertMerger.logSequences();
+	std::cout << YEL "Before: " NC;
+	insertMerger.logVec();
 
+	// Time merge sort
+	std::clock_t start = std::clock();
 	insertMerger.mergeInsertVector();
+	std::clock_t end = std::clock();
+	double elapsedVector =
+		(static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000);
+	// Time list sort
+	// ...
+	// ...
+	// ...
+	// Print results
 
-	
+	std::cout << "Range of " << insertMerger.getSize();
+	std::cout << " elements in" BBLU " std::vector" NC << " sorted in: ";
+	std::cout << BGRN << elapsedVector << "µs" NC << std::endl;
 	return (EXIT_SUCCESS);
 }

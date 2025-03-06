@@ -120,6 +120,15 @@ std::vector<int> PmergeMe::generateJacobsthalSequence(const std::vector<int> &pe
 }
 
 /* ************************************************************************** */
+/*                                  Getters                                   */
+/* ************************************************************************** */
+
+/// @brief Get the size of the internal vector
+/// @return Size of the internal vector
+int PmergeMe::getSize(void) const {
+	return (_vector.size());
+}
+/* ************************************************************************** */
 /*                                   Vector                                   */
 /* ************************************************************************** */
 
@@ -132,7 +141,7 @@ void PmergeMe::mergeInsertVector(void) {
 	createVectorPairs(); // split vector into pairs & sort pairs in ascending order
 	maxValueSortVector(_vectorPair, _vectorPair.size());
 	mergeInsertVectorPairs(createPendVector(), isUneven, lastIdx);
-	
+
 	showContainer(__func__, "vector", _vector);
 }
 
@@ -177,10 +186,11 @@ void PmergeMe::insertInSequenceVector(std::vector<std::vector<int> > &pairs,
 									  const std::vector<int> currPair,
 									  int n) {
 	if ((n >= 0) && (pairs[n][1] > currPair[1])) {
-		pairs[n + 1] = pairs[n];
-		insertInSequenceVector(pairs, currPair, (n - 1));
+		pairs[n + 1] = pairs[n]; // Shift pair to the right
+		insertInSequenceVector(
+			pairs, currPair, (n - 1)); // Check pair to the left
 	} else
-		pairs[n + 1] = currPair;
+		pairs[n + 1] = currPair; // Insert currPair in its right place
 }
 
 /// @brief Merge insertion sort on vector of pairs
@@ -208,7 +218,7 @@ void PmergeMe::mergeInsertVectorPairs(std::vector<int> pend,
 		// position and the next sequential pending element
 		if (!jacobsthalSequence.empty() && jacobsthalToggle) {
 			seqIdx.push_back(jacobsthalSequence[0]);
-			elem = jacobsthalSequence[0 - 1];
+			elem = pend[jacobsthalSequence[0] - 1];
 			lastJacobsthal = jacobsthalSequence[0];
 			jacobsthalSequence.erase(jacobsthalSequence.begin());
 			jacobsthalToggle = false;
@@ -255,7 +265,13 @@ std::vector<int> PmergeMe::createPendVector(void) {
 /*                                  Loggers                                   */
 /* ************************************************************************** */
 
+/// @brief Log the internal vector
+void PmergeMe::logVec(void) {
+	for (std::size_t i = 0; i < _vector.size(); ++i)
+		std::cout << _vector[i] << " ";
+	std::cout << std::endl;
+	
+}
+
 void PmergeMe::logSequences(void) {
-	// Logger::info("PmergeMe::logSequences");
-	// showContainer(__func__, "vectorPair", _vectorPair);
 }

@@ -39,8 +39,12 @@ class PmergeMe {
 	void computeExecTime(std::string &container);
 	double execTime(std::string &container);
 
+	// getters
+	int getSize(void) const;
+
 	// Printers
 	void logSequences(void);
+	void logVec(void);
 	void logPairs(void);
 
 	// Vector
@@ -53,7 +57,6 @@ class PmergeMe {
 	std::list<std::list<int> > _listPair;
 
 	// Logging Functions
-	void logVec(void);
 	void logVecPair(void);
 	void logList(void);
 	// Math Stuff

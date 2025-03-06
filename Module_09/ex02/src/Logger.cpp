@@ -57,6 +57,9 @@ void Logger::printLog(const std::string &header,
 
 /// @brief Print an info log
 void Logger::info(const std::string &message) {
+#ifndef DEBUG
+	return;
+#endif
 	printLog(BGRN "INFO", message, false);
 }
 
