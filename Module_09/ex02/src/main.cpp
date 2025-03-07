@@ -39,6 +39,9 @@ int main(int argc, char **argv) {
 	// ...
 	// Print results
 
+	std::cout << YEL "After: " NC;
+	insertMerger.logVec();
+
 	std::cout << "Range of " << insertMerger.getSize();
 	std::cout << " elements in" BBLU " std::vector" NC << " sorted in: ";
 	std::cout << BGRN << elapsedVector << "µs" NC << std::endl;

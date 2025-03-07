@@ -90,34 +90,84 @@ int PmergeMe::parseArgs(int argc, char **argv) {
 /// @return nth Jacobsthal number
 /// Recursively calculates the Jacobsthal number at a given index.
 /// J(n) = 2 * J(n-1) + J(n-2)
+// int PmergeMe::jacobsthalGenerator(std::size_t nIdx) {
+// 	if (nIdx == 0)
+// 		return (0);
+// 	if (nIdx == 1)
+// 		return (1);
+// 	return (
+// 		(2 * jacobsthalGenerator((nIdx - 1)) + jacobsthalGenerator((nIdx - 2))));
+// }
+
 int PmergeMe::jacobsthalGenerator(std::size_t nIdx) {
-	if (nIdx == 0)
-		return (0);
-	if (nIdx == 1)
-		return (1);
-	return (
-		(2 * jacobsthalGenerator((nIdx - 1)) + jacobsthalGenerator((nIdx - 2))));
+    static std::vector<int> memo;
+    if (memo.empty()) {
+        memo.push_back(0);
+        memo.push_back(1);
+    }
+    
+    if (nIdx < memo.size()) {
+        return memo[nIdx];
+    }
+    
+    while (memo.size() <= nIdx) {
+        int n = memo.size();
+        memo.push_back(2 * memo[n-1] + memo[n-2]);
+    }
+    
+    return memo[nIdx];
+}
+
+std::vector<int> PmergeMe::generateJacobsthalSequence(const std::vector<int> &pend) {
+    Logger::info("PmergeMe::generateJacobsthalSequence");
+
+    std::vector<int> jacobsthalSequence;
+    std::size_t jacobsthalIdx = 3; // First useful index
+    int pendLen = pend.size();
+
+    // Make sure we have at least one value in the sequence
+    int jacobValue = jacobsthalGenerator(jacobsthalIdx);
+    while (jacobValue < pendLen) {
+        jacobsthalSequence.push_back(jacobValue);
+        ++jacobsthalIdx;
+        jacobValue = jacobsthalGenerator(jacobsthalIdx);
+    }
+
+    // Print the sequence
+    std::cout << "Jacobsthal Sequence: ";
+    for (std::vector<int>::const_iterator it = jacobsthalSequence.begin(); 
+         it != jacobsthalSequence.end(); ++it) {
+        std::cout << *it << " ";
+    }
+    std::cout << std::endl;
+
+    return jacobsthalSequence;
 }
 
 /// @brief Generate a sequence of Jacobsthal numbers
 /// @param pend Vector of pending numbers
 /// @return Vector of Jacobsthal numbers
 /// Generates a sequence of Jacobsthal numbers up to the size of the pending vector.
-std::vector<int> PmergeMe::generateJacobsthalSequence(const std::vector<int> &pend) {
-	Logger::info("PmergeMe::generateJacobsthalSequence");
-
-	int pendLen = pend.size();
-	std::vector<int> jacobsthalSequence;
-	std::size_t jacobsthalIdx = 3; // First useful index
-	int jacobsthalNum = jacobsthalGenerator(jacobsthalIdx);
-	for (; jacobsthalNum < pendLen; ++jacobsthalIdx) {
-		jacobsthalSequence.push_back(jacobsthalNum);
-		jacobsthalNum = jacobsthalGenerator(jacobsthalIdx);
-	}
-	showContainer(__func__, "jacobsthalSequence", jacobsthalSequence);
-
-	return (jacobsthalSequence);
-}
+// std::vector<int> PmergeMe::generateJacobsthalSequence(const std::vector<int> &pend) {
+// 	Logger::info("PmergeMe::generateJacobsthalSequence");
+//
+// 	std::vector<int> jacobsthalSequence;
+// 	std::size_t jacobsthalIdx = 3; // First useful index
+// 	int pendLen = pend.size();
+//
+// 	while (jacobsthalGenerator(jacobsthalIdx) < pendLen) {
+// 		jacobsthalSequence.push_back(jacobsthalGenerator(jacobsthalIdx));
+// 		++jacobsthalIdx;
+// 	}
+//
+// 	std::cout << "Jacobsthal Sequence: ";
+// 	for (size_t i = 0; i < jacobsthalSequence.size(); ++i) {
+// 		std::cout << jacobsthalSequence[i] << " ";
+// 	}
+// 	std::cout << std::endl;
+//
+// 	return (jacobsthalSequence);
+// }
 
 /* ************************************************************************** */
 /*                                  Getters                                   */
@@ -141,8 +191,6 @@ void PmergeMe::mergeInsertVector(void) {
 	createVectorPairs(); // split vector into pairs & sort pairs in ascending order
 	maxValueSortVector(_vectorPair, _vectorPair.size());
 	mergeInsertVectorPairs(createPendVector(), isUneven, lastIdx);
-
-	showContainer(__func__, "vector", _vector);
 }
 
 /// @brief Create a vector of pairs and sort them (smaller number first)
@@ -153,7 +201,10 @@ void PmergeMe::createVectorPairs(void) {
 	std::vector<int>::iterator it;
 	for (it = _vector.begin(); it < _vector.end(); it += 2) {
 		std::vector<int> pairs;
-		if (*it < *(it + 1)) {
+		if ((it + 1) == _vector.end()) {
+			pairs.push_back(*it);
+			pairs.push_back(-1);
+		} else if (*it < *(it + 1)) {
 			pairs.push_back(*it);
 			pairs.push_back(*(it + 1));
 		} else {
@@ -256,8 +307,8 @@ std::vector<int> PmergeMe::createPendVector(void) {
 		vector.push_back(_vectorPair[i][0]);
 		pend.push_back(_vectorPair[i][1]);
 	}
-	showContainer(__func__, "vector", vector);
-	showContainer(__func__, "pend", pend);
+	// showContainer(__func__, "vector", vector);
+	// showContainer(__func__, "pend", pend);
 	return (pend);
 }
 

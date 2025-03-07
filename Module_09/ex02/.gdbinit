@@ -57,18 +57,18 @@ end
 ### Go GDB Go! I Choose YOU! 
 
 # STOP @ main
-break main
-run 3 5 9 7 4
-main
-fs cmd
-rfr
-
-### STOP @ mergeInsertVector
-# break mergeInsertVector
-# run "3 5 9 7 4"
-# mergeInsertVector
+# break main
+# run 3 5 9 7 4
+# main
 # fs cmd
 # rfr
+
+### STOP @ mergeInsertVector
+break mergeInsertVector
+run "3 5 9 7 4"
+mergeInsertVector
+fs cmd
+rfr
 
 # STOP @ main
 # break createVectorPairs
