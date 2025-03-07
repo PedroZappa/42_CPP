@@ -101,18 +101,18 @@ int PmergeMe::parseArgs(int argc, char **argv) {
 /// @return nth Jacobsthal number
 /// Generates the nth Jacobsthal number using memoization.
 int PmergeMe::jacobsthalGenerator(std::size_t nIdx) {
-    static std::vector<int> memo; // Memoization to store computed Jacobsthal numbers
-    if (memo.empty()) {
-        memo.push_back(0); // J(0) = 0
-        memo.push_back(1); // J(1) = 1
-    }
+	static std::vector<int> memo; // Memoization to store computed Jacobsthal numbers
+	if (memo.empty()) {
+		memo.push_back(0); // J(0) = 0
+		memo.push_back(1); // J(1) = 1
+	}
 
-    while (memo.size() <= nIdx) {
-        int nextVal = memo[memo.size() - 1] * 2 + memo[memo.size() - 2];
-        memo.push_back(nextVal); // J(n) = J(n-1) * 2 + J(n-2)
-    }
+	while (memo.size() <= nIdx) {
+		int nextVal = memo[memo.size() - 1] + 2 * memo[memo.size() - 2];
+		memo.push_back(nextVal); // J(n) = J(n-1) * 2 + J(n-2)
+	}
 
-    return memo[nIdx];
+	return memo[nIdx];
 }
 
 /// @brief Generate a sequence of Jacobsthal numbers
@@ -120,29 +120,40 @@ int PmergeMe::jacobsthalGenerator(std::size_t nIdx) {
 /// @return Vector of Jacobsthal numbers
 /// Generates a sequence of Jacobsthal numbers up to the size of the pending vector.
 std::vector<int> PmergeMe::generateJacobsthalSequence(const std::vector<int> &pend) {
-    Logger::info("PmergeMe::generateJacobsthalSequence");
-    std::vector<int> jacobsthalSequence;
-    std::size_t jacobIdx = 0; // Start from J(0)
-    int pendLen = pend.size();
+	Logger::info("PmergeMe::generateJacobsthalSequence");
+	std::vector<int> jacobsthalSequence;
 
-    int jacobValue = jacobsthalGenerator(jacobIdx);
-    while (jacobValue < pendLen) {
-        jacobsthalSequence.push_back(jacobValue);
-        ++jacobIdx;
-        jacobValue = jacobsthalGenerator(jacobIdx);
-    }
+	int pendLen = pend.size();
 
-    // Properly print the Jacobsthal sequence
-    std::cout << "Jacobsthal Sequence: ";
-    for (std::size_t i = 0; i < jacobsthalSequence.size(); ++i)
-        std::cout << jacobsthalSequence[i] << " ";
-    std::cout << std::endl;
+	// In the Ford–Johnson algorithm the first insertion index we care about is J(3)=3.
+	// For pend arrays too small (pend.size() <= 2), we want to force a 3.
+	if (pendLen <= 2) {
+		// Even if pend has size 2, our algorithm later expects a 3 (the ideal
+		// insertion index) in the Jacobsthal sequence.
+		jacobsthalSequence.push_back(3);
+	} else {
+		// For larger pend arrays, start at index 3.
+		std::size_t jacobIdx = 3;
+		int jacobValue =
+			jacobsthalGenerator(jacobIdx); // should be 3 for jacobIdx==3
+		// We add Jacobsthal numbers that are strictly less than pendLen.
+		while (jacobValue < pendLen) {
+			jacobsthalSequence.push_back(jacobValue);
+			++jacobIdx;
+			jacobValue = jacobsthalGenerator(jacobIdx);
+		}
+	}
+	// Print sequence
+	std::cout << "Jacobsthal Sequence: ";
+	for (std::size_t i = 0; i < jacobsthalSequence.size(); ++i)
+		std::cout << jacobsthalSequence[i] << " ";
+	std::cout << std::endl;
 
-    return jacobsthalSequence;
+	return jacobsthalSequence;
 }
 
 /* ************************************************************************** */
-/*                                  Getters                                   */
+/*                                  Getters */
 /* ************************************************************************** */
 
 /// @brief Get the size of the internal vector
@@ -151,7 +162,7 @@ int PmergeMe::getSize(void) const {
 	return (_vector.size());
 }
 /* ************************************************************************** */
-/*                                   Vector                                   */
+/*                                   Vector */
 /* ************************************************************************** */
 
 /// @brief Perform merge-insert sort on the vector
@@ -175,21 +186,23 @@ void PmergeMe::mergeInsertVector(void) {
 void PmergeMe::createVectorPairs(void) {
 	Logger::info("PmergeMe::createVectorPairs");
 	_vectorPair.clear();
-	std::vector<int>::iterator it;
 
-	for (it = _vector.begin(); it < _vector.end(); it += 2) {
-		std::vector<int> pairs;
+	for (std::size_t i = 0; i < _vector.size(); i += 2) {
+		std::vector<int> pair;
 
-		if ((it + 1) == _vector.end()) {
-			pairs.push_back(*it); // Single leftover (odd nuumber of elements)
-		} else if (*it < *(it + 1)) {
-			pairs.push_back(*it);
-			pairs.push_back(*(it + 1));
-		} else {
-			pairs.push_back(*(it + 1));
-			pairs.push_back(*it);
+		if (i + 1 < _vector.size()) { // If there are two elements
+			if (_vector[i] < _vector[i + 1]) {
+				pair.push_back(_vector[i]);
+				pair.push_back(_vector[i + 1]);
+			} else {
+				pair.push_back(_vector[i + 1]);
+				pair.push_back(_vector[i]);
+			}
+		} else { // If there’s only one element left (odd case)
+			pair.push_back(_vector[i]);
 		}
-		_vectorPair.push_back(pairs);
+
+		_vectorPair.push_back(pair);
 	}
 }
 
@@ -228,45 +241,58 @@ void PmergeMe::insertInSequenceVector(std::vector<std::vector<int> > &pairs,
 void PmergeMe::mergeInsertVectorPairs(std::vector<int> pend,
 									  bool isUneven,
 									  int straggler) {
-	std::vector<int> & S = _vector;
-	
-	S.insert(S.begin(), pend[0]); // insert first element from pend into S
-	std::vector<int> jacobInsertionSequence = generateJacobsthalSequence(pend);
-	std::vector<int> indexSequence;
-	indexSequence.push_back(1); // first pend element was already added
-	bool jacobTurn = true;
-	int lastJacob = 0;
+	std::vector<int> &S = _vector;
 
-	for (size_t insertions = 1; insertions <= pend.size(); insertions++)
-	{
-		int item = 0;
-		if (!jacobInsertionSequence.empty() && jacobTurn)
-		{
-			indexSequence.push_back(jacobInsertionSequence[0]);
-			item = pend[jacobInsertionSequence[0] - 1];
-			lastJacob = jacobInsertionSequence[0];
-			jacobInsertionSequence.erase(jacobInsertionSequence.begin());
-			jacobTurn = false;
+	// Insert first element directly
+	S.insert(S.begin(), pend[0]);
+
+	// Generate Jacobsthal sequence
+	std::vector<int> jacobSeq = generateJacobsthalSequence(pend);
+
+	// Track which indices have been inserted
+	std::set<int> insertedIndices;
+	insertedIndices.insert(0); // First element already inserted
+
+	int prevJacob = 0;
+
+	// Insert elements based on Jacobsthal sequence
+	for (std::size_t j = 0; j < jacobSeq.size(); ++j) {
+		int currJacob = jacobSeq[j];
+
+		// Insert elements in reverse order from currJacob down to prevJacob+1
+		for (int idx = currJacob; idx > prevJacob; --idx) {
+			if (idx >= static_cast<int>(pend.size()))
+				continue;
+
+			int elem_to_insert = pend[idx];
+			insertedIndices.insert(idx);
+
+			// Binary insertion
+			std::vector<int>::iterator insertPos =
+				std::upper_bound(S.begin(), S.end(), elem_to_insert);
+			S.insert(insertPos, elem_to_insert);
 		}
-		else
-		{
-			if (std::find(indexSequence.begin(), indexSequence.end(), insertions) != indexSequence.end())
-				insertions++;
-			if (insertions > pend.size())
-				break ;
-			item = pend[insertions - 1];
-			indexSequence.push_back(insertions);
-			if (lastJacob == (static_cast<int>(insertions) + 1))
-				jacobTurn = true;
-		}
-		// std::cout << "Inserting index: " << indexSequence.back() << "\n";
-		std::vector<int>::iterator insertionPoint = std::upper_bound(S.begin(), S.end(), item);
-		S.insert(insertionPoint, item);
+
+		prevJacob = currJacob;
 	}
-	if (isUneven)
-	{
-		std::vector<int>::iterator insertionPoint = std::upper_bound(S.begin(), S.end(), straggler);
-		S.insert(insertionPoint, straggler);
+
+	// Insert any remaining elements
+	for (std::size_t idx = 1; idx < pend.size(); ++idx) {
+		if (insertedIndices.find(idx) != insertedIndices.end())
+			continue;
+
+		int elem_to_insert = pend[idx];
+
+		std::vector<int>::iterator insertPos =
+			std::upper_bound(S.begin(), S.end(), elem_to_insert);
+		S.insert(insertPos, elem_to_insert);
+	}
+
+	// Handle straggler
+	if (isUneven) {
+		std::vector<int>::iterator insertPos =
+			std::upper_bound(S.begin(), S.end(), straggler);
+		S.insert(insertPos, straggler);
 	}
 }
 
@@ -300,7 +326,7 @@ std::vector<int> PmergeMe::createPendVector(void) {
 }
 
 /* ************************************************************************** */
-/*                                  Loggers                                   */
+/*                                  Loggers */
 /* ************************************************************************** */
 
 /// @brief Log the internal vector
