@@ -362,6 +362,8 @@ void PmergeMe::createListPairs(void) {
 }
 
 /// @brief Sort list pairs by their highest value
+/// @param pairs List of pairs
+/// @param n Number of pairs
 void PmergeMe::maxValueSortList(std::list<std::list<int> > &pairs, int n) {
     if (n <= 1)
         return;
@@ -370,6 +372,9 @@ void PmergeMe::maxValueSortList(std::list<std::list<int> > &pairs, int n) {
 }
 
 /// @brief Insert sort helper for list pairs
+/// @param pairs List of pairs
+/// @param currPair Pair to be inserted
+/// @param n Index
 void PmergeMe::insertInSequenceList(std::list<std::list<int> > &pairs,
                                    std::list<std::list<int> >::iterator currPair,
                                    int n) {
@@ -383,6 +388,7 @@ void PmergeMe::insertInSequenceList(std::list<std::list<int> > &pairs,
 }
 
 /// @brief Create pend list for merging
+/// @return List of pending numbers
 std::list<int> PmergeMe::createPendList(void) {
     _list.clear();
     std::list<int> pend;
@@ -401,6 +407,9 @@ std::list<int> PmergeMe::createPendList(void) {
 }
 
 /// @brief Merge-insert list pairs
+/// @param pend List of pending numbers
+/// @param isUneven Boolean to check if the list is uneven
+/// @param straggler The value at the last index
 void PmergeMe::mergeInsertListPairs(std::list<int> pend,
                                    bool isUneven,
                                    int straggler) {
@@ -427,6 +436,9 @@ void PmergeMe::mergeInsertListPairs(std::list<int> pend,
 }
 
 /// @brief Helper to get iterator at specific position
+/// @param pairs List of pairs
+/// @param index Index
+/// @return Iterator
 std::list<std::list<int> >::iterator PmergeMe::getListIter(
     std::list<std::list<int> > &pairs, int index) {
     std::list<std::list<int> >::iterator it = pairs.begin();
