@@ -61,24 +61,32 @@ PmergeMe::~PmergeMe(void) {
 /// @param argv Array of arguments
 /// Parses command-line arguments and fills the internal list and vector.
 int PmergeMe::parseArgs(int argc, char **argv) {
-	Logger::info("PmergeMe::parseArgs()");
-	_vector.clear(); // Ensure containers are empty
-	_list.clear();   // Before filling
+    Logger::info("PmergeMe::parseArgs()");
+    _vector.clear();
+    _list.clear();
 
-	for (int i = 1; i < argc; ++i) {
-		std::stringstream ss(argv[i]);
-		if (std::atoi(argv[i]) <= 0 || ss.fail()) {
-			std::cerr << RED "Error:" NC " invalid input" << std::endl;
-			exit(1);
-		}
-		int num;
-		while (ss >> num) { // Extract number from stringstream
-			_list.push_back(num);
-			_vector.push_back(num);
-		}
-	}
+    for (int i = 1; i < argc; ++i) {
+        std::stringstream ss(argv[i]);
+        int num;
 
-	return (EXIT_SUCCESS);
+        // Extract integers from the argument
+        while (ss >> num) {
+            if (num <= 0) {
+                std::cerr << RED "Error:" NC " invalid input (" << num << ")" << std::endl;
+                exit(1);
+            }
+            _list.push_back(num);
+            _vector.push_back(num);
+        }
+
+        // Check for invalid characters after the numbers
+        if (!ss.eof()) {
+            std::cerr << RED "Error:" NC " invalid input (non-integer characters detected)" << std::endl;
+            exit(1);
+        }
+    }
+
+    return EXIT_SUCCESS;
 }
 
 /* ************************************************************************** */
