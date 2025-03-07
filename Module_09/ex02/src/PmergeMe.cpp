@@ -101,15 +101,17 @@ int PmergeMe::parseArgs(int argc, char **argv) {
 /// @return nth Jacobsthal number
 /// Generates the nth Jacobsthal number using memoization.
 int PmergeMe::jacobsthalGenerator(std::size_t nIdx) {
-    static std::vector<int> memo;
+    static std::vector<int> memo; // Memoization to store computed Jacobsthal numbers
     if (memo.empty()) {
-        memo.push_back(0);
-        memo.push_back(1);
+        memo.push_back(0); // J(0) = 0
+        memo.push_back(1); // J(1) = 1
     }
+
     while (memo.size() <= nIdx) {
-        int nextVal = 2 * memo[memo.size() - 1] + memo[memo.size() - 2];
-        memo.push_back(nextVal);
+        int nextVal = memo[memo.size() - 1] * 2 + memo[memo.size() - 2];
+        memo.push_back(nextVal); // J(n) = J(n-1) * 2 + J(n-2)
     }
+
     return memo[nIdx];
 }
 
@@ -120,7 +122,7 @@ int PmergeMe::jacobsthalGenerator(std::size_t nIdx) {
 std::vector<int> PmergeMe::generateJacobsthalSequence(const std::vector<int> &pend) {
     Logger::info("PmergeMe::generateJacobsthalSequence");
     std::vector<int> jacobsthalSequence;
-    std::size_t jacobIdx = 3;
+    std::size_t jacobIdx = 0; // Start from J(0)
     int pendLen = pend.size();
 
     int jacobValue = jacobsthalGenerator(jacobIdx);
@@ -223,45 +225,49 @@ void PmergeMe::insertInSequenceVector(std::vector<std::vector<int> > &pairs,
 /// @param isUneven Boolean to check if the vector is uneven
 /// @param lastIdx The value at the last index
 /// Performs merge-insertion sort on the vector of pairs.
-void PmergeMe::mergeInsertVectorPairs(std::vector<int> pend, bool isUneven, int lastElem) {
-    _vector.insert(_vector.begin(), pend[0]); // Insert first pend element
+void PmergeMe::mergeInsertVectorPairs(std::vector<int> pend,
+									  bool isUneven,
+									  int straggler) {
+	std::vector<int> & S = _vector;
+	
+	S.insert(S.begin(), pend[0]); // insert first element from pend into S
+	std::vector<int> jacobInsertionSequence = generateJacobsthalSequence(pend);
+	std::vector<int> indexSequence;
+	indexSequence.push_back(1); // first pend element was already added
+	bool jacobTurn = true;
+	int lastJacob = 0;
 
-    std::vector<int> jacobSeq = generateJacobsthalSequence(pend);
-
-    int prevJacob = 1;
-
-    for (std::size_t j = 0; j < jacobSeq.size(); ++j) {
-        int current_jacob = jacobSeq[j];
-
-        for (int idx = current_jacob; idx > prevJacob; --idx) {
-            if (idx > static_cast<int>(pend.size()))
-                continue;
-
-            int elem_to_insert = pend[idx - 1];
-
-            // Binary insertion into sorted vector
-            std::vector<int>::iterator insertPos =
-                std::upper_bound(_vector.begin(), _vector.end(), elem_to_insert);
-            _vector.insert(insertPos, elem_to_insert);
-        }
-        prevJacob = current_jacob;
-    }
-
-    // Insert remaining elements sequentially if any left
-    for (int idx = pend.size(); idx > prevJacob; --idx) {
-        int elem_to_insert = pend[idx - 1];
-
-        std::vector<int>::iterator insertLoci =
-            std::upper_bound(_vector.begin(), _vector.end(), elem_to_insert);
-
-        _vector.insert(insertLoci, elem_to_insert);
-    }
-
-    if (isUneven) { // Insert leftover element explicitly
-        std::vector<int>::iterator insertLoci =
-            std::upper_bound(_vector.begin(), _vector.end(), lastElem);
-        _vector.insert(insertLoci, lastElem);
-    }
+	for (size_t insertions = 1; insertions <= pend.size(); insertions++)
+	{
+		int item = 0;
+		if (!jacobInsertionSequence.empty() && jacobTurn)
+		{
+			indexSequence.push_back(jacobInsertionSequence[0]);
+			item = pend[jacobInsertionSequence[0] - 1];
+			lastJacob = jacobInsertionSequence[0];
+			jacobInsertionSequence.erase(jacobInsertionSequence.begin());
+			jacobTurn = false;
+		}
+		else
+		{
+			if (std::find(indexSequence.begin(), indexSequence.end(), insertions) != indexSequence.end())
+				insertions++;
+			if (insertions > pend.size())
+				break ;
+			item = pend[insertions - 1];
+			indexSequence.push_back(insertions);
+			if (lastJacob == (static_cast<int>(insertions) + 1))
+				jacobTurn = true;
+		}
+		// std::cout << "Inserting index: " << indexSequence.back() << "\n";
+		std::vector<int>::iterator insertionPoint = std::upper_bound(S.begin(), S.end(), item);
+		S.insert(insertionPoint, item);
+	}
+	if (isUneven)
+	{
+		std::vector<int>::iterator insertionPoint = std::upper_bound(S.begin(), S.end(), straggler);
+		S.insert(insertionPoint, straggler);
+	}
 }
 
 /// @brief Create a vector of pending numbers
@@ -273,11 +279,11 @@ std::vector<int> PmergeMe::createPendVector(void) {
 	std::vector<int> pend;
 
 	for (std::size_t i = 0; i < _vectorPair.size(); ++i) {
-        vector.push_back(_vectorPair[i][0]); // Always safe to push first element
-        // Check if there's a second element before accessing it!
-        if (_vectorPair[i].size() == 2 && _vectorPair[i][1] > 0)
-            pend.push_back(_vectorPair[i][1]);
-    }
+		vector.push_back(_vectorPair[i][0]); // Always safe to push first element
+		// Check if there's a second element before accessing it!
+		if (_vectorPair[i].size() == 2 && _vectorPair[i][1] > 0)
+			pend.push_back(_vectorPair[i][1]);
+	}
 
 	// Print Created Vector
 	std::cout << "Vector\t: ";
