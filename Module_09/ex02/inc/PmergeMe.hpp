@@ -15,16 +15,17 @@
 
 #include "Ansi.h"
 #include "Logger.hpp"
+#include <algorithm>
 #include <cctype>
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
 #include <list>
-#include <sstream>
-#include <algorithm>
-#include <vector>
 #include <set>
+#include <sstream>
+#include <vector>
 
+#define WIDTH 50
 
 class PmergeMe {
   public:
@@ -44,14 +45,16 @@ class PmergeMe {
 	// getters
 	int getSize(void) const;
 
-	// Printers
-	void logSequences(void);
-	void logVec(void);
-	void logPairs(void);
-
 	// Vector
 	void mergeInsertVector(void);
-	std::vector<int> computeInsertionOrder(const std::vector<int> &pend);
+
+	// List
+	void mergeInsertList(void);
+
+	// Logging Functions
+	void logSequences(void);
+	void logVec(void);
+	void logList(void);
 
   private:
 	std::vector<int> _vector;
@@ -59,9 +62,6 @@ class PmergeMe {
 	std::list<int> _list;
 	std::list<std::list<int> > _listPair;
 
-	// Logging Functions
-	void logVecPair(void);
-	void logList(void);
 	// Math Stuff
 	int jacobsthalGenerator(std::size_t nIdx);
 	std::vector<int> generateJacobsthalSequence(const std::vector<int> &pend);
@@ -71,8 +71,20 @@ class PmergeMe {
 	void insertInSequenceVector(std::vector<std::vector<int> > &pair,
 								const std::vector<int> currPair,
 								int n);
+	std::vector<int> computeInsertionOrder(const std::vector<int> &pend);
 	void mergeInsertVectorPairs(std::vector<int> pend, bool isUneven, int lastIdx);
 	std::vector<int> createPendVector(void);
+
+	// List
+	void createListPairs(void);
+	void maxValueSortList(std::list<std::list<int> > &pairs, int n);
+	void insertInSequenceList(std::list<std::list<int> > &pairs,
+							  std::list<std::list<int> >::iterator currPair,
+							  int n);
+	std::list<int> createPendList(void);
+	void mergeInsertListPairs(std::list<int> pend, bool isUneven, int straggler);
+	std::list<std::list<int> >::iterator
+	getListIter(std::list<std::list<int> > &pairs, int index);
 };
 
 /** @brief UI Helper Functions */

@@ -306,13 +306,132 @@ std::vector<int> PmergeMe::createPendVector(void) {
             S.push_back(_vectorPair[i][1]);
             // Pend gets the smaller element (first in sorted pair)
             pend.push_back(_vectorPair[i][0]);
-        } else {
-            // Handle odd element (straggler)
+        } else // Handle odd element (straggler)
             S.push_back(_vectorPair[i][0]);
-        }
     }
 
     return pend;
+}
+
+/* ************************************************************************** */
+/*                                   List                                     */
+/* ************************************************************************** */
+
+/// @brief Perform merge-insert sort on the list
+/// Sorts the internal list using a merge-insert algorithm.
+void PmergeMe::mergeInsertList(void) {
+    bool isUneven = ((_list.size() % 2) != 0);
+    int lastIdx = -1;
+
+    if (isUneven) {
+        lastIdx = _list.back();
+        _list.pop_back();
+    }
+
+    createListPairs();
+    maxValueSortList(_listPair, _listPair.size());
+    mergeInsertListPairs(createPendList(), isUneven, lastIdx);
+}
+
+/// @brief Create a list of pairs and sort them
+void PmergeMe::createListPairs(void) {
+    Logger::info("PmergeMe::createListPairs");
+    _listPair.clear();
+
+    std::list<int>::iterator it = _list.begin();
+    while (it != _list.end()) {
+        std::list<int> pair;
+        int first = *it;
+        ++it;
+        
+        if (it != _list.end()) {
+            int second = *it;
+            if (first < second) {
+                pair.push_back(first);
+                pair.push_back(second);
+            } else {
+                pair.push_back(second);
+                pair.push_back(first);
+            }
+            ++it;
+        } else {
+            pair.push_back(first);
+        }
+        _listPair.push_back(pair);
+    }
+}
+
+/// @brief Sort list pairs by their highest value
+void PmergeMe::maxValueSortList(std::list<std::list<int> > &pairs, int n) {
+    if (n <= 1)
+        return;
+    maxValueSortList(pairs, n - 1);
+    insertInSequenceList(pairs, getListIter(pairs, n - 1), n - 2);
+}
+
+/// @brief Insert sort helper for list pairs
+void PmergeMe::insertInSequenceList(std::list<std::list<int> > &pairs,
+                                   std::list<std::list<int> >::iterator currPair,
+                                   int n) {
+    if (n >= 0) {
+        std::list<std::list<int> >::iterator prevPair = getListIter(pairs, n);
+        if ((*prevPair).back() > (*currPair).back()) {
+            std::swap(*prevPair, *currPair);
+            insertInSequenceList(pairs, prevPair, n - 1);
+        }
+    }
+}
+
+/// @brief Create pend list for merging
+std::list<int> PmergeMe::createPendList(void) {
+    _list.clear();
+    std::list<int> pend;
+
+    for (std::list<std::list<int> >::iterator it = _listPair.begin(); 
+        it != _listPair.end(); ++it) {
+        
+        if (it->size() >= 2) {
+            _list.push_back(it->back());
+            pend.push_back(it->front());
+        } else {
+            _list.push_back(it->front());
+        }
+    }
+    return pend;
+}
+
+/// @brief Merge-insert list pairs
+void PmergeMe::mergeInsertListPairs(std::list<int> pend,
+                                   bool isUneven,
+                                   int straggler) {
+    std::vector<int> insertionOrder = computeInsertionOrder(
+        std::vector<int>(pend.begin(), pend.end()));
+
+    for (std::size_t k = 0; k < insertionOrder.size(); ++k) {
+        int idx = insertionOrder[k];
+        std::list<int>::iterator pendIt = pend.begin();
+        std::advance(pendIt, idx);
+        
+        if (pendIt != pend.end()) {
+            std::list<int>::iterator pos = 
+                std::upper_bound(_list.begin(), _list.end(), *pendIt);
+            _list.insert(pos, *pendIt);
+        }
+    }
+
+    if (isUneven) {
+        std::list<int>::iterator pos = 
+            std::upper_bound(_list.begin(), _list.end(), straggler);
+        _list.insert(pos, straggler);
+    }
+}
+
+/// @brief Helper to get iterator at specific position
+std::list<std::list<int> >::iterator PmergeMe::getListIter(
+    std::list<std::list<int> > &pairs, int index) {
+    std::list<std::list<int> >::iterator it = pairs.begin();
+    std::advance(it, index);
+    return it;
 }
 
 /* ************************************************************************** */
@@ -323,6 +442,12 @@ std::vector<int> PmergeMe::createPendVector(void) {
 void PmergeMe::logVec(void) {
 	for (std::size_t i = 0; i < _vector.size(); ++i)
 		std::cout << _vector[i] << " ";
+	std::cout << std::endl;
+}
+
+void PmergeMe::logList(void) {
+	for (std::list<int>::iterator it = _list.begin(); it != _list.end(); ++it)
+		std::cout << *it << " ";
 	std::cout << std::endl;
 }
 

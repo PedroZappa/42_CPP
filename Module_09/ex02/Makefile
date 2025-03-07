@@ -129,12 +129,12 @@ gdb_jacobsthal: jacobsthal
 	
 # Helper function to generate a sequence from 1 to N
 define gen_sequence
-$(shell shuf -i 1-$(1) | tr '\n' ' ' | sed 's/ $$//')
+$(shell shuf -i 1-100000 -n $(1)  | tr '\n' ' ' | sed 's/ $$//')
 endef
 
 test_all: all						## Run All tests
 	echo "${YEL}Testing ${MAG}$(NAME)${D}"
-	@for n in 5 6 7 8 9 11 22 33 44; do \
+	@for n in 5 11 33 66 101 ; do \
 		make --no-print-directory test_n N=$$n; \
 	done
 

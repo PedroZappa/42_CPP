@@ -24,8 +24,11 @@ int main(int argc, char **argv) {
 		std::cerr << BRED "Error: Invalid input sequence." NC << std::endl;
 	}
 	// Print Sequences before sorting
-	std::cout << YEL "Before\t: " NC;
+	std::cout << YEL "Vector Before\t: " NC;
 	insertMerger.logVec();
+
+	std::cout << YEL "List Before\t: " NC;
+	insertMerger.logList();
 
 	// Time merge sort
 	std::clock_t start = std::clock();
@@ -34,16 +37,28 @@ int main(int argc, char **argv) {
 	double elapsedVector =
 		(static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000);
 	// Time list sort
-	// ...
-	// ...
-	// ...
+	start = std::clock();
+	insertMerger.mergeInsertList();
+	end = std::clock();
+	double elapsedList =
+		(static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000);
+	
+	sepPrinter(WIDTH, '=', BBLU, 1);
+	
 	// Print results
-
-	std::cout << YEL "After\t: " NC;
+	std::cout << YEL "Vector After\t: " NC;
 	insertMerger.logVec();
 
-	std::cout << "Range of " << insertMerger.getSize();
+	std::cout << YEL "List After\t: " NC;
+	insertMerger.logList();
+
+	std::cout << "Range of " BRED << insertMerger.getSize() << NC;
 	std::cout << " elements in" BBLU " std::vector" NC << " sorted in: ";
 	std::cout << BGRN << elapsedVector << "µs" NC << std::endl;
+	
+	std::cout << "Range of " BRED << insertMerger.getSize() << NC;
+	std::cout << " elements in" BBLU " std::list" NC << " sorted in: ";
+	std::cout << BGRN << elapsedList << "µs" NC << std::endl;
+
 	return (EXIT_SUCCESS);
 }
