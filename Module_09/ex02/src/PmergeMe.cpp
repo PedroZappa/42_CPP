@@ -105,6 +105,7 @@ int PmergeMe::jacobsthalGenerator(std::size_t nIdx) {
 	if (memo.empty()) {
 		memo.push_back(0); // J(0) = 0
 		memo.push_back(1); // J(1) = 1
+		memo.push_back(1); // J(2) = 1
 	}
 
 	while (memo.size() <= nIdx) {
@@ -127,13 +128,10 @@ std::vector<int> PmergeMe::generateJacobsthalSequence(const std::vector<int> &pe
 
 	// In the Ford–Johnson algorithm the first insertion index we care about is J(3)=3.
 	// For pend arrays too small (pend.size() <= 2), we want to force a 3.
-	if (pendLen <= 2) {
-		// Even if pend has size 2, our algorithm later expects a 3 (the ideal
-		// insertion index) in the Jacobsthal sequence.
+	if (pendLen <= 2)
 		jacobsthalSequence.push_back(3);
-	} else {
-		// For larger pend arrays, start at index 3.
-		std::size_t jacobIdx = 3;
+	else {
+		std::size_t jacobIdx = 3; // Start w/ J(3)
 		int jacobValue =
 			jacobsthalGenerator(jacobIdx); // should be 3 for jacobIdx==3
 		// We add Jacobsthal numbers that are strictly less than pendLen.
@@ -149,7 +147,7 @@ std::vector<int> PmergeMe::generateJacobsthalSequence(const std::vector<int> &pe
 		std::cout << jacobsthalSequence[i] << " ";
 	std::cout << std::endl;
 
-	return jacobsthalSequence;
+	return (jacobsthalSequence);
 }
 
 /* ************************************************************************** */
@@ -234,6 +232,32 @@ void PmergeMe::insertInSequenceVector(std::vector<std::vector<int> > &pairs,
 }
 
 /// @brief Merge insertion sort on vector of pairs
+
+std::vector<int> PmergeMe::computeInsertionOrder(const std::vector<int> &pend) {
+	std::vector<int> order;
+	int p = pend.size();
+	if (p < 3) {
+		for (int i = 0; i < p; i++)
+			order.push_back(i);
+	} else {
+		std::vector<int> jacobSeq = generateJacobsthalSequence(pend);
+		int prev = 0;
+		for (std::size_t j = 0; j < jacobSeq.size(); ++j) {
+			int curr = jacobSeq[j];
+			// Add indices in reverse order: from curr down to prev+1.
+			for (int i = curr; i > prev; --i) {
+				order.push_back(i);
+			}
+			prev = curr;
+		}
+		// Append any remaining indices
+		for (int i = prev; i < p; i++) {
+			order.push_back(i);
+		}
+	}
+	return order;
+}
+
 /// @param pend Vector of pending numbers
 /// @param isUneven Boolean to check if the vector is uneven
 /// @param lastIdx The value at the last index
@@ -242,57 +266,23 @@ void PmergeMe::mergeInsertVectorPairs(std::vector<int> pend,
 									  bool isUneven,
 									  int straggler) {
 	std::vector<int> &S = _vector;
-
-	// Insert first element directly
-	S.insert(S.begin(), pend[0]);
-
-	// Generate Jacobsthal sequence
-	std::vector<int> jacobSeq = generateJacobsthalSequence(pend);
-
-	// Track which indices have been inserted
-	std::set<int> insertedIndices;
-	insertedIndices.insert(0); // First element already inserted
-
-	int prevJacob = 0;
-
-	// Insert elements based on Jacobsthal sequence
-	for (std::size_t j = 0; j < jacobSeq.size(); ++j) {
-		int currJacob = jacobSeq[j];
-
-		// Insert elements in reverse order from currJacob down to prevJacob+1
-		for (int idx = currJacob; idx > prevJacob; --idx) {
-			if (idx >= static_cast<int>(pend.size()))
-				continue;
-
-			int elem_to_insert = pend[idx];
-			insertedIndices.insert(idx);
-
-			// Binary insertion
-			std::vector<int>::iterator insertPos =
-				std::upper_bound(S.begin(), S.end(), elem_to_insert);
-			S.insert(insertPos, elem_to_insert);
-		}
-
-		prevJacob = currJacob;
-	}
-
-	// Insert any remaining elements
-	for (std::size_t idx = 1; idx < pend.size(); ++idx) {
-		if (insertedIndices.find(idx) != insertedIndices.end())
+	// Assume the main chain S (the "vector") is already built (from the pairs)
+	// Insert pending elements into S in the computed order.
+	std::vector<int> insertionOrder = computeInsertionOrder(pend);
+	for (std::size_t k = 0; k < insertionOrder.size(); ++k) {
+		int idx = insertionOrder[k];
+		if ((size_t)idx >= pend.size())
 			continue;
-
-		int elem_to_insert = pend[idx];
-
-		std::vector<int>::iterator insertPos =
-			std::upper_bound(S.begin(), S.end(), elem_to_insert);
-		S.insert(insertPos, elem_to_insert);
+		int elem = pend[idx];
+		std::vector<int>::iterator pos =
+			std::upper_bound(S.begin(), S.end(), elem);
+		S.insert(pos, elem);
 	}
-
-	// Handle straggler
+	// If there is a "straggler" element from an odd-sized array, insert it last.
 	if (isUneven) {
-		std::vector<int>::iterator insertPos =
+		std::vector<int>::iterator pos =
 			std::upper_bound(S.begin(), S.end(), straggler);
-		S.insert(insertPos, straggler);
+		S.insert(pos, straggler);
 	}
 }
 

@@ -51,6 +51,7 @@ class PmergeMe {
 
 	// Vector
 	void mergeInsertVector(void);
+	std::vector<int> computeInsertionOrder(const std::vector<int> &pend);
 
   private:
 	std::vector<int> _vector;
