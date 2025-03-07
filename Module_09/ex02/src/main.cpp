@@ -24,7 +24,7 @@ int main(int argc, char **argv) {
 		std::cerr << BRED "Error: Invalid input sequence." NC << std::endl;
 	}
 	// Print Sequences before sorting
-	std::cout << YEL "Before: " NC;
+	std::cout << YEL "Before\t: " NC;
 	insertMerger.logVec();
 
 	// Time merge sort
@@ -39,7 +39,7 @@ int main(int argc, char **argv) {
 	// ...
 	// Print results
 
-	std::cout << YEL "After: " NC;
+	std::cout << YEL "After\t: " NC;
 	insertMerger.logVec();
 
 	std::cout << "Range of " << insertMerger.getSize();

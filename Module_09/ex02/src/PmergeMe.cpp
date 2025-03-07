@@ -120,34 +120,22 @@ int PmergeMe::jacobsthalGenerator(std::size_t nIdx) {
 /// @param pend Vector of pending numbers
 /// @return Vector of Jacobsthal numbers
 /// Generates a sequence of Jacobsthal numbers up to the size of the pending vector.
-std::vector<int> PmergeMe::generateJacobsthalSequence(const std::vector<int> &pend) {
-	Logger::info("PmergeMe::generateJacobsthalSequence");
-	std::vector<int> jacobsthalSequence;
+std::vector<int> PmergeMe::generateJacobsthalSequence(const std::vector<int>& pend) {
+    std::vector<int> jacobsthalSequence;
+    int pendLen = pend.size();
 
-	int pendLen = pend.size();
+    // Only generate numbers for pend.size() ≥ 3
+    if (pendLen >= 3) {
+        std::size_t jacobIdx = 3;
+        int jacobValue = jacobsthalGenerator(jacobIdx);
+        while (jacobValue < pendLen) {
+            jacobsthalSequence.push_back(jacobValue);
+            ++jacobIdx;
+            jacobValue = jacobsthalGenerator(jacobIdx);
+        }
+    }
 
-	// In the Ford–Johnson algorithm the first insertion index we care about is J(3)=3.
-	// For pend arrays too small (pend.size() <= 2), we want to force a 3.
-	if (pendLen <= 2)
-		jacobsthalSequence.push_back(3);
-	else {
-		std::size_t jacobIdx = 3; // Start w/ J(3)
-		int jacobValue =
-			jacobsthalGenerator(jacobIdx); // should be 3 for jacobIdx==3
-		// We add Jacobsthal numbers that are strictly less than pendLen.
-		while (jacobValue < pendLen) {
-			jacobsthalSequence.push_back(jacobValue);
-			++jacobIdx;
-			jacobValue = jacobsthalGenerator(jacobIdx);
-		}
-	}
-	// Print sequence
-	std::cout << "Jacobsthal Sequence: ";
-	for (std::size_t i = 0; i < jacobsthalSequence.size(); ++i)
-		std::cout << jacobsthalSequence[i] << " ";
-	std::cout << std::endl;
-
-	return (jacobsthalSequence);
+    return jacobsthalSequence;
 }
 
 /* ************************************************************************** */
@@ -159,6 +147,7 @@ std::vector<int> PmergeMe::generateJacobsthalSequence(const std::vector<int> &pe
 int PmergeMe::getSize(void) const {
 	return (_vector.size());
 }
+
 /* ************************************************************************** */
 /*                                   Vector */
 /* ************************************************************************** */
@@ -231,33 +220,46 @@ void PmergeMe::insertInSequenceVector(std::vector<std::vector<int> > &pairs,
 		pairs[n + 1] = currPair; // Insert currPair in its right place
 }
 
-/// @brief Merge insertion sort on vector of pairs
+/// @brief Compute the insertion order for a vector of pending numbers
+/// @param pend Vector of pending numbers
+/// @return Vector of insertion order
+std::vector<int> PmergeMe::computeInsertionOrder(const std::vector<int>& pend) {
+    std::vector<int> order;
+    int p = pend.size();
 
-std::vector<int> PmergeMe::computeInsertionOrder(const std::vector<int> &pend) {
-	std::vector<int> order;
-	int p = pend.size();
-	if (p < 3) {
-		for (int i = 0; i < p; i++)
-			order.push_back(i);
-	} else {
-		std::vector<int> jacobSeq = generateJacobsthalSequence(pend);
-		int prev = 0;
-		for (std::size_t j = 0; j < jacobSeq.size(); ++j) {
-			int curr = jacobSeq[j];
-			// Add indices in reverse order: from curr down to prev+1.
-			for (int i = curr; i > prev; --i) {
-				order.push_back(i);
-			}
-			prev = curr;
-		}
-		// Append any remaining indices
-		for (int i = prev; i < p; i++) {
-			order.push_back(i);
-		}
-	}
-	return order;
+    if (p <= 2) {
+        // Insert all indices sequentially for small pend
+        for (int i = 0; i < p; ++i)
+            order.push_back(i);
+    } else {
+        // Generate Jacobsthal sequence
+        std::vector<int> jacobSeq = generateJacobsthalSequence(pend);
+        int prev = -1; // Start before index 0
+
+        // Insert first element (index 0) explicitly
+        order.push_back(0);
+
+        for (size_t j = 0; j < jacobSeq.size(); ++j) {
+            int curr = jacobSeq[j];
+            // Insert indices in reverse from curr down to prev + 1
+            for (int i = curr; i > prev; --i) {
+                if (i < p && i != 0) // Avoid re-adding index 0
+                    order.push_back(i);
+            }
+            prev = curr;
+        }
+
+        // Add remaining indices (prev + 1 to p-1)
+        for (int i = prev + 1; i < p; ++i) {
+            if (std::find(order.begin(), order.end(), i) == order.end())
+                order.push_back(i);
+        }
+    }
+
+    return order;
 }
 
+/// @brief Merge insertion sort on vector of pairs
 /// @param pend Vector of pending numbers
 /// @param isUneven Boolean to check if the vector is uneven
 /// @param lastIdx The value at the last index
@@ -266,19 +268,23 @@ void PmergeMe::mergeInsertVectorPairs(std::vector<int> pend,
 									  bool isUneven,
 									  int straggler) {
 	std::vector<int> &S = _vector;
-	// Assume the main chain S (the "vector") is already built (from the pairs)
-	// Insert pending elements into S in the computed order.
+
+	// Compute insertion order using Jacobsthal sequence
 	std::vector<int> insertionOrder = computeInsertionOrder(pend);
+
+	// Insert pending elements into S in the computed order
 	for (std::size_t k = 0; k < insertionOrder.size(); ++k) {
 		int idx = insertionOrder[k];
 		if ((size_t)idx >= pend.size())
 			continue;
+
 		int elem = pend[idx];
 		std::vector<int>::iterator pos =
 			std::upper_bound(S.begin(), S.end(), elem);
 		S.insert(pos, elem);
 	}
-	// If there is a "straggler" element from an odd-sized array, insert it last.
+
+	// Handle straggler element from odd-sized array
 	if (isUneven) {
 		std::vector<int>::iterator pos =
 			std::upper_bound(S.begin(), S.end(), straggler);
@@ -290,29 +296,23 @@ void PmergeMe::mergeInsertVectorPairs(std::vector<int> pend,
 /// @return Vector of pending numbers
 /// Creates a vector of pending numbers from the internal vector pairs.
 std::vector<int> PmergeMe::createPendVector(void) {
-	_vector.clear();
-	std::vector<int> &vector = _vector;
-	std::vector<int> pend;
+    _vector.clear();
+    std::vector<int> &S = _vector;
+    std::vector<int> pend;
 
-	for (std::size_t i = 0; i < _vectorPair.size(); ++i) {
-		vector.push_back(_vectorPair[i][0]); // Always safe to push first element
-		// Check if there's a second element before accessing it!
-		if (_vectorPair[i].size() == 2 && _vectorPair[i][1] > 0)
-			pend.push_back(_vectorPair[i][1]);
-	}
+    for (std::size_t i = 0; i < _vectorPair.size(); ++i) {
+        if (_vectorPair[i].size() >= 2) {
+            // S gets the larger element (second in sorted pair)
+            S.push_back(_vectorPair[i][1]);
+            // Pend gets the smaller element (first in sorted pair)
+            pend.push_back(_vectorPair[i][0]);
+        } else {
+            // Handle odd element (straggler)
+            S.push_back(_vectorPair[i][0]);
+        }
+    }
 
-	// Print Created Vector
-	std::cout << "Vector\t: ";
-	for (std::size_t i = 0; i < vector.size(); ++i)
-		std::cout << vector[i] << " ";
-	std::cout << std::endl;
-	// Print Created Pend Vector
-	std::cout << "Pend\t: ";
-	for (std::size_t i = 0; i < pend.size(); ++i)
-		std::cout << pend[i] << " ";
-	std::cout << std::endl;
-
-	return (pend);
+    return pend;
 }
 
 /* ************************************************************************** */

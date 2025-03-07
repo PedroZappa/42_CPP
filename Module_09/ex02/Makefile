@@ -127,9 +127,21 @@ gdb_jacobsthal: jacobsthal
 	# tmux split-window -v "btop"
 	make get_log
 	
+# Helper function to generate a sequence from 1 to N
+define gen_sequence
+$(shell shuf -i 1-$(1) | tr '\n' ' ' | sed 's/ $$//')
+endef
 
-test_all:						## Run All tests
-	echo "test"
+test_all: all						## Run All tests
+	echo "${YEL}Testing ${MAG}$(NAME)${D}"
+	@for n in 5 6 7 8 9 11 22 33 44; do \
+		make --no-print-directory test_n N=$$n; \
+	done
+
+# Generic test rule for any N provided via command line
+test_n: ## Run test with N positive integers (usage: make test_n N=5)
+	@echo "${MAG}***${D} Testing with ${GRN}$(N)${D} positive integer sequence"
+	./$(NAME) "$(call gen_sequence,$(N))"
 
 ##@ Debug Rules 
 
