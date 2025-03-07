@@ -61,32 +61,35 @@ PmergeMe::~PmergeMe(void) {
 /// @param argv Array of arguments
 /// Parses command-line arguments and fills the internal list and vector.
 int PmergeMe::parseArgs(int argc, char **argv) {
-    Logger::info("PmergeMe::parseArgs()");
-    _vector.clear();
-    _list.clear();
+	Logger::info("PmergeMe::parseArgs()");
+	_vector.clear();
+	_list.clear();
 
-    for (int i = 1; i < argc; ++i) {
-        std::stringstream ss(argv[i]);
-        int num;
+	for (int i = 1; i < argc; ++i) {
+		std::stringstream ss(argv[i]);
+		int num;
 
-        // Extract integers from the argument
-        while (ss >> num) {
-            if (num <= 0) {
-                std::cerr << RED "Error:" NC " invalid input (" << num << ")" << std::endl;
-                exit(1);
-            }
-            _list.push_back(num);
-            _vector.push_back(num);
-        }
+		// Extract integers from the argument
+		while (ss >> num) {
+			if (num <= 0) {
+				std::cerr << RED "Error:" NC " invalid input (" << num << ")"
+						  << std::endl;
+				exit(1);
+			}
+			_list.push_back(num);
+			_vector.push_back(num);
+		}
 
-        // Check for invalid characters after the numbers
-        if (!ss.eof()) {
-            std::cerr << RED "Error:" NC " invalid input (non-integer characters detected)" << std::endl;
-            exit(1);
-        }
-    }
+		// Check for invalid characters after the numbers
+		if (!ss.eof()) {
+			std::cerr << RED "Error:" NC " invalid input (non-integer "
+							 "characters detected)"
+					  << std::endl;
+			exit(1);
+		}
+	}
 
-    return EXIT_SUCCESS;
+	return EXIT_SUCCESS;
 }
 
 /* ************************************************************************** */
@@ -108,48 +111,49 @@ int PmergeMe::parseArgs(int argc, char **argv) {
 // }
 
 int PmergeMe::jacobsthalGenerator(std::size_t nIdx) {
-    static std::vector<int> memo;
-    if (memo.empty()) {
-        memo.push_back(0);
-        memo.push_back(1);
-    }
-    
-    if (nIdx < memo.size()) {
-        return memo[nIdx];
-    }
-    
-    while (memo.size() <= nIdx) {
-        int n = memo.size();
-        memo.push_back(2 * memo[n-1] + memo[n-2]);
-    }
-    
-    return memo[nIdx];
+	static std::vector<int> memo;
+	if (memo.empty()) {
+		memo.push_back(0);
+		memo.push_back(1);
+	}
+
+	if (nIdx < memo.size()) {
+		return memo[nIdx];
+	}
+
+	while (memo.size() <= nIdx) {
+		int n = memo.size();
+		memo.push_back(2 * memo[n - 1] + memo[n - 2]);
+	}
+
+	return memo[nIdx];
 }
 
 std::vector<int> PmergeMe::generateJacobsthalSequence(const std::vector<int> &pend) {
-    Logger::info("PmergeMe::generateJacobsthalSequence");
+	Logger::info("PmergeMe::generateJacobsthalSequence");
 
-    std::vector<int> jacobsthalSequence;
-    std::size_t jacobsthalIdx = 3; // First useful index
-    int pendLen = pend.size();
+	std::vector<int> jacobsthalSequence;
+	std::size_t jacobsthalIdx = 3; // First useful index
+	int pendLen = pend.size();
 
-    // Make sure we have at least one value in the sequence
-    int jacobValue = jacobsthalGenerator(jacobsthalIdx);
-    while (jacobValue < pendLen) {
-        jacobsthalSequence.push_back(jacobValue);
-        ++jacobsthalIdx;
-        jacobValue = jacobsthalGenerator(jacobsthalIdx);
-    }
+	// Make sure we have at least one value in the sequence
+	int jacobValue = jacobsthalGenerator(jacobsthalIdx);
+	while (jacobValue < pendLen) {
+		jacobsthalSequence.push_back(jacobValue);
+		++jacobsthalIdx;
+		jacobValue = jacobsthalGenerator(jacobsthalIdx);
+	}
 
-    // Print the sequence
-    std::cout << "Jacobsthal Sequence: ";
-    for (std::vector<int>::const_iterator it = jacobsthalSequence.begin(); 
-         it != jacobsthalSequence.end(); ++it) {
-        std::cout << *it << " ";
-    }
-    std::cout << std::endl;
+	// Print the sequence
+	std::cout << "Jacobsthal Sequence: ";
+	for (std::vector<int>::const_iterator it = jacobsthalSequence.begin();
+		 it != jacobsthalSequence.end();
+		 ++it) {
+		std::cout << *it << " ";
+	}
+	std::cout << std::endl;
 
-    return jacobsthalSequence;
+	return jacobsthalSequence;
 }
 
 /// @brief Generate a sequence of Jacobsthal numbers
@@ -196,6 +200,11 @@ void PmergeMe::mergeInsertVector(void) {
 	bool isUneven = ((_vector.size() % 2) != 0);
 	int lastIdx = -1;
 
+	if (isUneven) {
+		lastIdx = _vector.back(); // store last element explicitly
+		_vector.pop_back();       // remove it temporarily from vector
+	}
+
 	createVectorPairs(); // split vector into pairs & sort pairs in ascending order
 	maxValueSortVector(_vectorPair, _vectorPair.size());
 	mergeInsertVectorPairs(createPendVector(), isUneven, lastIdx);
@@ -211,7 +220,7 @@ void PmergeMe::createVectorPairs(void) {
 		std::vector<int> pairs;
 		if ((it + 1) == _vector.end()) {
 			pairs.push_back(*it);
-			pairs.push_back(-1);
+			// pairs.push_back(-1);
 		} else if (*it < *(it + 1)) {
 			pairs.push_back(*it);
 			pairs.push_back(*(it + 1));
@@ -313,7 +322,8 @@ std::vector<int> PmergeMe::createPendVector(void) {
 
 	for (std::size_t i = 0; i < _vectorPair.size(); ++i) {
 		vector.push_back(_vectorPair[i][0]);
-		pend.push_back(_vectorPair[i][1]);
+		if (_vectorPair[i][1] > 0)
+			pend.push_back(_vectorPair[i][1]);
 	}
 	// showContainer(__func__, "vector", vector);
 	// showContainer(__func__, "pend", pend);
@@ -329,7 +339,6 @@ void PmergeMe::logVec(void) {
 	for (std::size_t i = 0; i < _vector.size(); ++i)
 		std::cout << _vector[i] << " ";
 	std::cout << std::endl;
-	
 }
 
 void PmergeMe::logSequences(void) {
