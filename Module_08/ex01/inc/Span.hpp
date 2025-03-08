@@ -46,15 +46,11 @@ class Span {
 	// Exceptions Classes
 	class ContainerFull : public std::exception {
 	  public:
-		virtual const char *what() const throw() {
-			return (RED "Array is full" NC);
-		};
+		virtual const char *what() const throw();
 	};
 	class EmptySpan : public std::exception {
 	  public:
-		virtual const char *what() const throw() {
-			return (RED "Span is empty" NC);
-		};
+		virtual const char *what() const throw();
 	};
 
   private:
