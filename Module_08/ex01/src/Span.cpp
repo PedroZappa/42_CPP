@@ -10,9 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+ * @file Span.cpp
+ * @brief Implementation of the Span class.
+ */
+
 #include "../inc/Span.hpp"
 
-/** Parameterized Constructor **/
+/**
+ * @brief Construct a new Span object with a specified size.
+ * @param N The maximum number of elements the Span can hold.
+ */
 Span::Span(unsigned int N) : _size(N) {
 #ifdef DEBUG
 	std::cout << BLU "Span " NC " constructor called" << std::endl;
@@ -21,7 +29,10 @@ Span::Span(unsigned int N) : _size(N) {
 	this->_container.reserve(N);
 }
 
-/** Copy Constructor **/
+/**
+ * @brief Copy constructor for Span.
+ * @param copy The Span object to copy from.
+ */
 Span::Span(Span const &copy) {
 #ifdef DEBUG
 	std::cout << "Span copy constructor called" << std::endl;
@@ -29,14 +40,21 @@ Span::Span(Span const &copy) {
 	*this = copy;
 }
 
-/** Destructor **/
+/**
+ * @brief Destroy the Span object.
+ */
 Span::~Span(void) {
 #ifdef DEBUG
 	std::cout << RED "Span" NC " destructor called" << std::endl;
 #endif
 }
 
-/** Assignment Operator **/
+/**
+ * @brief Assignment operator for Span.
+ * 
+ * @param src The Span object to assign from.
+ * @return Span& A reference to the assigned Span object.
+ */
 Span &Span::operator=(const Span &src) {
 #ifdef DEBUG
 	std::cout << "Span assignment operator called" << std::endl;
@@ -52,21 +70,39 @@ Span &Span::operator=(const Span &src) {
 	return (*this);
 }
 
-//** Getters **/
+/**
+ * @brief Get the size of the Span.
+ * @return unsigned int The maximum number of elements the Span can hold.
+ */
 unsigned int Span::getSize(void) const {
 	return (this->_size);
 }
 
+/**
+ * @brief Get the last element in the Span.
+ * 
+ * @return size_t The last element in the Span.
+ * @throw EmptySpan if the Span is empty.
+ */
 size_t Span::getLast(void) const {
 	if (this->_container.empty())
 		throw EmptySpan();
 	return (this->_container.back());
 }
 
+/**
+ * @brief Get the capacity of the Span.
+ * @return size_t The capacity of the Span.
+ */
 size_t Span::getCapacity(void) const {
 	return (this->_container.capacity());
 }
 
+/**
+ * @brief Calculate the shortest span between any two numbers in the Span.
+ * @return size_t The shortest span.
+ * @throw EmptySpan if the Span is empty or contains only one element.
+ */
 size_t Span::shortestSpan(void) const {
 	std::vector<int> toSort(this->_container);
 	size_t shortest = std::numeric_limits<size_t>::max();
@@ -85,6 +121,11 @@ size_t Span::shortestSpan(void) const {
 	return (shortest);
 }
 
+/**
+ * @brief Calculate the longest span between any two numbers in the Span.
+ * @return size_t The longest span.
+ * @throw EmptySpan if the Span is empty or contains only one element.
+ */
 size_t Span::longestSpan(void) const {
 	if (this->_container.size() <= 1)
 		throw EmptySpan();
@@ -95,7 +136,9 @@ size_t Span::longestSpan(void) const {
 	return (*max - *min);
 }
 
-//** Printers **/
+/**
+ * @brief Print the elements of the Span.
+ */
 void Span::printContainer(void) const {
 	for (std::vector<int>::const_iterator it = this->_container.begin();
 		 it != this->_container.end();
@@ -104,13 +147,24 @@ void Span::printContainer(void) const {
 	std::cout << std::endl;
 }
 
-//** Operations **/
+/**
+ * @brief Add a number to the Span.
+ * 
+ * @param n The number to add.
+ * @throw ContainerFull if the Span is already full.
+ */
 void Span::addNumber(int n) {
 	if (this->_container.size() >= this->getSize())
 		throw ContainerFull();
 	this->_container.push_back(n);
 }
 
+/**
+ * @brief Add a range of numbers to the Span.
+ * @param begin Iterator to the beginning of the range.
+ * @param end Iterator to the end of the range.
+ * @throw ContainerFull if adding the range would exceed the Span's capacity.
+ */
 void Span::addRange(std::vector<int>::iterator begin,
 					std::vector<int>::iterator end) {
 	int range = std::abs(end - begin); // Calculate the number of elements to add
@@ -121,11 +175,16 @@ void Span::addRange(std::vector<int>::iterator begin,
 	}
 }
 
-// Exception implementations
+/**
+ * @brief Exception thrown when attempting to add to a full Span.
+ */
 const char* Span::ContainerFull::what() const throw() {
     return (RED "Array is full" NC);
 }
 
+/**
+ * @brief Exception thrown when attempting to perform operations on an empty Span.
+ */
 const char* Span::EmptySpan::what() const throw() {
     return (RED "Span is empty" NC);
 }

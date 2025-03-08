@@ -10,13 +10,33 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+ * @file main.cpp
+ * @brief This file contains the main function to test the Span class.
+ *
+ * The main function includes several test cases to demonstrate the functionality
+ * and exception handling of the Span class.
+ */
+
 #include "../inc/Span.hpp"
 
 #define WIDTH 50
 
+/**
+ * @brief Main function to test the Span class.
+ *
+ * This function runs multiple test cases to validate the behavior of the Span class,
+ * including normal usage, exception handling, and performance with large data sets.
+ *
+ * @return int Returns 0 on successful execution.
+ */
 int main(void) {
 	headerPrinter("SPAN", 50, '-', GRN);
-	// Test 1: Normal usage with a small span of size 5
+	/**
+	 * @brief Test 1: Normal usage with a small span of size 5.
+	 *
+	 * This test adds numbers to a Span of size 5 and checks the shortest and longest spans.
+	 */
 	Span sp(5);
 	// Add numbers within the container's size limit
 	sp.addNumber(6);
@@ -31,7 +51,11 @@ int main(void) {
 	std::cout << std::endl;
 	sepPrinter(WIDTH, '-', GRN, 1);
 
-	// Test 2: Empty Span
+	/**
+	 * @brief Test 2: Empty Span.
+	 *
+	 * This test attempts to find the shortest span in an empty Span, expecting an exception.
+	 */
 	Span emptySpan(3);
 	try {
 		std::cout << BHYEL << "Test 2: Empty Span" << NC << std::endl;
@@ -41,7 +65,11 @@ int main(void) {
 	}
 	sepPrinter(WIDTH, '-', GRN, 1);
 
-	// Test 3: Span with only one element
+	/**
+	 * @brief Test 3: Span with only one element.
+	 *
+	 * This test adds a single number to a Span and attempts to find the shortest span, expecting an exception.
+	 */
 	Span oneElementSpan(1);
 	try {
 		oneElementSpan.addNumber(10);
@@ -54,7 +82,11 @@ int main(void) {
 	std::cout << std::endl;
 	sepPrinter(WIDTH, '-', GRN, 1);
 
-	// Test 4: Testing addRange() with valid range
+	/**
+	 * @brief Test 4: Testing addRange() with a valid range.
+	 *
+	 * This test uses the addRange() method to add a range of numbers to a Span and checks the spans.
+	 */
 	std::vector<int> rangeVec;
 	rangeVec.push_back(100);
 	rangeVec.push_back(220);
@@ -72,7 +104,11 @@ int main(void) {
 	std::cout << std::endl;
 	sepPrinter(WIDTH, '-', GRN, 1);
 
-	// Test 5: Testing with 10,000 numbers
+	/**
+	 * @brief Test 5: Testing with 10,000 numbers.
+	 *
+	 * This test adds 10,000 sequential numbers to a Span and checks the shortest and longest spans.
+	 */
 	Span largeSpan(10000);
 	std::cout << BHGRN << "Test 5: Large span with 10,000 numbers" << NC
 			  << std::endl;
@@ -89,7 +125,11 @@ int main(void) {
 	std::cout << std::endl;
 	sepPrinter(WIDTH, '-', GRN, 1);
 
-	// Test 6: Testing with 100,000 numbers, each larger than the previous by 666
+	/**
+	 * @brief Test 6: Testing with 100,000 numbers, each larger than the previous by 666.
+	 *
+	 * This test adds 100,000 numbers to a Span, each 666 larger than the previous, and checks the spans.
+	 */
 	Span largeSpan666(100000);
 	std::cout << BHGRN
 			  << "Test 6: Large span with 100,000 numbers, each larger by 666"
@@ -108,7 +148,11 @@ int main(void) {
 	std::cout << std::endl;
 	sepPrinter(WIDTH, '-', GRN, 1);
 	//
-	// Test 7: Testing ContainerFull exception when exceeding the span size
+	/**
+	 * @brief Test 7: Testing ContainerFull exception when exceeding the span size.
+	 *
+	 * This test attempts to add more numbers than the Span can hold, expecting a ContainerFull exception.
+	 */
 	Span spanForOverflow(5); // Create a Span with a size limit of 5
 	std::cout << BHYEL << "Test 7: Testing ContainerFull exception" << NC
 			  << std::endl;
