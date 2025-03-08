@@ -26,9 +26,9 @@ This program implements a Bitcoin exchange rate calculator that processes histor
 ## Program Structure
 
 The program consists of three main files:
-- `BitcoinExchange.hpp`: Header file containing class declarations
-- `BitcoinExchange.cpp`: Implementation file with method definitions
-- `main.cpp`: Entry point for the application
+* `BitcoinExchange.hpp`: Header file containing class declarations
+* `BitcoinExchange.cpp`: Implementation file with method definitions
+* `main.cpp`: Entry point for the application
 
 ### Class Structure
 
@@ -48,14 +48,14 @@ The program uses a `std::map` container to store Bitcoin exchange rates, with da
 
 #### Reading Exchange Rates
 The `readData()` method reads Bitcoin exchange rates from a CSV file with the format:
-```
+```csv
 date,exchange_rate
 2022-03-01,44000.5
 ```
 
 #### Processing User Input
 The `processData()` method processes a user-provided file with the format:
-```
+```plaintext
 date | value
 2022-03-01 | 10
 ```
@@ -71,7 +71,7 @@ The program implements comprehensive input validation:
 2. **Value Validation** (`isValueValid`, `isPositiveVal`, `isWithinRange`):
    - Checks that values are properly formatted numbers
    - Ensures values are positive
-   - Verifies values are within acceptable range (≤ 1000)
+   - Verifies values are within an acceptable range (≤ 1000)
 
 3. **Input Format Validation** (`isInputValid`):
    - Validates the overall format of input lines
@@ -86,9 +86,9 @@ When calculating Bitcoin values, the program:
 ## Error Handling
 
 The program uses exception handling to manage various error conditions:
-- File opening errors
-- Invalid file formats
-- Input validation failures
+* File opening errors
+* Invalid file formats
+* Input validation failures
 
 Custom exception classes provide specific error messages for different error types.
 
@@ -105,13 +105,14 @@ Where `` is a file containing Bitcoin values to be calculated, and the program e
 
 ### Date Parsing and Comparison
 
-The program uses the `strptime()` function to parse date strings and validate them against the calendar. The `isSameDate()` method ensures date components match after normalization.
+The program uses the `strptime()` function to parse date strings and validate them against the calendar. 
+The `isSameDate()` method ensures date components match after normalization.
 
 ### String Processing
 
 Several helper methods handle string manipulation:
-- `removeSpace()`: Removes all whitespace from a string
-- `trimSpaces()`: Removes leading and trailing spaces
+* `removeSpace()`: Removes all whitespace from a string
+* `trimSpaces()`: Removes leading and trailing spaces
 
 ### Date Conversion
 
