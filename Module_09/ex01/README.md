@@ -90,10 +90,3 @@ The RPN calculator uses a stack-based algorithm:
 
 This implementation follows the standard approach for evaluating Reverse Polish Notation expressions, which is both efficient and straightforward.
 
-Citations:
-[1] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/33783262/68a58e90-d079-412a-8cd4-e4fe991e5e43/main.cpp
-[2] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/33783262/ac10f50d-8a57-4417-8e92-e398ee4e1334/RPN.cpp
-[3] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/33783262/5c8b8e28-c75a-47e0-b05c-4d8347b22c36/printer.cpp
-[4] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/33783262/6b698bc2-c98a-4148-9339-bb9e82a7c427/RPN.hpp
-[5] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/33783262/80f5c637-680c-43df-a77e-50598db41954/Ansi.h
-[6] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/33783262/cbf5c3cf-26c7-4a62-b043-8b01742c5c7e/cpp09.en.subject.pdf
