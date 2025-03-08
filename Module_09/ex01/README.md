@@ -20,12 +20,11 @@ The RPN (Reverse Polish Notation) calculator is a command-line program that eval
 ## Implementation Details
 
 The program is implemented in C++ and consists of the following files:
-- `main.cpp`: Contains the entry point of the program
-- `RPN.cpp`: Contains the implementation of the RPN calculator
-- `printer.cpp`: Contains utility functions for printing error messages
-- `RPN.hpp`: Contains the class declaration for the RPN calculator
-- `Ansi.h`: Contains ANSI color codes for formatted output
-
+* `main.cpp`: Contains the entry point of the program
+* `RPN.cpp`: Contains the implementation of the RPN calculator
+* `printer.cpp`: Contains utility functions for printing error messages
+* `RPN.hpp`: Contains the class declaration for the RPN calculator
+* `Ansi.h`: Contains ANSI color codes for formatted output
 ___
 
 ### Class Structure
