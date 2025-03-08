@@ -111,6 +111,19 @@ void Span::addNumber(int n) {
 	this->_container.push_back(n);
 }
 
+/**
+ * @brief Adds a range of numbers to the Span container.
+ *
+ * Inserts the numbers from the given iterator range [begin, end) into the container.
+ * Before adding the numbers, it checks if doing so would exceed the container's
+ * maximum capacity (returned by getSize()). If the capacity would be exceeded,
+ * a ContainerFull exception is thrown.
+ *
+ * @param begin Iterator pointing to the start of the range to add.
+ * @param end Iterator pointing one past the end of the range.
+ *
+ * @throws ContainerFull If the total number of elements after the addition exceeds the allowed size.
+ */
 void Span::addRange(std::vector<int>::iterator begin,
 					std::vector<int>::iterator end) {
 	int range = std::abs(end - begin); // Calculate the number of elements to add
@@ -121,11 +134,25 @@ void Span::addRange(std::vector<int>::iterator begin,
 	}
 }
 
-// Exception implementations
+/**
+ * @brief Returns the error message for a full container.
+ *
+ * This method provides a color-coded string indicating that the container has reached its maximum capacity.
+ *
+ * @return const char* A pointer to the error message "Array is full" with red formatting.
+ */
 const char* Span::ContainerFull::what() const throw() {
     return (RED "Array is full" NC);
 }
 
+/**
+ * @brief Returns a formatted error message for an empty span.
+ *
+ * This method overrides the standard exception's `what()` function to provide a
+ * color-coded error message indicating that the span is empty.
+ *
+ * @return const char* A constant C-string with the error message.
+ */
 const char* Span::EmptySpan::what() const throw() {
     return (RED "Span is empty" NC);
 }
