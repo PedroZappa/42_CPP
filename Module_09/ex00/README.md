@@ -118,8 +118,8 @@ Several helper methods handle string manipulation:
 The `toLongDate()` method converts date strings to numeric values for efficient comparison when finding the nearest date in the database.
 
 Citations:
-[1] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/33783262/02afd7c8-64b7-4075-8569-c7eda8d2a3fd/main.cpp
-[2] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/33783262/12daffec-d355-4545-81f7-899289fad9e1/BitcoinExchange.cpp
-[3] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/33783262/26d2d2b2-5037-4009-8223-5bf15c37acd4/BitcoinExchange.hpp
-[4] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/33783262/02afd7c8-64b7-4075-8569-c7eda8d2a3fd/main.cpp
-[5] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/33783262/12daffec-d355-4545-81f7-899289fad9e1/BitcoinExchange.cpp
+[1](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/33783262/02afd7c8-64b7-4075-8569-c7eda8d2a3fd/main.cpp)
+[2](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/33783262/12daffec-d355-4545-81f7-899289fad9e1/BitcoinExchange.cpp)
+[3](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/33783262/26d2d2b2-5037-4009-8223-5bf15c37acd4/BitcoinExchange.hpp)
+[4](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/33783262/02afd7c8-64b7-4075-8569-c7eda8d2a3fd/main.cpp)
+[5](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/33783262/12daffec-d355-4545-81f7-899289fad9e1/BitcoinExchange.cpp)
