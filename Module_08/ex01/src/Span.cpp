@@ -120,3 +120,12 @@ void Span::addRange(std::vector<int>::iterator begin,
 		this->_container.push_back(*begin);
 	}
 }
+
+// Exception implementations
+const char* Span::ContainerFull::what() const throw() {
+    return (RED "Array is full" NC);
+}
+
+const char* Span::EmptySpan::what() const throw() {
+    return (RED "Span is empty" NC);
+}
