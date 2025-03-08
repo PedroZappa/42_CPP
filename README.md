@@ -1,7 +1,6 @@
 # C++ Modules
 
 <img src="https://img.shields.io/coderabbit/prs/github/PedroZappa/42_CPP?labelColor=171717&color=FF570A&link=https%3A%2F%2Fcoderabbit.ai&label=CodeRabbit%20Reviews">
-<img src="https://img.shields.io/coderabbit/prs/github/PedroZappa/42_CPP?labelColor=171717&color=FF570A&link=https%3A%2F%2Fcoderabbit.ai&label=CodeRabbit%20Reviews">
 
 * [Module_00](https://github.com/PedroZappa/42_CPP/tree/main/Module_00/README.md)
 * [Module_01](https://github.com/PedroZappa/42_CPP/tree/main/Module_01/README.md)
