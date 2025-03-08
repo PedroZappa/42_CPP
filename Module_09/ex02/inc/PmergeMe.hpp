@@ -52,9 +52,10 @@ class PmergeMe {
 	void mergeInsertList(void);
 
 	// Logging Functions
-	void logSequences(void);
-	void logVec(void);
-	void logList(void);
+	//
+	void logSequences(void) const;
+	void logVec(bool crop) const;
+	void logList(bool crop) const;
 
   private:
 	std::vector<int> _vector;

@@ -451,17 +451,39 @@ std::list<std::list<int> >::iterator PmergeMe::getListIter(
 /* ************************************************************************** */
 
 /// @brief Log the internal vector
-void PmergeMe::logVec(void) {
-	for (std::size_t i = 0; i < _vector.size(); ++i)
-		std::cout << _vector[i] << " ";
-	std::cout << std::endl;
+void PmergeMe::logVec(bool crop) const {
+    if (crop && _vector.size() > 5) {
+        for (std::size_t i = 0; i < 2; ++i)
+            std::cout << _vector[i] << " ";
+        std::cout << "[...] ";
+        for (std::size_t i = _vector.size() - 2; i < _vector.size(); ++i)
+            std::cout << _vector[i] << " ";
+        std::cout << std::endl;
+    } else {
+        for (std::size_t i = 0; i < _vector.size(); ++i)
+            std::cout << _vector[i] << " ";
+        std::cout << std::endl;
+    }
 }
 
-void PmergeMe::logList(void) {
-	for (std::list<int>::iterator it = _list.begin(); it != _list.end(); ++it)
-		std::cout << *it << " ";
-	std::cout << std::endl;
+void PmergeMe::logList(bool crop) const {
+    if (crop && _list.size() > 5) {
+        std::list<int>::const_iterator it = _list.begin();
+        for (int i = 0; i < 2; ++i, ++it)
+            std::cout << *it << " ";
+        std::cout << "[...] ";
+        it = _list.end();
+        for (int i = 0; i < 2; ++i)
+            --it;
+        for (; it != _list.end(); ++it)
+            std::cout << *it << " ";
+        std::cout << std::endl;
+    } else {
+        for (std::list<int>::const_iterator it = _list.begin(); it != _list.end(); ++it)
+            std::cout << *it << " ";
+        std::cout << std::endl;
+    }
 }
 
-void PmergeMe::logSequences(void) {
+void PmergeMe::logSequences(void) const {
 }

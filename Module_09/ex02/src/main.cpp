@@ -25,10 +25,10 @@ int main(int argc, char **argv) {
 	}
 	// Print Sequences before sorting
 	std::cout << YEL "Vector Before\t: " NC;
-	insertMerger.logVec();
+	insertMerger.logVec(true);
 
 	std::cout << YEL "List Before\t: " NC;
-	insertMerger.logList();
+	insertMerger.logList(true);
 
 	// Time merge sort
 	std::clock_t start = std::clock();
@@ -47,10 +47,10 @@ int main(int argc, char **argv) {
 	
 	// Print results
 	std::cout << YEL "Vector After\t: " NC;
-	insertMerger.logVec();
+	insertMerger.logVec(true);
 
 	std::cout << YEL "List After\t: " NC;
-	insertMerger.logList();
+	insertMerger.logList(true);
 
 	std::cout << "Range of " BRED << insertMerger.getSize() << NC;
 	std::cout << " elements in" BBLU " std::vector" NC << " sorted in: ";
