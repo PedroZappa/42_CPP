@@ -1,5 +1,4 @@
 # RPN Calculator
-
 <!-- mtoc-start -->
 
 * [Overview](#overview)
