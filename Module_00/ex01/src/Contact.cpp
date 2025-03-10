@@ -1,3 +1,14 @@
+/**
+ * @defgroup ContactModule Contact Management Module
+ * @{
+ *
+ * This module provides functionalities for managing contact information,
+ * including initialization, storage, and retrieval of contact details such as
+ * first name, last name, nickname, phone number, and darkest secret.
+ *
+ * @version 1.0
+ */
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -12,13 +23,16 @@
 
 #include "../inc/Contact.hpp"
 
-/// @brief Constructor
 Contact::Contact(void) {}
 
-/// @brief Destructor
 Contact::~Contact(void) {}
 
-/// @brief Contact initializer
+/// @brief Constructs a Contact object with specified details
+/// @param fN First name of the contact
+/// @param lN Last name of the contact
+/// @param nN Nickname of the contact
+/// @param pN Phone number of the contact
+/// @param dS Darkest secret of the contact
 Contact::Contact(std::string fN, std::string lN, std::string nN, std::string pN,
                  std::string dS) {
   this->_firstName = fN;
@@ -28,6 +42,7 @@ Contact::Contact(std::string fN, std::string lN, std::string nN, std::string pN,
   this->_darkestSecret = dS;
 }
 
+/// @brief Prints the contact information to the console
 void Contact::printContact(void) {
   std::cout << std::endl;
   std::cout << "\tContact Info\t" << std::endl;
@@ -40,6 +55,14 @@ void Contact::printContact(void) {
   std::cout << std::endl;
 }
 
+/// @brief Retrieves the first name of the contact
+/// @return The first name as a string
 std::string Contact::getFirstName(void) { return (this->_firstName); }
+/// @brief Retrieves the last name of the contact
+/// @return The last name as a string
 std::string Contact::getLastName(void) { return (this->_lastName); }
+/// @brief Retrieves the nickname of the contact
+/// @return The nickname as a string
 std::string Contact::getNickName(void) { return (this->_nickName); }
+
+/** @} */

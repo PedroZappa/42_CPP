@@ -1,3 +1,13 @@
+/**
+ * @defgroup PhonebookModule Phonebook Application Module
+ * @{
+ *
+ * This module provides functionalities for managing a phonebook application.
+ * It allows users to add, search, and manage contacts through a command-line interface.
+ *
+ * @version 1.0
+ */
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -14,6 +24,8 @@
 
 std::string toLower(std::string str);
 
+/// @brief Entry point of the application
+/// @return Exit status of the program
 int main(void) {
   PhoneBook phonebook = PhoneBook();
   std::string cmd;
@@ -34,9 +46,13 @@ int main(void) {
   return (0);
 }
 
-// Turn cmd into lkowercase
+/// @brief Converts a string to lowercase
+/// @param str The string to be converted
+/// @return The converted lowercase string
 std::string toLower(std::string str) {
   for (size_t i = 0; i < str.length(); i++)
     str[i] = std::tolower(str[i]);
   return (str);
 }
+/** @} */
+

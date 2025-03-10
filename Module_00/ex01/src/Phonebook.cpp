@@ -1,3 +1,11 @@
+/**
+ * @defgroup PhoneBookModule PhoneBook Management Module
+ * @{
+ *
+ * This module provides functionalities for managing a phonebook, including adding, searching, and displaying contacts. It ensures that all contact information is valid and formatted correctly before storage.
+ *
+ * @version 1.0
+ */
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -12,13 +20,13 @@
 
 #include "../inc/Phonebook.hpp"
 
-/// @brief Constructor
+/// @brief Constructs a PhoneBook object initializing the contact count to zero
 PhoneBook::PhoneBook(void) { this->_n = 0; }
 
-/// @brief Destructor
+/// @brief Destructor for the PhoneBook object
 PhoneBook::~PhoneBook(void) {}
 
-/// @brief Add a Contact to the PhoneBook
+/// @brief Adds a new contact to the phonebook after validating input
 void PhoneBook::add(void) {
   std::string firstName, lastName, nickName, phoneNumber, darkestSecret;
 
@@ -34,7 +42,6 @@ void PhoneBook::add(void) {
   std::cout << "Darkest Secret\t: ";
   std::getline(std::cin, darkestSecret, '\n');
 
-  // Validate user input
   if (firstName.size() < 1 || lastName.size() < 1 || nickName.size() < 1 ||
       phoneNumber.size() < 1 || darkestSecret.size() < 1) {
     std::cout << BRED << "\tA Contact cannot have empty fields" << NC
@@ -50,13 +57,13 @@ void PhoneBook::add(void) {
     return;
   }
 
-  // Add Contact
   this->_contacts[this->_n++ % MAX_CONTACTS] =
       Contact(firstName, lastName, nickName, phoneNumber, darkestSecret);
   std::cout << std::endl
             << BGRN << "\tContact added successfully" << NC << std::endl;
 }
 
+/// @brief Searches for a contact in the phonebook and displays the contact details
 void PhoneBook::search(void) {
   int id, max;
 
@@ -77,7 +84,7 @@ void PhoneBook::search(void) {
     this->_contacts[id].printContact();
 }
 
-/// @brief Print Menu
+/// @brief Prints the menu options for the phonebook application
 void PhoneBook::printMenu(void) {
   std::cout << HEADER << BGRN << NC << std::endl;
   std::cout << "Available Actions yo:" << std::endl;
@@ -88,21 +95,28 @@ void PhoneBook::printMenu(void) {
   prompt("Enter a command : ");
 }
 
-/// @brief Print Error
+/// @brief Prints an error message to the console
+/// @param msg The error message to be displayed
 void PhoneBook::printErr(std::string msg) {
   std::cout << BRED << "Error: " << BYEL << msg << NC << std::endl;
 }
 
-/// @brief Get Prompt
+/// @brief Prompts the user with a message
+/// @param prompt The message to prompt the user with
 void PhoneBook::prompt(std::string prompt) { std::cout << ARROW << prompt; };
 
-/// @brief Format String
+/// @brief Formats a string to fit within a specified width
+/// @param str The string to be formatted
+/// @return The formatted string
 std::string PhoneBook::formatString(std::string str) {
   if (str.length() > 10)
     return (str.substr(0, 9) + ".");
   return (str);
 }
 
+/// @brief Checks if a string contains only printable characters
+/// @param str The string to be checked
+/// @return True if the string is printable, false otherwise
 bool PhoneBook::_isPrintable(std::string str) {
   for (size_t i = 0; i < str.length(); i++)
     if (!std::isprint(str[i]))
@@ -110,6 +124,7 @@ bool PhoneBook::_isPrintable(std::string str) {
   return (true);
 }
 
+/// @brief Prints the list of contacts in the phonebook
 void PhoneBook::_printPhoneBook(void) {
   std::string field;
 
@@ -126,4 +141,6 @@ void PhoneBook::_printPhoneBook(void) {
               << std::endl;
   }
 }
+
+/** @} */
 
