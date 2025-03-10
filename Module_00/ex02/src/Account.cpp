@@ -1,3 +1,13 @@
+/**
+ * @defgroup AccountModule Account Management Module
+ * @{
+ *
+ * This module provides functionalities for managing bank accounts, including
+ * account creation, deposits, withdrawals, and displaying account information.
+ *
+ * @version 1.0
+ */
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -15,7 +25,6 @@
 #include <iomanip>  // std::setfill std::setw
 #include <iostream> // std::cout std::endl
 
-/*	Initializes Account's class static private members */
 int Account::_nbAccounts = 0;
 int Account::_totalAmount = 0;
 int Account::_totalNbDeposits = 0;
@@ -23,10 +32,9 @@ int Account::_totalNbWithdrawals = 0;
 
 /**
  * @brief Account class Constructor
- * @param initial_deposit
+ * @param initial_deposit Initial deposit amount for the account
  */
-Account::Account(int initial_deposit)
-{
+Account::Account(int initial_deposit) {
 	this->_accountIndex = Account::_nbAccounts++;
 	this->_amount = initial_deposit;
 	this->_nbWithdrawals = 0;
@@ -41,10 +49,10 @@ Account::Account(int initial_deposit)
 }
 
 /**
- *	@brief Account class Destructor
+ * @brief Account class Destructor
+ * @details Logs the account closure details
  */
-Account::~Account(void)
-{
+Account::~Account(void) {
 	// Write Account's destruction log to std::cout
 	_displayTimestamp();
 	std::cout << "index:" << this->_accountIndex << ";";
@@ -52,46 +60,43 @@ Account::~Account(void)
 	std::cout << "closed" << std::endl;
 }
 
-/* Account Class Public Methods */
-
 /**
- * @brief Get _nbAccounts
- * @return _nbAccounts
+ * @brief Get the number of accounts
+ * @return Total number of accounts
  */
-int Account::getNbAccounts()
-{
+int Account::getNbAccounts() {
 	return (_nbAccounts);
 }
+
 /**
- * @brief Get _totalAmount
- * @return _totalAmount
+ * @brief Get the total amount across all accounts
+ * @return Total amount
  */
-int Account::getTotalAmount()
-{
+int Account::getTotalAmount() {
 	return (_totalAmount);
 }
+
 /**
- * @brief Get _totalNbDeposits
- * @return _totalNbDeposits
+ * @brief Get the total number of deposits
+ * @return Total number of deposits
  */
-int Account::getNbDeposits()
-{
+int Account::getNbDeposits() {
 	return (_totalNbDeposits);
 }
+
 /**
- * @brief Get _totalNbWithdrawals
- * @return _totalNbWithdrawals
+ * @brief Get the total number of withdrawals
+ * @return Total number of withdrawals
  */
-int Account::getNbWithdrawals()
-{
+int Account::getNbWithdrawals() {
 	return (_totalNbWithdrawals);
 }
 
 /**
- * @brief Get Accounts Information
+ * @brief Display information about all accounts
+ * @details Outputs the number of accounts, total amount, total deposits, and total withdrawals
  */
-void Account::displayAccountsInfos(void)
-{
+void Account::displayAccountsInfos(void) {
 	_displayTimestamp();
 	std::cout << "accounts:" << t::getNbAccounts() << ";";
 	std::cout << "total:" << t::getTotalAmount() << ";";
@@ -100,11 +105,11 @@ void Account::displayAccountsInfos(void)
 }
 
 /**
- * @brief Make a Deposit
- * @param deposit amount to be deposited
+ * @brief Make a deposit to the account
+ * @param deposit Amount to be deposited
+ * @details Updates the account balance and logs the deposit details
  */
-void Account::makeDeposit(int deposit)
-{
+void Account::makeDeposit(int deposit) {
 	this->_amount += deposit;         // Update account balance
 	this->_nbDeposits++;              // Increment number of deposits
 	Account::_totalNbDeposits++;      // Increment global number of deposits
@@ -120,13 +125,12 @@ void Account::makeDeposit(int deposit)
 }
 
 /**
- * @brief Make a Withdrawal
- * @param withdrawal amount to be withdrawn
- * @return SUCCESS(true)
- * @return FAILURE(false)
+ * @brief Make a withdrawal from the account
+ * @param withdrawal Amount to be withdrawn
+ * @return true if the withdrawal was successful, false otherwise
+ * @details Updates the account balance and logs the withdrawal details
  */
-bool Account::makeWithdrawal(int withdrawal)
-{
+bool Account::makeWithdrawal(int withdrawal) {
 	bool success = false;
 
 	if (withdrawal <= this->_amount) // Perform withdrawal
@@ -140,8 +144,7 @@ bool Account::makeWithdrawal(int withdrawal)
 	// Write Withdrawal log to std::cout
 	_displayTimestamp();
 	std::cout << "index:" << this->_accountIndex << ";";
-	if (!success)
-	{
+	if (!success) {
 		std::cout << "p_amount:" << this->_amount << ";";
 		std::cout << "withdrawal:refused" << std::endl;
 		return (false);
@@ -154,21 +157,20 @@ bool Account::makeWithdrawal(int withdrawal)
 }
 
 /**
- * @brief Get Account's Amount
- * @return Account's Amount
+ * @brief Check the account's current amount
+ * @return Current account amount
  * @note 'const' guarantees no modifications to object's state
  */
-int Account::checkAmount(void) const
-{
+int Account::checkAmount(void) const {
 	return (this->_amount);
 }
 
 /**
- * @brief Get Account's Status
+ * @brief Display the account's status
+ * @details Outputs the account index, amount, number of deposits, and number of withdrawals
  * @note 'const' guarantees no modifications to object's state
  */
-void Account::displayStatus(void) const
-{
+void Account::displayStatus(void) const {
 	_displayTimestamp();
 	std::cout << "index:" << this->_accountIndex << ";";
 	std::cout << "amount:" << this->_amount << ";";
@@ -176,13 +178,15 @@ void Account::displayStatus(void) const
 	std::cout << "withdrawals:" << this->_nbWithdrawals << std::endl;
 }
 
-/* Account Class Private Methods */
+/* ************************************************************************** */
+/*                       Account Class Private Methods                        */
+/* ************************************************************************** */
 
 /**
- * @brief Print Timestamps
+ * @brief Print the current timestamp
+ * @details Formats and outputs the current date and time
  */
-void Account::_displayTimestamp(void)
-{
+void Account::_displayTimestamp(void) {
 	std::time_t rawtime;
 	std::tm *timestamp;
 
@@ -196,3 +200,5 @@ void Account::_displayTimestamp(void)
 	std::cout << std::setfill('0') << std::setw(2) << timestamp->tm_min;
 	std::cout << std::setfill('0') << std::setw(2) << timestamp->tm_sec << "] ";
 }
+
+/** @} */

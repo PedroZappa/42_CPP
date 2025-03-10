@@ -1,3 +1,15 @@
+/**
+ * @defgroup AccountTests Module for testing account operations
+ * @{
+ *
+ * This module contains tests for account operations such as initialization,
+ * deposits, withdrawals, and displaying account information. It simulates
+ * various transactions and outputs the results to verify the correctness
+ * of the account handling logic.
+ *
+ * @version 1.0
+ */
+
 // ************************************************************************** //
 //                                                                            //
 //                tests.cpp for GlobalBanksters United                        //
@@ -12,7 +24,11 @@
 #include <functional>
 #include "../inc/Account.hpp"
 
-
+/**
+ * @brief Main function to test account operations
+ * @details Initializes accounts, performs deposits and withdrawals, and displays account information
+ * @return Exit status
+ */
 int		main( void ) {
 
 	typedef std::vector<Account::t>							  accounts_t;
@@ -70,3 +86,5 @@ int		main( void ) {
 // -*- mode: c++-mode;                                                       -*-
 // -*- fill-column: 75; comment-column: 75;                                  -*-
 // ************************************************************************** //
+/** @} */
+
