@@ -1,3 +1,14 @@
+/**
+ * @defgroup MegaphoneModule Megaphone Application
+ * @{
+ *
+ * This module contains the implementation of a simple command-line application
+ * that converts input strings to uppercase, simulating a megaphone effect.
+ * It includes functions for capitalizing strings and trimming unwanted characters.
+ *
+ * @version 1.0
+ */
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -10,22 +21,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/**
-* @defgroup CPP_MODULE_00_EX00 megaphone
-* @{
-*
-* @brief		Exercise 00 - megaphone 
-* @version		1.0
-***/
-
 #include <iostream>
 
 std::string ft_capitalize(const std::string &str);
 std::string ft_trim(const std::string &str, char c);
 
-/// @brief Broadcast the message in all CAPS
-/// @param str string to be converted to uppercase
-/// @return SUCCESS(0)
+/**
+ * @brief Main function of the Megaphone application.
+ * 
+ * This function processes command-line arguments, converts them to uppercase,
+ * and prints the result. If no arguments are provided, it outputs a default message.
+ * 
+ * @param argc Number of command-line arguments.
+ * @param argv Array of command-line arguments.
+ * @return Exit status code.
+ */
 int main(int argc, char **argv)
 {
 	std::string out;
@@ -40,9 +50,15 @@ int main(int argc, char **argv)
 	return (0);
 }
 
-/// @brief Capitalize a string
-/// @param str string to be converted to uppercase
-/// @return uppercase string
+/**
+ * @brief Capitalizes all characters in a string after trimming spaces.
+ * 
+ * This function first trims the input string of leading and trailing spaces
+ * and then converts all characters to uppercase.
+ * 
+ * @param str The input string to be capitalized.
+ * @return A new string with all characters in uppercase.
+ */
 std::string ft_capitalize(const std::string &str)
 {
     std::string ret;
@@ -54,10 +70,15 @@ std::string ft_capitalize(const std::string &str)
     return (ret);
 }
 
-/// @brief Trim leading and trailing 'c' characters from a string
-/// @param str string to be trimmed
-/// @param c character to trim
-/// @return trimmed string
+/**
+ * @brief Trims leading and trailing characters from a string.
+ * 
+ * This function removes specified leading and trailing characters from the input string.
+ * 
+ * @param str The input string to be trimmed.
+ * @param c The character to be trimmed from the string.
+ * @return A new string with specified characters trimmed from both ends.
+ */
 std::string ft_trim(const std::string &str, char c)
 {
 	size_t str_start = str.find_first_not_of(c);
@@ -71,3 +92,4 @@ std::string ft_trim(const std::string &str, char c)
 }
 
 /** @} */
+
