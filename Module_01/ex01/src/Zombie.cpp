@@ -1,3 +1,15 @@
+/**
+ * @defgroup Zombie Brief description of this module or group.
+ * @{
+ *
+ * This module contains the implementation of the Zombie class, which includes
+ * constructors, a destructor, and methods for announcing and setting the name
+ * of a Zombie instance. The class is designed to manage the lifecycle and 
+* behavior of a Zombie object.
+ *
+ * @version 1.0
+ */
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -53,3 +65,5 @@ void Zombie::announce(void) {
 void Zombie::setName(const std::string &name) {
 	_name = name;
 }
+/** @} */
+

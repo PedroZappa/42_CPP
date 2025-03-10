@@ -1,3 +1,14 @@
+/**
+ * @defgroup PrinterUtilities Utilities for printing formatted headers and separators.
+ * @{
+ *
+ * This module provides functions to print formatted headers and separator lines
+ * with adjustable widths. It is useful for creating visually appealing console
+ * outputs with consistent formatting.
+ *
+ * @version 1.0
+ */
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -49,4 +60,6 @@ void sepPrinter(int inWidth)
     std::cout << std::string(inWidth, '=') << "\n";
     std::cout << std::string(inWidth, '=') << NC << "\n";
 }
+
+/** @} */
 

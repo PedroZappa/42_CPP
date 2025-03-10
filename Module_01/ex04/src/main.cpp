@@ -1,3 +1,12 @@
+/**
+ * @defgroup GroupName Brief description of this module or group.
+ * @{
+ *
+ * Detailed description clearly explaining purpose and usage.
+ *
+ * @version 1.0
+ */
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -20,6 +29,16 @@ static std::string replace(const std::string &in,
 						   const std::string &replaceWith);
 static void writeToFile(const std::string filename, const std::string &content);
 
+/**
+ * @brief Main function for performing string replacement in a file.
+ *
+ * This function serves as the entry point for the program. It processes command-line
+ * arguments to perform a string replacement operation on a specified file.
+ *
+ * @param argc The number of command-line arguments.
+ * @param argv The array of command-line arguments.
+ * @return int Returns EXIT_SUCCESS on successful execution, or EXIT_FAILURE on error.
+ */
 int main(int argc, char **argv) {
 	headerPrinter("Sed is for loosers", WIDTH, '*', BGRN);
 	try {
@@ -138,3 +157,5 @@ static void writeToFile(const std::string filename, const std::string &content) 
 		out.close();
 	}
 }
+
+/** @} */

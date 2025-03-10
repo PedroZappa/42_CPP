@@ -1,3 +1,13 @@
+/**
+ * @defgroup MemoryInspector Memory Inspector Module
+ * @{
+ *
+ * This module provides functionality to inspect and demonstrate the use of references and pointers in C++.
+ * It includes examples of address manipulation and memory inspection using constant strings, pointers, and references.
+ *
+ * @version 1.0
+ */
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -52,3 +62,5 @@ int main(void)
 
 	return (EXIT_SUCCESS);
 }
+/** @} */
+

@@ -1,3 +1,15 @@
+/**
+ * @defgroup WeaponSimulation Weapon Simulation Module
+ * @{
+ *
+ * This module demonstrates a simple simulation of humans interacting with weapons.
+ * It includes classes for HumanA and HumanB, each capable of performing attack actions
+ * with a specified weapon. The module showcases how weapon types can be dynamically
+ * changed and how these changes affect the behavior of the human objects.
+ *
+ * @version 1.0
+ */
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -14,6 +26,15 @@
 #include "../inc/HumanB.hpp"
 #include "../inc/Weapon.hpp"
 
+/**
+ * @brief Entry point of the program.
+ * 
+ * This function demonstrates the usage of HumanA and HumanB classes
+ * with Weapon objects. It creates instances of HumanA and HumanB,
+ * assigns weapons to them, and performs attack actions.
+ * 
+ * @return int Returns 0 upon successful execution.
+ */
 int main() {
 	{
 		// Creates an object of type HumanA;
@@ -36,3 +57,5 @@ int main() {
 	}
 	return 0;
 }
+
+/** @} */

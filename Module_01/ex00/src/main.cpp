@@ -12,12 +12,18 @@
 
 #include "../inc/Zombie.hpp"
 
-static void	headerPrinter(void);
-static void	sepPrinter(void);
+static void headerPrinter(void);
+static void sepPrinter(void);
 
 /**
- * @brief Zombie and Chump creation test
-*/
+ * @brief Entry point of the program.
+ *
+ * This function initializes the program, prompts the user for zombie names,
+ * creates a zombie on the heap, and a chump on the stack, then cleans up
+ * resources before exiting.
+ *
+ * @return int Returns EXIT_SUCCESS upon successful execution.
+ */
 int main(void) {
 	std::string zombieName;
 	std::string chumpName;
@@ -28,7 +34,7 @@ int main(void) {
 	std::getline(std::cin, zombieName);
 	std::cout << YEL "Name a new Chump: " NC;
 	std::getline(std::cin, chumpName);
-	
+
 	sepPrinter();
 	// Allocating in the Heap
 	zombie = newZombie(zombieName);
@@ -41,7 +47,12 @@ int main(void) {
 	return (EXIT_SUCCESS);
 }
 
-static void	headerPrinter(void) {
+/**
+ * @brief Prints the header for the program.
+ * 
+ * This function outputs a decorative header to the console.
+ */
+static void headerPrinter(void) {
 	std::cout << GRN;
 	std::cout << "=========================" << std::endl;
 	std::cout << BWHT;
@@ -51,7 +62,12 @@ static void	headerPrinter(void) {
 	std::cout << NC;
 }
 
-static void	sepPrinter(void) {
+/**
+ * @brief Prints a separator line.
+ * 
+ * This function outputs a decorative separator line to the console.
+ */
+static void sepPrinter(void) {
 	std::cout << GRN;
 	std::cout << "=========================" << std::endl;
 	std::cout << "=========================" << std::endl;

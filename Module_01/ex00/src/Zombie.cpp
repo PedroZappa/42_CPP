@@ -1,3 +1,14 @@
+/**
+ * @defgroup ZombieModule Zombie Management Module
+ * @{
+ *
+ * This module provides functionality for creating and managing Zombie objects.
+ * It includes constructors for initializing Zombies with or without names,
+ * a destructor for cleanup, and methods for announcing their presence.
+ *
+ * @version 1.0
+ */
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -13,11 +24,13 @@
 #include "../inc/Zombie.hpp"
 
 /**
- * @brief Zombie Class Constructor
+ * @brief Default constructor for the Zombie class.
+ *
+ * This constructor initializes a Zombie object without setting a name.
  */
-Zombie::Zombie(void)
-{
+Zombie::Zombie(void) {
 }
+
 
 /**
  * @brief Zombie Parameterized Constructor
@@ -27,25 +40,27 @@ Zombie::Zombie(void)
  * - more efficient than assignment;
  * - Mandatory for const or reference initializations
  */
-Zombie::Zombie(std::string name) : _name(name)
-{
+Zombie::Zombie(std::string name) : _name(name) {
 }
 
 /**
- * @brief Zombie Class Destructor
+ * @brief Destructor for the Zombie class.
+ *
+ * This destructor outputs a message indicating that the Zombie object
+ * with the specified name is being destroyed.
  */
-Zombie::~Zombie(void)
-{
+Zombie::~Zombie(void) {
 	std::cout << RED "Zombie " BWHT << _name;
 	std::cout << RED " destroyed ☠☠☠" NC << "\n";
 }
 
-/* Zombie's Public Methods */
-
 /**
- * @brief Announce Zombie
+ * @brief Announce the presence of the Zombie.
+ *
+ * This method outputs the Zombie's name followed by a message indicating
+ * its craving for brains.
  */
-void Zombie::announce(void)
-{
+void Zombie::announce(void) {
 	std::cout << _name << ": " BMAG "BraiiiiiiinnnzzzZ...\n" NC;
 }
+/** @} */

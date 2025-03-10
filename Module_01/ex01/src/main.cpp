@@ -1,3 +1,14 @@
+/**
+ * @defgroup ZombieHordeModule Zombie Horde Management
+ * @{
+ *
+ * This module handles the creation and management of a horde of zombies.
+ * It includes functionality for initializing a horde of zombies with a specified size and name,
+ * and provides utilities for printing headers, separators, and usage instructions.
+ *
+ * @version 1.0
+ */
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -58,6 +69,9 @@ int main(int argc, char **argv) {
 	return (EXIT_SUCCESS);
 }
 
+/**
+ * @brief Prints the header for the zombie horde.
+ */
 static void headerPrinter(void) {
 	std::cout << GRN;
 	std::cout << "=========================" << "\n";
@@ -67,13 +81,22 @@ static void headerPrinter(void) {
 	std::cout << "=========================" << NC << "\n";
 }
 
+/**
+ * @brief Prints a separator line.
+ */
 static void sepPrinter(void) {
 	std::cout << GRN;
 	std::cout << "=========================" << "\n";
 	std::cout << "=========================" << NC << "\n";
 }
 
+/**
+ * @brief Displays usage instructions for the program.
+ */
 static void usage(void) {
 	std::cout << BYEL "Usage: ";
 	std::cout << BWHT "./moarBrainz.out <N> <name>\n" NC;
 }
+
+/** @} */
+
