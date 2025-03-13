@@ -1,3 +1,16 @@
+/**
+ * @defgroup BitcoinExchangeModule Bitcoin Exchange Module
+ * @{
+ *
+ * This module provides functionality for reading, processing, and managing
+ * Bitcoin exchange rate data. It includes features for validating input data,
+ * handling exceptions, and performing calculations based on exchange rates.
+ * The module is designed to work with data files containing date and exchange
+ * rate information, allowing for efficient data management and retrieval.
+ *
+ * @version 1.0
+ */
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -430,3 +443,5 @@ const char *BitcoinExchange::NegativeValue::what(void) const throw() {
 const char *BitcoinExchange::OutOfRange::what(void) const throw() {
 	return (RED "Out of Range" NC);
 }
+/** @} */
+

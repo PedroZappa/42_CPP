@@ -12,6 +12,16 @@
 
 #include "../inc/RPN.hpp"
 
+/**
+ * @brief Main function to execute the RPN calculator.
+ * 
+ * This function checks for the correct number of command-line arguments,
+ * initializes an RPN object, and parses the input expression.
+ * 
+ * @param argc The number of command-line arguments.
+ * @param argv The array of command-line arguments.
+ * @return int Returns EXIT_SUCCESS on successful execution, otherwise EXIT_FAILURE.
+ */
 int main(int argc, char **argv) {
 	if (argc != 2) {
 		std::cerr << RED "Usage: " NC "./RPN <operand1> <operand2> <operator>"
