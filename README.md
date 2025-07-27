@@ -1,3 +1,6 @@
+**Note** : If you found this repo you should stop for a second and [read this](https://atomys.me/en/s42-sunset-story/)
+
+
 # C++ Modules
 
 <img src="https://img.shields.io/coderabbit/prs/github/PedroZappa/42_CPP?labelColor=171717&color=FF570A&link=https%3A%2F%2Fcoderabbit.ai&label=CodeRabbit%20Reviews">
